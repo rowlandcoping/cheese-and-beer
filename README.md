@@ -53,25 +53,24 @@ Cheese and Beer is about the democratisation of cheese. To enjoy the product you
 
 ### 4) Site Owner - User Stories
 
-Based on my project research I have identified the following key areas.
-
-- Brand Identity: The branding needs to be strong and clear from page one.
-- Site purpose:  The site mission and purpose needs to be clearly stated to encourage sign-up.  It needs to inspire people.
-- Simple sign-up: I want as much site interaction as possible as quickly as possible and users need a simple sign-up process just as soon as they hit the homepage.
-- Clean UI: I want the UI to be a stripped down and simple as possible so that it functions as well on mobile as it does on desktop, and looks great on both.  I want it to look so great people can't wait to click or tap on things.
-- Clear User Journey:  From the minute the user clicks the sign-up button, they need to be hand-held through the process.  This is a new concept and signing up is the most important part of that journey.  As soon as they have signed up and land in the site for the first time, the question 'what do I do now' needs to be answered.
-- Organic feed:  No edge weighting, all content has an equal chance on the general feed. No compulsary marketing on any feed. Logic for displaying dreams must be clean and effective.
+- Site Identity: The landing page needs to make people feel at home and get across the core values of the site.
+- Clear Pathway:  As soon as the user lands on the site their pathway should be clear and the options they are presented with need to make them stick.
+- Simple, familiar design:  There is no need to re-invent the wheel with this site, in terms of how products are presented, and there are plenty of excellent benchmarks out there.
+- Uncluttered UI: I think it's important that users aren't overwhelmed with menu options, especially on mobile.  There is no need to overcomplicte a website about cheese (and beer).
+- Engaging sales pathways: Although many features in this area may not form part of the MVP (see developed goals concerning keeping it simple) having novel and simple to use means of engagement, such as (for example) a cheeseboard generator, is key.
+- Regulatory Compliance and Security: As I want this to be a real world application, no features will be implemented that are not compliant with best practice, such as PCI DSS regulations.  If implemented, things like storing user payment details should be done through Stripe (which presumably takes care of most of this).
 
 ### 5) Site Visitor - User Stories
 
-This site should be for everyone, from any walk of life.  As such the user stories focus on UI, engagement and provision of compelling content.
+The site is positioned, for want of a better description, to appeal to the cheese and beer layman.  For the end user, accessibility is key.
 
-- Reasons to stay:  The homepage needs to give users instant motivation to sign up, through brand imagery and a clear concept.
-- Clean user journey:  The user journey needs to be interesting, but not too long, particularly through the sign-up phase.
-- Quick and intuitive UI: to avoid drop-outs the user should not be hunting for anything.
-- Customisable look and feel: People like to be able to make their corner of the web their own.  
-- Access to content: Feeds need to reflect what people are following and the things they have interest in, and searches need to deliver relevant results.
-- Safe Space:  Users need to feel their data is safe, that any data they provide is provided for a good reason, and that they have control over comments and content they see.
+- A homepage like home: Users need to feel comfortable when they land on the site.  Not like they are being overly sold to, or that the site 'isn't for them'.  Homepage promotions should be informative first.
+- Clear pathways: Once the user has landed on the homepage, they need a clear and obvious path to locate what it is they visited the site for in the first place.
+- Recommendations: For users uninitiated in the world of cheese, it is important to have recommendations and suggestions, especially when it comes to pairing.
+- Easy checkout: The user doesn't want to have to jump through a lot of hoops to do anything online, especially on mobile. They want to buy what they want and get gone.
+- Seperate billing and delivery addresses: If a user is purchasing a gift it should be easy to add, select and save multiple delivery addresses.
+- Retain key details:  People are used to once click shopping with Amazon's buy it now, for example.  Equally they also want to feel their data is protected.  This is a fine line.
+- Review order history:  Customers would like to be able to review and track their orders, especially if everything doesn't go to plan. They want this re-assurance.
 
 ## UX - Scope
 ([back to top](#contents))
@@ -80,65 +79,168 @@ It is important to make clear at that the below is the scope envisaged at the be
 
 ### Technology
 
-The technology used will be HTML/CSS and JavaScript/JQuery, using Python with the Flask framework as a templating language and MongoDB to store data.
+The technology used will be HTML/CSS and JavaScript, and Python with the Django framework and a SQL-based relational database to store data, most likely using Django's built-in models.
 
-I am lucky in that I have developed strong skills with vanilla Javascript and CSS Flexbox which means there is little to gain using a heavy library like Bootstrap. HOWEVER some of the dependencies from the course (notably Stripe, Django Forms (crispy) and AllAuth) benefit from using the templates that come with such libraries.  As such I have been looking at Tailwind to provide templates for forms.
+I am lucky in that I have developed strong skills with vanilla Javascript and CSS Flexbox which means there is little to gain from using a heavy library like Bootstrap.  It's just as quick for me to hand-code my own media queries and in some ways quicker since Bootstrap needs a degree of customisation in any case.  I am also wary from a previous project of how awkward it can sometimes be to customise Bootstrap-based code.  Furthermore I don't want to slow my code down with multiple imports, where the majority of the code is actually unnecessary.  
 
-I have chosen to use MongoDB over PostgreSQL for a number of reasons (in order of importance):
- - Type of Application:  From the reading I've done it seems MongoDB is a great option for unstructured data the likes of which you find on social media platforms, and is being widely adopted by 'big-tech' companies.
- - Development Cycle: The lack of requirement for a rigid schema will suit the ongoing development of this project, with its potential for expansion and growth (both to MVP level and beyond).  I feel like the application could see significant evolution as I develop it and encounter new challenges.
- - Data storage capacity:  ElephantSQL only provides 25MB storage with the base package, which is extremely low headroom for this sort of application, whilst MongoDB Atlas provides 512MB which should be more than enough.
- - MongoDB Atlas:  Atlas is a slick platform with a superb UI and great documentation, making it a pleasure to use. 
- - Personal Development:  Because my fourth project will involve using the Django framework with a relational database and being familiar with MySQL from the past, I feel like using MongoDB here will add a very useful string to my bow and further my professional development.
- - Obselescence: This relates to course material, where the PostgreSQL module is far lower in quality than the MongoDB content.  Whilst both contain deprecated code, only minor changes were required to update PyMongo functionality to be compatible with latest package versions and therefore make the code viable for use in a brand-new real-world application. The SQLAlchemy methodology I have been taught caused all sorts of problems and required very specific package versions to function whilst leaving out key concepts such as search functionality and user authentication; it would need a lot of additional learning to fill these gaps in my knowledge which I don't have time for in the context of this course.
+One issue in dispensing with Bootstrap is the integration of JQuery into the project, and some of the custom methods that were used in the checkout process which I'm not sure how to replicate as yet. Whilst I can see the benefit of the shorthand, going forward I would rather invest time in learning something like React and REST APIs.  With the time limitations involved in this project, it is much easier for me to use the vanilla JavaScript I'm already familiar with - hopefully it will be pretty straighforward to build the vanilla JS code to emulate these methods, using fetch().
 
-### Core Elements (MVP)
+This all said, it is clear to me that some of the dependencies from the learning I have done (notably Stripe, Django, and AllAuth forms) benefit from using Crispy Forms and the templates that come with such libraries. I think there would be a very high development overhead in doing all this customisation myself (more so than building the forms from scratch). As such I have been looking at other CSS libraries that integrate with Crispy Forms, and have decided to use Tailwind. It seems to be the most popular and easy to use framework out there, and from my research seems to come without a lot of the bloat associated with Bootstrap, relying as it does on a range of helper classes. Ideally, I want the best of both worlds - properly formatted forms that are easier to customise.  It may even prove to be easier to style the whole website in the manner of the forms than the other way around!
 
-#### Structure
+### Structure
 
- - Landing Page: features logo, brief site description and sign up / sign in option.  All about branding the site.
- - New User Journey:  On clicking Sign Up will begin a user journey.
- - Base Elements:  Once signed in each page will have title/logo and menu with four core elements, plus a search.
- - Feed (default page): The main site feed is divided into two elements, Dreamscape (default) and Personal
- - Profile: Consists of an overview of your profile and options to update info divided into 2 sections, account or personal settings.
- - Dreams: This page will list the user's current Hopes and Dreams. 
- - Dreambuilder:  This is a walkthrough process for creating a new dream. 
- - Update Dream Page:  Page will consist of a description, and underneath icons representing each aspect of a dream.  Where an available module doesn't exist there will be the option to create it.
- - View dream page: here the user can review your dream as others see it, and view, rate and respond to any offers of help, comments or encouragement that other users have provided.
+ - Home Page: Logo, menu and search in the main navigation for immediate browsing.  The main area of the page will feature two callouts - one linking to special offers and the other to the create your own cheeseboard feature.  It will also feature a brief site mission statement.
+ - Search/Filter:  Once a user either searches or filters the page via one of the menus, a familiar looking results screen will appear with basic product information which the user can browse.
+ - Product view: When clicking on a product the page provides more detailed information plus the opportunity to add the item to the cart or purchase immediately, and a 'recommended' section which will focus on product pairing (cheese to beer, and beer to cheese (or sundries should they be integrated into the project.)).
+ - Cart page:  If the user has filled a cart with items, they can review and update these items.
+ - Checkout page:  Here the user selects/inputs their billing and delivery address, specifies whether the item is a gift (and if they want it wrapped) and enters their payment details, and which details they wish to retain (ie register as a user)
+ - Confirmation page: This is where users will be provided with confirmation of their purchase.
+ - Product update page:  The site is not envisaged as an amazon style marketplace, so the only users who will have access to this are designated administrators of the platform.  Here new products can be added and removed.
+ - Order history (with varying permissions):  Users can view their own order history, customer services can view any of them, and managers/admins have update tools.  Not all of this will be in the lean MVP as it's not clear on the levels of permissions built into allauth, but obviously superuser isn't suitable in all (most??) cases.
+ - Manage account:  User can change billing/delivery addresses, other personal details, or payment options (if included).  They can access their order history from here. Users which are not signed in will have the option to search for their order by order number to track it.
 
-#### Features
+### Features
 
-NB This MVP feature list represents this site as I currently envisage it, and will be subject to change (probably quite a lot of it!)
+I have organised the feature list into multiple categories based on user stories, with a very strict MVP list, an expanded list which ought to be viable in the time allowed once the MVP has been completed (with hard work and good luck), and a nice-to-have list which I view as highly unlikely to be implemented as things stand.
 
- - Detailed step-by-step user journey planner to introduce them to the world of hopes and dreams, which not only gets them signed up to the site but introduces the site concept in small bites.  Unfolds in stages over multiple pages with strong brand imagery based around default theme.  A bare minimum of the personal profile settings will be set compulsararily here for initial discovery (to avoid an empty feed after signup!).
- - Multiple feeds - one just to follow and/or assist with dreams and one to follow people and dreams you know or are interested in.
- - Dreamscape feed is a 'feed of dreams' consisting of dreams from other users that appear based on the user's interests/skills and also personal settings.  The user can choose to comment, offer advice or offer a service (based on dream requirements).  Alternatively users can just enjoy reading other peoples hopes and dreams.
- - Personal feed will consist of actions from people or dreams you follow, reactions to your comments, comments on your own dreams or any other modules (beyond the MVP)
- - Step-by-step Dreambuilder wizard to walk the user through the process of building their dream. Only a name, description and keywords are compulsary fields, the rest can be added later, or not added at all.  The intention is dreams should be quite freeform.
- - Optional modular elements for your dream, the core of which will be the dream diary, dream requirements and a dream planner.
- - Each dream will be listed with a brief description if any exist, and the option to view the dream, update it, or undream it.  If you have no dreams a tutorial message will appear below the Dreambuilder inviting you to share your hopes and dreams.
- - Opportunities to update skills and interests to ensure the user only sees what they are intererested in. Account and personal settings which allow the user to customize their experience.Account settings will include Name, Profile Pic, e-mail address, Location (optional), notifications/privacy settings (if included). Personal settings inlcude Skills/Experiences/Interests, projects, open to (which may be rolled into the privacy settings).
- - Users may comment on a dream to offer advice or encouragement, or offer specific help or services.  They may also follow a specific dream in their personal feed.
- - Users may rate comments, and have the option to filter users with very low scores (which indicates spam, trolling or other destructive behaviour).
- - Search facility to find friends or chase specific dreams.
- - 3 user levels, admin, moderator or user.  The single admin (ie me) will be able to create other moderators and both will be able to remove users and content deemded to be in breach of the Terms of Use Policy.
- - Basic themes - dreams and indeed profiles can be tailored with basic color themes.
- - Image handling - all user supplied images converted and compressed appropriately to the platform. I will also need to work out somewhere to put them when using a Heroku deployment.
+#### Site Template (features accessible anywhere)
 
-### Optional Features
+MVP FEATURES
 
- - Additional Services module for dreams. Will allow companies to offer their services (eg if your dream is to be a web developer, you might be offered courses). Would allow for targeted, entirely optional monetisation without weakening the platform.
- - Organisations module for dreams. If added would provide details of organisations that may be able to help via an API. 
- - Extended notification and privacy settings for each feed, in order to make them highly customisable.
- - The ability to have an advanced range of search options and more advanced requirement gathering, allowing dreams to feature according to multple categories. This is highly unlikely to feature in the MVP; although there may well be multple categories for users/dreams it is likely they will be grouped together when indexing each side of the search for discovery purposes.
- - Advanced/custom themes: The ability to select from multiple advanced themes when setting up dreams and accounts, including images.  The ability to create custom themes.  Whilst I view this as a lot more important than just a nice to have given the feedback from some of my research, I'm not sure I'll have time to include it in the MVP for this project as well as providing the basic functionality it needs to be a working real-world application.
- - Suggest people to follow by connecting with other social apps via API.  Could also use to invite new users to the service.  Useful growth tool.
- - Infinite scrolling on feeds.
+ - Users can search the products on the site
+ - Users can access their account information (including order history)
+ - Users can access their shopping cart.
+ - Users can process direct to checkout for anything in their cart.
+ - Users can browse cheese products
+ - Users can browse beer products
 
- ### Hopes and Dreams
+STRETCH FEATURES:
 
- - Hopes and Dreams mobile app, with full site integration.
- - Integration with other social APIs to enable users to add friends and share content.
+- Users can filter and browse sundry products (jams/chutneys/accessories/meats).
+- Users can filter and browse special offers.
+- Users can access BYO / randomized cheeseboard features.
+
+#### Landing Page
+
+MVP FEATURES:
+
+ - Site description (clarity)
+ - Site Logo (branding)
+ - Site callout for specific products (immediate call to action)
+
+STRETCH FEATURES:
+
+ - Site callout/navigation for cheeseboard builder
+ - Site callout/navigation for cheeseboard randomizer
+ - Site callout/navigation for special offers
+
+#### Search Results page
+
+MVP FEATURES:
+
+ - Users can browse a a list of products
+ - Users can click to view individual products
+ - Users can filter results by category by clicking on a product's category
+
+STRETCH FEATURES:
+
+ - Users can add x amount of the item to cart or checkout an item directly from search results.
+ - Users can see paginated results.
+ - Users can view associated recommendations by clicking on a link in the product's listing.
+
+BLUE SKY FEATURES:
+
+ - Users can share a product to social direct from the search results.
+ - Users can select the number of results they want to see per page.
+ - Users can enable infinite scrolling for results.
+
+#### View Product Page
+
+MVP FEATURES:
+
+ - Users can view full product info
+ - Users can click any product category to open another filtered list of results.
+ - Users are presented recommendations for pairings with the product on this page(beer or cheese)
+ - Users can add x amount of the item to the cart or checkout an item directly
+
+STRETCH FEATURES
+
+ - Add to cheeseboard feature (for BYO cheeseboard)
+
+BLUE SKY FEATURES
+
+ - Share product on social
+ - Users can add product to a wishlist
+
+#### Shopping Cart Page
+
+MVP FEATURES:
+
+ - Users can add or remove items from the cart
+ - Users can increment or decrement the amount/quantity of an item they wish to purchase
+ - Users can proceed to checkout
+ - Users can easily return to what they were doing / the homepage
+
+#### Checkout Page
+
+MVP FEATURES:
+
+ - Registered users can access saved addresses
+ - Unregistered users can checkout
+ - Unregistered users offered option to register prior to checkout
+ - Users enter card details into secure checkout process
+ - Registered users can opt to store addresses
+ - Users can see order summary
+
+STRETCH FEATURES:
+
+ - Users can store card details for next time (this depends on stripe functionality - if it's not a Stripe feature this goes straight to Blue Sky as it would require a lot of reading)
+
+BLUE SKY FEATURES:
+
+ - Users can register as they checkout if they enter a password (NB this would require a custom authorisation system rather than using AllAuth)
+
+#### Order Confirmation Page
+
+MVP FEATURES:
+
+ - users see an order summary
+ - users are provided with an order number referencing their order
+ - users are provided a route back to the site
+
+BLUE SKY FEATURES:
+
+ - users have option to share their purchase on social
+
+#### Account Page
+
+MVP FEATURES:
+
+ - Users can edit and update addresses
+ - Users can view order history
+ - Order history page allows drilling down into individual orders
+
+STRETCH FEATURES:
+
+ - Users can update payment options
+
+BLUE SKY FEATURES:
+
+ - When viewing past orders users can raise a ticket (This is probably un-necessary in a test iteration of the site but will be essential if it ever goes into production, along with some kind of CRM for issue handling, including amending orders and processing refunds.)
+
+#### Admin Features
+
+MVP FEATURES:
+
+ - Admin user can access 'add products' page
+ - Admin user can add products
+ - Admin user can delete products
+ - Admin user can edit products
+
+BLUE SKY FEATURES:
+
+ - Admin user can view sales volumes
+ - Admin user has access to stock control algorithms to help stock purchasing or promotional decision making
 
 ## UX - Structure
 ([back to top](#contents))
