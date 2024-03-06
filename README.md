@@ -37,9 +37,9 @@ You don't have to look far to find the best online retailers.  Amazon is the ben
 
 This website is for a specialist retailer though, so I have looked for examples in that area as well.  Paxton and Whitfield's website, for example, is exhaustive in content and slick in design, and provides a good benchmark for the sort of range a decent cheese retailer needs to be carrying.  I have also found guides on how to pair cheese with beer which I think will be very useful when making suggestions to the user.
 
-One thing that strikes me about Amazon in particular but also the cheese retailer is the sheer number of menus, sub-menus and options.  Paxton and Whitfields has no fewer than nine options in their main navigation bar, which open admittedly very nice sub-pages when you mouse-over.  Amazon... well amazon is just ridiculous (it gets even more ridiculous when you try and navigate AWS but that's another matter).  I think Amazon assumes a certain familiarity from the user, and gets away with a lot of bad UI as a result.  Most people know where to find what they need on there.  I pretty much never click and of the navigation links though, aside from my account options.  What would a new user make of it?  Then when you search for products and scroll down the page... then you get a heading saying more products, then more products... then you get pagination!  Amazon can be baffling sometimes.  I think for a specialist site aimed at more casual users, you just can't get away with this - people will get lost and give up.  The simpler the navigation the better.
+One thing that strikes me about Amazon in particular but also the cheese retailer is the sheer number of menus, sub-menus and options.  Paxton and Whitfields has no fewer than nine options in their main navigation bar, which open admittedly very nice sub-pages when you mouse-over.  Amazon... well Amazon is just ridiculous (it gets even more ridiculous when you try and navigate AWS but that's another matter).  I think Amazon assumes a certain familiarity from the user, and gets away with a lot of bad UI as a result.  Most people know where to find what they need on there.  I pretty much never click and of the navigation links though, aside from my account options.  What would a new user make of it?  When you search for products and scroll down the page you get a heading saying more products, then the same heading again with even more products... then you finally get pagination! I think for a specialist site aimed at more casual users, you just can't get away with most of this - people will get lost and give up.  The simpler the navigation the better.  Of course, there is a huge caveat to this.  For the exact same reason it would be foolish not to emulate Amazon's site layout to some degree, so that the majority of users will feel comfortable and instantly be able to find where everything is.
 
-Brand and price-wise, Paxton and Whitfield seems to be the upper end of the market. It assumes a certain level of knowledge about the products, as I'd imagine most visitors will have.  At the other end of the market is the supermarket, and whilst you can purchase a similar quantity of pretty decent cheese and get change from ten pounds, it does lack a certain sense of occasion.  There is room then, in the middle ground.  The cheese and beer branding sits perfectly in this area - craft ales rather than fine wines, and enough sense of occasion to feel like you're doing something special without being unconfortable about the amount of money you're spending on it.  A site that isn't just for enthusiasts, but is for everyone.
+When it comes to positioning and branding Paxton and Whitfield seems to be the upper end of the market. It assumes a certain level of knowledge about the products, as I'd imagine most visitors will have.  At the other end of the market is the supermarket, and whilst you can purchase a similar quantity of pretty decent cheese and get change from ten pounds, it does lack a certain sense of occasion.  There is room then, in the middle ground.  The cheese and beer branding should sit perfectly in this area - craft ales rather than fine wines, and enough sense of occasion to feel like you're doing something special without being unconfortable about the amount of money you're spending on it.  A site that isn't just for enthusiasts, but is for everyone.
 
 ### 2) Project Goal
 
@@ -75,21 +75,19 @@ The site is positioned, for want of a better description, to appeal to the chees
 ## UX - Scope
 ([back to top](#contents))
 
-It is important to make clear at that the below is the scope envisaged at the beginning of the project, and that there was always anticipated to be an evolutionary process in producing an MVP.  For a full overview of specification changes in the finished MVP, please click [HERE](#specification-changes).
-
 ### Technology
 
 The technology used will be HTML/CSS and JavaScript, and Python with the Django framework and a SQL-based relational database to store data, most likely using Django's built-in models.
 
 I am lucky in that I have developed strong skills with vanilla Javascript and CSS Flexbox which means there is little to gain from using a heavy library like Bootstrap.  It's just as quick for me to hand-code my own media queries and in some ways quicker since Bootstrap needs a degree of customisation in any case.  I am also wary from a previous project of how awkward it can sometimes be to customise Bootstrap-based code.  Furthermore I don't want to slow my code down with multiple imports, where the majority of the code is actually unnecessary.  
 
-One issue in dispensing with Bootstrap is the integration of JQuery into the project, and some of the custom methods that were used in the checkout process which I'm not sure how to replicate as yet. Whilst I can see the benefit of the shorthand, going forward I would rather invest time in learning something like React and REST APIs.  With the time limitations involved in this project, it is much easier for me to use the vanilla JavaScript I'm already familiar with - hopefully it will be pretty straighforward to build the vanilla JS code to emulate these methods, using fetch().
+One issue in dispensing with Bootstrap is the integration of Bootstrap JQuery libraries into the course material, and some of the custom methods that were used in the checkout process which I'm not sure how to replicate as yet. Whilst I can see the benefit of the shorthand, going forward I would rather invest time in learning something like React and REST APIs.  With the time limitations involved in this project, it is much easier for me to use the vanilla JavaScript I'm already familiar with - hopefully it will be pretty straighforward to build the vanilla JS code to emulate these methods, using fetch().
 
-This all said, it is clear to me that some of the dependencies from the learning I have done (notably Stripe, Django, and AllAuth forms) benefit from using Crispy Forms and the templates that come with such libraries. I think there would be a very high development overhead in doing all this customisation myself (more so than building the forms from scratch). As such I have been looking at other CSS libraries that integrate with Crispy Forms, and have decided to use Tailwind. It seems to be the most popular and easy to use framework out there, and from my research seems to come without a lot of the bloat associated with Bootstrap, relying as it does on a range of helper classes. Ideally, I want the best of both worlds - properly formatted forms that are easier to customise.  It may even prove to be easier to style the whole website in the manner of the forms than the other way around!
+This all said, it is clear to me that some of the dependencies from the learning I have done (notably Stripe, Django, and AllAuth forms) benefit from using Crispy Forms and the templates that come with such libraries. I think there would be a very high development overhead in doing all this customisation myself (more so than building the forms from scratch). As such I have been looking at other CSS libraries that integrate with Crispy Forms, and have decided attempt to use Tailwind. It seems to be the most popular and easy to use framework out there, and from my research seems to come without a lot of the bloat associated with Bootstrap, relying as it does on a range of helper classes. Ideally, I want the best of both worlds - instantly formatted forms that are easy to customise where necessary. Speaking frankly it may even prove to be easier to style the whole website in the manner of the forms than the other way around!
 
 ### Structure
 
- - Home Page: Logo, menu and search in the main navigation for immediate browsing.  The main area of the page will feature two callouts - one linking to special offers and the other to the create your own cheeseboard feature.  It will also feature a brief site mission statement.
+ - Home Page: Logo, menu and search in the main navigation for immediate browsing.  The main area of the page will feature two callouts - one linking to special offers and the other to the create your own cheeseboard feature (if included).  It will also feature a brief site mission statement.
  - Search/Filter:  Once a user either searches or filters the page via one of the menus, a familiar looking results screen will appear with basic product information which the user can browse.
  - Product view: When clicking on a product the page provides more detailed information plus the opportunity to add the item to the cart or purchase immediately, and a 'recommended' section which will focus on product pairing (cheese to beer, and beer to cheese (or sundries should they be integrated into the project.)).
  - Cart page:  If the user has filled a cart with items, they can review and update these items.
@@ -204,13 +202,13 @@ BLUE SKY FEATURES:
 
 MVP FEATURES:
 
- - users see an order summary
- - users are provided with an order number referencing their order
- - users are provided a route back to the site
+ - users see an order summary.
+ - users are provided with an order number referencing their order.
+ - users are provided a route back to the site.
 
 BLUE SKY FEATURES:
 
- - users have option to share their purchase on social
+ - users have option to share their purchase on social.
 
 #### Account Page
 
@@ -251,94 +249,89 @@ The data structure for the submitted MPV can be found [HERE](#mvp-data-structure
 
 ### Site pages and elements
 
-#### Header and Site Navigation
+#### Main Template and Navigation
 
-The homepage navigation will simply be a sign up/sign in button prominently placed, which leads either to the sign-up user journey or the Dreamscape feed by default on signing in.
+The homepage navigation will emulate to a degree the way Amazon is arranges, with a small logo, prominent search and key navigation arranged horizontally across the top of the screen.  On mobile this stacks to arrange the navigation filters below the search and account links.  For logged in users the can access their account details at the top right of the page, as is convention.
 
-Once logged in the main navigation will be in the form of bold icons indicating the function of each page, and a logo will appear either alongside or above the navigation.
- - Feeds
- - Profile
- - Dreams
+Although I generally try to avoid drop-down menus, I believe they will be necessary to allow users to filter without multiple clicks, but I do not wish menus to go more than 1 deep.  Javascript will be effective on desktop, and allow users to filter all by category with one click whilst using mouseover to reveal other options.  For mobile this will require 2 taps but I think users will be used to this.
 
-Furthermore search functionality will also be included on all pages.  This will take either the form of a search bar with a radial offering the option to search for people or dreams, or an additional icon which would open a more detailed search page.  The choice of concept here will likely evolve along with the site design.
+#### Results Page
 
-My philosophy is to simplify navigation and avoid the need for additional pop-up/drop-down menus on mobile which impair site feel and are largely un-necessary if navigation is well designed.
+Basic product details will be shown on results pages, with an initial 4-8 items shown and the option to view more (as with Amazon).  I would like to include pagination if I have time, but on such a niche site the small number of products available should mean it's not an essential (and it would require learning from scratch to do it with Django although I'd imageine the principle is the same as with anything else!).  I'm also keen to have instant checkout options here (everywhere in fact) as somtimes people just know what they want and the shopping cart mean unnecessary extra clicks.
 
-#### Footer
+#### Item Page
 
-If I view any social site there is no main footer as such, and indeed Facebook does not include one either - this seems to be for two reasons; one is infinite scroll, the other is space being limited on a mobile screen.  Any important information (copyright, terms of service) can be located elsewhere; with this in mind I'm not sure what a footer would add so I won't be including one. 
+This will contain full product information, more order options and a recommendation section, which will pair beer with cheese.  This will be pretty straighforward process and the pairings will be set on product creation as part of the data modelling.
 
-#### Sign-up user journey
+#### Shopping Basket Page
 
-This will consist of a series of pages requesting use information to complete the sign-up process.  The intention is not only to gather the information required for the site to be functional, but to introduce the user to key site concepts, build anticipation about site content and encourage exploration once signed up.
+The concept involves allowing users to edit their basket and also add giftwrap/convert to cheeseboard (if included) options on the page.  These are nice to have options but they should be straightforward to include and I think are close to essential on a site which will lean heavily towards gifting.  If I include as planned and instant checkout option then these options will also need to be available on the checkout page, as well as the option for a user to change their mind.  It's important in these sorts of cases the user doesn't have to go hunting to achieve what they want to achieve.
 
-#### Feed pages
+#### Checkout Page
 
-The feed pages will consist of a scrollable list of items in the feed, along with options to interact at the bottom of each item.  This will include like buttons, and the ability to follow, unfollow, expand the comments section or leave a new comment.  Where dreams are concerned users will also be able to access full details about the dream and the user who created it from the feed.
+I intend to give users a choice of saved addresses, and the option to designate a seperate billing / delivery address using Javascript to show/hide and autofill fields if boxes are checked or unchecked.  I think the convenience of this is a key part of what makes Amazon so successful.  I would also like to do the same for payment details, but that will be time-restricted as there are a lot of extra considerations when it comes to storing sensitive financial data which I think are beyond the scope of this project.  The theory remains the same however, minimal user input to acheive the end result, creating a seamless experience.
 
-The feed will take two forms - one is a personal feed which will show the latest from all the content and people the user is following.  the other is the Dreamscape feed where the user can browse the dreams that others have created.
+#### Confirmation Page
 
-#### Dreams page
+This will be straightforward so I haven't wireframed it, but I also want to provide unique order references so that users can track their order without logging in and provides a point of reference.  This is very important for unregistered users that are not logged in.
 
-The dreams page will list Dreams and descriptions of them, with latest comments.  You can also expand them to view various modules and comments therein, or open them in the Dream Editor page.  At the top of the page will also be the Dream Builder button which initiates the user journey for building a dream.
+#### Add / Edit Product Page
 
-#### Dream Editor
+I've considered a number of complex iterations of this, but in the end it will be very simple case of choosing to add beer or cheese and then having near identical forms to fill out in the style of the wireframe. It could be condensed to a single page and the form presented and controlled using Javascript and a drop-down, but it makes little sense to spend time on this when it is only for site-affiliated admin users, which in practice will only ever be me.  That said, although this website is not intended to be a storefront, it will be formatted so that other admin users find it a pleasure to use. It will also have proper image handling so that images are uploaded and stored in the proper size and format rather than this being incumbent on the user. Searching for products will also provide admin users the chance to edit products (but they can only be deleted from the edit item page, I'm keen not to make that too easy).  I also think it will make sense that for any product which has been involved in an order to have a for a hide option rather than a delete, which hides them from the user using an availability toggle - items may often be temporarily unavailable and if something has been sold in the past it's important to retain that link to the order history.
 
-Large icons will represent the various dream modules if present, otherwise there is an icon to create them.  Here you can also enter various modules to edit and update them.
+#### Account Section
 
-#### Dream Builder
-
-The Dream Builder icon initiates the user journey to create a dream, walking the user through each stage of the process.  Not all modules are compulsary but each dream will require a name, description and some category tags so people can discover it.
-
-#### Profile Page
-
-The user will be faced with two options - it defaults to personal which allows them to update skills, interests, projects and experience to tailor what they see in their Dreamscape feed.  The user can also access Account Settings from this page to update their personal info and privacy/notification settings.
+This will be a simple menu offering order history, manage addresses or update personal details.  Order history will be a simple list of orders that can be expanded when clicked on.
 
 ### Core Data Structure
 
-Please note that this section represents the initial design phase for the database schema, and as I outlined below it was always going to be subject to change. The data structure for the completed MVP can be found [HERE](#mvp-data-structure).
+Please note that this section represents the initial design phase for the database schema, and may well be subject to change.
 
-Using Mongo DB and a modular approach to building key elements of the site means I have opted for an extremely flat structure, creating new collections where possible to make data easily accessible and speeding up the process of removing data.  This data structure has been put together with two major provisos - one is that this is my first MongoDB project and I do not yet know how this structure will evolve in practice.  It may well be that I need to merge, nest or separate various collections as the requirements of the platform become clearer.
+Having used MongoDB in my previous project, I'm glad that a relational database will be used in this one - it means that data can be broken down into chunks and their relationships with each other can be tracked and indexed very easily and my Python code should be a lot simpler (theoretically).
 
-#### Users Collection
+My main decisions when modelling the data for this project are whether I need sub-models for the various classes of product.  In the end I have decided that each main product line (cheese or beer) will also have a sub-class with its own attributes.  This will be extremely handy when it comes to making recommendations on the item page and will make product creation a simple matter of adding a name, image, price and quantity, then selecting the appropriate category from a drop-down.  Each cheese product will be sub-class of the selected category (eg Camembert) and inherit its characteristics, likewise for beer.  I belive this functionality is built in to Django Models so should be easy to implement.  Apart from that everything will be very straightforward, except that addresses will have their own data model linked to the user by a foreign key so that users can save multiple addresses.  It will also make it easy to track which addresses have been used in the order history, should users subsequently change their address.
 
-This will include basic user data, key settings for discovery of dreams and notification/privacy settings.
+I also want users to log in with their e-mail.  It is rare they are able to remember their username, especially as often the one they are most likely to use is already taken.  Personally, there is little more frustrating.  Because the e-mail address is a unique piece of data, I don't know why anyone would do it any other way unless they are safeguarding against very weak passwords, which will be taken care of in this case when they are created.
 
-![image](static/images/data-model/users.png)
+#### User Model
 
-#### Dream Collection
+This will include basic user authentication data, for the most part created by AllAuth.  
 
-This is the collection for base dream data.  It includes all the data to be included in feeds and discovery, and is linked to a user by the user's ID.  Comments will be enabled on dreams.
+![image](media/data-model/users.png)
 
-![image](static/images/data-model/dreams.png)
+#### Address Model
 
-### Modular Components Data Structure
+This is the model for user addresses, which also logs the associated user ID and whether it is a billing or shipping address.  For shipping addresses there will also be the option to add a shipping name, which will default to the user's name for billing addresses.
 
-The below represent modular components of dreams. The key concept among these components is the Diary Module, which will form part of the MVP - the rest may not all be included in the MVP depending on timescales and viability, however it is intended that they should be.
+### Order Model
 
-#### Diary Collection
+This is the model to track order histories, with associated users, products and shipping addresses.
 
-The diary is a modular component of a dream, and is linked to a dream by the dream's ID. Comments will be enabled for diary entries.
+#### Cheese Category Model
+
+Will include details of generic cheese types, from Goat's Cheese to Gruyere, along with their characteristics and pairing recommendations.
+
+#### Beer Category Model
+
+Will include details of generic beer types, along with their characteristics and pairing recommendations.
+
+#### Cheese Product Model
+
+A unique product which will include name, description, images, price, and relate to an order history.  Related to the selected category model.
+
+#### Beer Product Model
+
+A unique product which will include name, description, images, price, and relate to an order history.  Related to the selected category model.
+
+#### Order Model
+
+Each table entry will be for a seperate order, logging who ordered it, when, the total order value, additional options selected, plus the billing and shipping address foreign keys.
+
+#### Order Item
+
+A record of each individual item ordered, linked to an order by foreign key.
 
 ![image](static/images/data-model/diary.png)
-
-#### Goals Collection
-
-Goals are a modular component of a dream, and are linked to a dream by the dream ID. Comments will be enabled for goals.
-
-![image](static/images/data-model/goals.png)
-
-#### Planner Collection
-
-The Planner collection will be created on the same basis as other dream modules and will have comments enabled.  Each plan within the planner will have an associated task, which can include any number of steps.
-
-![image](static/images/data-model/planner.png)
-
-#### Requests Collection
-
-The requests module of a dream allows a user to request any number of specific skills or assistance within the skills required section. This can then be associated with users offering their services.
-
-![image](static/images/data-model/requests.png)
 
 ## UX - Skeleton
 ([back to top](#contents))
