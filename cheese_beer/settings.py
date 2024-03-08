@@ -45,8 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     #locally installed apps
-
-
+    'home',
+    'admin_console',
     # allauth
     'allauth',
     'allauth.account',
@@ -69,7 +69,10 @@ ROOT_URLCONF = 'cheese_beer.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+           os.path.join(BASE_DIR, 'templates'),
+           os.path.join(BASE_DIR, 'templates', 'allauth'), 
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
