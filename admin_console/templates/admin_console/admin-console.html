@@ -6,7 +6,23 @@ Cheese and Beer - Admin Console
 
 {% block content %}
 <h1>Do Stuff Now</h1>
-<a href="">Add a new product</a>
-<a href="">Edit existing product</a>
-<a href="">Customer Support</a>
+<p>
+    <a href="{% url 'add_cheese_category' %}">Add a new cheese category</a>
+</p>
+<p>
+    <a href="">Add a new beer category</a>
+</p>
+<p>
+    <a href="">Add a new product</a>
+</p>
+<p>
+    <a href="">Edit existing product</a>
+</p>
+<p>
+    <a href="">Customer Support</a>
+</p>
+
+<h2>
+    <a href="{% url 'home' %}">Back to Homepage</a>
+</h2>
 {% endblock %}

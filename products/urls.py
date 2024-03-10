@@ -5,5 +5,6 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
-    path('', views.admin_console, name='admin_console')
+    path('', views.add_cheese_category, name='add_cheese_category')
 ]
+

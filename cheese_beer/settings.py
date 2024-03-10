@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     #locally installed apps
     'home',
     'admin_console',
+    'products',
     # allauth
     'allauth',
     'allauth.account',
