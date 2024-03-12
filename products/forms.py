@@ -1,12 +1,22 @@
 from django import forms
-from .models import cheese_category, beer_category
+from .models import CheeseCategory, BeerCategory
 
+
+class BeerCategoryForm(forms.ModelForm):
+
+    class Meta:
+        model = BeerCategory
+        fields = ('name', 'description',)
+    
+    image = forms.ImageField(label='Image', required=False)
 
 class CheeseCategoryForm(forms.ModelForm):
 
     class Meta:
-        model = cheese_category
-        fields = '__all__'
+        model = CheeseCategory
+        fields = ('name', 'description')
+    
+    image = forms.ImageField(label='Image', required=False)
 
 
     # this overrides .init to customise fields.  may not be needed yet

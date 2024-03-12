@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 load_dotenv()
 
@@ -33,6 +36,13 @@ ALLOWED_HOSTS = os.getenv("HOST")
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+#cloudinary
+
+cloudinary.config(
+    cloud_name=os.environ.get('CLOUD_NAME'),
+    api_key=os.environ.get('API_KEY'),
+    api_secret=os.environ.get('API_SECRET'))
 
 
 # Application definition
@@ -156,3 +166,7 @@ SITE_ID=1
 
 #email
 EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
+
+#Cloudinary
+
+

@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import BeerCategory, CheeseCategory
 
-# Register your models here.
+
+admin.site.register(BeerCategory)
+admin.site.register(CheeseCategory)

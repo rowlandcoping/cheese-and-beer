@@ -5,10 +5,11 @@ Cheese and Beer - Admin Console
 {% endblock %}
 
 {% block content %}
-<h1>Do Stuff Now</h1>
-<form method="POST" action="" enctype="multipart/form-data">
+<h1>Do Stuffs Now</h1>
+<form method="POST" action="{% url 'add_beer_category' %}" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form }}
+
     <div class="text-right">
         <a class="btn btn-outline-black rounded-0" href="">Cancel</a>
         <button class="btn btn-black rounded-0" type="submit">Add Product</button>

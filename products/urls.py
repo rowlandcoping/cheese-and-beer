@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
-    path('', views.add_cheese_category, name='add_cheese_category')
+    path('add-cheese-catgory/', views.add_cheese_category, name='add_cheese_category'),
+    path('add-beer-catgory/', views.add_beer_category, name='add_beer_category'),
 ]
 
