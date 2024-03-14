@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cheese and Beer - Admin Console
+{% endblock %}
+
+{% block content %}
+<h1>Do Stuff Now</h1>
+<form method="POST" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    <div>
+        <img src="{{ base_url }}cheese-and-beer/cheese-categories/{{ category.image_url }}">
+    </div>
+    <div>
+        <a href="">Cancel</a>
+        <button type="submit">Add Product</button>
+    </div>
+</form>
+
+<h2>
+    <a href="{% url 'admin_console' %}">Back to Admin Console</a>
+    <br>
+    <a href="{% url 'home' %}">Back to Homepage</a>
+</h2>
+{% endblock %}

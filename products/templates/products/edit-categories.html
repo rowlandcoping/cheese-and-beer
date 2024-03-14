@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cheese and Beer - Admin Console
+{% endblock %}
+
+{% block content %}
+<h1>Edit Stuff Now</h1>
+<h2>Cheese Categories</h2>
+
+{% for category in cheese_categories %}
+<h3>Name: {{ category.name }}</h3>
+<h3><a href = "{% url 'edit_cheese_category' category.id %}">Edit</a></h3>
+{% endfor %}
+
+<h2>Beer Categories</h2>
+
+{% for category in beer_categories %}
+<h3>Name: {{ category.name }}</h3>
+<h3><a href = "{% url 'edit_beer_category' category.id %}">Edit</a></h3>
+{% endfor %}
+
+<h2>
+    <a href="{% url 'admin_console' %}">Back to Admin Console</a>
+    <br>
+    <a href="{% url 'home' %}">Back to Homepage</a>
+</h2>
+{% endblock %}

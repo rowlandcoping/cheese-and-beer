@@ -6,6 +6,7 @@ Cheese and Beer - Admin Console
 
 {% block content %}
 <h1>Do Stuff Now</h1>
+<h2>Categories</h2>
 <p>
     <a href="{% url 'add_cheese_category' %}">Add a new cheese category</a>
 </p>
@@ -13,11 +14,16 @@ Cheese and Beer - Admin Console
     <a href="{% url 'add_beer_category' %}">Add a new beer category</a>
 </p>
 <p>
+    <a href="{% url 'edit_categories' %}">Edit Categories</a>
+</p>
+<h2>Products</h2>
+<p>
     <a href="">Add a new product</a>
 </p>
 <p>
     <a href="">Edit existing product</a>
 </p>
+<h2>Administration</h2>
 <p>
     <a href="">Customer Support</a>
 </p>

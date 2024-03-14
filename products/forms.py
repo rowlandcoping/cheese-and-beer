@@ -8,7 +8,9 @@ class BeerCategoryForm(forms.ModelForm):
         model = BeerCategory
         fields = ('name', 'description',)
     
+    pairings = forms.CharField(widget=forms.HiddenInput())
     image = forms.ImageField(label='Image', required=False)
+    
 
 class CheeseCategoryForm(forms.ModelForm):
 
@@ -16,9 +18,10 @@ class CheeseCategoryForm(forms.ModelForm):
         model = CheeseCategory
         fields = ('name', 'description')
     
+    pairings = forms.CharField(widget=forms.HiddenInput())
     image = forms.ImageField(label='Image', required=False)
-
+    
 
     # this overrides .init to customise fields.  may not be needed yet
     # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
+    #   super().__init__(*args, **kwargs)

@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.conf import settings
 from django.urls import reverse
 from .models import CheeseCategory, BeerCategory
 from .forms import CheeseCategoryForm, BeerCategoryForm
@@ -112,4 +113,53 @@ def add_beer_category(request):
         'form': beer_form,
     }
 
+    return render(request, template, context)
+
+
+def edit_categories(request):
+    """ 
+    Returns a list of categories so that they can be edited
+    """
+    cheese_categories = CheeseCategory.objects.all()
+    beer_categories = BeerCategory.objects.all()
+    template = 'products/edit-categories.html'
+    context = {
+        'cheese_categories': cheese_categories,
+        'beer_categories': beer_categories
+    }
+    return render(request, template, context)
+
+def edit_cheese_category(request, category_id):
+    """ 
+    Allows user to edit individual cheese category
+    """
+    base_url = settings.CLOUDINARY_BASE[0]
+    category = get_object_or_404(CheeseCategory, pk=category_id)
+    beer_categories = BeerCategory.objects.all()
+    form = CheeseCategoryForm(instance=category)
+    template = 'products/edit-cheese-category.html'
+    context = {
+        'base_url': base_url,
+        'form': form,
+        'category': category,
+        'beer_categories': beer_categories
+    }
+    return render(request, template, context)
+
+
+def edit_beer_category(request, category_id):
+    """ 
+    Allows user to edit individual beer category
+    """
+    base_url = settings.CLOUDINARY_BASE[0]
+    category = get_object_or_404(BeerCategory, pk=category_id)
+    cheese_categories = CheeseCategory.objects.all()
+    form = BeerCategoryForm(instance=category)
+    template = 'products/edit-beer-category.html'
+    context = {
+        'base_url': base_url,
+        'form': form,
+        'category': category,
+        'cheese_categories': cheese_categories,
+    }
     return render(request, template, context)
