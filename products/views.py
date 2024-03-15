@@ -156,11 +156,13 @@ def edit_beer_category(request, category_id):
     """
     base_url = settings.CLOUDINARY_BASE[0]
     category = get_object_or_404(BeerCategory, pk=category_id)
-    pairings = category.pairs_with.all()
+    pairings = category.cheese.all()
+    initial_pairings = pairings.values_list('id', flat=True)
     cheese_categories = CheeseCategory.objects.all()
     form = BeerCategoryForm(instance=category)
     template = 'products/edit-beer-category.html'
     context = {
+        'initial_pairings': list(initial_pairings),
         'base_url': base_url,
         'form': form,
         'category': category,

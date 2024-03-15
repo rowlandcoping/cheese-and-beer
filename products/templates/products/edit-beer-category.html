@@ -9,6 +9,7 @@ Cheese and Beer - Admin Console
 <form method="POST" action="" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form }}
+    <input type="hidden" name="initial_pairings" id="id_initial_pairings" value="{{ initial_pairings }}">
     <div>
         <img src="{{ base_url }}cheese-and-beer/beer-categories/{{ category.image_url }}">
     </div>

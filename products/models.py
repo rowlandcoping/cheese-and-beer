@@ -18,7 +18,7 @@ class CheeseCategory(models.Model):
     description = models.TextField()
     image_url = models.CharField(max_length=254, null=True, blank=True)
     image_alt = models.CharField(max_length=1024, null=True, blank=True)
-    pairs_with = models.ManyToManyField(BeerCategory, null=True, blank=True)
+    pairs_with = models.ManyToManyField(BeerCategory, related_name="cheese", blank=True)
 
     def __str__(self):
         return self.name
