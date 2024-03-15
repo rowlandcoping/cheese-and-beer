@@ -7,7 +7,7 @@ class BeerCategoryForm(forms.ModelForm):
     class Meta:
         model = BeerCategory
         fields = ('name', 'description',)
-    
+
     pairings = forms.CharField(widget=forms.HiddenInput())
     image = forms.ImageField(label='Image', required=False)
     

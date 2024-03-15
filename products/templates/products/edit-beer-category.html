@@ -12,6 +12,12 @@ Cheese and Beer - Admin Console
     <div>
         <img src="{{ base_url }}cheese-and-beer/beer-categories/{{ category.image_url }}">
     </div>
+    <div class="categories">
+        <h2>Select Cheese Pairings</h2>
+        {% for category in cheese_categories %}
+        <div class="category-selector" id = "{{ category.id }}">{{ category.name}}</div>
+        {% endfor %}
+    <div>
     <div>
         <a href="">Cancel</a>
         <button type="submit">Add Product</button>

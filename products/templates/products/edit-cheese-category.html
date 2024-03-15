@@ -9,14 +9,21 @@ Cheese and Beer - Admin Console
 <form method="POST" action="" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form }}
+    <input type="hidden" name="initial_pairings" id="id_initial_pairings" value="{{ initial_pairings }}">
     <div>
         <img src="{{ base_url }}cheese-and-beer/cheese-categories/{{ category.image_url }}">
     </div>
+    <div class="categories">
+        <h2>Select Beer Pairings</h2>
+        {% for category in beer_categories %}
+        <div class="category-selector" id = "{{ category.id }}">{{ category.name}}</div>
+        {% endfor %}
     <div>
         <a href="">Cancel</a>
         <button type="submit">Add Product</button>
     </div>
 </form>
+
 
 <h2>
     <a href="{% url 'admin_console' %}">Back to Admin Console</a>
