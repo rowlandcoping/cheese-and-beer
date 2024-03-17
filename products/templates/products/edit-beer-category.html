@@ -6,11 +6,11 @@ Cheese and Beer - Admin Console
 
 {% block content %}
 <h1>Do Stuff Now</h1>
-<form method="POST" action="" enctype="multipart/form-data">
+<form method="POST" action="{% url 'edit_beer_category' category.id %}" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form }}
     <input type="hidden" name="initial_pairings" id="id_initial_pairings" value="{{ initial_pairings }}">
-    <input type="hidden" name="pairings" id="pairings">
+    <input type="hidden" name="pairings" id="id_pairings">
     <div>
         <img src="{{ base_url }}cheese-and-beer/beer-categories/{{ category.image_url }}">
     </div>

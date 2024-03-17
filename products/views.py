@@ -225,6 +225,73 @@ def edit_beer_category(request, category_id):
     """ 
     Allows user to edit individual beer category
     """
+    if request.method=='POST':
+        form = BeerCategoryForm(request.POST)
+        if form.is_valid():
+            category = get_object_or_404(BeerCategory, pk=category_id)
+            # updates image, name and description
+            name = request.POST.get('name').lower()
+            ImageUpload = request.FILES.get('image')
+            image_id = str(datetime.now().timestamp()).split('.')[1]
+            if ImageUpload:    
+                image_url = str(
+                    re.sub(
+                        "[.!# $%;@&'*+/=?^_` {|}~]",
+                        "-",
+                        name
+                        ) + "-" + image_id
+                    )
+                image_alt = str("An image depicting some " + name)
+                converted_image = imageConvert(
+                    ImageUpload, 400, 75, "webp")
+                if category.image_url != "":
+                    cloudinary.uploader.destroy(
+                        "cheese-and-beer/beer-categories/" + category.image_url)
+                cloudinary.uploader.upload(
+                    converted_image,
+                    public_id=image_url,
+                    folder="cheese-and-beer/beer-categories")                
+            else:
+                image_url = category.image_url
+                image_alt = category.image_alt        
+            BeerCategory.objects.filter(pk=category_id).update(
+                name=request.POST.get('name'), 
+                description=request.POST.get('description'), 
+                image_url=image_url,
+                image_alt=image_alt
+            )
+            # updates many to many pairings based on category buttons selected
+            pairings = category.cheese.all()
+            initial_pairings = list(pairings.values_list('id', flat=True))
+            pairings_to_add = []
+            pairings_to_remove = []
+            if request.POST.get('pairings'):
+                pairings_list = request.POST.get('pairings')[:-1]
+                updated_pairings = list(pairings_list.split(','))
+                updated_pairings = [ int(x) for x in updated_pairings ]            
+                if initial_pairings:
+                    for pairing in initial_pairings:
+                        if pairing not in updated_pairings:
+                            pairings_to_remove.append(pairing)
+                    for next_pairing in updated_pairings:
+                        if next_pairing not in initial_pairings:                   
+                            pairings_to_add.append(next_pairing)
+                else:
+                    for next_pairing in updated_pairings:
+                        pairings_to_add.append(next_pairing)
+            elif initial_pairings:
+                for pairing in initial_pairings:
+                    pairings_to_remove.append(pairing)
+            if pairings_to_add:
+                for add_pairing in pairings_to_add:
+                    cheese_to_add = get_object_or_404(CheeseCategory, pk=add_pairing)
+                    category.cheese.add(cheese_to_add)
+            if pairings_to_remove:
+                for remove_pairing in pairings_to_remove:
+                    cheese_to_remove = get_object_or_404(CheeseCategory, pk=remove_pairing)
+                    category.cheese.remove(cheese_to_remove)
+        else:
+            messages.error(request, 'Failed to update product. Please ensure the form is valid.')  
     base_url = settings.CLOUDINARY_BASE[0]
     category = get_object_or_404(BeerCategory, pk=category_id)
     pairings = category.cheese.all()
