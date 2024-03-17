@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
 from django.urls import reverse
+from django.contrib import messages
+from datetime import datetime
 from .models import CheeseCategory, BeerCategory
 from .forms import CheeseCategoryForm, BeerCategoryForm
 import io
@@ -133,6 +135,75 @@ def edit_cheese_category(request, category_id):
     """ 
     Allows user to edit individual cheese category
     """
+    if request.method=='POST':
+        form = CheeseCategoryForm(request.POST)
+        if form.is_valid():
+            category = get_object_or_404(CheeseCategory, pk=category_id)
+            print(category.image_url)
+            # updates image, name and description
+            name = request.POST.get('name').lower()
+            ImageUpload = request.FILES.get('image')
+            image_id = str(datetime.now().timestamp()).split('.')[1]
+            if ImageUpload:    
+                image_url = str(
+                    re.sub(
+                        "[.!# $%;@&'*+/=?^_` {|}~]",
+                        "-",
+                        name
+                        ) + "-" + image_id
+                    )
+                image_alt = str("An image of " + name + " cheese")
+                converted_image = imageConvert(
+                    ImageUpload, 400, 75, "webp")
+                if category.image_url != "":
+                    cloudinary.uploader.destroy(
+                        "cheese-and-beer/cheese-categories/" + category.image_url)
+                cloudinary.uploader.upload(
+                    converted_image,
+                    public_id=image_url,
+                    folder="cheese-and-beer/cheese-categories")                
+            else:
+                image_url = category.image_url
+                image_alt = category.image_alt        
+            CheeseCategory.objects.filter(pk=category_id).update(
+                name=request.POST.get('name'), 
+                description=request.POST.get('description'), 
+                image_url=image_url,
+                image_alt=image_alt
+            )
+            # updates many to many pairings based on category buttons selected
+            pairings = category.pairs_with.all()
+            initial_pairings = list(pairings.values_list('id', flat=True))
+            pairings_to_add = []
+            pairings_to_remove = []
+            if request.POST.get('pairings'):
+                pairings_list = request.POST.get('pairings')[:-1]
+                updated_pairings = list(pairings_list.split(','))
+                updated_pairings = [ int(x) for x in updated_pairings ]            
+                if initial_pairings:
+                    for pairing in initial_pairings:
+                        if pairing not in updated_pairings:
+                            pairings_to_remove.append(pairing)
+                    for next_pairing in updated_pairings:
+                        if next_pairing not in initial_pairings:                   
+                            pairings_to_add.append(next_pairing)
+                else:
+                    for next_pairing in updated_pairings:
+                        pairings_to_add.append(next_pairing)
+            elif initial_pairings:
+                for pairing in initial_pairings:
+                    pairings_to_remove.append(pairing)
+            if pairings_to_add:
+                for add_pairing in pairings_to_add:
+                    beer_to_add = get_object_or_404(BeerCategory, pk=add_pairing)
+                    category.pairs_with.add(beer_to_add)
+            if pairings_to_remove:
+                for remove_pairing in pairings_to_remove:
+                    beer_to_remove = get_object_or_404(BeerCategory, pk=remove_pairing)
+                    category.pairs_with.remove(beer_to_remove)
+        else:
+            messages.error(request, 'Failed to update product. Please ensure the form is valid.')  
+    # returns updated data
     base_url = settings.CLOUDINARY_BASE[0]
     category = get_object_or_404(CheeseCategory, pk=category_id)
     pairings = category.pairs_with.all()

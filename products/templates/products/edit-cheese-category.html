@@ -5,11 +5,15 @@ Cheese and Beer - Admin Console
 {% endblock %}
 
 {% block content %}
+{% for message in messages %}
+<h3>{{ message }}</h3>
+{% endfor %}
 <h1>Do Stuff Now</h1>
-<form method="POST" action="" enctype="multipart/form-data">
+<form method="POST" action="{% url 'edit_cheese_category' category.id %}" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form }}
     <input type="hidden" name="initial_pairings" id="id_initial_pairings" value="{{ initial_pairings }}">
+    <input type="hidden" name="pairings" id="pairings">
     <div>
         <img src="{{ base_url }}cheese-and-beer/cheese-categories/{{ category.image_url }}">
     </div>

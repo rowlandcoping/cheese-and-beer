@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     document.getElementById(categoryButtons[i]).style.backgroundColor = "green";
                     document.getElementById(categoryButtons[i]).style.color = "white";
                     document.getElementById(categoryButtons[i]).style.borderColor = "white";
-                    document.getElementById("id_pairings").value += categoryButtons[i] + ",";
+                    document.getElementById("id_pairings").value += Number(categoryButtons[i]) + ",";
                 }
             }
         }
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById(itemId).style.backgroundColor = "green";
             document.getElementById(itemId).style.color = "white";
             document.getElementById(itemId).style.border = "2px solid white";
-            document.getElementById("id_pairings").value += itemId + ",";
+            document.getElementById("id_pairings").value += Number(itemId) + ",";
         }
         console.log(document.getElementById("id_pairings").value)
     }
