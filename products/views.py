@@ -3,8 +3,8 @@ from django.conf import settings
 from django.urls import reverse
 from django.contrib import messages
 from datetime import datetime
-from .models import CheeseCategory, BeerCategory
-from .forms import CheeseCategoryForm, BeerCategoryForm
+from .models import CheeseCategory, BeerCategory, Product
+from .forms import CheeseCategoryForm, BeerCategoryForm, CheeseForm, BeerForm
 import io
 import re
 import cloudinary
@@ -305,5 +305,22 @@ def edit_beer_category(request, category_id):
         'form': form,
         'category': category,
         'cheese_categories': cheese_categories,
+    }
+    return render(request, template, context)
+
+def add_cheese(request):
+    form = CheeseForm()
+    template = 'products/add-cheese.html'
+    context = {
+        'form': form,
+    }
+    return render(request, template, context)
+
+
+def add_beer(request):
+    form = BeerForm()
+    template = 'products/add-beer.html'
+    context = {
+        'form': form,
     }
     return render(request, template, context)
