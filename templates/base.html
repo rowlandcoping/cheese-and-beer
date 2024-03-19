@@ -12,6 +12,9 @@
     </title>    
 </head>
 <body>
+    {% for message in messages %}
+    <h3>{{ message }}</h3>
+    {% endfor %}
     {% block content %}
     {% endblock %}
     <script src="{% static 'js/script.js' %}"></script>

@@ -22,13 +22,18 @@ class CheeseCategoryForm(forms.ModelForm):
 
 class BeerForm(forms.ModelForm):
     quantity_options = (
-        ('1', '175ml'),
-        ('2', '250ml'),
-        ('2', '330ml'),
-        ('3', '400ml'),
-        ('4', '500ml')
+        ('175ml', '175ml'),
+        ('250ml', '250ml'),
+        ('330ml', '330ml'),
+        ('400ml', '400ml'),
+        ('500ml', '500ml')
     )
-    quantity = forms.ChoiceField(label='Quantity', widget=forms.Select, choices=quantity_options)
+    type_options = (
+        ('bottle', 'bottle'),
+        ('can', 'can'), 
+    )
+    container = forms.ChoiceField(label='Comes In', widget=forms.RadioSelect, choices=type_options)
+    amount = forms.ChoiceField(label='Amount', widget=forms.Select, choices=quantity_options)
     image = forms.ImageField(label='Image', required=False)
 
     class Meta:
@@ -39,7 +44,8 @@ class BeerForm(forms.ModelForm):
             'description',
             'variety',
             'alcohol_content',
-            'quantity',            
+            'container',
+            'amount',           
             'price',            
             'country_origin',
             'image',
@@ -48,16 +54,16 @@ class BeerForm(forms.ModelForm):
 
 class CheeseForm(forms.ModelForm):
     quantity_options = (
-        ('1', '100g'),
-        ('2', '125g'),
-        ('3', '150g'),
-        ('4', '175g'),
-        ('5', '200g'),
-        ('6', '250g'),
-        ('7', '350g'),
-        ('8', '500g'),
+        ('100g', '100g'),
+        ('125g', '125g'),
+        ('150g', '150g'),
+        ('175g', '175g'),
+        ('200g', '200g'),
+        ('250g', '250g'),
+        ('350g', '350g'),
+        ('500g', '500g'),
     )
-    quantity = forms.ChoiceField(label='Quantity', widget=forms.Select, choices=quantity_options)
+    amount = forms.ChoiceField(label='Amount', widget=forms.Select, choices=quantity_options)
     image = forms.ImageField(label='Image', required=False)
 
     class Meta:
@@ -67,7 +73,7 @@ class CheeseForm(forms.ModelForm):
             'cheese_category',
             'description',
             'variety',
-            'quantity',
+            'amount',
             'price',
             'country_origin',
             'image',

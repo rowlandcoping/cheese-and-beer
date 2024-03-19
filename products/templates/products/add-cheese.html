@@ -6,9 +6,10 @@ Cheese and Beer - Admin Console
 
 {% block content %}
 <h1>Do Stuff Now</h1>
-<form method="POST" action="" enctype="multipart/form-data">
+<form method="POST" action="{% url 'add_product' %}" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form }}
+    <input type="hidden" name="product_type" id="id_product_type" value="cheese">
     <div class="text-right">
         <a class="btn btn-outline-black rounded-0" href="">Cancel</a>
         <button class="btn btn-black rounded-0" type="submit">Add Product</button>

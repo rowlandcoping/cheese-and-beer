@@ -28,28 +28,25 @@ class CheeseCategory(models.Model):
 class Product(models.Model):
     #common fields
     name = models.CharField(max_length=254)
-    type = models.CharField(max_length=6)
+    product_type = models.CharField(max_length=254)
     description = models.TextField(null=True, blank=True)
     variety = models.CharField(max_length=254)
-    price = models.DecimalField(max_digits=6, decimal_places=2)
+    amount = models.CharField(max_length=6)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
     price_per_amount = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     image_url = models.CharField(max_length=254, null=True, blank=True)
     image_alt = models.CharField(max_length=1024, null=True, blank=True)
     country_origin = models.CharField(
         max_length=254,
-        choices=CountryField().choices
+       choices=CountryField().choices
     )
     # fields specific to cheese
     cheese_category = models.ForeignKey('CheeseCategory', null=True, blank=True, on_delete=models.SET_NULL)
-    quantity = models.CharField(max_length=254, null=True, blank=True)
     # fields specific to beer 
     beer_category = models.ForeignKey('BeerCategory', null=True, blank=True, on_delete=models.SET_NULL)
-    quantity = models.CharField(max_length=254, null=True, blank=True)
+    container = models.CharField(max_length=254, null=True, blank=True)
     alcohol_content = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
 
    
-    
-
-
     def __str__(self):
         return self.name
