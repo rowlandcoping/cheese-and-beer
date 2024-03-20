@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cheese and Beer - Admin Console
+{% endblock %}
+
+{% block content %}
+<h1>Update or Remove Products</h1>
+<h2>Search here by Product ID or name:</h2>
+<form method="GET" action="{% url 'edit_product' %}">
+    <div class="input-group w-100">
+      <input type="text" name="q" placeholder="Search">
+      <div>
+        <button type="submit">
+          <span>
+            <i>search</i>
+          </span>
+        </button>
+      </div>
+    </div>
+</form>
+{% if search_term %}
+<h3>Search results for {{ query }}</h3>
+{% for product in products %}
+<h3>Name: {{ product.name }}</h3>
+<h3><a href = "{% url 'product_edit' product.id %}">Edit</a></h3>
+{% endfor %}
+{% endif %}
+
+
+
+{% endblock %}

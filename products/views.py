@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
 from django.urls import reverse
 from django.contrib import messages
+from django.db.models import Q
 from datetime import datetime
 from .models import CheeseCategory, BeerCategory, Product
 from .forms import CheeseCategoryForm, BeerCategoryForm, CheeseForm, BeerForm
+import uuid
 import io
 import re
 import cloudinary
@@ -335,13 +337,16 @@ def add_product(request):
     if product_type == "cheese":
         form = CheeseForm(request.POST)
         selected_category = form['cheese_category'].value()
+        product_code="PCH"
         if selected_category == "":
             messages.error(request, 'Failed to add cheese, please select a category')
             return redirect('add_cheese')
         cheese_category = selected_category
+        
     else:
         form = BeerForm(request.POST)
         selected_category = form['beer_category'].value()
+        product_code="PBE"
         if selected_category == "":
             messages.error(request, 'Failed to add beer, please select a category')
             return redirect('add_beer')
@@ -353,29 +358,24 @@ def add_product(request):
             return redirect('add_beer')
         beer_category = selected_category
     if form.is_valid():
-        name = request.POST.get('name').lower()
+        name = request.POST.get('name').lower()        
         ImageUpload = request.FILES.get('image')
         # reverts description to the generic category description if none added
-        if request.FILES.get('description'):
-            description = request.FILES.get('description')
+        if request.POST.get('description'):
+            description = request.POST.get('description')
         else:
             if product_type == "cheese":
                 category = get_object_or_404(CheeseCategory, pk=cheese_category)
             else:
-                category = get_object_or_404(CheeseCategory, pk=beer_category)
+                category = get_object_or_404(BeerCategory, pk=beer_category)
             description = category.description
         # adds a price per kilo or price per litre so that products can be more accurately compared
-        if product_type == "cheese":
-            amount = decimal.Decimal(form['amount'].value()[:-1])
-            price =  decimal.Decimal(request.POST.get('price'))
-            new_price = (1000/amount)*price
-            price_per_amount = new_price.quantize(decimal.Decimal('0.00'))
-        else:
-            amount = decimal.Decimal(form['amount'].value()[:-2])
-            price =  decimal.Decimal(request.POST.get('price'))
-            new_price = (1000/amount)*price
-            price_per_amount = new_price.quantize(decimal.Decimal('0.00'))
+        amount = decimal.Decimal(form['amount'].value())
+        price =  decimal.Decimal(request.POST.get('price'))
+        new_price = (1000/amount)*price
+        price_per_amount = new_price.quantize(decimal.Decimal('0.00'))
         image_id = str(datetime.now().timestamp()).split('.')[1]
+        product_number = product_code + uuid.uuid4().hex.upper()
         if ImageUpload:    
             image_url = str(
                 re.sub(
@@ -395,6 +395,7 @@ def add_product(request):
             image_url = ""
             image_alt = ""
         final_form = form.save(commit=False)
+        final_form.product_number = product_number
         final_form.product_type = product_type
         final_form.description = description
         final_form.image_url = image_url
@@ -402,7 +403,7 @@ def add_product(request):
         final_form.price_per_amount = price_per_amount
         final_form.save()
         if product_type == "cheese":
-            return redirect('add_cheese')        
+            return redirect('add_cheese')
         else:
             return redirect('add_beer')
     else:
@@ -412,3 +413,40 @@ def add_product(request):
         else:
             messages.error(request, 'Failed to add beer, please unsure all fields are filled out correctly')
             return redirect('add_beer')
+        
+
+def edit_product(request):
+    products = Product.objects.all()
+    query = None
+    if request.GET:
+        if 'q' in request.GET:
+            query = request.GET['q'].strip()
+            
+            if not query:
+                messages.error(request, 'Please enter something to search for')
+                return redirect('edit_product')
+        queries = Q(product_number__iexact=query) | Q(name__icontains=query)
+        products = products.filter(queries)
+    template = 'products/edit-product.html'
+    context = {
+        'search_term': query,
+        'products': products,
+    }
+    return render(request, template, context)
+
+
+def product_edit(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    if product.product_type == "cheese":
+        form = CheeseForm(instance=product)    
+    else:
+        form = BeerForm(instance=product)
+    template = 'products/product-edit.html'
+    base_url = settings.CLOUDINARY_BASE[0]
+    context = {
+        'base_url': base_url,
+        'product': product,
+        'form': form,
+    }
+    return render(request, template, context)
+

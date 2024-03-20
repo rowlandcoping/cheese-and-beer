@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cheese and Beer - Admin Console
+{% endblock %}
+
+{% block content %}
+<h1>Do Stuff Now</h1>
+<form method="POST" action="{% url 'add_product' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    <div class="text-right">
+        <a class="btn btn-outline-black rounded-0" href="">Cancel</a>
+        <button class="btn btn-black rounded-0" type="submit">Add Product</button>
+    </div>
+</form>
+
+<h2>
+    <a href="{% url 'admin_console' %}">Back to Admin Console</a>
+    <br>
+    <a href="{% url 'home' %}">Back to Homepage</a>
+</h2>
+{% endblock %}

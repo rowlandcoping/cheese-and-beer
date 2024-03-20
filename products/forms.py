@@ -22,11 +22,11 @@ class CheeseCategoryForm(forms.ModelForm):
 
 class BeerForm(forms.ModelForm):
     quantity_options = (
-        ('175ml', '175ml'),
-        ('250ml', '250ml'),
-        ('330ml', '330ml'),
-        ('400ml', '400ml'),
-        ('500ml', '500ml')
+        ('175', '175ml'),
+        ('250', '250ml'),
+        ('330', '330ml'),
+        ('400', '400ml'),
+        ('500', '500ml')
     )
     type_options = (
         ('bottle', 'bottle'),
@@ -54,14 +54,14 @@ class BeerForm(forms.ModelForm):
 
 class CheeseForm(forms.ModelForm):
     quantity_options = (
-        ('100g', '100g'),
-        ('125g', '125g'),
-        ('150g', '150g'),
-        ('175g', '175g'),
-        ('200g', '200g'),
-        ('250g', '250g'),
-        ('350g', '350g'),
-        ('500g', '500g'),
+        ('100', '100g'),
+        ('125', '125g'),
+        ('150', '150g'),
+        ('175', '175g'),
+        ('200', '200g'),
+        ('250', '250g'),
+        ('350', '350g'),
+        ('500', '500g'),
     )
     amount = forms.ChoiceField(label='Amount', widget=forms.Select, choices=quantity_options)
     image = forms.ImageField(label='Image', required=False)
