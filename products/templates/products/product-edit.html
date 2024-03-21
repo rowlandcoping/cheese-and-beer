@@ -6,7 +6,7 @@ Cheese and Beer - Admin Console
 
 {% block content %}
 <h1>Do Stuff Now</h1>
-<form method="POST" action="{% url 'add_product' %}" enctype="multipart/form-data">
+<form method="POST" action="{% url 'product_edit' product.id %}" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form }}
     <div class="text-right">
