@@ -1,3 +1,15 @@
+a, a:visited, a:link, a:active, a:hover, a:focus  {
+    text-decoration: none;
+    outline: 0;
+    cursor: pointer;
+}
+ul {
+    list-style-type: none;
+}
+.clickable-element {
+    cursor: pointer;
+}
+
 .category-selector {
     background-color:grey;
     display:inline-block;
@@ -20,4 +32,28 @@
     font-size: 200%;
     color: red;
     text-decoration: none;
+}
+.not-displayed {
+    display:none;
+}
+
+#main-navigation {
+    display:flex;
+    justify-content:space-between;
+}
+
+.nav-menu-link {
+    display:block;
+}
+
+#cheese-nav, #beer-nav, #account-nav {
+    position:relative;
+    display:inline-block;
+    width: 125px;
+}
+
+#beer-desktop-mouseover, #cheese-desktop-mouseover,
+#beer-desktop-mouseout, #cheese-desktop-mouseout,
+#account-mouseout, #account-mouseover {
+    position:absolute;
 }

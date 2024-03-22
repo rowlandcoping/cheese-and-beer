@@ -5,23 +5,5 @@ Cheese and Beer
 {% endblock %}
 
 {% block content %}
-<h1>Hello Ffion</h1>
-<p>
-    <a href="{% url 'admin_console' %}">Add stuff here</a>
-</p>
-<p>
-    <a href="{% url 'admin:index' %}">Django Admin</a>
-</p>
-{% if request.user.is_authenticated %}
-<p>
-    <a href="{% url 'account_logout' %}">Log out</a>
-</p>
-{% else %}
-<p>
-    <a href="{% url 'account_login' %}">Log in</a>
-</p>
-<p>
-    <a href="{% url 'account_signup' %}">Sign Up</a>
-</p>
-{% endif %}
+
 {% endblock %}

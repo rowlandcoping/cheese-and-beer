@@ -489,6 +489,9 @@ def product_edit(request, product_id):
                 image_alt = str("An image depicting " + form['name'].value())
                 converted_image = imageConvert(
                     ImageUpload, 400, 75, "webp")
+                if product.image_url != "":
+                    cloudinary.uploader.destroy(
+                        "cheese-and-beer/products/" + product.image_url)
                 cloudinary.uploader.upload(
                     converted_image,
                     public_id=image_url,
@@ -530,6 +533,7 @@ def product_publish(request, product_id):
         )    
     return redirect(reverse('product_edit', args=[product_id]))
 
+
 def product_unpublish(request, product_id):
     Product.objects.filter(pk=product_id).update(
             displayed=False
@@ -539,7 +543,6 @@ def product_unpublish(request, product_id):
 
 def delete_product(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
-    print(product.name)
     if product.image_url != "":
         cloudinary.uploader.destroy(
             "cheese-and-beer/products/" + product.image_url)

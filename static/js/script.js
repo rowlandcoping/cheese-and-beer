@@ -1,6 +1,9 @@
 /*jshint esversion: 6*/
 
 document.addEventListener("DOMContentLoaded", function() {
+
+
+    //MANY TO MANY FIELD SELECTOR
     //attach event listners to category buttons    
     const attachCategoryListners= Array.from(document.getElementsByClassName('category-selector'));
     attachCategoryListners.forEach(item => {
@@ -46,10 +49,8 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         console.log(document.getElementById("id_pairings").value)
     }
-
-
-
     //mouseover effects for categories
+    //NOT YET IMPLEMENTED
 
     function categoryMouseover(itemId) {        
         if (document.getElementById(itemId).style.backgroundColor === "green") {
@@ -75,6 +76,66 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
 
+    //NAV MENU
+
+    document.addEventListener("mouseover", function(e){
+        const target = e.target.closest("#beer-nav");
+        if(target){
+            document.getElementById('beer-desktop-mouseout').style.display = "none";
+            document.getElementById('beer-desktop-mouseover').style.display = "block";
+        }
+    });
+    document.addEventListener("mouseout", function(e){
+        const target = e.target.closest("#beer-nav");
+        if(target){
+            document.getElementById('beer-desktop-mouseout').style.display = "block";
+            document.getElementById('beer-desktop-mouseover').style.display = "none";
+        }
+    });
+    document.addEventListener("mouseover", function(e){
+        const target = e.target.closest("#cheese-nav");
+        if(target){
+            document.getElementById('cheese-desktop-mouseout').style.display = "none";
+            document.getElementById('cheese-desktop-mouseover').style.display = "block";
+        }
+    });
+    document.addEventListener("mouseout", function(e){
+        const target = e.target.closest("#cheese-nav");
+        if(target){
+            document.getElementById('cheese-desktop-mouseout').style.display = "block";
+            document.getElementById('cheese-desktop-mouseover').style.display = "none";
+        }
+    });
+    document.addEventListener("mouseover", function(e){
+        const target = e.target.closest("#account-nav");
+        if(target){
+            document.getElementById('account-mouseout').style.display = "none";
+            document.getElementById('account-mouseover').style.display = "block";
+        }
+    });
+    document.addEventListener("mouseout", function(e){
+        const target = e.target.closest("#account-nav");
+        if(target){
+            document.getElementById('account-mouseout').style.display = "block";
+            document.getElementById('account-mouseover').style.display = "none";
+        }
+    });
+
+    document.addEventListener("mouseover", function(e){
+        const target = e.target.closest(".nav-menu-link");
+        if(target){
+            target.style.backgroundColor = "black";
+            target.style.Color = "white";
+        }
+    });
+    document.addEventListener("mouseout", function(e){
+        const target = e.target.closest(".nav-menu-link");
+        if(target){
+            target.style.backgroundColor = "white";
+            target.style.Color = "black";
+        }
+    });
+    
 
 
 
@@ -85,6 +146,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+
+
+
+    //IMAGE HANDLING (NOT YET IMPLEMENTED)
     //previews images due for upload
     const imageUpload= document.getElementById('uploaded-image');
     const previewPhoto = () => {
