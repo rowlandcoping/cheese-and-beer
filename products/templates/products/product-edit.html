@@ -8,7 +8,17 @@ Cheese and Beer - Admin Console
 <h1>Do Stuff Now</h1>
 <form method="POST" action="{% url 'product_edit' product.id %}" enctype="multipart/form-data">
     {% csrf_token %}
+    <div class="publish-toggle">Availability
+    {% if product.displayed %}
+    <a class="fa fa-toggle-on btn basic button-on" href="{% url 'product_unpublish' product.id %}"></a>
+    {% else %}
+    <a class="fa fa-toggle-off btn basic button-off" href="{% url 'product_publish' product.id %}"></a>
+    {% endif %}
+    </div>
     {{ form }}
+    <div>
+        <img src="{{ base_url }}cheese-and-beer/products/{{ product.image_url }}">
+    </div>
     <div class="text-right">
         <a class="btn btn-outline-black rounded-0" href="">Cancel</a>
         <button class="btn btn-black rounded-0" type="submit">Add Product</button>

@@ -9,15 +9,21 @@ Cheese and Beer - Admin Console
 <h2>Cheese Categories</h2>
 
 {% for category in cheese_categories %}
-<h3>Name: {{ category.name }}</h3>
-<h3><a href = "{% url 'edit_cheese_category' category.id %}">Edit</a></h3>
+<h3>
+    {{ category.name }}
+    <a href = "{% url 'edit_cheese_category' category.id %}"> Edit</a>
+    <a href = ""> Delete</a>
+</h3>
 {% endfor %}
 
 <h2>Beer Categories</h2>
 
 {% for category in beer_categories %}
-<h3>Name: {{ category.name }}</h3>
-<h3><a href = "{% url 'edit_beer_category' category.id %}">Edit</a></h3>
+<h3>
+    {{ category.name }}
+    <a href = "{% url 'edit_beer_category' category.id %}"> Edit</a>
+    <a href = ""> Delete</a>
+</h3>
 {% endfor %}
 
 <h2>

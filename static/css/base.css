@@ -10,3 +10,14 @@
     text-align: center;
     border-radius: 4px;
 }
+
+.button-on {
+    font-size: 200%;
+    color: green;
+    text-decoration: none;
+}
+.button-off{
+    font-size: 200%;
+    color: red;
+    text-decoration: none;
+}

@@ -494,8 +494,8 @@ def product_edit(request, product_id):
                     public_id=image_url,
                     folder="cheese-and-beer/products")                
             else:
-                image_url = None
-                image_alt = None
+                image_url = ""
+                image_alt = ""
             final_form = form.save(commit=False)
             final_form.product_type = product.product_type
             final_form.description = description
@@ -506,11 +506,9 @@ def product_edit(request, product_id):
             messages.success(request, 'Cheese Updated')
         else:
             if product.product_type == "cheese":
-                messages.error(request, 'Failed to add cheese, please ensure all fields are filled out correctly')
-                return redirect('add_cheese')
+                messages.error(request, 'Failed to edit cheese, please ensure all fields are filled out correctly')
             else:
-                messages.error(request, 'Failed to add beer, please ensure all fields are filled out correctly')
-                return redirect('add_beer')
+                messages.error(request, 'Failed to edit beer, please ensure all fields are filled out correctly')
     product = get_object_or_404(Product, pk=product_id)
     if product.product_type == "cheese":
         form = CheeseForm(instance=product)    
@@ -524,4 +522,28 @@ def product_edit(request, product_id):
         'form': form,
     }
     return render(request, template, context)
+
+
+def product_publish(request, product_id):
+    Product.objects.filter(pk=product_id).update(
+            displayed=True
+        )    
+    return redirect(reverse('product_edit', args=[product_id]))
+
+def product_unpublish(request, product_id):
+    Product.objects.filter(pk=product_id).update(
+            displayed=False
+        )    
+    return redirect(reverse('product_edit', args=[product_id]))
+
+
+def delete_product(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    print(product.name)
+    if product.image_url != "":
+        cloudinary.uploader.destroy(
+            "cheese-and-beer/products/" + product.image_url)
+    product.delete()
+    messages.success(request, 'Product Deleted')
+    return redirect('edit_product')
 

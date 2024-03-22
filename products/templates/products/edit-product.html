@@ -27,11 +27,16 @@ Cheese and Beer - Admin Console
 <h3>
   {{ product.name }}
   <a href = "{% url 'product_edit' product.id %}"> Edit</a>
-  <a href = ""> Delete</a>
+  <a href = "{% url 'delete_product' product.id %}"> Delete</a>
 </h3>
 {% endfor %}
 {% else %}
 <h3>No Products Found, please check your search term and try again!</h3>
 {% endif %}
+<h2>
+  <a href="{% url 'admin_console' %}">Back to Admin Console</a>
+  <br>
+  <a href="{% url 'home' %}">Back to Homepage</a>
+</h2>
 
 {% endblock %}
