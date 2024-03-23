@@ -1,3 +1,5 @@
+/*GENERAL*/
+
 a, a:visited, a:link, a:active, a:hover, a:focus  {
     text-decoration: none;
     outline: 0;
@@ -9,7 +11,12 @@ ul {
 .clickable-element {
     cursor: pointer;
 }
+.not-displayed {
+    display:none;
+}
 
+
+/*CHEESE/BEER CATEGORY SELECTOR*/
 .category-selector {
     background-color:grey;
     display:inline-block;
@@ -23,6 +30,9 @@ ul {
     border-radius: 4px;
 }
 
+
+/*EDIT PRODUCT*/
+
 .button-on {
     font-size: 200%;
     color: green;
@@ -33,27 +43,68 @@ ul {
     color: red;
     text-decoration: none;
 }
-.not-displayed {
-    display:none;
-}
+
+/*BASE TEMPLATE*/
 
 #main-navigation {
     display:flex;
     justify-content:space-between;
 }
-
 .nav-menu-link {
     display:block;
 }
-
 #cheese-nav, #beer-nav, #account-nav {
     position:relative;
     display:inline-block;
     width: 125px;
 }
-
 #beer-desktop-mouseover, #cheese-desktop-mouseover,
 #beer-desktop-mouseout, #cheese-desktop-mouseout,
 #account-mouseout, #account-mouseover {
     position:absolute;
+}
+
+/*HOMEPAGE*/
+
+#homepage-content {
+    text-align: center;
+}
+
+#homepage-intro {
+    height: 10vh;
+}
+
+#homepage-banners {
+    height: 50vh;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+}
+
+.homepage-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left;
+    width: 400px;
+    height: 400px;
+    color:black;
+    font-family:title;
+}
+
+.banner-text-holder {
+    background-color: rgba(0,0,0,0.8);
+    color: white;
+    padding: 10px 30px;
+    border-radius:60px;
+}
+
+#homepage-banner-one {
+    background-image: url("../images/bingcheese.jpeg");
+}
+
+#homepage-banner-two {
+    background-image: url("../images/bingbeer.jpeg");
 }
