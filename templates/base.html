@@ -39,7 +39,7 @@
                 <div id="cheese-desktop-mouseover" class="not-displayed">
                     <a href="" class="nav-menu-link"><span>Cheese</span></a>
                     {% for category in cheese_categories %}
-                    <a href="" class="nav-menu-link"><span>{{ category.name }}</span></a>
+                    <a href="{% url 'view_results' %}?category=cheese,{{ category.id }}" class="nav-menu-link"><span>{{ category.name }}</span></a>
                     {% endfor %}
                 </div>
             </div>
@@ -50,7 +50,7 @@
                 <div id="beer-desktop-mouseover" class="not-displayed">
                     <a href="" class="nav-menu-link"><span>Beer</span></a>
                     {% for category in beer_categories %}
-                    <a href="" class="nav-menu-link"><span>{{ category.name }}</span></a>
+                    <a href="{% url 'view_results' %}?category=beer,{{ category.id }}" class="nav-menu-link"><span>{{ category.name }}</span></a>
                     {% endfor %}
                 </div>
             </div>

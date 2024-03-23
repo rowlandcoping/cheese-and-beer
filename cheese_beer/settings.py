@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'home',
     'admin_console',
     'products',
+    'product_views',
     # allauth
     'allauth',
     'allauth.account',

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cheese and Beer
+{% endblock %}
+
+{% block content %}
+<div id="product-view">
+    <div id="results and filter">
+        <div id="results">
+            {% if products %}
+            {% if category %}
+            <h3>{{ number }} results for {{ category.name }} {{ type }}</h3>
+            {% else %}
+            <h3>{{ number }} results for {{ search_query }}</h3>
+            {% endif %}
+            {% else %}
+            <h3>You have returned no results.  Please try again.</h3>
+            {% endif %}
+        </div>
+        <div id="filter">
+
+        </div>
+    </div>
+    <div id="product-listings">
+        {% for product in products %}
+        <p>{{ product.name }}</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
