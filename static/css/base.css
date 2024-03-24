@@ -112,7 +112,25 @@ ul {
 #homepage-banner-one {
     background-image: url("../images/bingcheese.jpeg");
 }
-
 #homepage-banner-two {
     background-image: url("../images/bingbeer.jpeg");
+}
+
+/*RESULTS VIEW PAGE*/
+.product-section {
+    width:500px;
+    display:inline-block;
+    margin: 20px;
+}
+.product-name {
+    text-align:center;
+}
+.detail-section {
+    display:flex;
+    align-items:center;
+}
+.product-image img{
+    object-fit: cover;
+    width: 200px;
+    height:150px;
 }

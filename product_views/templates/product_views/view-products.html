@@ -10,9 +10,9 @@ Cheese and Beer
         <div id="results">
             {% if products %}
             {% if category %}
-            <h3>{{ number }} results for {{ category.name }} {{ type }}</h3>
+            <h3>{{ number }} {{ result }} for {{ category.name }} {{ type }}</h3>
             {% else %}
-            <h3>{{ number }} results for {{ search_query }}</h3>
+            <h3>{{ number }} {{ result }} for {{ search_term }}</h3>
             {% endif %}
             {% else %}
             <h3>You have returned no results.  Please try again.</h3>
@@ -24,7 +24,52 @@ Cheese and Beer
     </div>
     <div id="product-listings">
         {% for product in products %}
-        <p>{{ product.name }}</p>
+        {% if product.displayed %}
+        <div class="product-section">
+            <div class="product-name">
+                <h4>{{ product.name }}</h4>
+            </div>
+            <div class="detail-section">
+                <div class="product-image">
+                    <img src="{{ base_url }}cheese-and-beer/products/{{ product.image_url }}">
+                </div>
+                <div class="product-info">
+                    <ul>
+                        <li>
+                            {% if product.cheese_category  %}
+                            Category: {{ product.cheese_category }}
+                            {% else %}
+                            Category: {{ product.beer_category }}
+                            {% endif %}
+                        </li>
+                        <li>
+                            Variety: {{ product.variety }}
+                        </li>
+                        <li>
+                            Price: £{{ product.price }}
+                        </li>
+                        <li>
+                            {% if product.product_type == "cheese" %}
+                            Quantity: {{product.amount}}g
+                            {% else %}
+                            Quantity: {{product.amount}}ml
+                            {% endif %}
+                        </li>
+                        <li>
+                            {% if product.product_type == "cheese" %}
+                            Price per Kilo: £{{ product.price_per_amount }}
+                            {% else %}
+                            Price per Litre: £{{ product.price_per_amount }}
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="action-section">
+
+            </div>
+        </div>
+        {% endif %}
         {% endfor %}
     </div>
 </div>

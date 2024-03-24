@@ -497,8 +497,8 @@ def product_edit(request, product_id):
                     public_id=image_url,
                     folder="cheese-and-beer/products")                
             else:
-                image_url = ""
-                image_alt = ""
+                image_url = product.image_url
+                image_alt = product.image_alt
             final_form = form.save(commit=False)
             final_form.product_type = product.product_type
             final_form.description = description

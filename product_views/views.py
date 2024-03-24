@@ -21,23 +21,35 @@ def view_results(request):
         if 'category' in request.GET:
             values = request.GET['category'].split(',')
             type =  values[0]
-            print(type)
-            category = values[1]
-            print(category)
-            if type == "cheese":
-                products = Product.objects.filter(cheese_category=category)
-                category = get_object_or_404 (CheeseCategory, pk=category)
+            if len(values)>1:                
+                category = values[1]
+                search_term = None
+                if type == "cheese":
+                    products = Product.objects.filter(cheese_category=category)
+                    category = get_object_or_404 (CheeseCategory, pk=category)
+                else:
+                    products = Product.objects.filter(beer_category=category)
+                    category = get_object_or_404 (BeerCategory, pk=category)            
             else:
-                products = Product.objects.filter(beer_category=category)
-                category = get_object_or_404 (BeerCategory, pk=category)
+                products = Product.objects.filter(product_type=type)
+                category = None
+                search_term = type
     else:
         products = Product.objects.all()
     number = products.count()
+    if number==1:
+        result = "result"
+    else:
+        result = "results"
+    base_url = settings.CLOUDINARY_BASE[0]
     template = 'product_views/view-products.html'
     context = {
+        'base_url' : base_url,
         'number': number,
-        'type': type,
+        'search_term': search_term,
         'products' : products,
         'category' : category,
+        'result' : result,
+        'type' : type
     }
     return render(request, template, context)
