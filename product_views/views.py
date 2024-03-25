@@ -25,29 +25,72 @@ def view_results(request):
                 category = values[1]
                 search_term = None
                 if type == "cheese":
-                    products = Product.objects.filter(cheese_category=category)
+                    product_list = Product.objects.filter(cheese_category=category)
                     category = get_object_or_404 (CheeseCategory, pk=category)
                 else:
-                    products = Product.objects.filter(beer_category=category)
+                    product_list = Product.objects.filter(beer_category=category)
                     category = get_object_or_404 (BeerCategory, pk=category)            
             else:
-                products = Product.objects.filter(product_type=type)
+                product_list = Product.objects.filter(product_type=type)
                 category = None
                 search_term = type
+        if 'query' in request.GET:
+            products = Product.objects.all()
+            query = request.GET['query'].strip()        
+            if query:
+                queries = Q(
+                    product_number__iexact=query
+                    ) | Q(
+                        name__icontains=query
+                        ) | Q(
+                            variety__icontains=query
+                            )
+                product_list = list(products.filter(queries))
+                search_term = query
+                cheese_index = []
+                cheese_query = Q(name__icontains=query)                
+                cheese_categories = list(CheeseCategory.objects.all().filter(cheese_query))
+                for category in cheese_categories:
+                    cheese_index.append(category.id)
+                for i in cheese_index:
+                    index_query= Q(
+                        cheese_category__exact=i
+                    )                    
+                    product = list(Product.objects.all().filter(index_query))
+                    product_list.extend(product)
+                beer_index = []
+                beer_query = Q(name__icontains=query)
+                beer_categories = list(BeerCategory.objects.all().filter(beer_query))
+                for category in beer_categories:
+                    beer_index.append(category.id)
+                for i in beer_index:
+                    index_query= Q(
+                        beer_category__exact=i
+                    )                    
+                    product = list(Product.objects.all().filter(index_query))
+                    product_list.extend(product)
+            else:
+                search_term = "all products"
+                product_list = products
+            category = None
+            type = None
     else:
-        products = Product.objects.all()
-    number = products.count()
+        product_list = Product.objects.all()
+        search_term = "all products"
+        category = None
+        type = None
+    number = len(product_list)
     if number==1:
-        result = "result"
+      result = "result"
     else:
-        result = "results"
+      result = "results"
     base_url = settings.CLOUDINARY_BASE[0]
     template = 'product_views/view-products.html'
     context = {
         'base_url' : base_url,
         'number': number,
         'search_term': search_term,
-        'products' : products,
+        'products' : product_list,
         'category' : category,
         'result' : result,
         'type' : type

@@ -1,5 +1,4 @@
 /*GENERAL*/
-
 a, a:visited, a:link, a:active, a:hover, a:focus  {
     text-decoration: none;
     outline: 0;
@@ -7,7 +6,15 @@ a, a:visited, a:link, a:active, a:hover, a:focus  {
 }
 ul {
     list-style-type: none;
+    margin:0;
+    padding:0;
 }
+
+h1,h2,h3,h4 {
+    margin:0;
+    padding:0;
+}
+
 .clickable-element {
     cursor: pointer;
 }
@@ -46,13 +53,15 @@ ul {
 
 /*BASE TEMPLATE*/
 
-#main-navigation {
+#main-navigation {    
     display:flex;
     justify-content:space-between;
 }
 .nav-menu-link {
+    position:relative;
     display:block;
 }
+
 #cheese-nav, #beer-nav, #account-nav {
     position:relative;
     display:inline-block;
@@ -61,7 +70,9 @@ ul {
 #beer-desktop-mouseover, #cheese-desktop-mouseover,
 #beer-desktop-mouseout, #cheese-desktop-mouseout,
 #account-mouseout, #account-mouseover {
+    background-color:white;
     position:absolute;
+    z-index: 1;
 }
 
 /*HOMEPAGE*/
@@ -117,20 +128,35 @@ ul {
 }
 
 /*RESULTS VIEW PAGE*/
+#product-view {
+    position:relative;
+    z-index:0;
+}
 .product-section {
-    width:500px;
+    width:250px;
     display:inline-block;
     margin: 20px;
 }
-.product-name {
-    text-align:center;
+.product-detail {
+    display:flex;
+    flex-flow:column;
+    align-items:center;
+    justify-content:center;
 }
+.product-name {
+    display:flex;
+    text-align:center;
+    height:65px;
+    align-items:center;
+}
+
 .detail-section {
     display:flex;
+    flex-flow:row;
     align-items:center;
 }
 .product-image img{
     object-fit: cover;
     width: 200px;
-    height:150px;
+    height:200px;
 }

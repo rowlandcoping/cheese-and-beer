@@ -489,7 +489,7 @@ def product_edit(request, product_id):
                 image_alt = str("An image depicting " + form['name'].value())
                 converted_image = imageConvert(
                     ImageUpload, 400, 75, "webp")
-                if product.image_url != "":
+                if product.image_url:
                     cloudinary.uploader.destroy(
                         "cheese-and-beer/products/" + product.image_url)
                 cloudinary.uploader.upload(
