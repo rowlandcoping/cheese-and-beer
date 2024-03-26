@@ -14,10 +14,27 @@ import PIL
 from PIL import Image
 import decimal
 
+base_url = settings.CLOUDINARY_BASE[0]
 # Create your views here.
 
 def view_results(request):
     if request.GET:
+        if 'view_category' in request.GET:
+            values = request.GET['view_category'].split(',')
+            type =  values[0]
+            if len(values)>1:                
+                category = values[1]
+                search_term = None
+                if type == "cheese":
+                    category = get_object_or_404 (CheeseCategory, name=category)
+                    product_list = Product.objects.filter(cheese_category=category.id)
+                else:
+                    category = get_object_or_404 (BeerCategory, name=category) 
+                    product_list = Product.objects.filter(beer_category=category.id)   
+            else:
+                product_list = Product.objects.filter(product_type=type)
+                category = None
+                search_term = type
         if 'category' in request.GET:
             values = request.GET['category'].split(',')
             type =  values[0]
@@ -84,7 +101,6 @@ def view_results(request):
       result = "result"
     else:
       result = "results"
-    base_url = settings.CLOUDINARY_BASE[0]
     template = 'product_views/view-products.html'
     context = {
         'base_url' : base_url,
@@ -94,5 +110,27 @@ def view_results(request):
         'category' : category,
         'result' : result,
         'type' : type
+    }
+    return render(request, template, context)
+
+def product_detail(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    if product.product_type == "beer":
+        category = get_object_or_404(BeerCategory, name=product.beer_category)
+        category_pairs = category.cheese.all()
+        pairings = []
+        for category in category_pairs:
+            pairings.extend(list(Product.objects.filter(cheese_category=category.id)))
+    else:
+        category = get_object_or_404(CheeseCategory, name=product.cheese_category)
+        category_pairs = category.pairs_with.all()
+        pairings = []
+        for category in category_pairs:
+            pairings.extend(list(Product.objects.filter(beer_category=category.id)))
+    template = 'product_views/product-detail.html'
+    context = {
+        'base_url' : base_url,
+        'product': product,
+        'pairings': pairings,
     }
     return render(request, template, context)

@@ -10,7 +10,7 @@ ul {
     padding:0;
 }
 
-h1,h2,h3,h4 {
+h1,h2,h3,h4,p {
     margin:0;
     padding:0;
 }
@@ -149,6 +149,9 @@ h1,h2,h3,h4 {
     height:65px;
     align-items:center;
 }
+.product-info {
+    margin-bottom:5px;
+}
 
 .detail-section {
     display:flex;
@@ -159,4 +162,25 @@ h1,h2,h3,h4 {
     object-fit: cover;
     width: 200px;
     height:200px;
+}
+
+.action-section {
+    text-align:center;
+}
+
+.action-button {
+    display:inline-block;
+    padding:3px;
+    font-size:130%;
+    width: 95px;
+    margin:10px 0;
+    border-radius: 6px;
+}
+.add-basket {
+    background-color:rgb(139, 67, 0);
+    color:white;
+}
+.buy-now {
+    background-color:rgb(16, 95, 0);
+    color:white;
 }

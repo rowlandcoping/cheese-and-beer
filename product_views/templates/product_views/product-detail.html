@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cheese and Beer
+{% endblock %}
+
+{% block content %}
+<div id="product-view">
+    <div class="product-section">
+        <div class="product-detail">          
+            <div class="product-image">
+                <a href="">
+                    <img src="{{ base_url }}cheese-and-beer/products/{{ product.image_url }}">
+                </a>
+            </div>
+            <div class="product-name">
+                <a href="">
+                    <h4>{{ product.name }}</h4>
+                </a>
+            </div>
+            <div class="product-info">
+                <ul>
+                    <li>
+                        {% if product.cheese_category  %}                            
+                            Category: 
+                            <a href="{% url 'view_results' %}?view_category=cheese,{{ product.cheese_category }}">
+                                {{ product.cheese_category }}
+                            </a>
+                        {% else %}                            
+                            Category:
+                            <a href="{% url 'view_results' %}?view_category=beer,{{ product.beer_category }}">
+                            {{ product.beer_category }}
+                            </a>
+                        </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        Variety: 
+                        <a href="{% url 'view_results' %}?query={{ product.variety }}">
+                            {{ product.variety }}
+                        </a>                            
+                    </li>
+                    <li>
+                        Price: £{{ product.price }}
+                    </li>
+                    <li>
+                        {% if product.product_type == "cheese" %}
+                        Quantity: {{product.amount}}g
+                        {% else %}
+                        Quantity: {{product.amount}}ml
+                        {% endif %}
+                    </li>
+                    <li>
+                        {% if product.product_type == "cheese" %}
+                        Price per Kilo: £{{ product.price_per_amount }}
+                        {% else %}
+                        Price per Litre: £{{ product.price_per_amount }}
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+            <div class="action-section">
+                <a href="">
+                    <p><small><em><u>more information</u></em></small></p>
+                </a>
+                <a href="">
+                    <span class="action-button add-basket">
+                        <i class="fas fa-shopping-basket"></i> Add
+                    </span>
+                </a>
+                <a href="">
+                    <span class="action-button buy-now">
+                        <i class="fa-solid fa-credit-card"></i> Buy
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="pairings-section">
+        {% for pairing in pairings %}
+        <div class="product-detail">          
+            <div class="product-image">
+                <a href="">
+                    <img src="{{ base_url }}cheese-and-beer/products/{{ pairing.image_url }}">
+                </a>
+            </div>
+            <div class="product-name">
+                <a href="">
+                    <h4>{{ pairing.name }}</h4>
+                </a>
+            </div>
+            <div class="product-info">
+                <ul>
+                    <li>
+                        {% if pairing.cheese_category  %}                            
+                            Category: 
+                            <a href="{% url 'view_results' %}?view_category=cheese,{{ pairing.cheese_category }}">
+                                {{ pairing.cheese_category }}
+                            </a>
+                        {% else %}                            
+                            Category:
+                            <a href="{% url 'view_results' %}?view_category=beer,{{ pairing.beer_category }}">
+                            {{ pairing.beer_category }}
+                            </a>
+                        </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        Variety: 
+                        <a href="{% url 'view_results' %}?query={{ pairing.variety }}">
+                            {{ pairing.variety }}
+                        </a>                            
+                    </li>
+                    <li>
+                        Price: £{{ pairing.price }}
+                    </li>
+                    <li>
+                        {% if pairing.product_type == "cheese" %}
+                        Quantity: {{pairing.amount}}g
+                        {% else %}
+                        Quantity: {{pairing.amount}}ml
+                        {% endif %}
+                    </li>
+                    <li>
+                        {% if pairing.product_type == "cheese" %}
+                        Price per Kilo: £{{ pairing.price_per_amount }}
+                        {% else %}
+                        Price per Litre: £{{ pairing.price_per_amount }}
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+            <div class="action-section">
+                <a href="{% url 'product_detail' pairing.id %}">
+                    <p><small><em><u>more information</u></em></small></p>
+                </a>
+                <a href="">
+                    <span class="action-button add-basket">
+                        <i class="fas fa-shopping-basket"></i> Add
+                    </span>
+                </a>
+                <a href="">
+                    <span class="action-button buy-now">
+                        <i class="fa-solid fa-credit-card"></i> Buy
+                    </span>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -28,22 +28,36 @@ Cheese and Beer
         <div class="product-section">
             <div class="product-detail">          
                 <div class="product-image">
-                    <img src="{{ base_url }}cheese-and-beer/products/{{ product.image_url }}">
+                    <a href="{% url 'product_detail' product.id %}">
+                        <img src="{{ base_url }}cheese-and-beer/products/{{ product.image_url }}">
+                    </a>
                 </div>
                 <div class="product-name">
-                    <h4>{{ product.name }}</h4>
+                    <a href="{% url 'product_detail' product.id %}">
+                        <h4>{{ product.name }}</h4>
+                    </a>
                 </div>
                 <div class="product-info">
                     <ul>
                         <li>
-                            {% if product.cheese_category  %}
-                            Category: {{ product.cheese_category }}
-                            {% else %}
-                            Category: {{ product.beer_category }}
+                            {% if product.cheese_category  %}                            
+                                Category: 
+                                <a href="{% url 'view_results' %}?view_category=cheese,{{ product.cheese_category }}">
+                                    {{ product.cheese_category }}
+                                </a>
+                            {% else %}                            
+                                Category:
+                                <a href="{% url 'view_results' %}?view_category=beer,{{ product.beer_category }}">
+                                {{ product.beer_category }}
+                                </a>
+                            </a>
                             {% endif %}
                         </li>
                         <li>
-                            Variety: {{ product.variety }}
+                            Variety: 
+                            <a href="{% url 'view_results' %}?query={{ product.variety }}">
+                                {{ product.variety }}
+                            </a>                            
                         </li>
                         <li>
                             Price: £{{ product.price }}
@@ -65,7 +79,19 @@ Cheese and Beer
                     </ul>
                 </div>
                 <div class="action-section">
-
+                    <a href="{% url 'product_detail' product.id %}">
+                        <p><small><em><u>more information</u></em></small></p>
+                    </a>
+                    <a href="">
+                        <span class="action-button add-basket">
+                            <i class="fas fa-shopping-basket"></i> Add
+                        </span>
+                    </a>
+                    <a href="">
+                        <span class="action-button buy-now">
+                            <i class="fa-solid fa-credit-card"></i> Buy
+                        </span>
+                    </a>
                 </div>
             </div>  
         </div>

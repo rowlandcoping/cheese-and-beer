@@ -12,8 +12,8 @@ class BeerCategory(models.Model):
 
     def __str__(self):
         return self.name
-   
-
+    
+    
 class CheeseCategory(models.Model):
     name = models.CharField(max_length=254)
     description = models.TextField()
