@@ -82,9 +82,15 @@ Cheese and Beer
                         <p><small><em><u>more information</u></em></small></p>
                     </a>
                     <a href="">
-                        <span class="action-button add-basket">
-                            <i class="fas fa-shopping-basket"></i> Add
-                        </span>
+                        <form method="POST" action="{% url 'add_to_basket' %}" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="hidden" name="view" id="view" value="{{ request.path }}?{{ current_view }}">
+                            <input type="hidden" name="quantity" id="quantity" value="1">
+                            <input type="hidden" name="product" id="product" value="{{ product.id }}">                     
+                            <button class="action-button add-basket">
+                                <i class="fas fa-shopping-basket"></i> Add
+                            </button>
+                        </form>
                     </a>
                     <a href="">
                         <span class="action-button buy-now">

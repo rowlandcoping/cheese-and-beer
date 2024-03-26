@@ -20,6 +20,7 @@ base_url = settings.CLOUDINARY_BASE[0]
 def view_results(request):
     if request.GET:
         if 'view_category' in request.GET:
+            view = "view_category=" + request.GET['view_category']
             values = request.GET['view_category'].split(',')
             type =  values[0]
             if len(values)>1:                
@@ -36,6 +37,7 @@ def view_results(request):
                 category = None
                 search_term = type
         if 'category' in request.GET:
+            view = "category=" + request.GET['category']
             values = request.GET['category'].split(',')
             type =  values[0]
             if len(values)>1:                
@@ -53,6 +55,7 @@ def view_results(request):
                 search_term = type
         if 'query' in request.GET:
             products = Product.objects.all()
+            view = "query=" + request.GET['query']
             query = request.GET['query'].strip()        
             if query:
                 queries = Q(
@@ -96,6 +99,7 @@ def view_results(request):
         search_term = "all products"
         category = None
         type = None
+        view = None
     number = len(product_list)
     if number==1:
       result = "result"
@@ -103,6 +107,7 @@ def view_results(request):
       result = "results"
     template = 'product_views/view-products.html'
     context = {
+        'current_view': view,
         'base_url' : base_url,
         'number': number,
         'search_term': search_term,

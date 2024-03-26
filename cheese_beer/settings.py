@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'admin_console',
     'products',
     'product_views',
+    'basket',
     # allauth
     'allauth',
     'allauth.account',
@@ -96,6 +97,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'products.contexts.menu_categories_and_user_status',
+                'basket.contexts.basket_total',
             ],
         },
     },
