@@ -38,45 +38,44 @@ Cheese and Beer
                     </a>
                 </div>
                 <div class="product-info">
-                    <ul>
-                        <li>
+                    <div>
+                        <p>
                             {% if product.cheese_category  %}                            
-                                Category: 
-                                <a href="{% url 'view_results' %}?view_category=cheese,{{ product.cheese_category }}">
-                                    {{ product.cheese_category }}
-                                </a>
+                            Category: 
+                            <a href="{% url 'view_results' %}?view_category=cheese,{{ product.cheese_category }}">
+                                {{ product.cheese_category }}
+                            </a>
                             {% else %}                            
-                                Category:
-                                <a href="{% url 'view_results' %}?view_category=beer,{{ product.beer_category }}">
-                                {{ product.beer_category }}
-                                </a>
+                            Category:
+                            <a href="{% url 'view_results' %}?view_category=beer,{{ product.beer_category }}">
+                            {{ product.beer_category }}
                             </a>
                             {% endif %}
-                        </li>
-                        <li>
-                            Variety: 
-                            <a href="{% url 'view_results' %}?query={{ product.variety }}">
-                                {{ product.variety }}
-                            </a>                            
-                        </li>
-                        <li>
-                            Price: £{{ product.price }}
-                        </li>
-                        <li>
+                        </p>
+                    
+                        <p>
+                        Variety: 
+                        <a href="{% url 'view_results' %}?query={{ product.variety }}">
+                            {{ product.variety | lower }}
+                        </a>
+                        </p>
+                    </div>
+                    <div class="listing-price">
+                        <h4>
                             {% if product.product_type == "cheese" %}
-                            Quantity: {{product.amount}}g
+                            £{{ product.price }} ({{product.amount}}g)
                             {% else %}
-                            Quantity: {{product.amount}}ml
+                            £{{ product.price }} ({{product.amount}}ml)
                             {% endif %}
-                        </li>
-                        <li>
+                        </h4>
+                        <p>
                             {% if product.product_type == "cheese" %}
-                            Price per Kilo: £{{ product.price_per_amount }}
+                            <em><small>£{{ product.price_per_amount }} / kg</small></em>
                             {% else %}
-                            Price per Litre: £{{ product.price_per_amount }}
+                            <em><small>£{{ product.price_per_amount }} / ltr</small></em>
                             {% endif %}
-                        </li>
-                    </ul>
+                        </p>
+                    </div>
                 </div>
                 <div class="action-section">
                     <a href="{% url 'product_detail' product.id %}">
