@@ -4,9 +4,8 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Addresses(models.Model):
-    user_id = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=254)
-    email = models.CharField(max_length=254)
     address_line_one = models.CharField(max_length=254)
     address_line_two = models.CharField(max_length=254)
     town_or_city = models.CharField(max_length=64)

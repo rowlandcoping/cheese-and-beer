@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cheese and Beer
+{% endblock %}
+
+{% block content %}
+<div class="checkout-page">
+    <h3>Delivery Address</h3>
+    {% if authenticated %}
+    
+    <div class="address-section">
+        {% if default_address %}
+        <p>
+            {{ default_address.full_name }}
+        </p>
+        <p>
+            {{ default_address.address_line_one }}
+        </p>
+        <p>
+            {{ default_address.address_line_two }}
+        </p>
+        <p>
+            {{ default_address.town_or_city }}
+        </p>
+        <p>
+            {{ default_address.county }}
+        </p>
+        <p>
+            {{ default_address.postcode }}
+        </p>
+        {% else %}
+        <h4>Add a Delivery Address</h4>
+        {% endif %}        
+    </div>
+    {% endif %}
+    <div class="order-form-section">
+        <form action="{% url 'checkout' %}" method="POST" id="payment-form">
+            {% if authenticated %}
+            <div class="address-form-section not-displayed">
+            {% else %}
+            <div class="address-form-section">            
+            {% endif %}
+                <div class="not-signedin">
+                    <p>Not Registered?  Click <a href="{% url 'account_signup' %}">here</a> to sign up and save your details!</p>
+                    <p>Sign in <a href="{% url 'account_login' %}">here</a> first if you already have an account.</p>
+                </div>
+                <div>
+                    <label for="order-email">Enter e-mail for order confirmation: </label>
+                    <input type="email" name="order-email" id="order-email">
+                </div>
+                <p><em>Please note because of Brexit we can only deliver to UK addresses.</em></h4>
+                {{ address_form }}
+            </div>
+            <hr>     
+            <div class="payment-detail-section">
+                <h3>Payment Details</h3>
+                <p>Stripe stuff here</p>
+            </div>
+        </form>
+        <hr>
+    </div>
+    <div class="order-detail-section">
+        {{basket_total}}
+        {% for order in basket_items %}
+        <div class="order-item-view">
+            <p>
+            {{ order.product.name }}
+            </p>
+            <p>
+            {{ order.quantity }}
+            </p>
+            <p>
+            {{ order.total }}
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

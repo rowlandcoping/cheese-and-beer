@@ -78,6 +78,9 @@
         <div class="checkout clickable-element">
             <i class="fas fa-shopping-basket"></i>
             {{ basket_total }}
+            {% if basket_total %}
+            <p><a href="{% url 'checkout' %}">Checkout</a></p>
+            {% endif %}
         </div>
     </div>
     <div class="product-menu-mobile not-displayed">

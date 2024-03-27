@@ -10,7 +10,7 @@ def basket_total(request):
         product = get_object_or_404(Product, pk=id)
         total += quantity * product.price
         product_count += quantity
-        basket_items.extend({
+        basket_items.append({
             'product_id': id,
             'quantity': quantity,
             'product': product

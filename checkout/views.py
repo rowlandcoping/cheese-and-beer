@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.db.models import Q
 from datetime import datetime
 from .models import Addresses
+from .forms import AddressForm
 from basket.contexts import basket_total
 import uuid
 import io
@@ -22,6 +23,7 @@ def checkout(request):
         return redirect(reverse('products'))
 
     current_basket = basket_total(request)
+    print(current_basket)
     total = current_basket['basket_total']
     #stripe_total = round(total * 100)
     #stripe.api_key = stripe_secret_key
@@ -41,9 +43,14 @@ def checkout(request):
      #       Did you forget to set it in your environment?')
 
     template = 'checkout/checkout.html'
+    if address:
+        address_form = AddressForm(instance=address)
+    else:
+        address_form = AddressForm()
     context = {
         'default_address': address,
-        #'order_form': order_form,
+        'order_info': current_basket,
+        'address_form': address_form,
         #'stripe_public_key': stripe_public_key,
         #'client_secret': intent.client_secret,
     }
