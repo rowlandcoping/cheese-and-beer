@@ -15,6 +15,11 @@ Cheese and Beer
                 <h3>
                     {{ product.name }} ({{product.amount }}g{% if product.container %} {{ product.container }}{% endif %})
                 </h3>
+                {% load countries %}
+                {% get_country product.country_origin as country %}
+                <p>
+                    <img src="{{ country.flag }}"> {{ country.name }}
+                </p>
                 <p>
                     <small>{{ product.product_number }}</small>
                 </p>
@@ -44,9 +49,7 @@ Cheese and Beer
                     APR: {{ product.alcohol_content }}%
                 </p>
                 {% endif %}
-                <p>
-                    Country of Origin: {{ product.country_origin }}
-                </p>
+                
             </div>        
             <hr>
             <div class="detail-description">

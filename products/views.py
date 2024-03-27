@@ -334,6 +334,8 @@ def add_beer(request):
 
 def add_product(request):
     product_type = request.POST.get('product_type')
+    country=request.POST.get('country_origin')
+    print(country)
     # validate custom fields for type of product
     if product_type == "cheese":
         form = CheeseForm(request.POST)

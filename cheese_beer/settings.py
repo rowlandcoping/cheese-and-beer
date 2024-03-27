@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'products',
     'product_views',
     'basket',
+    'checkout',
     # allauth
     'allauth',
     'allauth.account',
