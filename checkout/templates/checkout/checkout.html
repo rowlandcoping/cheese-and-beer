@@ -5,76 +5,172 @@ Cheese and Beer
 {% endblock %}
 
 {% block content %}
+<hr>
 <div class="checkout-page">
-    <h3>Delivery Address</h3>
-    {% if authenticated %}
-    
-    <div class="address-section">
-        {% if default_address %}
-        <p>
-            {{ default_address.full_name }}
-        </p>
-        <p>
-            {{ default_address.address_line_one }}
-        </p>
-        <p>
-            {{ default_address.address_line_two }}
-        </p>
-        <p>
-            {{ default_address.town_or_city }}
-        </p>
-        <p>
-            {{ default_address.county }}
-        </p>
-        <p>
-            {{ default_address.postcode }}
-        </p>
-        {% else %}
-        <h4>Add a Delivery Address</h4>
-        {% endif %}        
-    </div>
-    {% endif %}
-    <div class="order-form-section">
-        <form action="{% url 'checkout' %}" method="POST" id="payment-form">
-            {% if authenticated %}
-            <div class="address-form-section not-displayed">
+    <div class="main-section">
+        <h3>1) Delivery Address</h3>
+        {% if authenticated %}
+        
+        <div class="address-section">
+            {% if default_address %}
+            <div class="checkout-address">
+                <div class="selected-address"></div>
+                    <p>
+                        {{ default_address.full_name }}
+                    </p>
+                    <p>
+                        {{ default_address.address_line_one }}
+                    </p>
+                    <p>
+                        {{ default_address.address_line_two }}
+                    </p>
+                    <p>
+                        {{ default_address.town_or_city }}
+                    </p>
+                    <p>
+                        {{ default_address.county }}
+                    </p>
+                    <p>
+                        {{ default_address.postcode }}
+                    </p>
+                </div>
+                <div class="address-options">
+                    <a href=""><span class="address-checkout-button">Manage Addresses</span></a>
+                </div>
+            </div>
             {% else %}
-            <div class="address-form-section">            
-            {% endif %}
-                <div class="not-signedin">
-                    <p>Not Registered?  Click <a href="{% url 'account_signup' %}">here</a> to sign up and save your details!</p>
-                    <p>Sign in <a href="{% url 'account_login' %}">here</a> first if you already have an account.</p>
+            <h4>Add a delivery address to your account:</h4>
+            <form action="" method="POST" id="address-form">
+                <table class="address-form">
+                    <input type="hidden" name="origin" id="origin" origin="checkout">
+                    <tr>
+                        <td><label for="id_full_name">Full Name:<span class="red">*</span> </label></td>
+                        <td>{{ address_form.full_name }}</td>
+                    </tr>
+                    <tr>
+                        <td><label for="id_address_line_one">Address 1:<span class="red">*</span> </label></td>
+                        <td>{{ address_form.address_line_one }}</td>
+                    </tr>
+                    <tr>
+                        <td><label for="id_address_line_two">Address 2: </label></td>
+                        <td>{{ address_form.address_line_two }}</td>
+                    </tr>
+                    <tr>
+                        <td><label for="id_town_or_city">Town or City:<span class="red">*</span> </label></td>
+                        <td>{{ address_form.town_or_city }}</td>
+                    </tr>
+                    <tr>
+                        <td><label for="id_county">County:<span class="red">*</span> </label></td>
+                        <td>{{ address_form.county }}</td>
+                    </tr>
+                    <tr>
+                        <td><label for="id_postcode">Postcode:<span class="red">*</span> </label></td>
+                        <td>{{ address_form.postcode }}</td>
+                    </tr>
+                </table>
+                <div id="set-default" class="blue-box">
+                    <label for="default">Set as default? </label>
+                    <input type="checkbox" id="default" name="default" checked>
                 </div>
-                <div>
-                    <label for="order-email">Enter e-mail for order confirmation: </label>
-                    <input type="email" name="order-email" id="order-email">
-                </div>
-                <p><em>Please note because of Brexit we can only deliver to UK addresses.</em></h4>
-                {{ address_form }}
-            </div>
-            <hr>     
-            <div class="payment-detail-section">
-                <h3>Payment Details</h3>
-                <p>Stripe stuff here</p>
-            </div>
-        </form>
-        <hr>
-    </div>
-    <div class="order-detail-section">
-        {{basket_total}}
-        {% for order in basket_items %}
-        <div class="order-item-view">
-            <p>
-            {{ order.product.name }}
-            </p>
-            <p>
-            {{ order.quantity }}
-            </p>
-            <p>
-            {{ order.total }}
-            </p>
+
+                <button type="submit" form="address-form" class="add-address-button">Add Address</button>
+            </form>
+            {% endif %}        
         </div>
-        {% endfor %}
+        {% endif %}
+        <div class="order-form-section">
+            <form action="{% url 'checkout' %}" method="POST" id="payment-form">
+                {% csrf_token %}
+                {% if authenticated %}
+                <div class="address-form-section not-displayed">
+                {% else %}
+                <div class="address-form-section">            
+                {% endif %}
+                    <div class="not-signedin">
+                        <p>Not Registered?  Click <a href="{% url 'account_signup' %}">here</a> to sign up and save your details!</p>
+                        <p>Sign in <a href="{% url 'account_login' %}">here</a> first if you already have an account.</p>
+                    </div>
+                    <div class="guest-email-field">
+                        <label for="order-email">Confirmation e-mail: </label>
+                        <input type="email" name="order-email" id="order-email">
+                    </div>
+                    <p><em>Please note that because of Brexit we can only deliver to UK addresses.</em></p>
+                        <table class="address-form">
+                            <tr>
+                                <td><label for="id_full_name">Full Name:<span class="red">*</span> </label></td>
+                                <td>{{ address_form.full_name }}</td>
+                            </tr>
+                            <tr>
+                                <td><label for="id_address_line_one">Address 1:<span class="red">*</span> </label></td>
+                                <td>{{ address_form.address_line_one }}</td>
+                            </tr>
+                            <tr>
+                                <td><label for="id_address_line_two">Address 2: </label></td>
+                                <td>{{ address_form.address_line_two }}</td>
+                            </tr>
+                            <tr>
+                                <td><label for="id_town_or_city">Town or City:<span class="red">*</span> </label></td>
+                                <td>{{ address_form.town_or_city }}</td>
+                            </tr>
+                            <tr>
+                                <td><label for="id_county">County:<span class="red">*</span> </label></td>
+                                <td>{{ address_form.county }}</td>
+                            </tr>
+                            <tr>
+                                <td><label for="id_postcode">Postcode:<span class="red">*</span> </label></td>
+                                <td>{{ address_form.postcode }}</td>
+                            </tr>
+                        </table>
+                </div>
+                <hr>     
+                <div class="payment-detail-section">
+                    <h3>2) Payment Details</h3>
+                    <p class="text-[#51BE95]">Stripe stuff here</p>
+                </div>
+            </form>
+            <hr>
+        </div>
+        <div class="order-detail-section">
+            <h3>3) Review Items</h3>
+            {% for order in basket_items %}
+            <div class="order-item-view">
+                <div class="order-image">
+                    <img src="{{ base_url }}products/{{ order.product.image_url }}">
+                </div>
+                <div class="order-info">
+                    <p>
+                        {{ order.product.name }}
+                        {% if order.product.product_type == "cheese" %}
+                        ({{ order.product.amount }}g, {{ order.product.cheese_category }} cheese,
+                        {{ order.product.variety | lower }})
+                        {% else %}
+                        ({{ order.product.amount }}ml {{ order.product.container }}, {{ order.product.beer_category }} beer,
+                        {{ order.product.variety | lower }}, {{ order.product.alcohol_content }}% APR)
+                        {% endif %}
+                    </p>
+                    <h4 class="checkout-price">
+                        £{{ order.product.price }}
+                    </h4>
+                    <div class="order-quantity">Qty: {{ order.quantity }}</div>
+                    </p>
+                    <p>
+                        {{ order.total }}
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
+    <div class="purchase-section">
+        <button type="submit" form="payment-form">
+            Purchase Now
+        </button>
+        <p class="ts-and-cs"><small>Any orders placed through this website will not be fulfilled. 
+            This site is a project built as part of a level 6 Diploma in web development at Code Institute. 
+            All cheeses on this site are fictional and similarities to cheeses living or dead are purely co-incidental.
+        </small></p>
+    </div>
+</div>
+
 
 {% endblock %}

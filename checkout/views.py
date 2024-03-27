@@ -16,6 +16,8 @@ import PIL
 from PIL import Image
 import decimal
 
+base_url = settings.CLOUDINARY_BASE[0]
+
 def checkout(request):
     basket = request.session.get('basket', {})
     if not basket:
@@ -23,7 +25,6 @@ def checkout(request):
         return redirect(reverse('products'))
 
     current_basket = basket_total(request)
-    print(current_basket)
     total = current_basket['basket_total']
     #stripe_total = round(total * 100)
     #stripe.api_key = stripe_secret_key
@@ -33,7 +34,8 @@ def checkout(request):
     #)
 
     if request.user.is_authenticated:
-        address = Addresses.objects.filter(user_id=request.user.id, default=True).values
+        address = Addresses.objects.filter(user_id=request.user.id, default=True)
+        print(address)
     else:
         address = None
 
@@ -43,11 +45,12 @@ def checkout(request):
      #       Did you forget to set it in your environment?')
 
     template = 'checkout/checkout.html'
-    if address:
+    if "full_name" in address:
         address_form = AddressForm(instance=address)
     else:
         address_form = AddressForm()
     context = {
+        'base_url': base_url,
         'default_address': address,
         'order_info': current_basket,
         'address_form': address_form,

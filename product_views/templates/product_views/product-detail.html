@@ -8,7 +8,7 @@ Cheese and Beer
 <div id="product-page">
     <div class="product-overview">          
         <div class="detail-image">
-            <img src="{{ base_url }}cheese-and-beer/products/{{ product.image_url }}">
+            <img src="{{ base_url }}products/{{ product.image_url }}">
         </div>
         <div class="detail-information">
             <div>
@@ -78,7 +78,7 @@ Cheese and Beer
             <div class="pairing-detail">          
                 <div class="product-image">
                     <a href="{% url 'product_detail' pairing.id %}">
-                        <img src="{{ base_url }}cheese-and-beer/products/{{ pairing.image_url }}">
+                        <img src="{{ base_url }}products/{{ pairing.image_url }}">
                     </a>
                 </div>
                 <div class="product-name">

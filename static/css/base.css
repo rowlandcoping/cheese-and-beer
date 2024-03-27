@@ -21,6 +21,9 @@ h1,h2,h3,h4,p {
 .not-displayed {
     display:none;
 }
+body {
+    margin: 30px 50px;
+}
 
 
 /*CHEESE/BEER CATEGORY SELECTOR*/
@@ -201,4 +204,46 @@ h1,h2,h3,h4,p {
 }
 #product-matching {
     margin-top:20px;
+}
+
+/* CHECKOUT PAGE */
+.checkout-page {
+    margin:10px 150px 0 150px;
+    display:flex;
+    justify-content: space-between;
+}
+
+.address-form {
+    margin:10px 0;
+}
+.guest-email-field {
+    margin:10px 0;
+}
+.not-signedin {
+    margin-top:10px;
+}
+.order-image img {
+    width:100px;
+    height:100px;
+    margin: 0 5px;
+    object-fit:cover;
+}
+.order-item-view {
+    margin:10px 0;
+    width: 400px;
+    display:flex;
+}
+.main-section {
+    width:60%;
+}
+.purchase-section {
+    text-align:center;
+    width:25%;
+}
+.ts-and-cs {
+    margin-top:5px;
+    font-size:80%;
+}
+.checkout-address {
+    display:flex;
 }
