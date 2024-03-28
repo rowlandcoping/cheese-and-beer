@@ -34,8 +34,12 @@ def checkout(request):
 
     if request.user.is_authenticated:
         addresses = Addresses.objects.filter(user_id=request.user.id)
-        address = get_object_or_404(addresses, default=True)
-        email = request.user.email
+        if addresses:
+            address = get_object_or_404(addresses, default=True)
+            email = request.user.email
+        else:
+            address = None
+            email = request.user.email
     else:
         address = None
         email = ""
@@ -46,7 +50,7 @@ def checkout(request):
      #       Did you forget to set it in your environment?')
 
     template = 'checkout/checkout.html'
-    if address:
+    if address is not None:
         address_form = AddressForm(instance=address)
     else:
         address_form = AddressForm()
