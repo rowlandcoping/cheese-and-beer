@@ -37,11 +37,14 @@ Cheese and Beer
                     </p>
                 </div>
                 <div class="address-options">
-                    <a href=""><span class="address-checkout-button">Manage Addresses</span></a>
+                    <a href=""><span class="address-checkout-button">Change Address</span></a>
                 </div>
             </div>
+
+            <div class="add-user-address not-displayed">
             {% else %}
             <div class="add-user-address">
+            {% endif %}
             <h4>Add a delivery address to your account:</h4>
                 <form action="{% url 'add_address' %}" method="POST" id="address-form">
                     {% csrf_token %}
@@ -79,8 +82,7 @@ Cheese and Beer
 
                     <button type="submit" form="address-form" class="add-address-button">Add Address</button>
                 </form>
-            </div>
-            {% endif %}        
+            </div>     
         </div>
         {% endif %}
         <div class="order-form-section">
@@ -171,7 +173,7 @@ Cheese and Beer
             Purchase Now
         </button>
         <p class="ts-and-cs"><small>Be aware that any orders placed through this website will not be fulfilled. 
-            This site is a project built as part of a level 6 Diploma in web development at Code Institute. 
+            This site is a project built as part of a level 5 Diploma in web development at Code Institute. 
             All cheeses depicted on this site are fictional and similarities to cheeses living or dead are entirely co-incidental.
         </small></p>
     </div>
