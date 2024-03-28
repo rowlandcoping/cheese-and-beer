@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.conf import settings
 from django.urls import reverse
 from django.contrib import messages
 from django.db.models import Q
@@ -14,7 +13,6 @@ import PIL
 from PIL import Image
 import decimal
 
-base_url = settings.CLOUDINARY_BASE[0]
 # Create your views here.
 
 def view_results(request):
@@ -108,7 +106,6 @@ def view_results(request):
     template = 'product_views/view-products.html'
     context = {
         'current_view': view,
-        'base_url' : base_url,
         'number': number,
         'search_term': search_term,
         'products' : product_list,
@@ -134,7 +131,6 @@ def product_detail(request, product_id):
             pairings.extend(list(Product.objects.filter(beer_category=category.id)))
     template = 'product_views/product-detail.html'
     context = {
-        'base_url' : base_url,
         'product': product,
         'pairings': pairings,
     }

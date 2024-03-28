@@ -150,7 +150,7 @@ Cheese and Beer
             {% for order in basket_items %}
             <div class="order-item-view">
                 <div class="order-image">
-                    <img src="{{ base_url }}products/{{ order.product.image_url }}">
+                    <img src="{{ MEDIA_URL }}products/{{ order.product.image_url }}">
                 </div>
                 <div class="order-info">
                     <p>

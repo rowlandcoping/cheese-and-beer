@@ -29,7 +29,7 @@ Cheese and Beer
             <div class="product-detail">          
                 <div class="product-image">
                     <a href="{% url 'product_detail' product.id %}">
-                        <img src="{{ base_url }}products/{{ product.image_url }}">
+                        <img src="{{ MEDIA_URL }}products/{{ product.image_url }}">
                     </a>
                 </div>
                 <div class="product-name">

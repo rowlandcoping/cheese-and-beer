@@ -207,7 +207,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 iconColor: '#dc3545'
             }
         };
-        const card = elements.create('card', {style: style});
+        const card = elements.create('card',  { hidePostalCode: true, style: style});
         card.mount('#card-element');
     }
     /*

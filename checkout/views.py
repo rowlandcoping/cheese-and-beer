@@ -17,8 +17,6 @@ import stripe
 from PIL import Image
 import decimal
 
-base_url = settings.CLOUDINARY_BASE[0]
-
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
@@ -56,7 +54,6 @@ def checkout(request):
         address_form = AddressForm()
     context = {
         'user_email': email,
-        'base_url': base_url,
         'address': address,
         'order_info': current_basket,
         'address_form': address_form,

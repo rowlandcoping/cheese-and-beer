@@ -208,7 +208,6 @@ def edit_cheese_category(request, category_id):
             messages.error(request, 'Failed to update product. Please ensure the form is valid.') 
             return redirect(reverse('edit_cheese_category', args=[category_id]))
     # returns updated data
-    base_url = settings.CLOUDINARY_BASE[0]
     category = get_object_or_404(CheeseCategory, pk=category_id)
     pairings = category.pairs_with.all()
     initial_pairings = pairings.values_list('id', flat=True)
@@ -217,7 +216,6 @@ def edit_cheese_category(request, category_id):
     template = 'products/edit-cheese-category.html'
     context = {
         'initial_pairings': list(initial_pairings),
-        'base_url': base_url,
         'form': form,
         'category': category,
         'beer_categories': beer_categories
@@ -297,7 +295,6 @@ def edit_beer_category(request, category_id):
         else:
             messages.error(request, 'Failed to update product. Please ensure the form is valid.')
             return redirect(reverse('edit_beer_category', args=[category_id]))
-    base_url = settings.CLOUDINARY_BASE[0]
     category = get_object_or_404(BeerCategory, pk=category_id)
     pairings = category.cheese.all()
     initial_pairings = pairings.values_list('id', flat=True)
@@ -306,7 +303,6 @@ def edit_beer_category(request, category_id):
     template = 'products/edit-beer-category.html'
     context = {
         'initial_pairings': list(initial_pairings),
-        'base_url': base_url,
         'form': form,
         'category': category,
         'cheese_categories': cheese_categories,
@@ -335,7 +331,6 @@ def add_beer(request):
 def add_product(request):
     product_type = request.POST.get('product_type')
     country=request.POST.get('country_origin')
-    print(country)
     # validate custom fields for type of product
     if product_type == "cheese":
         form = CheeseForm(request.POST)
@@ -344,8 +339,7 @@ def add_product(request):
         if selected_category == "":
             messages.error(request, 'Failed to add cheese, please select a category')
             return redirect('add_cheese')
-        cheese_category = selected_category
-        
+        cheese_category = selected_category        
     else:
         form = BeerForm(request.POST)
         selected_category = form['beer_category'].value()
@@ -520,9 +514,7 @@ def product_edit(request, product_id):
     else:
         form = BeerForm(instance=product)
     template = 'products/product-edit.html'
-    base_url = settings.CLOUDINARY_BASE[0]
     context = {
-        'base_url': base_url,
         'product': product,
         'form': form,
     }
