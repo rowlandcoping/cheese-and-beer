@@ -46,12 +46,12 @@ CLOUDINARY_BASE = os.environ.get('CLOUDINARY_BASE'),
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.messages',    
     #locally installed apps
     'home',
     'admin_console',
@@ -59,12 +59,14 @@ INSTALLED_APPS = [
     'product_views',
     'basket',
     'checkout',
+    'addresses',
     # allauth
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     # other
     'django_countries',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [

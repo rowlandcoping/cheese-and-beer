@@ -4,8 +4,8 @@ from django.urls import reverse
 from django.contrib import messages
 from django.db.models import Q
 from datetime import datetime
-from .models import Addresses
-from .forms import AddressForm
+from addresses.models import Addresses
+from addresses.forms import AddressForm
 from basket.contexts import basket_total
 import uuid
 import io
@@ -34,10 +34,12 @@ def checkout(request):
     #)
 
     if request.user.is_authenticated:
-        address = Addresses.objects.filter(user_id=request.user.id, default=True)
-        print(address)
+        addresses = Addresses.objects.filter(user_id=request.user.id)
+        address = get_object_or_404(addresses, default=True)
+        email = request.user.email
     else:
         address = None
+        email = ""
 
 
     #if not stripe_public_key:
@@ -45,13 +47,14 @@ def checkout(request):
      #       Did you forget to set it in your environment?')
 
     template = 'checkout/checkout.html'
-    if "full_name" in address:
+    if address:
         address_form = AddressForm(instance=address)
     else:
         address_form = AddressForm()
     context = {
+        'user_email': email,
         'base_url': base_url,
-        'default_address': address,
+        'address': address,
         'order_info': current_basket,
         'address_form': address_form,
         #'stripe_public_key': stripe_public_key,
