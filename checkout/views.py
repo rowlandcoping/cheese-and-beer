@@ -13,12 +13,15 @@ import re
 import cloudinary
 import cloudinary.uploader
 import PIL
+import stripe
 from PIL import Image
 import decimal
 
 base_url = settings.CLOUDINARY_BASE[0]
 
 def checkout(request):
+    stripe_public_key = settings.STRIPE_PUBLIC_KEY
+    stripe_secret_key = settings.STRIPE_SECRET_KEY
     basket = request.session.get('basket', {})
     if not basket:
         messages.error(request, "There's nothing in your basket the moment")
@@ -57,7 +60,7 @@ def checkout(request):
         'address': address,
         'order_info': current_basket,
         'address_form': address_form,
-        #'stripe_public_key': stripe_public_key,
+        'stripe_public_key': stripe_public_key,
         #'client_secret': intent.client_secret,
     }
 
