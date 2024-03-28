@@ -170,6 +170,10 @@ body {
     width: 200px;
     height:200px;
 }
+.view-action-buttons {
+    display:flex;
+    justify-content: space-between;
+}
 
 .action-section {
     text-align:center;
@@ -184,10 +188,12 @@ body {
     border-radius: 6px;
 }
 .add-basket {
+    margin-right:5px;
     background-color:rgb(139, 67, 0);
     color:white;
 }
 .buy-now {
+    margin-left:5px;
     background-color:rgb(16, 95, 0);
     color:white;
 }

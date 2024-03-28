@@ -80,8 +80,10 @@ Cheese and Beer
                 <div class="action-section">
                     <a href="{% url 'product_detail' product.id %}">
                         <p><small><em><u>more information</u></em></small></p>
-                    </a>
-                    <a href="">
+                    </a>                    
+                </div>
+                <div class="view-action-buttons">
+                    <div class="add-from-view">
                         <form method="POST" action="{% url 'add_to_basket' %}" enctype="multipart/form-data">
                             {% csrf_token %}
                             <input type="hidden" name="view" id="view" value="{{ request.path }}?{{ current_view }}">
@@ -91,12 +93,18 @@ Cheese and Beer
                                 <i class="fas fa-shopping-basket"></i> Add
                             </button>
                         </form>
-                    </a>
-                    <a href="">
-                        <span class="action-button buy-now">
-                            <i class="fa-solid fa-credit-card"></i> Buy
-                        </span>
-                    </a>
+                    </div>
+                    <div class="buy-from-view">
+                        <form method="POST" id="products-buy-now" action="" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="hidden" name="view" id="view" value="{{ request.path }}?{{ current_view }}">
+                            <input type="hidden" name="quantity" id="quantity" value="1">
+                            <input type="hidden" name="product" id="product" value="{{ product.id }}">                     
+                            <button class="action-button buy-now" form="products-buy-now">
+                                <i class="fa-solid fa-credit-card"></i> Buy
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>  
         </div>
@@ -106,3 +114,4 @@ Cheese and Beer
 </div>
 
 {% endblock %}
+
