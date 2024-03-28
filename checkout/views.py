@@ -23,10 +23,6 @@ def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
     basket = request.session.get('basket', {})
-    if not basket:
-        messages.error(request, "There's nothing in your basket the moment")
-        return redirect(reverse('products'))
-
     current_basket = basket_total(request)
     total = current_basket['basket_total']
     #stripe_total = round(total * 100)

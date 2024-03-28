@@ -41,7 +41,7 @@ class Product(models.Model):
     image_alt = models.CharField(max_length=1024, null=True, blank=True)
     country_origin = models.CharField(
         max_length=254,
-       choices=CountryField().choices
+        choices=CountryField().choices
     )
     # fields specific to cheese
     cheese_category = models.ForeignKey('CheeseCategory', null=True, blank=True, on_delete=models.SET_NULL)
