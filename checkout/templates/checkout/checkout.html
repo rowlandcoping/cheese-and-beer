@@ -80,7 +80,7 @@ Cheese and Beer
                         <input type="checkbox" id="default" name="default" checked>
                     </div>
 
-                    <button type="submit" form="address-form" class="add-address-button">Add Address</button>
+                    <button type="submit" form="address-form" class="add-address-button form-button">Add Address</button>
                 </form>
             </div>     
         </div>
@@ -99,7 +99,7 @@ Cheese and Beer
                     </div>
                     <div class="guest-email-field">
                         <label for="order-email">Confirmation e-mail: </label>
-                        <input type="email" name="order-email" id="order-email" value="{{ user_email }}">
+                        <input type="email" name="order-email" id="order-email" value="{{ user_email }}" placeholder="e-mail">
                     </div>
                     <p><em>Please note that because of Brexit we can only deliver to UK addresses.</em></p>
                         <table class="address-form">
@@ -127,6 +127,7 @@ Cheese and Beer
                                 <td><label for="id_postcode">Postcode:<span class="red">*</span> </label></td>
                                 <td>{{ address_form.postcode }}</td>
                             </tr>
+                            <input type="hidden" name="country" id="country" value="GB" placeholder="country">
                         </table>
                 </div>
                 <hr>     
@@ -139,8 +140,7 @@ Cheese and Beer
                         <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
                         <!-- Pass the client secret to the view so we can get the payment intent id -->
                         <input type="hidden" value="{{ client_secret }}" name="client_secret">
-                    </div>
-                    
+                    </div>                    
                 </div>
             </form>
             <hr>
@@ -168,18 +168,18 @@ Cheese and Beer
                     </h4>
                     <div class="order-quantity">Qty: {{ order.quantity }}</div>
                     </p>
-                    <p>
-                        {{ order.total }}
-                    </p>
                 </div>
             </div>
             {% endfor %}
+            <span class="payment-button-small payment-button form-button">
+                Purchase Now
+            </span>
         </div>
     </div>
     <div class="purchase-section">
-        <button type="submit" form="payment-form">
+        <span class="payment-button-large payment-button form-button">
             Purchase Now
-        </button>
+        </span>
         <p class="ts-and-cs"><small>Be aware that any orders placed through this website will not be fulfilled. 
             This site is a project built as part of a level 5 Diploma in web development at Code Institute. 
             All cheeses depicted on this site are fictional and similarities to cheeses living or dead are entirely co-incidental.

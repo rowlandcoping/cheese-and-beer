@@ -47,7 +47,6 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById(itemId).style.border = "2px solid white";
             document.getElementById("id_pairings").value += Number(itemId) + ",";
         }
-        console.log(document.getElementById("id_pairings").value)
     }
     //mouseover effects for categories
     //NOT YET IMPLEMENTED
@@ -191,7 +190,6 @@ document.addEventListener("DOMContentLoaded", function() {
         const clientSecret = document.getElementById('id_client_secret').textContent.slice(1, -1);
         const stripe = Stripe(stripePublicKey);
         const elements = stripe.elements();
-        console.log(elements);
         const style = {
             base: {
                 color: '#000',
@@ -209,98 +207,115 @@ document.addEventListener("DOMContentLoaded", function() {
         };
         const card = elements.create('card',  { hidePostalCode: true, style: style});
         card.mount('#card-element');
-    }
-    /*
-    // Handle realtime validation errors on the card element
-    card.addEventListener('change', function (event) {
-        var errorDiv = document.getElementById('card-errors');
-        if (event.error) {
-            var html = `
-                <span class="icon" role="alert">
-                    <i class="fas fa-times"></i>
-                </span>
-                <span>${event.error.message}</span>
-            `;
-            $(errorDiv).html(html);
-        } else {
-            errorDiv.textContent = '';
-        }
-    });
-
-    // Handle form submit
-    var form = document.getElementById('payment-form');
-
-    form.addEventListener('submit', function(ev) {
-        ev.preventDefault();
-        card.update({ 'disabled': true});
-        $('#submit-button').attr('disabled', true);
-        $('#payment-form').fadeToggle(100);
-        $('#loading-overlay').fadeToggle(100);
-
-        var saveInfo = Boolean($('#id-save-info').attr('checked'));
-        // From using {% csrf_token %} in the form
-        var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
-        var postData = {
-            'csrfmiddlewaretoken': csrfToken,
-            'client_secret': clientSecret,
-            'save_info': saveInfo,
-        };
-        var url = '/checkout/cache_checkout_data/';
-
-        $.post(url, postData).done(function () {
-            stripe.confirmCardPayment(clientSecret, {
-                payment_method: {
-                    card: card,
-                    billing_details: {
-                        name: $.trim(form.full_name.value),
-                        phone: $.trim(form.phone_number.value),
-                        email: $.trim(form.email.value),
-                        address:{
-                            line1: $.trim(form.street_address1.value),
-                            line2: $.trim(form.street_address2.value),
-                            city: $.trim(form.town_or_city.value),
-                            country: $.trim(form.country.value),
-                            state: $.trim(form.county.value),
-                        }
-                    }
-                },
-                shipping: {
-                    name: $.trim(form.full_name.value),
-                    phone: $.trim(form.phone_number.value),
-                    address: {
-                        line1: $.trim(form.street_address1.value),
-                        line2: $.trim(form.street_address2.value),
-                        city: $.trim(form.town_or_city.value),
-                        country: $.trim(form.country.value),
-                        postal_code: $.trim(form.postcode.value),
-                        state: $.trim(form.county.value),
-                    }
-                },
-            }).then(function(result) {
-                if (result.error) {
-                    var errorDiv = document.getElementById('card-errors');
-                    var html = `
-                        <span class="icon" role="alert">
+        // Handle realtime validation errors on the card element
+        card.addEventListener('change', function (event) {
+            var errorDiv = document.getElementById('card-errors');
+            if (event.error) {
+                let html = `
+                    <span class="icon" role="alert">
                         <i class="fas fa-times"></i>
-                        </span>
-                        <span>${result.error.message}</span>`;
-                    $(errorDiv).html(html);
-                    $('#payment-form').fadeToggle(100);
-                    $('#loading-overlay').fadeToggle(100);
-                    card.update({ 'disabled': false});
-                    $('#submit-button').attr('disabled', false);
-                } else {
-                    if (result.paymentIntent.status === 'succeeded') {
-                        form.submit();
-                    }
+                    </span>
+                    <span>${event.error.message}</span>
+                `;
+                errorDiv.innerHTML = html;
+            } else {
+                errorDiv.textContent = '';
+            }
+        });        
+        // Handle form submit
+        const form = document.getElementById('payment-form');        
+        const paymentSubmitButtons = Array.from(document.getElementsByClassName('payment-button'));
+        paymentSubmitButtons.forEach(item => {
+            item.addEventListener('click', function handleClick(event) {
+                card.update({ 'disabled': true});
+                formButtons = Array.from(document.getElementsByClassName('form-button'));
+                for (let i = 0; i < formButtons.length; i++) {
+                    formButtons[i].style.pointerEvents = "none";
                 }
-            });
-        }).fail(function () {
-            // just reload the page, the error will be in django messages
-            location.reload();
-        })
-    });
-    */
+                if (document.getElementById('add-user-address')) {
+                    document.getElementById('add-user-address').setAttribute('disabled', true);
+                }
+                /*this is for the loading circle thing.  Fade toggle is just an opacity type toggle thing in jquery.
+                given I don't have a loady circle thing yet I'll park this for now.  Maybe replace with a spinning cheese or whatever*/
+                //document.getElementById('payment-form').fadeToggle(100);
+                //document.getElementById('loading-overlay').fadeToggle(100);
+    
+
+                // From using {% csrf_token %} in the form, in order to use in the header of the POST request
+                const csrfToken = document.querySelector("[name='csrfmiddlewaretoken']").value;
+                const postData = JSON.stringify({
+                    'csrfmiddlewaretoken': csrfToken,
+                    'client_secret': clientSecret,
+                });
+                const url = 'cache_checkout_data/';
+
+
+                //don't forget to trim whitespace from the user supplied fields.
+                fetch(url, {
+                    method: 'POST',
+                    body: postData,
+                    headers: { 
+                        "X-CSRFToken": csrfToken, 
+                        'Content-Type': 'application/json',
+                     },
+                    credentials: 'same-origin',
+                }).then(
+                    stripe.confirmCardPayment(clientSecret, {
+                            payment_method: {
+                                card: card,
+                            },
+                            shipping: {
+                                name: form.full_name.value,
+                                address: {
+                                    line1: form.address_line_one.value,
+                                    line2: form.address_line_two.value,
+                                    city: form.town_or_city.value,
+                                    state: form.county.value,
+                                    postal_code: form.postcode.value,
+                                    country: form.country.value,
+                                }
+                            },
+                        }).then(function(result) {
+                            if (result.error) {
+                                var errorDiv = document.getElementById('card-errors');
+                                var html = `
+                                    <span class="icon" role="alert">
+                                    <i class="fas fa-times"></i>
+                                    </span>
+                                    <span>${result.error.message}</span>`;
+                                    errorDiv.innerHTML = html;
+                                console.log(result.error.message)
+                                /*spinny wheel stuff again
+                                $('#payment-form').fadeToggle(100);
+                                $('#loading-overlay').fadeToggle(100);
+                                */
+                                // re-enable butotns
+                                for (let i = 0; i < formButtons.length; i++) {
+                                    formButtons[i].style.pointerEvents = "auto";
+                                }
+                                if (document.getElementById('add-user-address')) {
+                                    document.getElementById('add-user-address').setAttribute('disabled', "");
+                                }
+                            } else {
+                                if (result.paymentIntent.status === 'succeeded') {
+                                    console.log("it worked")
+                                    form.submit();
+                                }
+                            }
+                        })  
+                    ).catch(err => {
+                        console.log(err)
+                        // just reload the page
+                        location.reload();
+                    })
+                })       
+        });    
+    }
+    
+    
+
+
+
 
 });
 
