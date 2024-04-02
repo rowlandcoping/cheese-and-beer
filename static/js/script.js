@@ -255,6 +255,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 fetch(url, {
                     method: 'POST',
                     body: postData,
+                    mode: "no-cors",
                     headers: { 
                         "X-CSRFToken": csrfToken, 
                         'Content-Type': 'application/json',

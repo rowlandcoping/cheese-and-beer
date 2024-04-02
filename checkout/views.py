@@ -51,12 +51,12 @@ def checkout(request):
     if request.method == 'POST':
         address_form = AddressForm(request.POST)
         if address_form.is_valid():
-            if (request.user):
+            if request.user.is_authenticated:
                 user_id = request.user
-                address_id = Addresses.objects.get(postcode=request.POST.get('postcode'))
+                address_id = Addresses.objects.get(postcode=request.POST.get('postcode'))                 
             else:
-                user_id = "anonymous"
-                address_id = None
+                user_id = None
+                address_id = None                              
             current_basket = basket_total(request)
             time_created = datetime.now()
             delivery_date = datetime.now() + timedelta(days=5)
@@ -95,6 +95,10 @@ def checkout(request):
                     )
                     order.delete()
                     return redirect('home')
+        if 'basket' in request.session:
+            del request.session['basket']
+        if 'intent_id' in request.session:
+            del request.session['intent_id']
         return redirect('home')
     
     if not basket:
@@ -103,10 +107,26 @@ def checkout(request):
     total = current_basket['grand_total']
     stripe_total = round(total * 100)
     stripe.api_key = stripe_secret_key
-    intent = stripe.PaymentIntent.create(
-        amount=stripe_total,
-        currency=settings.STRIPE_CURRENCY,
-    )
+
+    intent_id = request.session.get('intent_id', {})
+    if intent_id:
+        client_secret = intent_id['secret']
+        pid = client_secret.split('_secret')[0]
+        stripe.PaymentIntent.modify(pid, amount=stripe_total, metadata={
+           'basket': json.dumps(request.session.get('basket', {})),
+           'username': request.user,
+        })
+        print(stripe_total)
+    else:
+        intent = stripe.PaymentIntent.create(
+            amount=stripe_total,
+            currency=settings.STRIPE_CURRENCY,
+        )
+        intent_id = request.session.get('intent_id', {})
+        intent_id['secret'] = intent.client_secret
+        request.session['intent_id'] = intent_id
+        client_secret = intent.client_secret
+
     if request.user.is_authenticated:
         addresses = Addresses.objects.filter(user_id=request.user.id)
         if addresses:
@@ -129,7 +149,7 @@ def checkout(request):
         'order_info': current_basket,
         'address_form': address_form,
         'stripe_public_key': stripe_public_key,
-        'client_secret': intent.client_secret,
+        'client_secret': client_secret,
     }
 
     return render(request, template, context)
