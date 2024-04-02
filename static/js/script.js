@@ -183,8 +183,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // STRIPE JS (needs converting from jQuery and whatever other stuff it uses)
 
-    // Adds Card element to checkout page
-
+    // Adds Card element to checkout page(if element exists).  Also adds event listeners and actions to be taken on card submit.
     if (document.getElementById('id_stripe_public_key')) {
         const stripePublicKey = document.getElementById('id_stripe_public_key').textContent.slice(1, -1);
         const clientSecret = document.getElementById('id_client_secret').textContent.slice(1, -1);
@@ -222,11 +221,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 errorDiv.textContent = '';
             }
         });        
-        // Handle form submit
-        const form = document.getElementById('payment-form');        
+        // HANDLE FORM SUBMISSION
+        const form = document.getElementById('payment-form');
+        // adds event listeners to all the payment buttons.       
         const paymentSubmitButtons = Array.from(document.getElementsByClassName('payment-button'));
         paymentSubmitButtons.forEach(item => {
             item.addEventListener('click', function handleClick(event) {
+                //disables form input etc to prevent multiple submissions
                 card.update({ 'disabled': true});
                 formButtons = Array.from(document.getElementsByClassName('form-button'));
                 for (let i = 0; i < formButtons.length; i++) {
@@ -235,11 +236,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (document.getElementById('add-user-address')) {
                     document.getElementById('add-user-address').setAttribute('disabled', true);
                 }
+
                 /*this is for the loading circle thing.  Fade toggle is just an opacity type toggle thing in jquery.
                 given I don't have a loady circle thing yet I'll park this for now.  Maybe replace with a spinning cheese or whatever*/
                 //document.getElementById('payment-form').fadeToggle(100);
                 //document.getElementById('loading-overlay').fadeToggle(100);
-    
 
                 // From using {% csrf_token %} in the form, in order to use in the header of the POST request
                 const csrfToken = document.querySelector("[name='csrfmiddlewaretoken']").value;
@@ -248,9 +249,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     'client_secret': clientSecret,
                 });
                 const url = 'cache_checkout_data/';
-
-
-                //don't forget to trim whitespace from the user supplied fields.
+                /*don't forget to trim whitespace from the user supplied fields.
+                This fetch statement adds the current info to the webhook and confirms card info with stripe,
+                as well as updating payment intent with order details (useful later)*/
                 fetch(url, {
                     method: 'POST',
                     body: postData,
@@ -261,54 +262,55 @@ document.addEventListener("DOMContentLoaded", function() {
                     credentials: 'same-origin',
                 }).then(
                     stripe.confirmCardPayment(clientSecret, {
-                            payment_method: {
-                                card: card,
-                            },
-                            shipping: {
-                                name: form.full_name.value,
-                                address: {
-                                    line1: form.address_line_one.value,
-                                    line2: form.address_line_two.value,
-                                    city: form.town_or_city.value,
-                                    state: form.county.value,
-                                    postal_code: form.postcode.value,
-                                    country: form.country.value,
-                                }
-                            },
-                        }).then(function(result) {
-                            if (result.error) {
-                                var errorDiv = document.getElementById('card-errors');
-                                var html = `
-                                    <span class="icon" role="alert">
-                                    <i class="fas fa-times"></i>
-                                    </span>
-                                    <span>${result.error.message}</span>`;
-                                    errorDiv.innerHTML = html;
-                                console.log(result.error.message)
-                                /*spinny wheel stuff again
-                                $('#payment-form').fadeToggle(100);
-                                $('#loading-overlay').fadeToggle(100);
-                                */
-                                // re-enable butotns
-                                for (let i = 0; i < formButtons.length; i++) {
-                                    formButtons[i].style.pointerEvents = "auto";
-                                }
-                                if (document.getElementById('add-user-address')) {
-                                    document.getElementById('add-user-address').setAttribute('disabled', "");
-                                }
-                            } else {
-                                if (result.paymentIntent.status === 'succeeded') {
-                                    console.log("it worked")
-                                    form.submit();
-                                }
+                        //sends the data to stripe, 
+                        payment_method: {
+                            card: card,
+                            //may well be worth adding billing data to this section later on, along with billing e-mail.  Not essential functionality though.
+                        },
+                        shipping: {
+                            name: form.full_name.value,
+                            address: {
+                                line1: form.address_line_one.value,
+                                line2: form.address_line_two.value,
+                                city: form.town_or_city.value,
+                                state: form.county.value,
+                                postal_code: form.postcode.value,
+                                country: form.country.value,
                             }
-                        })  
-                    ).catch(err => {
-                        console.log(err)
-                        // just reload the page
-                        location.reload();
-                    })
-                })       
+                        },
+                    }).then(function(result) {
+                        // if stripe throws an error
+                        if (result.error) {
+                            var errorDiv = document.getElementById('card-errors');
+                            var html = `
+                                <span class="icon" role="alert">
+                                <i class="fas fa-times"></i>
+                                </span>
+                                <span>${result.error.message}</span>`;
+                                errorDiv.innerHTML = html;
+                            console.log(result.error.message)
+                            /*spinny wheel stuff again
+                            $('#payment-form').fadeToggle(100);
+                            $('#loading-overlay').fadeToggle(100);
+                            */
+                            // re-enable buttons
+                            card.update({ 'disabled': false});
+                            for (let i = 0; i < formButtons.length; i++) {
+                                formButtons[i].style.pointerEvents = "auto";
+                            }
+                            if (document.getElementById('add-user-address')) {
+                                document.getElementById('add-user-address').removeAttribute('disabled');
+                            }
+                        } else {
+                            if (result.paymentIntent.status === 'succeeded') {
+                                console.log("it worked")
+                                //this acts like the submit button and submits the form to the checkout view.
+                                form.submit();
+                            }
+                        }
+                    })  
+                )
+            })       
         });    
     }
     

@@ -99,7 +99,7 @@ Cheese and Beer
                     </div>
                     <div class="guest-email-field">
                         <label for="order-email">Confirmation e-mail: </label>
-                        <input type="email" name="order-email" id="order-email" value="{{ user_email }}" placeholder="e-mail">
+                        <input type="email" name="order_email" id="order-email" value="{{ user_email }}" placeholder="e-mail">
                     </div>
                     <p><em>Please note that because of Brexit we can only deliver to UK addresses.</em></p>
                         <table class="address-form">
@@ -128,6 +128,7 @@ Cheese and Beer
                                 <td>{{ address_form.postcode }}</td>
                             </tr>
                             <input type="hidden" name="country" id="country" value="GB" placeholder="country">
+                            <input type="hidden" name="address_id" id="address-id" value="{{ address_form.id }}" placeholder="e-mail">
                         </table>
                 </div>
                 <hr>     
