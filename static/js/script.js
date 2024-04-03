@@ -314,7 +314,27 @@ document.addEventListener("DOMContentLoaded", function() {
             })       
         });    
     }
-    
+    //Quantity form control icons.
+    if (document.getElementById('decrement-amount')) {
+        document.addEventListener("click", function(e){
+            const target = e.target.closest("#decrement-amount");
+            if(target){
+                if (document.getElementById('quantity').value > 1) {
+                    document.getElementById('quantity').value -= 1
+                }
+            }
+        });
+        document.addEventListener("click", function(e){
+            const target = e.target.closest("#increment-amount");
+            if(target){
+                quantity = document.getElementById('quantity').value;
+                quantity = Number(quantity);
+                quantity += 1;
+                document.getElementById('quantity').value = quantity;                    
+            }
+        });
+
+    }
     
 
 

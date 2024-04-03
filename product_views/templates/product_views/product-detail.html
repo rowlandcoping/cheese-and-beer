@@ -56,15 +56,34 @@ Cheese and Beer
                 {{ product.description | linebreaksbr }}
             </div>
         </div>
-        <div class="action-section">
+        <div class="product-action-section">
             <div>
-                <span class="action-button add-basket">
-                    <i class="fas fa-shopping-basket"></i> Add
-                </span>
+                <h3>£{{ product.price }}</h3>
             </div>
-            <div>
-                <span class="action-button buy-now">
-                    <i class="fa-solid fa-credit-card"></i> Buy
+            {% if product.displayed %}            
+            <h4 class="green-text">Available</h4>
+            <p>Estimated delivery {{ delivery_date }}</p>
+            {% else %}
+            <h4 class="red-text">Unavailable</h4>
+            {% endif %}
+
+            <form method="POST" action="{% url 'add_to_basket' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="view" id="view" value="{{ request.path }}?{{ current_view }}">
+                <div class="quantity-box-product">
+                    <label for="quantity"><h4>Quantity:</h4></label>
+                    <i id="decrement-amount" class="fa fa-minus"></i> <input type="number" name="quantity" id="quantity" min="1" value="1"> <i id="increment-amount" class="fa fa-plus"></i>
+                </div>
+                <input type="hidden" name="product" id="product" value="{{ product.id }}">                     
+                <div class="product-action-buttons">
+                    <button class="product-action-button product-add-basket">
+                        <i class="fas fa-shopping-basket"></i> Add to Basket
+                    </button>
+                </div>
+            </form>
+            <div class="product-action-buttons">
+                <span class="product-action-button product-buy-now">
+                    <i class="fa-solid fa-credit-card"></i> Buy it Now
                 </span>
             </div>
         </div>

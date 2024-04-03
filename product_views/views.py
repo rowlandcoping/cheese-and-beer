@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.db.models import Q
 from datetime import datetime
 from products.models import CheeseCategory, BeerCategory, Product
+from datetime import datetime, timedelta
 import uuid
 import io
 import re
@@ -129,9 +130,11 @@ def product_detail(request, product_id):
         pairings = []
         for category in category_pairs:
             pairings.extend(list(Product.objects.filter(beer_category=category.id)))
+    delivery_date = datetime.now().date() + timedelta(days=5)
     template = 'product_views/product-detail.html'
     context = {
         'product': product,
         'pairings': pairings,
+        'delivery_date': delivery_date,
     }
     return render(request, template, context)

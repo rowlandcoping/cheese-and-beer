@@ -24,6 +24,12 @@ h1,h2,h3,h4,p {
 body {
     margin: 30px 50px;
 }
+.green-text {
+    color: green;
+}
+.red-text {
+    color: red;
+}
 
 
 /*CHEESE/BEER CATEGORY SELECTOR*/
@@ -210,6 +216,36 @@ body {
 }
 #product-matching {
     margin-top:20px;
+}
+
+.product-action-buttons {
+    text-align:center;
+}
+.product-action-button {
+    display:inline-block;
+    padding:3px;
+    font-size:130%;
+    width: 200px;
+    margin:5px 0;
+    border-radius: 6px;
+}
+.product-add-basket {
+    background-color:rgb(139, 67, 0);
+    color:white;
+}
+.product-buy-now {
+    background-color:rgb(16, 95, 0);
+    color:white;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
+input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
 }
 
 /* CHECKOUT PAGE */

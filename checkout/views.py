@@ -5,19 +5,10 @@ from django.contrib import messages
 from django.views.decorators.http import require_POST
 from datetime import datetime, timedelta
 from .models import Order, OrderItems
-from .forms import OrderForm
 from addresses.models import Addresses
 from products.models import Product
 from addresses.forms import AddressForm
 from basket.contexts import basket_total
-import uuid
-import io
-import re
-import cloudinary
-import cloudinary.uploader
-import PIL
-from PIL import Image
-import decimal
 import stripe
 import json
 
