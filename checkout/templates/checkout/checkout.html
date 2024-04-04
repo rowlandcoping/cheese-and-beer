@@ -167,8 +167,16 @@ Cheese and Beer
                     <h4 class="checkout-price">
                         £{{ order.product.price }}
                     </h4>
-                    <div class="order-quantity">Qty: {{ order.quantity }}</div>
-                    </p>
+                    <div class="order-quantity">
+                        Qty: 
+                        <a href="{% url 'update_basket' %}?action=decrement,{{ order.product.id }}">
+                            <i id="decrement-{{ order.product.id }}" class="update-basket fa fa-minus"></i>  
+                        </a>                      
+                        <span class="product-quantity" id="quantity-{{ order.product.id }}">{{ order.quantity }}</span>
+                        <a href="{% url 'update_basket' %}?action=increment,{{ order.product.id }}">
+                            <i id="increment-{{ order.product.id }}" class="update-basket fa fa-plus"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
             {% endfor %}

@@ -333,13 +333,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById('quantity').value = quantity;                    
             }
         });
-
     }
-    
-
-
-
-
 });
 
 

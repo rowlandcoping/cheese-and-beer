@@ -13,6 +13,19 @@ import stripe
 import json
 
 
+def update_basket(request):
+    action = request.GET['action'].split(',')[0]
+    product_id = request.GET['action'].split(',')[1]
+    basket = request.session.get('basket', {})
+    if action == "increment":
+        basket[product_id] += 1
+    else:
+        if basket[product_id] > 1:
+            basket[product_id] -= 1
+    request.session['basket'] = basket
+    return redirect('checkout')
+
+
 @require_POST
 def cache_checkout_data(request):
     try:
@@ -76,6 +89,7 @@ def checkout(request):
                             order_id=order,
                             product_type = product.product_type,
                             product=product,
+                            price=product.price,
                             quantity=item_data,
                         )
                         order_item.save()

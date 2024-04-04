@@ -3,7 +3,7 @@
 {% block title %}
 Cheese and Beer
 {% endblock %}
-
+ 
 {% block content %}
 <div id="product-page">
     <div class="product-overview">          
@@ -67,6 +67,7 @@ Cheese and Beer
             <h4 class="red-text">Unavailable</h4>
             {% endif %}
 
+            {% if product.displayed %} 
             <form method="POST" action="{% url 'add_to_basket' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="hidden" name="view" id="view" value="{{ request.path }}?{{ current_view }}">
@@ -86,6 +87,7 @@ Cheese and Beer
                     <i class="fa-solid fa-credit-card"></i> Buy it Now
                 </span>
             </div>
+            {% endif %}
         </div>
     </div>
     <hr>
