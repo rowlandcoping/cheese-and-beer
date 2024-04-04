@@ -14,6 +14,8 @@ import json
 
 
 def update_basket(request):
+    stripe_secret_key = settings.STRIPE_SECRET_KEY
+    stripe.api_key = stripe_secret_key
     action = request.GET['action'].split(',')[0]
     product_id = request.GET['action'].split(',')[1]
     basket = request.session.get('basket', {})
@@ -23,6 +25,15 @@ def update_basket(request):
         if basket[product_id] > 1:
             basket[product_id] -= 1
     request.session['basket'] = basket
+    intent_id = request.session.get('intent_id', {})
+    pid = intent_id['secret'].split('_secret')[0]
+    current_basket = basket_total(request)
+    total = current_basket['grand_total']
+    stripe_total = round(total * 100)
+    stripe.PaymentIntent.modify(pid, amount=stripe_total, metadata={
+           'basket': json.dumps(request.session.get('basket', {})),
+           'username': request.user,
+        })
     return redirect('checkout')
 
 
@@ -121,7 +132,6 @@ def checkout(request):
            'basket': json.dumps(request.session.get('basket', {})),
            'username': request.user,
         })
-        print(stripe_total)
     else:
         intent = stripe.PaymentIntent.create(
             amount=stripe_total,
