@@ -97,13 +97,23 @@ Cheese and Beer
                     </div>
                     <div class="buy-from-view">
                         <div class="buynow-alert not-displayed" id="alert-{{ product.id }}">
-                            <h4>Buy {{ product.name }} Now</h4>
+                            <h4>Buy Now:</h4> 
+                            <h4>{{ product.name }}</h4>
                             <p>You have other items in your basket, do you wish to remove them?</p>
-                            <span class="alert-positive">
-                                Yes, I only want this
-                            </span>
-                            <span class="alert-negative">
-                                No, I want them too
+                            <div class="alert-buttons-container">
+                                <a href="{% url 'buy_now' %}?remove={{ product.id }},1">
+                                    <span class="alert-buttons alert-positive">
+                                        Yes, please.
+                                    </span>
+                                </a>
+                                <a href="{% url 'buy_now' %}?addon={{ product.id }},1">
+                                    <span class="alert-buttons alert-negative">
+                                        No, thank you.
+                                    </span>
+                                </a>
+                            </div>
+                            <span class="alert-buttons alert-cancel" id="cancel-{{ product.id }}">
+                               Cancel Action
                             </span>
                         </div>
                         <div class="buynow-buttons alert-disable"> 
@@ -113,7 +123,7 @@ Cheese and Beer
                                 <i class="fa-solid fa-credit-card"></i> Buy
                             </span>
                             {% else %}
-                            <a href="{% url 'buy_now' %}?single={{ product.id }}">
+                            <a href="{% url 'buy_now' %}?single={{ product.id }},1">
                                 <span class="action-button buy-now" id="buy-{{ product.id }}">
                                     <i class="fa-solid fa-credit-card"></i> Buy
                                 </span>

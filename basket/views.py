@@ -8,15 +8,17 @@ import json
 
 def buy_now(request):
     if 'single' in request.GET:
-        product = request.GET['single']
+        product = int(request.GET['single'].split(',')[0])
+        quantity = int(request.GET['single'].split(',')[1])
         basket = request.session.get('basket', {})
-        basket[product] = 1
+        basket[product] = quantity
         request.session['basket'] = basket
     elif 'remove' in request.GET:        
-        product = request.GET['remove']
+        product = int(request.GET['remove'].split(',')[0])
+        quantity = int(request.GET['remove'].split(',')[1])
         del request.session['basket']
         basket = request.session.get('basket', {})
-        basket[product] = 1
+        basket[product] = quantity
         request.session['basket'] = basket
         intent_id = request.session.get('intent_id', {})
         if intent_id:
@@ -32,12 +34,13 @@ def buy_now(request):
                 'username': request.user,
                 })
     else:
-        product = request.GET['addon']
+        product = request.GET['addon'].split(',')[0]
+        quantity = int(request.GET['addon'].split(',')[1])
         basket = request.session.get('basket', {})
         if product in list(basket.keys()):
-            basket[product] += 1
+            basket[product] += quantity
         else:
-            basket[product] = 1
+            basket[product] = quantity
         request.session['basket'] = basket
         intent_id = request.session.get('intent_id', {})
         if intent_id:

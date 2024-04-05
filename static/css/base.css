@@ -22,6 +22,7 @@ h1,h2,h3,h4,p {
     display:none;
 }
 body {
+    position:relative;
     margin: 30px 50px;
 }
 .green-text {
@@ -203,12 +204,52 @@ body {
     background-color:rgb(16, 95, 0);
     color:white;
 }
-.buy-from-view {
-    position: relative;
-}
+
 .buynow-alert {
+    text-align:center;
     position:absolute;
+    background-color: white;
+    border:1px solid rgb(139, 67, 0);
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width:300px;
+    padding:20px;
 }
+
+.buynow-alert h4,.buynow-alert p {
+    margin-bottom:10px;
+}
+
+.alert-buttons {
+    display:inline-block;
+    width:125px;
+    padding:5px;
+    border-radius:6px;
+}
+
+.alert-positive {
+    background-color:rgb(16, 95, 0);
+    color:white;
+    
+}
+
+.alert-negative {
+    background-color:rgb(139, 67, 0);
+    color:white;
+    width:125px;
+}
+
+
+.alert-cancel {
+    margin-top:10px;
+    background-color:red;
+    color:white;
+}
+
+
+
 
 /* VIEW PRODUCT PAGE */
 .product-overview {
