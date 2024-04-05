@@ -320,17 +320,36 @@ document.addEventListener("DOMContentLoaded", function() {
             const target = e.target.closest("#decrement-amount");
             if(target){
                 if (document.getElementById('quantity').value > 1) {
-                    document.getElementById('quantity').value -= 1
+                    initial_price = document.getElementById('product-price').innerHTML;
+                    initial_price = Number(initial_price)
+                    quantity = document.getElementById('quantity').value;
+                    quantity = Number(quantity);
+                    quantity -= 1;
+                    document.getElementById('quantity').value = quantity
+                    document.getElementById('product-view-total').innerHTML = (Math.round((initial_price * quantity) * 100) / 100).toFixed(2); 
                 }
             }
         });
         document.addEventListener("click", function(e){
             const target = e.target.closest("#increment-amount");
             if(target){
+                initial_price = document.getElementById('product-price').innerHTML;
+                initial_price = Number(initial_price)
                 quantity = document.getElementById('quantity').value;
                 quantity = Number(quantity);
                 quantity += 1;
-                document.getElementById('quantity').value = quantity;                    
+                document.getElementById('quantity').value = quantity;
+                document.getElementById('product-view-total').innerHTML = (Math.round((initial_price * quantity) * 100) / 100).toFixed(2);                 
+            }
+        });
+        document.addEventListener("input", function(e){
+            const target = e.target.closest("#quantity");
+            if(target){
+                initial_price = document.getElementById('product-price').innerHTML;
+                initial_price = Number(initial_price)
+                initial_quantity = document.getElementById('quantity').value;
+                initial_quantity = Number(initial_quantity)
+                document.getElementById('product-view-total').innerHTML = (Math.round((initial_price * initial_quantity) * 100) / 100).toFixed(2);                
             }
         });
     }

@@ -25,7 +25,7 @@ Cheese and Beer
                 </p>
                 <hr>
                 <h4>
-                    £{{ product.price }} 
+                    £<span id="product-price">{{ product.price }}</span>
                     <em><small>
                     {% if product.cheese_category  %}
                     ({{ product.price_per_amount }}/kg)
@@ -58,7 +58,7 @@ Cheese and Beer
         </div>
         <div class="product-action-section">
             <div>
-                <h3>£{{ product.price }}</h3>
+                <h3>£<span id="product-view-total">{{ product.price }}<span></h3>
             </div>
             {% if product.displayed %}            
             <h4 class="green-text">Available</h4>
