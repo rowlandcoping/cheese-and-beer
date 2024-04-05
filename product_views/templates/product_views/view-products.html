@@ -6,7 +6,7 @@ Cheese and Beer
 
 {% block content %}
 <div id="product-view">
-    <div id="results and filter">
+    <div id="results and filter" class="alert-disable">
         <div id="results">
             {% if products %}
             {% if category %}
@@ -22,22 +22,23 @@ Cheese and Beer
 
         </div>
     </div>
+    <!-- keep in mind this id is used in the javascript to activate the buy now code -->
     <div id="product-listings">
         {% for product in products %}
         {% if product.displayed %}
         <div class="product-section">
             <div class="product-detail">          
-                <div class="product-image">
+                <div class="product-image alert-disable">
                     <a href="{% url 'product_detail' product.id %}">
                         <img src="{{ MEDIA_URL }}products/{{ product.image_url }}">
                     </a>
                 </div>
-                <div class="product-name">
+                <div class="product-name alert-disable">
                     <a href="{% url 'product_detail' product.id %}">
                         <h4>{{ product.name }}</h4>
                     </a>
                 </div>
-                <div class="product-info">
+                <div class="product-info alert-disable">
                     <div>
                         <p>
                             {% if product.cheese_category  %}                            
@@ -77,13 +78,13 @@ Cheese and Beer
                         </p>
                     </div>
                 </div>
-                <div class="action-section">
+                <div class="action-section alert-disable">
                     <a href="{% url 'product_detail' product.id %}">
                         <p><small><em><u>more information</u></em></small></p>
                     </a>                    
                 </div>
                 <div class="view-action-buttons">
-                    <div class="add-from-view">
+                    <div class="add-from-view alert-disable">
                         <form method="POST" action="{% url 'add_to_basket' %}" enctype="multipart/form-data">
                             {% csrf_token %}
                             <input type="hidden" name="view" id="view" value="{{ request.path }}?{{ current_view }}">
@@ -95,15 +96,30 @@ Cheese and Beer
                         </form>
                     </div>
                     <div class="buy-from-view">
-                        <form method="POST" id="products-buy-now" action="" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <input type="hidden" name="view" id="view" value="{{ request.path }}?{{ current_view }}">
-                            <input type="hidden" name="quantity" id="quantity" value="1">
-                            <input type="hidden" name="product" id="product" value="{{ product.id }}">                     
-                            <button class="action-button buy-now" form="products-buy-now">
+                        <div class="buynow-alert not-displayed" id="alert-{{ product.id }}">
+                            <h4>Buy {{ product.name }} Now</h4>
+                            <p>You have other items in your basket, do you wish to remove them?</p>
+                            <span class="alert-positive">
+                                Yes, I only want this
+                            </span>
+                            <span class="alert-negative">
+                                No, I want them too
+                            </span>
+                        </div>
+                        <div class="buynow-buttons alert-disable"> 
+                            {% if basket_total %}
+                            
+                            <span class="action-button buy-now" id="buy-{{ product.id }}">
                                 <i class="fa-solid fa-credit-card"></i> Buy
-                            </button>
-                        </form>
+                            </span>
+                            {% else %}
+                            <a href="{% url 'buy_now' %}?single={{ product.id }}">
+                                <span class="action-button buy-now" id="buy-{{ product.id }}">
+                                    <i class="fa-solid fa-credit-card"></i> Buy
+                                </span>
+                            </a>                            
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>  

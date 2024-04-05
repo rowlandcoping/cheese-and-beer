@@ -5,5 +5,6 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
-    path('add-basket/', views.add_to_basket, name='add_to_basket')
+    path('add-basket/', views.add_to_basket, name='add_to_basket'),
+    path('buy-now/', views.buy_now, name='buy_now')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

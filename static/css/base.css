@@ -203,6 +203,12 @@ body {
     background-color:rgb(16, 95, 0);
     color:white;
 }
+.buy-from-view {
+    position: relative;
+}
+.buynow-alert {
+    position:absolute;
+}
 
 /* VIEW PRODUCT PAGE */
 .product-overview {
