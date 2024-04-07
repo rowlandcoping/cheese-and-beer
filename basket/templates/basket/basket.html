@@ -5,10 +5,12 @@ Cheese and Beer
 {% endblock %}
 
 {% block content %}
+<div class="title-section">
+    <h2>Your Cheese Board</h2>
+</div>
 <div id="product-view">
     <div id="basket-listings">
-        {% for order in basket_items %}
-    
+        {% for order in basket_items %}    
         <div class="basket-item-view">
             <div class="basket-image">
                 <img src="{{ MEDIA_URL }}products/{{ order.product.image_url }}">
@@ -66,6 +68,25 @@ Cheese and Beer
             </div>
         </div>
         {% endfor %}
+        <h4>Order sub-total: £{{ basket_total }}</h4>
+        <a href="{% url 'checkout' %}">
+            <span class="checkout-button">Go to Checkout</span>
+        </a>
+    </div>
+    <div class="checkout-section">
+        <div>
+            <a href="{% url 'checkout' %}">
+                <span class="checkout-button">Go to Checkout</span>
+            </a>
+        </div>
+        <div class="order-value-details">
+            <h4>Order Price: £{{ basket_total }}</h4>
+            <h4>Delivery Cost: £{{ delivery_charge }}</h4>
+            {% if free_remaining_amount > 0 %}
+            <p>Order £{{ free_remaining_amount }} extra for free delivery.</p>
+            {% endif %}
+            <h4><span class="green-text">Grand Total: £{{ grand_total }}</span></h4>
+        </div>
     </div>
 </div>
 

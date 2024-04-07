@@ -339,10 +339,13 @@ input[type=number] {
 }
 
 /*-----BASKET PAGE------*/
+#product-view {
+    display: flex;
+    justify-content: space-between;
+}
 .basket-item-view {
     width:100%;
     display:flex;
-    flex-flow:row;
     margin:20px;
 }
 .basket-image img {
@@ -350,16 +353,33 @@ input[type=number] {
     height:150px;
     object-fit:cover;
 }
+.checkout-section {
+    margin:10px;
+}
+.checkout-button {
+    display:inline-block;
+    font-size:120%;
+    border:rgb(255, 201, 51) solid 2px;
+    background-color: rgb(47, 71, 0);
+    border-radius: 6px;
+    color: white;
+    text-align:center;
+    width:200px;
+    padding:5px;
+    margin-bottom:10px;
+}
 .basket-detail {
     display:flex;
     flex-flow:column;
     padding-bottom:5px;
     margin:0 10px;
     justify-content: space-between;
-    width:50%;
-
+    width:90%;
 }
 .basket-info {
     display:flex;    
     justify-content: space-between;
+}
+.title-section {
+    margin-top:30px;
 }

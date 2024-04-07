@@ -23,10 +23,10 @@ def basket_total(request):
         delivery_charge = settings.DELIVERY_HIGHER_CHARGE
     else:
         delivery_charge = 0
-    grand_total = Decimal(delivery_charge) + Decimal(total)
+    grand_total = round((Decimal(delivery_charge) + Decimal(total)) , 2)
     context = {
-        'delivery_charge': delivery_charge,
-        'free_remaining_amount': Decimal(total) - Decimal(settings.DELIVERY_HIGHER_CHARGE),
+        'delivery_charge': round(delivery_charge, 2),
+        'free_remaining_amount': round((Decimal(settings.DELIVERY_HIGHER_THRESHOLD - Decimal(total))), 2),
         'grand_total': grand_total,
         'basket_items': basket_items,
         'basket_total': total,
