@@ -180,19 +180,35 @@ Cheese and Beer
                 </div>
             </div>
             {% endfor %}
-            <span class="payment-button-small payment-button form-button">
+            <h4>Order sub-total: £{{ basket_total }}</h4>
+            <span class="action-buttons checkout-button form-button">
                 Purchase Now
             </span>
+            <a href="{% url 'view_basket' %}">
+                <span class="action-buttons basket-button">
+                    Go to Basket
+                </span>
+            </a>
         </div>
     </div>
     <div class="purchase-section">
-        <span class="payment-button-large payment-button form-button">
+        <span class="action-buttons checkout-button form-button">
             Purchase Now
         </span>
-        <p class="ts-and-cs"><small>Be aware that any orders placed through this website will not be fulfilled. 
-            This site is a project built as part of a level 5 Diploma in web development at Code Institute. 
-            All cheeses depicted on this site are fictional and similarities to cheeses living or dead are entirely co-incidental.
-        </small></p>
+        
+        <h4>Order Price: £{{ basket_total }}</h4>
+        <h4>Delivery Cost: £{{ delivery_charge }}</h4>
+        {% if free_remaining_amount > 0 %}
+        <p>Order £{{ free_remaining_amount }} extra for free delivery.</p>
+        {% endif %}
+        <h4><span class="green-text">Grand Total: £{{ grand_total }}</span></h4>
+        <p class="ts-and-cs">
+            <small>
+                Be aware that any orders placed through this website will not be fulfilled. 
+                This site is a project built as part of a level 5 Diploma in web development at Code Institute. 
+                All cheeses depicted on this site are fictional and similarities to cheeses living or dead are entirely co-incidental.
+            </small>
+        </p>
     </div>
 </div>
 

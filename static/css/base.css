@@ -339,7 +339,7 @@ input[type=number] {
 }
 
 /*-----BASKET PAGE------*/
-#product-view {
+#basket-view {
     display: flex;
     justify-content: space-between;
 }
@@ -356,18 +356,31 @@ input[type=number] {
 .checkout-section {
     margin:10px;
 }
-.checkout-button {
+
+.action-buttons {
     display:inline-block;
     font-size:120%;
-    border:rgb(255, 201, 51) solid 2px;
-    background-color: rgb(47, 71, 0);
     border-radius: 6px;
-    color: white;
     text-align:center;
     width:200px;
     padding:5px;
     margin-bottom:10px;
 }
+
+.checkout-button {
+    border:rgb(255, 201, 51) solid 2px;
+    background-color: rgb(47, 71, 0);    
+    color: rgb(255, 201, 51);    
+}
+
+.basket-button {
+    background-color:rgb(255, 201, 51);
+    border: rgb(47, 71, 0) solid 2px;    
+    color: rgb(47, 71, 0);
+}
+
+
+
 .basket-detail {
     display:flex;
     flex-flow:column;

@@ -6,9 +6,9 @@ Cheese and Beer
 
 {% block content %}
 <div class="title-section">
-    <h2>Your Cheese Board</h2>
+    <h2>Your Cheeseboard</h2>
 </div>
-<div id="product-view">
+<div id="basket-view">
     <div id="basket-listings">
         {% for order in basket_items %}    
         <div class="basket-item-view">
@@ -70,13 +70,13 @@ Cheese and Beer
         {% endfor %}
         <h4>Order sub-total: £{{ basket_total }}</h4>
         <a href="{% url 'checkout' %}">
-            <span class="checkout-button">Go to Checkout</span>
+            <span class="checkout-button action-buttons">Go to Checkout</span>
         </a>
     </div>
     <div class="checkout-section">
         <div>
             <a href="{% url 'checkout' %}">
-                <span class="checkout-button">Go to Checkout</span>
+                <span class="checkout-button action-buttons">Go to Checkout</span>
             </a>
         </div>
         <div class="order-value-details">

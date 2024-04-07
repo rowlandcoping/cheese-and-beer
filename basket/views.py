@@ -20,19 +20,6 @@ def buy_now(request):
         basket = request.session.get('basket', {})
         basket[product] = quantity
         request.session['basket'] = basket
-        intent_id = request.session.get('intent_id', {})
-        if intent_id:
-            stripe_secret_key = settings.STRIPE_SECRET_KEY
-            stripe.api_key = stripe_secret_key
-            intent_id = request.session.get('intent_id', {})
-            pid = intent_id['secret'].split('_secret')[0]
-            current_basket = basket_total(request)
-            total = current_basket['grand_total']
-            stripe_total = round(total * 100)
-            stripe.PaymentIntent.modify(pid, amount=stripe_total, metadata={
-                'basket': json.dumps(request.session.get('basket', {})),
-                'username': request.user,
-                })
     else:
         product = request.GET['addon'].split(',')[0]
         quantity = int(request.GET['addon'].split(',')[1])
@@ -42,19 +29,6 @@ def buy_now(request):
         else:
             basket[product] = quantity
         request.session['basket'] = basket
-        intent_id = request.session.get('intent_id', {})
-        if intent_id:
-            stripe_secret_key = settings.STRIPE_SECRET_KEY
-            stripe.api_key = stripe_secret_key
-            intent_id = request.session.get('intent_id', {})
-            pid = intent_id['secret'].split('_secret')[0]
-            current_basket = basket_total(request)
-            total = current_basket['grand_total']
-            stripe_total = round(total * 100)
-            stripe.PaymentIntent.modify(pid, amount=stripe_total, metadata={
-                'basket': json.dumps(request.session.get('basket', {})),
-                'username': request.user,
-                })
     return redirect('checkout')    
 
 
@@ -68,19 +42,6 @@ def add_to_basket(request):
     else:
         basket[product] = quantity
     request.session['basket'] = basket
-    intent_id = request.session.get('intent_id', {})
-    if intent_id:
-        stripe_secret_key = settings.STRIPE_SECRET_KEY
-        stripe.api_key = stripe_secret_key
-        intent_id = request.session.get('intent_id', {})
-        pid = intent_id['secret'].split('_secret')[0]
-        current_basket = basket_total(request)
-        total = current_basket['grand_total']
-        stripe_total = round(total * 100)
-        stripe.PaymentIntent.modify(pid, amount=stripe_total, metadata={
-            'basket': json.dumps(request.session.get('basket', {})),
-            'username': request.user,
-            })
     return redirect(view)
 
 def update_basket(request):
