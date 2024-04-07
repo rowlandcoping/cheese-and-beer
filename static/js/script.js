@@ -362,12 +362,17 @@ document.addEventListener("DOMContentLoaded", function() {
                 const itemId = item.getAttribute('id'); 
                 productId = itemId.split("-")[1];
                 productScenario = itemId.split("-")[0];
-                quantity = document.getElementById('quantity').value;
-                quantity = Number(quantity);
+                if (document.getElementById('product-page')) {
+                    quantity = document.getElementById('quantity').value;
+                    quantity = Number(quantity);
+                } else {
+                    quantity = 1;
+                }
                 if (productScenario === "single") {
                     url = "/buy-now/?single=" + productId + "," + quantity;
                     window.location.href = url
-                } else {
+                } 
+                if (productScenario === "basket") {
                     document.getElementById('alert-' + productId).style.display="block";
                     document.getElementById('alert-' + productId).focus();
                     const disabledSections = Array.from(document.getElementsByClassName('alert-disable'));
@@ -375,6 +380,8 @@ document.addEventListener("DOMContentLoaded", function() {
                         disabledSections[i].style.pointerEvents = "none";
                         disabledSections[i].style.opacity = "0.5";
                     }
+                    document.getElementById('remove-' + productId).href = "/buy-now/?remove=" + productId + "," + quantity;
+                    document.getElementById('addon-' + productId).href = "/buy-now/?addon=" + productId + "," + quantity;
                     document.addEventListener("click", function(e){
                         const target = e.target.closest(".alert-cancel");
                         if(target){
@@ -385,11 +392,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                 disabledSections[i].style.opacity = "1";
                             }
                         }
-                    });
-                    if (productScenario === "basket") {
-                        document.getElementById('remove-' + productId).href = "/buy-now/?remove=" + productId + "," + quantity;
-                        document.getElementById('addon-' + productId).href = "/buy-now/?addon=" + productId + "," + quantity;
-                    }
+                    });   
                 }
             });    
         });

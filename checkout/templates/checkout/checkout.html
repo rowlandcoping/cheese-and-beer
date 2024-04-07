@@ -169,11 +169,11 @@ Cheese and Beer
                     </h4>
                     <div class="order-quantity">
                         Qty: 
-                        <a href="{% url 'update_basket' %}?action=decrement,{{ order.product.id }}">
+                        <a href="{% url 'update_basket' %}?action=decrement,{{ order.product.id }},chkt">
                             <i id="decrement-{{ order.product.id }}" class="update-basket fa fa-minus"></i>  
                         </a>                      
                         <span class="product-quantity" id="quantity-{{ order.product.id }}">{{ order.quantity }}</span>
-                        <a href="{% url 'update_basket' %}?action=increment,{{ order.product.id }}">
+                        <a href="{% url 'update_basket' %}?action=increment,{{ order.product.id }},chkt">
                             <i id="increment-{{ order.product.id }}" class="update-basket fa fa-plus"></i>
                         </a>
                     </div>

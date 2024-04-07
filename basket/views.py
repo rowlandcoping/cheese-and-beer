@@ -1,4 +1,4 @@
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 import stripe
 from django.conf import settings
 from basket.contexts import basket_total
@@ -82,3 +82,32 @@ def add_to_basket(request):
             'username': request.user,
             })
     return redirect(view)
+
+def update_basket(request):
+    action = request.GET['action'].split(',')[0]
+    product_id = request.GET['action'].split(',')[1]
+    origin = request.GET['action'].split(',')[2]
+    basket = request.session.get('basket', {})
+    if action == "increment":
+        basket[product_id] += 1
+    else:
+        if basket[product_id] > 1:
+            basket[product_id] -= 1
+    request.session['basket'] = basket
+    if origin == "chkt":
+        return redirect('checkout')
+    else:
+        return redirect('view_basket')
+
+
+def view_basket(request):
+    basket = request.session.get('basket', {})
+    if not basket:
+        return redirect('home')
+    current_basket = basket_total(request)
+
+    template = 'basket/basket.html'
+    context = {
+        'products': current_basket,
+    }
+    return render(request, template, context)

@@ -80,8 +80,11 @@
                 </div>
             </div>
             <div class="checkout clickable-element">
-                <i class="fas fa-shopping-basket"></i>
-                {{ basket_total }}
+                <a href="{% url 'view_basket' %}"><i class="fas fa-shopping-basket"></i>
+                    {% if basket_total %}
+                    £{{ basket_total }}
+                    {% endif %}
+                </a>
                 {% if basket_total %}
                 <p><a href="{% url 'checkout' %}">Checkout</a></p>
                 {% endif %}

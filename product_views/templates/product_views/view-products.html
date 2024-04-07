@@ -101,12 +101,12 @@ Cheese and Beer
                             <h4>{{ product.name }}</h4>
                             <p>You have other items in your basket, do you wish to remove them?</p>
                             <div class="alert-buttons-container">
-                                <a href="{% url 'buy_now' %}?remove={{ product.id }},1">
+                                <a id="remove-{{ product.id }}" href="{% url 'buy_now' %}?remove={{ product.id }},1">
                                     <span class="alert-buttons alert-positive">
                                         Yes, please.
                                     </span>
                                 </a>
-                                <a href="{% url 'buy_now' %}?addon={{ product.id }},1">
+                                <a id="addon-{{ product.id }}" href="{% url 'buy_now' %}?addon={{ product.id }},1">
                                     <span class="alert-buttons alert-negative">
                                         No, thank you.
                                     </span>
@@ -119,7 +119,7 @@ Cheese and Beer
                         <div class="buynow-buttons alert-disable"> 
                             {% if basket_total %}
                             
-                            <span class="action-button buy-now" id="buy-{{ product.id }}">
+                            <span class="action-button buy-now" id="basket-{{ product.id }}">
                                 <i class="fa-solid fa-credit-card"></i> Buy
                             </span>
                             {% else %}

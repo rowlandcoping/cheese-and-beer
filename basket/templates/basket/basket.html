@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cheese and Beer
+{% endblock %}
+
+{% block content %}
+<div id="product-view">
+    <div id="basket-listings">
+        {% for order in basket_items %}
+    
+        <div class="basket-item-view">
+            <div class="basket-image">
+                <img src="{{ MEDIA_URL }}products/{{ order.product.image_url }}">
+            </div>
+            <div class="basket-detail">
+                <div class="basket-info">
+                    <div class="basket-item">
+                        <h4>
+                            {{ order.product.name }}
+                            {% if order.product.product_type == "cheese" %}
+                            ({{ order.product.amount }}g, {{ order.product.cheese_category }} cheese,
+                            {{ order.product.variety | lower }})
+                            {% else %}
+                            ({{ order.product.amount }}ml {{ order.product.container }}, {{ order.product.beer_category }} beer,
+                            {{ order.product.variety | lower }}, {{ order.product.alcohol_content }}% APR)
+                            {% endif %}
+                        </h4>
+                        {% if order.product.displayed %}            
+                        <h4 class="green-text">Available</h4>
+                        {% else %}
+                        <h4 class="red-text">Unavailable</h4>
+                        {% endif %}
+                        <p>
+                            <small>ID: {{ order.product.product_number }}</small>
+                        </p>
+                    </div>
+                    <div class="basket-item-price">
+                        <h4>Total:</h4>
+                        <h4 class="order-checkout-price" id="basket-total-{{order.product.id}}">
+                            {% load order_calculator %}
+                            £{{ order.product.price | totalizer:order.quantity }}
+                        </h4>
+                    </div>
+                </div>
+                <div class="special-offers">
+                    £{{ order.product.price }} each (<em>no current offers</em>)
+                </div>
+                <div class="basket-adjustment">
+                    <div class="basket-quantity">
+                        Qty: 
+                        <a href="{% url 'update_basket' %}?action=decrement,{{ order.product.id }},bskt">
+                            <i id="decrement-{{ order.product.id }}" class="update-basket fa fa-minus"></i>  
+                        </a>                      
+                        <span class="product-quantity" id="quantity-{{ order.product.id }}">{{ order.quantity }}</span>
+                        <a href="{% url 'update_basket' %}?action=increment,{{ order.product.id }},bskt">
+                            <i id="increment-{{ order.product.id }}" class="update-basket fa fa-plus"></i>
+                        </a>
+                    </div>
+                    <div class="basket-remove">
+                        <a href="">
+                            Remove
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+

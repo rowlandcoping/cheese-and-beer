@@ -7,10 +7,10 @@ Cheese and Beer
 {% block content %}
 <div id="product-page">
     <div class="product-overview">          
-        <div class="detail-image">
+        <div class="detail-image alert-disable">
             <img src="{{ MEDIA_URL }}products/{{ product.image_url }}">
         </div>
-        <div class="detail-information">
+        <div class="detail-information alert-disable">
             <div>
                 <h3>
                     {{ product.name }} ({{product.amount }}g{% if product.container %} {{ product.container }}{% endif %})
@@ -57,18 +57,20 @@ Cheese and Beer
             </div>
         </div>
         <div class="product-action-section">
-            <div>
-                <h3>£<span id="product-view-total">{{ product.price }}<span></h3>
+            <div class="alert-disable">
+                <div>
+                    <h3>£<span id="product-view-total">{{ product.price }}<span></h3>
+                </div>
+                {% if product.displayed %}            
+                <h4 class="green-text">Available</h4>
+                <p>Estimated delivery {{ delivery_date }}</p>
+                {% else %}
+                <h4 class="red-text">Unavailable</h4>
+                {% endif %}
             </div>
-            {% if product.displayed %}            
-            <h4 class="green-text">Available</h4>
-            <p>Estimated delivery {{ delivery_date }}</p>
-            {% else %}
-            <h4 class="red-text">Unavailable</h4>
-            {% endif %}
 
             {% if product.displayed %} 
-            <form method="POST" action="{% url 'add_to_basket' %}" enctype="multipart/form-data">
+            <form class="alert-disable" method="POST" action="{% url 'add_to_basket' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="hidden" name="view" id="view" value="{{ request.path }}?{{ current_view }}">
                 <div class="quantity-box-product">
@@ -117,7 +119,7 @@ Cheese and Beer
         </div>
     </div>
     <hr>
-    <div id="product-matching">
+    <div id="product-matching" class="alert-disable">
         {% if pairings %}
         <h3>Pairs Well With:</h3>
         {% for pairing in pairings %}
