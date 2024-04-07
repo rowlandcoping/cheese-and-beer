@@ -98,6 +98,14 @@ def update_basket(request):
         return redirect('checkout')
     else:
         return redirect('view_basket')
+    
+def remove_item(request):
+    product_id = request.GET['remove']    
+    basket = request.session.get('basket', {})
+    if basket[product_id]:
+        basket.pop(product_id)
+    request.session['basket'] = basket
+    return redirect('view_basket')
 
 
 def view_basket(request):

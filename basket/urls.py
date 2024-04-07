@@ -9,4 +9,5 @@ urlpatterns = [
     path('buy-now/', views.buy_now, name='buy_now'),
     path('basket/', views.view_basket, name='view_basket'),
     path('update_basket/', views.update_basket, name='update_basket'),
+    path('remove_item/', views.remove_item, name='remove_item'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

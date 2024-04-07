@@ -58,7 +58,7 @@ Cheese and Beer
                         </a>
                     </div>
                     <div class="basket-remove">
-                        <a href="">
+                        <a href="{% url 'remove_item' %}?remove={{ order.product.id }}">
                             Remove
                         </a>
                     </div>
