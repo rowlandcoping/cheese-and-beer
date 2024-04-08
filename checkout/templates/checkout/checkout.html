@@ -130,7 +130,7 @@ Cheese and Beer
                 {% if authenticated %}
                 <div class="address-form-section not-displayed">
                 {% else %}
-                <div class="address-form-section">            
+                <div class="address-form-section">
                 {% endif %}
                     <div class="not-signedin">
                         <p>Not Registered?  Click <a href="{% url 'account_signup' %}">here</a> to sign up and save your details!</p>
@@ -138,7 +138,7 @@ Cheese and Beer
                     </div>
                     <div class="guest-email-field">
                         <label for="order-email">Confirmation e-mail: </label>
-                        <input type="email" name="order_email" id="order-email" value="{{ user_email }}" placeholder="e-mail">
+                        <input type="email" name="order_email" id="order-email" class="address-field" value="{{ user_email }}" placeholder="e-mail" required>
                     </div>
                     <p><em>Please note that because of Brexit we can only deliver to UK addresses.</em></p>
                         <table class="address-form">
@@ -182,6 +182,7 @@ Cheese and Beer
                         <input type="hidden" value="{{ client_secret }}" name="client_secret">
                     </div>                    
                 </div>
+                <span class="not-displayed"><button type ="submit" id="form-submit-button" form="payment-form">Submit</button></span>
             </form>
             <hr>
         </div>

@@ -6,5 +6,4 @@ from . import views
 
 urlpatterns = [
     path('', views.checkout, name='checkout'),
-    path('cache_checkout_data/', views.cache_checkout_data, name='cache_checkout_data'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

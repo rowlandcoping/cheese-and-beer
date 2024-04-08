@@ -13,28 +13,6 @@ import stripe
 import json
 
 
-@require_POST
-def cache_checkout_data(request):
-    try:
-        # gets ths data from the body of the fetch request and converts to python dictionary
-        json_data = json.loads(request.body)
-        # retrieves pid
-        pid = json_data['client_secret'].split('_secret')[0]
-        stripe.api_key = settings.STRIPE_SECRET_KEY
-        # updates payment intent with final info
-        stripe.PaymentIntent.modify(pid, metadata={
-           'basket': json.dumps(request.session.get('basket', {})),
-           'username': request.user,
-        })
-        # lets fetch request know the request has been carried out.
-        print("you have reached this")
-        return HttpResponse(status=200)
-    except Exception as e:
-        messages.error(request, 'Sorry, your payment cannot be \
-            processed right now. Please try again later.')
-        return HttpResponse(content=e, status=400)
-    
-
 def checkout(request):    
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
@@ -114,12 +92,15 @@ def checkout(request):
         intent = stripe.PaymentIntent.create(
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,
+            metadata={
+                'basket': json.dumps(request.session.get('basket', {})),
+                'username': request.user,
+            }
         )
         intent_id = request.session.get('intent_id', {})
         intent_id['secret'] = intent.client_secret
         request.session['intent_id'] = intent_id
         client_secret = intent.client_secret
-
     if request.user.is_authenticated:
         addresses = Addresses.objects.filter(user_id=request.user.id)
         if addresses:

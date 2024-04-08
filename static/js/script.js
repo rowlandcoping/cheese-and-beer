@@ -184,7 +184,21 @@ document.addEventListener("DOMContentLoaded", function() {
     // STRIPE JS (needs converting from jQuery and whatever other stuff it uses)
 
     // Adds Card element to checkout page(if element exists).  Also adds event listeners and actions to be taken on card submit.
+    
     if (document.getElementById('id_stripe_public_key')) {
+        //add event listneres to the buttons that trigger the submit button
+        const paymentSubmitButtons = Array.from(document.getElementsByClassName('payment-button'));
+        paymentSubmitButtons.forEach(item => {
+            item.addEventListener('click', function handleClick(event) {
+                document.getElementById('form-submit-button').click();
+            })
+        })
+        document.addEventListener("submit", function(e){
+            const target = e.target.closest("#payment-form");
+            if(target){
+                e.preventDefault();
+            }
+        })
         const stripePublicKey = document.getElementById('id_stripe_public_key').textContent.slice(1, -1);
         const clientSecret = document.getElementById('id_client_secret').textContent.slice(1, -1);
         const stripe = Stripe(stripePublicKey);
@@ -220,48 +234,42 @@ document.addEventListener("DOMContentLoaded", function() {
             } else {
                 errorDiv.textContent = '';
             }
-        });        
+        });
+        // Javascript form validation to prevent submission without an address:
+
         // HANDLE FORM SUBMISSION
         const form = document.getElementById('payment-form');
         // adds event listeners to all the payment buttons.       
-        const paymentSubmitButtons = Array.from(document.getElementsByClassName('payment-button'));
-        paymentSubmitButtons.forEach(item => {
-            item.addEventListener('click', function handleClick(event) {
-                //disables form input etc to prevent multiple submissions
-                card.update({ 'disabled': true});
-                const formButtons = Array.from(document.getElementsByClassName('form-button'));
-                for (let i = 0; i < formButtons.length; i++) {
-                    formButtons[i].style.pointerEvents = "none";
+        document.addEventListener("click", function(e){
+            const target = e.target.closest("#form-submit-button");
+            if(target){
+                //checks necessary form fields are complete or prevents submission of payment until they are, returning true or false
+                const addressFields = Array.from(document.getElementsByClassName('address-field'));
+                for (let i = 0; i < addressFields.length; i++) {                    
+                    if (addressFields[i].required) {
+                        if (addressFields[i].value) {
+                            takePayment=true;                            
+                        } else {
+                            takePayment=false;
+                            break;
+                        }
+                    }
                 }
-                if (document.getElementById('add-user-address')) {
-                    document.getElementById('add-user-address').setAttribute('disabled', true);
-                }
-
-                /*this is for the loading circle thing.  Fade toggle is just an opacity type toggle thing in jquery.
-                given I don't have a loady circle thing yet I'll park this for now.  Maybe replace with a spinning cheese or whatever*/
-                //document.getElementById('payment-form').fadeToggle(100);
-                //document.getElementById('loading-overlay').fadeToggle(100);
-
-                // From using {% csrf_token %} in the form, in order to use in the header of the POST request
-                const csrfToken = document.querySelector("[name='csrfmiddlewaretoken']").value;
-                const postData = JSON.stringify({
-                    'csrfmiddlewaretoken': csrfToken,
-                    'client_secret': clientSecret,
-                });
-                const url = 'cache_checkout_data/';
-                /*don't forget to trim whitespace from the user supplied fields.
-                This fetch statement adds the current info to the webhook and confirms card info with stripe,
-                as well as updating payment intent with order details (useful later)*/
-                fetch(url, {
-                    method: 'POST',
-                    body: postData,
-                    mode: "no-cors",
-                    headers: { 
-                        "X-CSRFToken": csrfToken, 
-                        'Content-Type': 'application/json',
-                     },
-                    credentials: 'same-origin',
-                }).then(
+                
+                if (takePayment === true) {
+                    //disables form input etc to prevent multiple submissions
+                    card.update({ 'disabled': true});
+                    const formButtons = Array.from(document.getElementsByClassName('form-button'));
+                    for (let i = 0; i < formButtons.length; i++) {
+                        formButtons[i].style.pointerEvents = "none";
+                    }
+                    if (document.getElementById('add-user-address')) {
+                        document.getElementById('add-user-address').setAttribute('disabled', true);
+                    }
+                    /*this is for the loading circle thing.  Fade toggle is just an opacity type toggle thing in jquery.
+                    given I don't have a loady circle thing yet I'll park this for now.  Maybe replace with a spinning cheese or whatever*/
+                    //document.getElementById('payment-form').fadeToggle(100);
+                    //document.getElementById('loading-overlay').fadeToggle(100);                
                     stripe.confirmCardPayment(clientSecret, {
                         //sends the data to stripe, 
                         payment_method: {
@@ -309,9 +317,9 @@ document.addEventListener("DOMContentLoaded", function() {
                                 form.submit();
                             }
                         }
-                    })  
-                )
-            })       
+                    })
+                }
+            }      
         });    
     }
     //Quantity form control icons.
