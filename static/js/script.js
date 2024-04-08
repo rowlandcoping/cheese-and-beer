@@ -229,7 +229,7 @@ document.addEventListener("DOMContentLoaded", function() {
             item.addEventListener('click', function handleClick(event) {
                 //disables form input etc to prevent multiple submissions
                 card.update({ 'disabled': true});
-                formButtons = Array.from(document.getElementsByClassName('form-button'));
+                const formButtons = Array.from(document.getElementsByClassName('form-button'));
                 for (let i = 0; i < formButtons.length; i++) {
                     formButtons[i].style.pointerEvents = "none";
                 }
@@ -397,6 +397,33 @@ document.addEventListener("DOMContentLoaded", function() {
             });    
         });
 
+    }
+    if (document.getElementById('add-new-address')) {
+        document.addEventListener("click", function(e){
+            const target = e.target.closest("#add-new-address");
+            if(target){
+                document.getElementById('add-new-address-form').style.display="block";
+                document.getElementById('existing-address-section').style.display="none";
+                const formButtons = Array.from(document.getElementsByClassName('form-button'));
+                for (let i = 0; i < formButtons.length; i++) {
+                    formButtons[i].style.pointerEvents = "none";
+                }
+                if (document.getElementById('add-user-address')) {
+                    document.getElementById('add-user-address').setAttribute('disabled', true);
+                }
+                const addressFields = Array.from(document.getElementsByClassName('address-field'));
+                for (let i = 0; i < addressFields.length; i++) {
+                    addressFields[i].value = "";
+                }
+            }
+        });
+        document.addEventListener("click", function(e){
+            const target = e.target.closest("#cancel-address-add");
+            if(target){
+                window.location.reload();
+            }
+        });
+        
     }
 
 });

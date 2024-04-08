@@ -33,3 +33,4 @@ class AddressForm(forms.ModelForm):
             placeholder = placeholders[field]
             self.fields[field].widget.attrs['placeholder'] = placeholder
             self.fields[field].widget.attrs.update({'style': 'font-family: "Times New Roman"; font-size:95%;'})
+            self.fields[field].widget.attrs['class'] = 'address-field'

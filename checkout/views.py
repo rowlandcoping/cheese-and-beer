@@ -39,6 +39,7 @@ def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
     basket = request.session.get('basket', {})
+    selected_address = request.session.get('selected_address', {})
     if request.method == 'POST':
         address_form = AddressForm(request.POST)
         if address_form.is_valid():
@@ -91,6 +92,8 @@ def checkout(request):
             del request.session['basket']
         if 'intent_id' in request.session:
             del request.session['intent_id']
+        if 'selected_address' in request.session:
+            del request.session['selected_address']
         return redirect('home')
     
     if not basket:
@@ -99,7 +102,6 @@ def checkout(request):
     total = current_basket['grand_total']
     stripe_total = round(total * 100)
     stripe.api_key = stripe_secret_key
-
     intent_id = request.session.get('intent_id', {})
     if intent_id:
         client_secret = intent_id['secret']
@@ -121,8 +123,12 @@ def checkout(request):
     if request.user.is_authenticated:
         addresses = Addresses.objects.filter(user_id=request.user.id)
         if addresses:
-            address = get_object_or_404(addresses, default=True)
-            email = request.user.email
+            if selected_address:
+                address = get_object_or_404(addresses, postcode=selected_address['postcode'], address_line_one=selected_address['address_line_one'])
+                email = request.user.email
+            else:
+                address = get_object_or_404(addresses, default=True)
+                email = request.user.email
         else:
             address = None
             email = request.user.email
