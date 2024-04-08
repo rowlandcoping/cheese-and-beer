@@ -408,9 +408,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 for (let i = 0; i < formButtons.length; i++) {
                     formButtons[i].style.pointerEvents = "none";
                 }
-                if (document.getElementById('add-user-address')) {
-                    document.getElementById('add-user-address').setAttribute('disabled', true);
-                }
                 const addressFields = Array.from(document.getElementsByClassName('address-field'));
                 for (let i = 0; i < addressFields.length; i++) {
                     addressFields[i].value = "";
@@ -421,6 +418,36 @@ document.addEventListener("DOMContentLoaded", function() {
             const target = e.target.closest("#cancel-address-add");
             if(target){
                 window.location.reload();
+            }
+        });
+        document.addEventListener("click", function(e){
+            const target = e.target.closest("#select-address");
+            if(target){
+                document.getElementById('address-selection').style.display="block";
+                document.getElementById('existing-address-section').style.display="none";
+                const formButtons = Array.from(document.getElementsByClassName('form-button'));
+                for (let i = 0; i < formButtons.length; i++) {
+                    formButtons[i].style.pointerEvents = "none";
+                }
+            }
+        });
+
+        document.addEventListener("click", function(e){
+            const target = e.target.closest(".address-bar");
+            if(target){
+                const itemId = target.getAttribute('id');
+                selectorId = itemId.split('-')[1];
+                const allAddresses = Array.from(document.getElementsByClassName('address-bar'));
+                for (let i = 0; i < allAddresses.length; i++) {
+                    allAddresses[i].style.backgroundColor = "white";
+                }
+                document.querySelector('input[name="address_selector"]:checked').checked = false;
+                document.getElementById(selectorId).checked = true;
+                document.getElementById(itemId).style.backgroundColor = "rgb(226, 250, 200)";
+                const formButtons = Array.from(document.getElementsByClassName('form-button'));
+                for (let i = 0; i < formButtons.length; i++) {
+                    formButtons[i].style.pointerEvents = "none";
+                }
             }
         });
         

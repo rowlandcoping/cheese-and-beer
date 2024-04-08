@@ -33,8 +33,6 @@ def add_address(request):
         return_url="checkout"
     if form.is_valid():             
         if request.POST.get('selected'):
-            print(form.cleaned_data["postcode"])
-            print(form.cleaned_data)
             selected_address = {}   
             selected_address['postcode'] = form.cleaned_data["postcode"]
             selected_address['address_line_one'] = form.cleaned_data["address_line_one"]
@@ -47,3 +45,10 @@ def add_address(request):
     else:
         messages.error(request, 'Sorry, your address was not added, please try again.')    
     return redirect(return_url)
+
+def select_address(request):
+    id = request.POST.get('address_selector')
+    print(id)
+
+
+    return redirect('checkout')

@@ -39,10 +39,39 @@ Cheese and Beer
                 <div class="address-options">
                     <span class="address-checkout-button" id="add-new-address">Use New Address</span>
                     <br>
-                    <a href=""><span class="address-checkout-button">Select Another Address</span></a>
+                    <span class="address-checkout-button" id="select-address">Select Another Address</span>
                 </div>
             </div>
-
+            <div id="address-selection" class="not-displayed">
+                <h4>Choose from your existing addresses:</h4>               
+                <form action="{% url 'select_address' %}" method="POST" id="address-selector">
+                    {% csrf_token %}
+                    {% if user_addresses %}
+                    {% for a in user_addresses %}
+                    {% if a.id == address.id %}
+                    <div id="selector-{{ a.id }}" class="address-bar highlighted-address">
+                    {% else %}
+                    <div id="selector-{{ a.id }}" class="address-bar">
+                    {% endif %}
+                        <div class="address-label">
+                            <label for = "{{ a.id }}">{{ a.full_name }}, {{ a.address_line_one }}, {{ a.postcode }}</label>
+                        </div>
+                        <div class="address-input">
+                            {% if a.id == address.id %}
+                            <input type = "radio" id="{{ a.id }}" name="address_selector" value="{{ a.id }}" checked>
+                            {% else %}
+                            <input type = "radio" id="{{ a.id }}" name="address_selector" value="{{ a.id }}">
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    <button type="submit" form="address-selector" class="add-address-button">Select Address</button>
+                    <span class="alert-buttons alert-cancel" id="cancel-address-add">
+                        Cancel
+                    </span>
+                </form>
+            </div>
             <div id = "add-new-address-form" class="add-user-address not-displayed">
             {% else %}
             <div id = "add-new-address-form" class="add-user-address">
@@ -53,11 +82,11 @@ Cheese and Beer
                     <table class="address-form">
                         <input type="hidden" name="origin" id="origin" value="checkout">
                         <tr>
-                            <td><label for="id_full_name">Full Name:<span class="red">*</span> </label></td>
+                            <td><label for="id_full_name">Full Name:<span class="red-text">*</span> </label></td>
                             <td>{{ address_form.full_name }}</td>
                         </tr>
                         <tr>
-                            <td><label for="id_address_line_one">Address 1:<span class="red">*</span> </label></td>
+                            <td><label for="id_address_line_one">Address 1:<span class="red-text">*</span> </label></td>
                             <td>{{ address_form.address_line_one }}</td>
                         </tr>
                         <tr>
@@ -65,15 +94,15 @@ Cheese and Beer
                             <td>{{ address_form.address_line_two }}</td>
                         </tr>
                         <tr>
-                            <td><label for="id_town_or_city">Town or City:<span class="red">*</span> </label></td>
+                            <td><label for="id_town_or_city">Town or City:<span class="red-text">*</span> </label></td>
                             <td>{{ address_form.town_or_city }}</td>
                         </tr>
                         <tr>
-                            <td><label for="id_county">County:<span class="red">*</span> </label></td>
+                            <td><label for="id_county">County:<span class="red-text">*</span> </label></td>
                             <td>{{ address_form.county }}</td>
                         </tr>
                         <tr>
-                            <td><label for="id_postcode">Postcode:<span class="red">*</span> </label></td>
+                            <td><label for="id_postcode">Postcode:<span class="red-text">*</span> </label></td>
                             <td>{{ address_form.postcode }}</td>
                         </tr>
                     </table>

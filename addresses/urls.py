@@ -6,5 +6,6 @@ from . import views
 
 urlpatterns = [
     path('manage-addresses/', views.manage_addresses, name='manage_addresses'),
-    path('add-address/', views.add_address, name='add_address')
+    path('add-address/', views.add_address, name='add_address'),
+    path('select-address/', views.select_address, name='select_address')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

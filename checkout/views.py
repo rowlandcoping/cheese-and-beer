@@ -133,6 +133,7 @@ def checkout(request):
             address = None
             email = request.user.email
     else:
+        addresses = None
         address = None
         email = ""
     template = 'checkout/checkout.html'
@@ -141,6 +142,7 @@ def checkout(request):
     else:
         address_form = AddressForm()
     context = {
+        'user_addresses': addresses,
         'user_email': email,
         'address': address,
         'order_info': current_basket,

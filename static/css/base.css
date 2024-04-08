@@ -337,6 +337,16 @@ input[type=number] {
 .existing-address {
     display:flex;
 }
+.highlighted-address {
+    background-color:rgb(226, 250, 200);
+}
+.address-bar {
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    margin:5px;
+    padding:5px;
+}
 
 /*-----BASKET PAGE------*/
 #basket-view {
