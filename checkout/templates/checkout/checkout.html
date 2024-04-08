@@ -125,7 +125,7 @@ Cheese and Beer
         </div>
         {% endif %}
         <div class="order-form-section">
-            <form action="" method="POST" id="payment-form">
+            <form action="{% url 'checkout' %}" method="POST" id="payment-form">
                 {% csrf_token %}
                 {% if authenticated %}
                 <div class="address-form-section not-displayed">

@@ -274,6 +274,9 @@ document.addEventListener("DOMContentLoaded", function() {
                         //sends the data to stripe, 
                         payment_method: {
                             card: card,
+                            billing_details: {
+                                email: document.getElementById('order-email').value,
+                            }
                             //may well be worth adding billing data to this section later on, along with billing e-mail.  Not essential functionality though.
                         },
                         shipping: {
