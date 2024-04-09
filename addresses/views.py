@@ -20,33 +20,57 @@ import decimal
 # Create your views here.
 
 def manage_addresses(request):
-    template = 'checkout/checkout.html'
+    addresses= Addresses.objects.filter(user_id=request.user.id)
+    template = 'addresses/addresses.html'
     
     context = {
-        
+        'addresses': addresses,
     }
 
     return render(request, template, context)
 
-@require_POST
+
 def add_address(request):
-    form = AddressForm(request.POST)
-    if request.POST.get('origin') == "checkout":
-        return_url="checkout"
-    if form.is_valid():
-        final_form = form.save(commit=False)  
-        final_form.user_id = request.user
-        if request.POST.get('default'):
-            final_form.default = True                 
-        if request.POST.get('selected'):
-            selected_address = {}   
-            selected_address['postcode'] = form.cleaned_data["postcode"]
-            selected_address['address_line_one'] = form.cleaned_data["address_line_one"]
-            request.session['selected_address'] = selected_address        
-        final_form.save()           
-    else:
-        messages.error(request, 'Sorry, your address was not added, please try again.')    
-    return redirect(return_url)
+    if request.method=='POST':
+        form = AddressForm(request.POST)
+        if request.POST.get('origin') == "checkout":
+            return_url="checkout"
+        else:
+            return_url="manage_addresses"
+        if form.is_valid():
+            final_form = form.save(commit=False)  
+            final_form.user_id = request.user
+            if request.POST.get('default'):
+                addresses= Addresses.objects.filter(user_id=request.user.id)
+                for address in addresses:
+                    Addresses.objects.filter(pk=address.id).update(
+                        default=False
+                    )       
+                final_form.default = True                 
+            if request.POST.get('selected'):
+                selected_address = {}   
+                selected_address['postcode'] = form.cleaned_data["postcode"]
+                selected_address['address_line_one'] = form.cleaned_data["address_line_one"]
+                request.session['selected_address'] = selected_address        
+            final_form.save()           
+        else:
+            messages.error(request, 'Sorry, your address was not added, please try again.')    
+        return redirect(return_url)
+    template = 'addresses/add-address.html'
+    address_form = AddressForm()
+    context = {
+        'address_form': address_form,
+    }
+    return render(request, template, context)
+
+def edit_address(request):
+    template = 'addresses/add-address.html'
+    address_form = AddressForm()
+    context = {
+        'address_form': address_form,
+    }
+
+    return render(request, template, context)
 
 
 @require_POST

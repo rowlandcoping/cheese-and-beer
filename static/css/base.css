@@ -93,10 +93,11 @@ body {
 }
 
 #homepage-intro {
-    height: 10vh;
+    height: 7vh;
 }
 
 #homepage-banners {
+    margin-top:50px;
     height: 50vh;
     display:flex;
     justify-content:space-around;
@@ -366,7 +367,6 @@ input[type=number] {
 .checkout-section {
     margin:10px;
 }
-
 .action-buttons {
     display:inline-block;
     font-size:120%;
@@ -376,21 +376,16 @@ input[type=number] {
     padding:5px;
     margin-bottom:10px;
 }
-
 .checkout-button {
     border:rgb(255, 201, 51) solid 2px;
     background-color: rgb(47, 71, 0);    
     color: rgb(255, 201, 51);    
 }
-
 .basket-button {
     background-color:rgb(255, 201, 51);
     border: rgb(47, 71, 0) solid 2px;    
     color: rgb(47, 71, 0);
 }
-
-
-
 .basket-detail {
     display:flex;
     flex-flow:column;
@@ -405,4 +400,49 @@ input[type=number] {
 }
 .title-section {
     margin-top:30px;
+}
+
+/*------MANAGE ADDRESSES PAGE------*/
+#address-listings {
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.address-container {
+    margin:0 50px;
+    margin-bottom:20px;
+}
+
+.add-address-box i {
+    font-size:200%;
+}
+.manage-address-box {
+    display: flex;
+    flex-flow:column;
+    justify-content: space-between;
+    border: 1px  rgb(173, 173, 173) solid;
+    min-width: 250px;
+    min-height: 200px;
+}
+.add-address-box {
+    text-align:center;    
+    border: 1px  rgb(173, 173, 173) dashed;
+}
+.main-section-address, .bottom-section-address, .top-section-address, .dummy-top, .dummy-bottom, .dummy-main {
+    padding: 0 20px;
+}
+.top-section-address, .bottom-section-address, .dummy-top, .dummy-bottom { 
+    height:25px;    
+    padding-top:5px;
+}
+
+.bottom-section-address {
+    border-top:1px rgb(173, 173, 173) dashed;
+}
+
+.top-section-address {
+    border-bottom:1px rgb(173, 173, 173) dashed;
+}
+.layout-correction {
+    padding-top:-100px;
 }

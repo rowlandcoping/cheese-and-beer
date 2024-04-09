@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cheese and Beer
+{% endblock %}
+
+{% block content %}
+<div id="address-view">
+    <h2>Manage Addresses</h2>
+    <div id="address-listings">
+        <div class="address-container">           
+            <div class="add-address-box manage-address-box">
+                <div class="dummy-top">
+                    
+                </div>
+                <div class="dummy-main">
+                    <a href="{% url 'add_address' %}">
+                    <i class="fa-solid fa-plus"></i>
+                    <h4>ADD AN ADDRESS</h4>
+                    </a>
+                </div>
+                <div class="dummy-bottom">                    
+                </div>            
+            </div>
+        </div>        
+        {% if addresses %}
+        {% for address in addresses %}
+        <div class="address-container">
+            <div class="manage-address-box">
+                <div class="top-section-address">{%if address.default%}<small>Default</small>{% endif%}</div>
+                <div class="main-section-address">                
+                    <p><strong>
+                        {{ address.full_name }}
+                    </strong></p>
+                    <p>
+                        {{ address.address_line_one }}
+                    </p>
+                    {% if address.address_line_two %}
+                    <p>
+                        {{ address.address_line_two }}
+                    </p>
+                    {% endif %}
+                    <p>
+                        {{ address.town_or_city }}
+                    </p>
+                    <p>
+                        {{ address.county }}
+                    </p>
+                    <p>
+                        {{ address.postcode }}
+                    </p>
+                </div>
+                <div class="bottom-section-address">
+                    <a href="">edit</a> | <a href="">remove</a> | <a href="">set default</a>
+                </div>
+            </div>
+        </div>      
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+
