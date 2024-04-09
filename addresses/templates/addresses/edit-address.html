@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cheese and Beer
+{% endblock %}
+
+{% block content %}
+<div id="address-view">
+    <div>
+    <h4>Edit delivery address:</h4>
+        <form action="{% url 'edit_address' address.id %}" method="POST" id="address-form">
+            {% csrf_token %}
+            <table class="address-form">
+                <input type="hidden" name="origin" id="origin" value="addresses">
+                <tr>
+                    <td><label for="id_full_name">Full Name:<span class="red-text">*</span> </label></td>
+                    <td>{{ address_form.full_name }}</td>
+                </tr>
+                <tr>
+                    <td><label for="id_address_line_one">Address 1:<span class="red-text">*</span> </label></td>
+                    <td>{{ address_form.address_line_one }}</td>
+                </tr>
+                <tr>
+                    <td><label for="id_address_line_two">Address 2: </label></td>
+                    <td>{{ address_form.address_line_two }}</td>
+                </tr>
+                <tr>
+                    <td><label for="id_town_or_city">Town or City:<span class="red-text">*</span> </label></td>
+                    <td>{{ address_form.town_or_city }}</td>
+                </tr>
+                <tr>
+                    <td><label for="id_county">County:<span class="red-text">*</span> </label></td>
+                    <td>{{ address_form.county }}</td>
+                </tr>
+                <tr>
+                    <td><label for="id_postcode">Postcode:<span class="red-text">*</span> </label></td>
+                    <td>{{ address_form.postcode }}</td>
+                </tr>
+            </table>
+            {% if address.default %}
+            <div id="set-default" class="blue-box not-displayed">
+                <label for="default">Set as default? </label>
+                <input type="checkbox" id="default" name="default" checked>
+            </div>
+            {% else %}
+            <div id="set-default" class="blue-box">
+                <label for="default">Set as default? </label>
+                <input type="checkbox" id="default" name="default">
+            </div>
+            {% endif %}
+            <button type="submit" form="address-form" class="add-address-button">Add Address</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

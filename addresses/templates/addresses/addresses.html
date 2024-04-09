@@ -51,7 +51,9 @@ Cheese and Beer
                     </p>
                 </div>
                 <div class="bottom-section-address">
-                    <a href="">edit</a> | <a href="">remove</a> | <a href="">set default</a>
+                    <a href="{% url 'edit_address' address.id %}">edit</a> | 
+                    <a href="{% url 'remove_address' address.id %}">remove</a> | 
+                    <a href="{% url 'set_default' address.id %}">set default</a>
                 </div>
             </div>
         </div>      

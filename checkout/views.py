@@ -102,7 +102,7 @@ def checkout(request):
         request.session['intent_id'] = intent_id
         client_secret = intent.client_secret
     if request.user.is_authenticated:
-        addresses = Addresses.objects.filter(user_id=request.user.id)
+        addresses = Addresses.objects.filter(user_id=request.user.id).order_by('-default', 'id')
         if addresses:
             if selected_address:
                 address = get_object_or_404(addresses, postcode=selected_address['postcode'], address_line_one=selected_address['address_line_one'])
