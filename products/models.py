@@ -45,6 +45,7 @@ class Product(models.Model):
     )
     # fields specific to cheese
     cheese_category = models.ForeignKey('CheeseCategory', null=True, blank=True, on_delete=models.SET_NULL)
+    texture = models.CharField(max_length=254)
     # fields specific to beer 
     beer_category = models.ForeignKey('BeerCategory', null=True, blank=True, on_delete=models.SET_NULL)
     container = models.CharField(max_length=254, null=True, blank=True)

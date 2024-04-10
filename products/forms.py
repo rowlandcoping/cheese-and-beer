@@ -73,6 +73,7 @@ class CheeseForm(forms.ModelForm):
             'cheese_category',
             'description',
             'variety',
+            'texture',
             'amount',
             'price',
             'country_origin',
