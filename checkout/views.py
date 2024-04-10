@@ -30,6 +30,7 @@ def checkout(request):
             current_basket = basket_total(request)
             time_created = datetime.now()
             delivery_date = datetime.now() + timedelta(days=5)
+            stripe_pid = request.POST.get('client_secret').split('_secret')[0]
             order = Order.objects.create(
                 user_id = user_id,
                 shipping_id = address_id,
@@ -45,7 +46,7 @@ def checkout(request):
                 items_total = current_basket['basket_total'],
                 delivery_cost = current_basket['delivery_charge'],
                 grand_total = current_basket['grand_total'],
-                stripe_pid = request.POST.get('client_secret').split('_secret')[0],
+                stripe_pid = stripe_pid,
             )
             for item_id, item_data in basket.items():
                 try:
@@ -72,8 +73,7 @@ def checkout(request):
             del request.session['intent_id']
         if 'selected_address' in request.session:
             del request.session['selected_address']
-        return redirect('home')
-    
+        return redirect(reverse('confirmation', args=[order.order_number]))
     if not basket:
         return redirect('home')
     current_basket = basket_total(request)
@@ -131,5 +131,13 @@ def checkout(request):
         'stripe_public_key': stripe_public_key,
         'client_secret': client_secret,
     }
+    return render(request, template, context)
 
+
+def confirmation(request, order_number):
+    order = get_object_or_404(Order, order_number=order_number)
+    template = 'checkout/confirmation.html'
+    context = {
+        'order': order,
+    }
     return render(request, template, context)

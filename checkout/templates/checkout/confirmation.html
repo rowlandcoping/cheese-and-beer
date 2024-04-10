@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cheese and Beer
+{% endblock %}
+
+
+
+{% block content %}
+<div id="homepage-content">
+    <div id="homepage-intro"></div>
+    <h2>Congratulations on your Purchase</h2>
+    <h4>Your order number is {{order.order_number}}</h4>
+    <p>Click <a href="">here</a> to review the order</p>
+    <p>A confirmation has also been sent to {{ order.email }}</p>
+    </div>
+    <div id="homepage-banners">
+        <div id="homepage-banner-one" class="homepage-banner">
+            <a href="{% url 'view_results' %}?category=cheese">
+                <span class="banner-text-holder">
+                    <h3>BUY CHEESE</h3>
+                </span>
+            </a>
+        </div>
+        <div id="homepage-banner-two" class="homepage-banner">
+            <a href="{% url 'view_results' %}?category=beer">
+                <span class="banner-text-holder">
+                    <h3>BUY BEER</h3>
+                </span>
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

@@ -5,5 +5,6 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
-    path('', views.checkout, name='checkout'),
+    path('checkout/', views.checkout, name='checkout'),
+    path('confirmation/<order_number>', views.confirmation, name='confirmation'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
