@@ -40,6 +40,10 @@ Cheese and Beer
                     <span class="address-checkout-button" id="add-new-address">Use New Address</span>
                     <br>
                     <span class="address-checkout-button" id="select-address">Select Another Address</span>
+                    {% if not address.default %}
+                    <br>
+                    <a href="{% url 'use_default' %}"><span class="address-checkout-button">Use Default</span></a>
+                    {% endif %}
                 </div>
             </div>
             <div id="address-selection" class="not-displayed">
@@ -110,7 +114,7 @@ Cheese and Beer
                         <label for="default">Set as default? </label>
                         <input type="checkbox" id="default" name="default">
                     </div>
-                    <div id="select-address" class="blue-box">
+                    <div id="selected-address" class="blue-box">
                         <label for="selected">Select for this order? </label>
                         <input type="checkbox" id="selected" name="selected" checked>
                     </div>

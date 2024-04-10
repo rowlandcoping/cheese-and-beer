@@ -78,7 +78,3 @@ class CheeseForm(forms.ModelForm):
             'country_origin',
             'image',
         )
-
-    # this overrides .init to customise fields.  may not be needed yet
-    # def __init__(self, *args, **kwargs):
-    #   super().__init__(*args, **kwargs)

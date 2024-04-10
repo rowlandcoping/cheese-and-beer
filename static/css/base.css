@@ -336,7 +336,9 @@ input[type=number] {
     font-size:80%;
 }
 .existing-address {
+    width:90%;
     display:flex;
+    justify-content:space-between;
 }
 .highlighted-address {
     background-color:rgb(226, 250, 200);
@@ -409,7 +411,7 @@ input[type=number] {
 }
 
 .address-container {
-    margin:0 50px;
+    margin:0 30px;
     margin-bottom:20px;
 }
 

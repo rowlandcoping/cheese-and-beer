@@ -26,8 +26,8 @@ class CheeseCategory(models.Model):
 
     
 class Product(models.Model):
-    readonly_fields = ["product_number"]
     #common fields
+    readonly_fields = ["product_number"]    
     displayed = models.BooleanField(default=True)
     product_number = models.CharField(max_length=254)
     name = models.CharField(max_length=254)

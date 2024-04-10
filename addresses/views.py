@@ -109,6 +109,12 @@ def set_default(request, address_id):
     else:
         return redirect('home')
     
+    
+def use_default(request):
+    if 'selected_address' in request.session:
+        del request.session['selected_address']
+    return redirect('checkout')
+    
 
 @require_POST
 def select_address(request):

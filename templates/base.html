@@ -71,7 +71,7 @@
                         <a href="{% url 'admin:index' %}" class="nav-menu-link"><span>Django Admin</span></a>
                         {% endif %}
                         {% if authenticated %}
-                        <a href="{% url 'manage_addresses' %}" class="nav-menu-link"><span>Manage Addresses</span></a>
+                        <a href="{% url 'manage_addresses' %}" class="nav-menu-link"><span>Addresses</span></a>
                         <a href="{% url 'account_logout' %}" class="nav-menu-link"><span>Log out</span></a>
                         {% else %}
                         <a href="{% url 'account_login' %}" class="nav-menu-link"><span>Log in</span></a>
