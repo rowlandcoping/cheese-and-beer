@@ -49,6 +49,7 @@ class StripeWH_Handler:
                 content=f'Webhook received: {event["type"]} | SUCCESS: Verified order already in database',
                 status=200)
         else:
+            order = None
             basket=intent.metadata.basket
             stripe_charge = stripe.Charge.retrieve(
                 intent.latest_charge
