@@ -6,7 +6,7 @@ from .webhooks import webhook
 from . import views
 
 urlpatterns = [
-    path('checkout/', views.checkout, name='checkout'),
+    path('', views.checkout, name='checkout'),
     path('confirmation/<order_number>', views.confirmation, name='confirmation'),
     path('wh/', webhook, name='webhook'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
