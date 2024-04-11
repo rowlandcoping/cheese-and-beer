@@ -317,7 +317,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             if (result.paymentIntent.status === 'succeeded') {
                                 console.log("it worked")
                                 //this acts like the submit button and submits the form to the checkout view.
-                                form.submit();
+                                //form.submit();
                             }
                         }
                     })

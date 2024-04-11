@@ -76,31 +76,6 @@ def checkout(request):
         return redirect(reverse('confirmation', args=[order.order_number]))
     if not basket:
         return redirect('home')
-    current_basket = basket_total(request)
-    total = current_basket['grand_total']
-    stripe_total = round(total * 100)
-    stripe.api_key = stripe_secret_key
-    intent_id = request.session.get('intent_id', {})
-    if intent_id:
-        client_secret = intent_id['secret']
-        pid = client_secret.split('_secret')[0]
-        stripe.PaymentIntent.modify(pid, amount=stripe_total, metadata={
-           'basket': json.dumps(request.session.get('basket', {})),
-           'username': request.user,
-        })
-    else:
-        intent = stripe.PaymentIntent.create(
-            amount=stripe_total,
-            currency=settings.STRIPE_CURRENCY,
-            metadata={
-                'basket': json.dumps(request.session.get('basket', {})),
-                'username': request.user,
-            }
-        )
-        intent_id = request.session.get('intent_id', {})
-        intent_id['secret'] = intent.client_secret
-        request.session['intent_id'] = intent_id
-        client_secret = intent.client_secret
     if request.user.is_authenticated:
         addresses = Addresses.objects.filter(user_id=request.user.id).order_by('-default', 'id')
         if addresses:
@@ -117,6 +92,33 @@ def checkout(request):
         addresses = None
         address = None
         email = ""
+    current_basket = basket_total(request)
+    total = current_basket['grand_total']
+    stripe_total = round(total * 100)
+    stripe.api_key = stripe_secret_key
+    intent_id = request.session.get('intent_id', {})
+    if intent_id:
+        client_secret = intent_id['secret']
+        pid = client_secret.split('_secret')[0]
+        stripe.PaymentIntent.modify(pid, amount=stripe_total, metadata={
+           'basket': json.dumps(request.session.get('basket', {})),
+           'username': request.user,
+           'address_id': address,
+        })
+    else:
+        intent = stripe.PaymentIntent.create(
+            amount=stripe_total,
+            currency=settings.STRIPE_CURRENCY,
+            metadata={
+                'basket': json.dumps(request.session.get('basket', {})),
+                'username': request.user,
+                'address_id': address,
+            }
+        )
+        intent_id = request.session.get('intent_id', {})
+        intent_id['secret'] = intent.client_secret
+        request.session['intent_id'] = intent_id
+        client_secret = intent.client_secret
     template = 'checkout/checkout.html'
     if address is not None:
         address_form = AddressForm(instance=address)
