@@ -19,7 +19,6 @@ import decimal
 def view_results(request):
     if request.GET:
         if 'view_category' in request.GET:
-            print("BOLOCKS")
             view = "view_category=" + request.GET['view_category']
             values = request.GET['view_category'].split(',')
             type =  values[0]
