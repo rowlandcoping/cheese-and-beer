@@ -98,6 +98,10 @@ def checkout(request):
     total = current_basket['grand_total']
     stripe_total = round(total * 100)
     intent_id = request.session.get('intent_id', {})
+    if address:
+        address_id = address.id
+    else:
+        address_id = None
     if intent_id:
         client_secret = intent_id['secret']
         pid = client_secret.split('_secret')[0]
@@ -118,7 +122,7 @@ def checkout(request):
             stripe.PaymentIntent.modify(pid, amount=stripe_total, metadata={
                 'basket': json.dumps(request.session.get('basket', {})),
                 'username': request.user,
-                'address_id': address.id,
+                'address_id': address_id,
                 'items_total': current_basket['basket_total'],
                 'delivery_cost': current_basket['delivery_charge'],
             })
@@ -129,7 +133,7 @@ def checkout(request):
             metadata={
                 'basket': json.dumps(request.session.get('basket', {})),
                 'username': request.user,
-                'address_id': address.id,
+                'address_id': address_id,
                 'items_total': current_basket['basket_total'],
                 'delivery_cost': current_basket['delivery_charge'],
             }

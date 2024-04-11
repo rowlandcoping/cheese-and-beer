@@ -206,6 +206,14 @@ SITE_ID=1
 #email
 
 EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
+DEFAULT_FROM_EMAIL = 'noreply@cheeseandbeer.com'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+if DEVELOPMENT == False:
+    EMAIL_USE_TLS = False
+    EMAIL_USE_SSL = True
+    EMAIL_PORT = 465
+    EMAIL_HOST = 'smtp.zoho.eu'
 
 # whitenoise
 
