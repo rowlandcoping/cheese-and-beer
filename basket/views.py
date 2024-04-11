@@ -65,7 +65,16 @@ def remove_item(request):
     basket = request.session.get('basket', {})
     if basket[product_id]:
         basket.pop(product_id)
-    request.session['basket'] = basket
+    print(basket)
+    if basket:
+        request.session['basket'] = basket
+    else:
+        if 'basket' in request.session:
+            del request.session['basket']
+        if 'intent_id' in request.session:
+            del request.session['intent_id']
+        if 'selected_address' in request.session:
+            del request.session['selected_address']
     return redirect('view_basket')
 
 

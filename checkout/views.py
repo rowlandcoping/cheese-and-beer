@@ -17,6 +17,7 @@ def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
     basket = request.session.get('basket', {})
+    current_basket = basket_total(request)
     selected_address = request.session.get('selected_address', {})
     if request.method == 'POST':
         address_form = AddressForm(request.POST)
@@ -27,7 +28,6 @@ def checkout(request):
             else:
                 user_id = None
                 address_id = None                              
-            current_basket = basket_total(request)
             time_created = datetime.now()
             delivery_date = datetime.now() + timedelta(days=5)
             stripe_pid = request.POST.get('client_secret').split('_secret')[0]
@@ -101,9 +101,11 @@ def checkout(request):
         client_secret = intent_id['secret']
         pid = client_secret.split('_secret')[0]
         stripe.PaymentIntent.modify(pid, amount=stripe_total, metadata={
-           'basket': json.dumps(request.session.get('basket', {})),
-           'username': request.user,
-           'address_id': address,
+            'basket': json.dumps(request.session.get('basket', {})),
+            'username': request.user,
+            'address_id': json.dumps(address),
+            'items_total': current_basket['basket_total'],
+            'delivery_cost': current_basket['delivery_charge'],
         })
     else:
         intent = stripe.PaymentIntent.create(
@@ -113,6 +115,8 @@ def checkout(request):
                 'basket': json.dumps(request.session.get('basket', {})),
                 'username': request.user,
                 'address_id': address,
+                'items_total': current_basket['basket_total'],
+                'delivery_cost': current_basket['delivery_charge'],
             }
         )
         intent_id = request.session.get('intent_id', {})

@@ -56,16 +56,21 @@ class StripeWH_Handler:
             )
             user_id = intent.metadata.username
             email = stripe_charge.billing_details.email
+            
             shipping_details = intent.shipping
             for field, value in shipping_details.address.items():
                 if value == "":
                     shipping_details.address[field] = None
-            time_created = datetime.now()
-            delivery_date = datetime.now() + timedelta(days=5)
+            items_total=intent.metadata.items_total
+            delivery_cost = intent.metadata.delivery_cost
+            address=intent.metadata.address_id
+            time_created = datetime.now(),
+            delivery_date = datetime.now() + timedelta(days=5),
+            grand_total = round(stripe_charge.amount / 100, 2),
             try:
                 order = Order.objects.create(
                     user_id = user_id,
-                    shipping_id = intent.metadata.address_id,
+                    shipping_id = address,
                     email = email,
                     full_name = shipping_details,
                     address_line_one = shipping_details.line1,
@@ -75,9 +80,9 @@ class StripeWH_Handler:
                     postcode = shipping_details.postal_code,
                     order_date = time_created,
                     delivery_date = delivery_date,
-                    items_total = json.loads(basket['basket_total']),
-                    delivery_cost = json.loads(basket['delivery_charge']),
-                    grand_total = round(stripe_charge.amount / 100, 2),
+                    items_total = items_total,
+                    delivery_cost = delivery_cost,
+                    grand_total = grand_total,
                     stripe_pid = pid,
                 )
                 for item_id, item_data in json.loads(basket).items():                    
