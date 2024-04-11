@@ -24,10 +24,10 @@ class StripeWH_Handler:
         """Send the user a confirmation email"""
         cust_email = order.email
         subject = render_to_string(
-            'checkout/confirmation_emails/confirmation_email_subject.txt',
+            'checkout/confirmation_emails/header.txt',
             {'order': order})
         body = render_to_string(
-            'checkout/confirmation_emails/confirmation_email_body.txt',
+            'checkout/confirmation_emails/body.txt',
             {'order': order, 'contact_email': settings.DEFAULT_FROM_EMAIL})        
         send_mail(
             subject,
@@ -58,14 +58,12 @@ class StripeWH_Handler:
         while attempt <= 5:
             try:
                 order = Order.objects.get(stripe_pid=pid)
-                print(order)
                 order_exists = True
                 break
             except Order.DoesNotExist:
                 attempt += 1
                 time.sleep(1)
         if order_exists:
-            print(order)
             self._send_confirmation_email(order)
             return HttpResponse(
                 content=f'Webhook received: {event["type"]} | SUCCESS: Verified order already in database',
@@ -76,7 +74,6 @@ class StripeWH_Handler:
             stripe_charge = stripe.Charge.retrieve(
                 intent.latest_charge
             )
-            print(stripe_charge)
             user_id = get_object_or_404(User, username=intent.metadata.username)
             address= get_object_or_404(Addresses, pk=intent.metadata.address_id)          
             email = stripe_charge.billing_details.email            
@@ -117,8 +114,7 @@ class StripeWH_Handler:
                             price=product.price,
                             quantity=item_data,
                         )
-                    order_item.save()
-                print(order)             
+                    order_item.save()          
             except Exception as e:
                 if order:
                     order.delete()
