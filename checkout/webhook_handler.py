@@ -31,10 +31,10 @@ class StripeWH_Handler:
             {'order': order, 'contact_email': settings.DEFAULT_FROM_EMAIL})        
         send_mail(
             subject,
-            html_message,
             settings.DEFAULT_FROM_EMAIL,
-            [cust_email]
-        ) 
+            [cust_email],
+            html_message=html_message,
+        )
 
    
     def handle_event(self, event):
