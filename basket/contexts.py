@@ -3,6 +3,7 @@ from products.models import Product
 from decimal import Decimal
 from django.conf import settings
 
+
 def basket_total(request):
     basket_items = []
     total = 0

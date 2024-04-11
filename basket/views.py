@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 import stripe
 from django.conf import settings
 from basket.contexts import basket_total
+from django.contrib import messages
 import json
 
 # Create your views here.
@@ -75,6 +76,9 @@ def remove_item(request):
             del request.session['intent_id']
         if 'selected_address' in request.session:
             del request.session['selected_address']
+        messages.error(request, (
+                        "You have removed everything from your basket.  Would you like some more cheese?")
+                    )
     return redirect('view_basket')
 
 

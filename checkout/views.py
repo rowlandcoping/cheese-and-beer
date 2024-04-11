@@ -92,21 +92,36 @@ def checkout(request):
         addresses = None
         address = None
         email = ""
+    
+    stripe.api_key = stripe_secret_key
     current_basket = basket_total(request)
     total = current_basket['grand_total']
     stripe_total = round(total * 100)
-    stripe.api_key = stripe_secret_key
     intent_id = request.session.get('intent_id', {})
     if intent_id:
         client_secret = intent_id['secret']
         pid = client_secret.split('_secret')[0]
-        stripe.PaymentIntent.modify(pid, amount=stripe_total, metadata={
-            'basket': json.dumps(request.session.get('basket', {})),
-            'username': request.user,
-            'address_id': json.dumps(address),
-            'items_total': current_basket['basket_total'],
-            'delivery_cost': current_basket['delivery_charge'],
-        })
+        existing_order = Order.objects.filter(stripe_pid=pid)
+        if existing_order:
+            if 'basket' in request.session:
+                del request.session['basket']
+            if 'intent_id' in request.session:
+                del request.session['intent_id']
+            if 'selected_address' in request.session:
+                del request.session['selected_address']
+            messages.error(request, (
+                        "Your order has already been processed\n"
+                        "Please check your order history.")
+                    )
+            return redirect('home')
+        else:
+            stripe.PaymentIntent.modify(pid, amount=stripe_total, metadata={
+                'basket': json.dumps(request.session.get('basket', {})),
+                'username': request.user,
+                'address_id': address.id,
+                'items_total': current_basket['basket_total'],
+                'delivery_cost': current_basket['delivery_charge'],
+            })
     else:
         intent = stripe.PaymentIntent.create(
             amount=stripe_total,
@@ -114,7 +129,7 @@ def checkout(request):
             metadata={
                 'basket': json.dumps(request.session.get('basket', {})),
                 'username': request.user,
-                'address_id': address,
+                'address_id': address.id,
                 'items_total': current_basket['basket_total'],
                 'delivery_cost': current_basket['delivery_charge'],
             }
