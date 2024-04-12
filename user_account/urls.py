@@ -7,5 +7,6 @@ from . import views
 urlpatterns = [
     path('', views.account_overview, name='account_overview'),
     path('orders/', views.view_orders, name='view_orders'),
+    path('order-info/int:<order_id>/', views.order_info, name='order_info'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

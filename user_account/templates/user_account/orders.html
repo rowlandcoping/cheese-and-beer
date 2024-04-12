@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cheese and Beer
+{% endblock %}
+
+{% block content %}
+<div class="title-section">
+    <h2>Your Orders</h2>
+</div>
+<div id="basket-view">
+    <div id="basket-listings">
+        <table>
+            <thead>
+                <tr>
+                    <th>Order Date</th>
+                    <th>Billed Amount</th>
+                    <th>Shipped Address</th>
+                    <th>View Items</th>
+                </tr>
+            </thead>
+        
+        {% for order in orders %}
+            <tr>
+                <td>
+                    {{ order.order_date | date:"d/m/Y"}}
+                </td>
+                <td>
+                    £{{ order.grand_total }}
+                </td>
+                <td>
+                    {{ order.full_name }}, {{ order.address_line_one }}, {{ order.postcode }}
+                </td>
+                <td>
+                    <a href="{% url 'order_info' order.id %}">View</a>
+                </td>
+            </tr>  
+        
+        {% endfor %}
+    </table>
+    </div>
+</div>
+
+{% endblock %}
+

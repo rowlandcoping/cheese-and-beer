@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cheese and Beer
+{% endblock %}
+
+{% block content %}
+<div class="title-section">
+    <h2>Order details, Order {{ order.order_number }}</h2>
+</div>
+<div id="basket-view">
+    <div id="basket-listings">
+        {% for item in items %}    
+        <div class="basket-item-view">
+            <div class="order-view-image">
+                <img src="{{ MEDIA_URL }}products/{{ item.product.image_url }}">
+            </div>
+            <div class="order-item-detail">
+                        <h4>
+                            {{ item.product.name }}
+                            {% if item.product.product_type == "cheese" %}
+                            ({{ item.product.amount }}g, {{ item.product.cheese_category }} cheese,
+                            {{ item.product.variety | lower }})
+                            {% else %}
+                            ({{ item.product.amount }}ml {{ item.product.container }}, {{ item.product.beer_category }} beer,
+                            {{ item.product.variety | lower }}, {{ item.product.alcohol_content }}% APR)
+                            {% endif %}
+                        </h4>
+                        <p>
+                            <small>ID: {{ item.product.product_number }}</small>
+                        </p>
+                        <p>
+                            {{ item.quantity }} purchased at £{{ item.price }} each
+                        </p>
+
+            </div>
+            <div class="basket-item-price">
+                <h4>Item Total:</h4>
+                <h4 class="order-checkout-price" id="basket-total-{{order.product.id}}">
+                    £{{ item.item_total }}
+                </h4>
+            </div>
+            <div class="order-buy-again">
+                <a href=""><h4>Buy Again</h4></a>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+

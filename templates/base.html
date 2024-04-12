@@ -65,13 +65,18 @@
                         <a href="" class="nav-menu-link"><span>My Account</span></a>
                     </div>
                     <div id="account-mouseover" class="not-displayed">
-                        <a href="" class="nav-menu-link"><span>My Account</span></a>
+                        {% if authenticated %}
+                        <a href="{% url 'account_overview' %}" class="nav-menu-link"><span>My Account</span></a>
+                        {% else %}
+                        <span>My Account</span>
+                        {% endif %}
                         {% if superuser %}
                         <a href="{% url 'admin_console' %}" class="nav-menu-link"><span>Admin Console</span></a>
                         <a href="{% url 'admin:index' %}" class="nav-menu-link"><span>Django Admin</span></a>
                         {% endif %}
                         {% if authenticated %}
                         <a href="{% url 'manage_addresses' %}" class="nav-menu-link"><span>Addresses</span></a>
+                        <a href="{% url 'view_orders' %}" class="nav-menu-link"><span>Orders</span></a>
                         <a href="{% url 'account_logout' %}" class="nav-menu-link"><span>Log out</span></a>
                         {% else %}
                         <a href="{% url 'account_login' %}" class="nav-menu-link"><span>Log in</span></a>

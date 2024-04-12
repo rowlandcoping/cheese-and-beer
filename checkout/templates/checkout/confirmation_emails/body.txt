@@ -1,7 +1,7 @@
 Thank you for choosing Cheese and Beer!
 We really hope your order is everything you dreamed of.
 
-Your estimated delivery date is {{ order.delivery_date }}
+Your estimated delivery date is {{ order.delivery_date | date:"l jS F, Y" }}.
 
 Order details:
 

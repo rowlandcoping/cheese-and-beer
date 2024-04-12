@@ -448,3 +448,10 @@ input[type=number] {
 .layout-correction {
     padding-top:-100px;
 }
+
+/* VIEW ORDER ITEMS PAGE */
+.order-view-image img {
+    width:100px;
+    height:100px;
+    object-fit:cover;
+}
