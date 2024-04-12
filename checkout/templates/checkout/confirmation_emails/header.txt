@@ -1,1 +1,1 @@
-Cheese and beer Order Confirmation: {{ order.order_number }}
+Cheese and Beer Order Confirmation: {{ order.order_number }}

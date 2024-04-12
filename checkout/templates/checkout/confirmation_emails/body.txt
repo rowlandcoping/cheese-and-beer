@@ -1,32 +1,27 @@
-<h3>Thank you for choosing Cheese and Beer!<h3>
-<h4>We really hope your order is everything you dreamed of.</h4>
+Thank you for choosing Cheese and Beer!
+We really hope your order is everything you dreamed of.
 
 Your estimated delivery date is {{ order.delivery_date }}
 
-<h4>Order details:<h4>
+Order details:
 
 Order Date: {{ order.order_date }}
 Order Number: {{ order.order_number }}
 Billed Amount: {{ order.grand_total }}
 
-<h4>Delivery Address:<h4>
+Delivery Address:
 
 {{ order.full_name }},
-<br>
 {{ order.address_line_one }},
-<br>
 {% if order.address_line_two %}
 {{ order.address_line_two }},
-<br>
 {% endif %}
 {{ order.town_or_city }},
-<br>
 {{ order.county }},
-<br>
 {{ order.postcode }}
 
 
-<p>If you don't remember making this order or the amount looks wrong, please contact us urgently.
-<br>
-We hope to see you again soon!</p>
-<a href="https://cheese-and-beer-896aa5a35920.herokuapp.com/">Cheese and Beer</a>
+If you don't remember making this order or the amount looks wrong, please contact us urgently.
+
+We hope to see you again soon!
+Cheese and Beer
