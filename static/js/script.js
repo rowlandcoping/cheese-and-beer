@@ -366,7 +366,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     //buy it now alert to manage existing basket items.  This is better than Amazon.
-    if (document.getElementById('product-listings') || document.getElementById('product-page')) {
+    if (document.getElementById('product-listings') || document.getElementById('product-page') || document.getElementById('order-item-view')) {
         const buyNowButtons = Array.from(document.getElementsByClassName('buy-now'));
         buyNowButtons.forEach(item => {
             item.addEventListener('click', function handleClick(event) {
