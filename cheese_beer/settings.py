@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'basket',
     'checkout',
     'addresses',
+    'user_account',
     # allauth
     'allauth',
     'allauth.account',
