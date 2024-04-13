@@ -19,7 +19,12 @@ Cheese and Beer
             {% endif %}
         </div>
         <div id="filter">
-
+            <select id="sort-selector" class="{% if current_sorting != 'None_None' %}green-sorter{% else %}black-sorter{% endif %}">
+                <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
+                <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
+                <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
+                <option value="trending_desc" {% if current_sorting == 'trending_desc' %}selected{% endif %}>Most Popular</option>
+            </select>
         </div>
     </div>
     <!-- keep in mind this id is used in the javascript to activate the buy now code -->

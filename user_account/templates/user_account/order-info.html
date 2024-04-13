@@ -65,12 +65,12 @@ Cheese and Beer
                     {% if basket_total %}
                     
                     <span class="action-button buy-now" id="basket-{{ item.product.id }}">
-                        <i class="fa-solid fa-credit-card"></i> Buy
+                        <i class="fa-solid fa-credit-card"></i> Buy Again
                     </span>
                     {% else %}
                     <a href="{% url 'buy_now' %}?single={{  item.product.id }},1">
                         <span class="action-button buy-now" id="buy-{{  item.product.id }}">
-                            <i class="fa-solid fa-credit-card"></i> Buy
+                            <i class="fa-solid fa-credit-card"></i> Buy Again
                         </span>
                     </a>                            
                     {% endif %}

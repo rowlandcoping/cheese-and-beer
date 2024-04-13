@@ -41,6 +41,13 @@ class Order(models.Model):
         """
         if not self.order_number:
             self.order_number = self._generate_order_number()
+        if self.shipping_id:
+            self.full_name = self.shipping_id.full_name
+            self.address_line_one = self.shipping_id.address_line_one
+            self.address_line_two = self.shipping_id.address_line_two
+            self.town_or_city = self.shipping_id.town_or_city
+            self.county = self.shipping_id.county
+            self.postcode = self.shipping_id.postcode
         super().save(*args, **kwargs)
 
 
