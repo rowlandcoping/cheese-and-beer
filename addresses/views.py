@@ -24,12 +24,15 @@ def add_address(request):
         if form.is_valid():
             final_form = form.save(commit=False)  
             final_form.user_id = request.user
-            if request.POST.get('default'):
-                addresses= Addresses.objects.filter(user_id=request.user.id)
-                for address in addresses:
-                    Addresses.objects.filter(pk=address.id).update(
-                        default=False
-                    )
+            addresses= Addresses.objects.filter(user_id=request.user.id)
+            if addresses:
+                if request.POST.get('default'):                
+                    for address in addresses:
+                        Addresses.objects.filter(pk=address.id).update(
+                            default=False
+                        )
+                    final_form.default = True
+            else:
                 final_form.default = True
             if request.POST.get('selected'):
                 selected_address = {}
@@ -46,6 +49,7 @@ def add_address(request):
         'address_form': address_form,
     }
     return render(request, template, context)
+    
 
 
 def edit_address(request, address_id):
@@ -84,11 +88,13 @@ def remove_address(request, address_id):
     default = address.default
     if request.user == address.user_id:
         address.delete()
-        if default:
-            default_default = Addresses.objects.filter(user_id=request.user.id).order_by('id').values()[:1]
-            Addresses.objects.filter(pk=default_default[0]['id']).update(
-                default=True
-            )
+        addresses= Addresses.objects.filter(user_id=request.user.id)
+        if addresses:
+            if default:
+                default_default = Addresses.objects.filter(user_id=request.user.id).order_by('id').values()[:1]
+                Addresses.objects.filter(pk=default_default[0]['id']).update(
+                    default=True
+                )
         return redirect('manage_addresses')
     else:
         return redirect('home')

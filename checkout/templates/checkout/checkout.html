@@ -38,8 +38,12 @@ Cheese and Beer
                 </div>
                 <div class="address-options">
                     <span class="address-checkout-button" id="add-new-address">Use New Address</span>
-                    <br>
-                    <span class="address-checkout-button" id="select-address">Select Another Address</span>
+                    {% if user_addresses|length > 1 %}
+                    <br>                    
+                    <span class="address-checkout-button" id="select-address">Select Another Address</span>                    
+                    {% else %}
+                    <span class="address-checkout-button not-displayed" id="select-address">Select Another Address</span>
+                    {% endif %}
                     {% if not address.default %}
                     <br>
                     <a href="{% url 'use_default' %}"><span class="address-checkout-button">Use Default</span></a>

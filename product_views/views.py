@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.contrib import messages
 from django.db.models import Q
+from django.db.models.functions import Lower
 from datetime import datetime
 from products.models import CheeseCategory, BeerCategory, Product
 from datetime import datetime, timedelta
@@ -17,6 +18,13 @@ import decimal
 # Create your views here.
 
 def view_results(request):
+    product_list = Product.objects.all()
+    search_term = "all products"
+    category = None
+    type = None
+    view = None
+    sort = None
+    direction = None 
     if request.GET:
         if 'view_category' in request.GET:
             view = "view_category=" + request.GET['view_category']
@@ -91,20 +99,27 @@ def view_results(request):
             else:
                 search_term = "all products"
                 product_list = products
-            category = None
+                category = None
             type = None
-    else:
-        product_list = Product.objects.all()
-        search_term = "all products"
-        category = None
-        type = None
-        view = None
+        if 'sort' in request.GET:
+            sortkey = request.GET['sort']          
+            sort = sortkey
+            if sortkey == 'price':
+                sortkey = 'price_per_amount'
+            if sortkey == 'trending':
+                sortkey = 'price_per_amount'
+            if 'direction' in request.GET:                  
+                direction = request.GET['direction']
+                if direction == 'desc':
+                    sortkey = f'-{sortkey}'
+            product_list = product_list.order_by(sortkey)                            
     number = len(product_list)
     if number==1:
       result = "result"
     else:
       result = "results"
     template = 'product_views/view-products.html'
+    current_sorting = f'{sort}_{direction}'
     context = {
         'current_view': view,
         'number': number,
@@ -112,7 +127,8 @@ def view_results(request):
         'products' : product_list,
         'category' : category,
         'result' : result,
-        'type' : type
+        'type' : type,
+        'current_sorting':current_sorting,
     }
     return render(request, template, context)
 

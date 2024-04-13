@@ -1,13 +1,18 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from checkout .models import Order, OrderItems
+from addresses .models import Addresses
 
 from django.views.decorators.http import require_POST
 
 
 def account_overview(request):
+    addresses= Addresses.objects.filter(user_id=request.user.id)
+    orders = Order.objects.filter(user_id=request.user)
     template = 'user_account/my-account.html'    
     context = {
+        'addresses': addresses,
+        'orders': orders
     }
     return render(request, template, context)
 

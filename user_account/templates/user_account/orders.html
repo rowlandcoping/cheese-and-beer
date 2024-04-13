@@ -10,6 +10,7 @@ Cheese and Beer
 </div>
 <div id="basket-view">
     <div id="basket-listings">
+        {% if orders %}
         <table>
             <thead>
                 <tr>
@@ -18,9 +19,8 @@ Cheese and Beer
                     <th>Shipped Address</th>
                     <th>View Items</th>
                 </tr>
-            </thead>
-        
-        {% for order in orders %}
+            </thead>        
+            {% for order in orders %}
             <tr>
                 <td>
                     {{ order.order_date | date:"d/m/Y"}}
@@ -34,10 +34,13 @@ Cheese and Beer
                 <td>
                     <a href="{% url 'order_info' order.id %}">View</a>
                 </td>
-            </tr>  
-        
-        {% endfor %}
+            </tr>        
+            {% endfor %}
     </table>
+    {% else %}
+    <h3>You have not yet placed any orders</h3>
+    <a href="{% url 'view_results' %}">Buy something!</a>
+    {% endif %}
     </div>
 </div>
 

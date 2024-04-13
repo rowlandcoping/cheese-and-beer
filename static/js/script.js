@@ -464,6 +464,29 @@ document.addEventListener("DOMContentLoaded", function() {
         
     }
 
+
+    // SORT FILTER, PRODUCT VIEW PAGE
+    
+    document.addEventListener("change", function(e){
+        const target = e.target.closest("#sort-selector");
+        if(target){
+            const selector = document.querySelector('#sort-selector');
+            const currentUrl = new URL(window.location);
+            const selectedVal = selector.value;
+            if(selectedVal != "reset"){
+                const sort = selectedVal.split("_")[0];
+                const direction = selectedVal.split("_")[1];                
+                currentUrl.searchParams.set("sort", sort);
+                currentUrl.searchParams.set("direction", direction);
+                window.location.replace(currentUrl);
+            } else {
+                currentUrl.searchParams.delete("sort");
+                currentUrl.searchParams.delete("direction");
+                window.location.replace(currentUrl);
+            }
+        }
+    })
+
 });
 
 
