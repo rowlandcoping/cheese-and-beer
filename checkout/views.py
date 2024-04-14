@@ -9,6 +9,7 @@ from addresses.models import Addresses
 from products.models import Product
 from addresses.forms import AddressForm
 from basket.contexts import basket_total
+from django.db.models import Sum
 import stripe
 import json
 
@@ -60,6 +61,10 @@ def checkout(request):
                             quantity=item_data,
                         )
                         order_item.save()
+                        units_sold = OrderItems.objects.filter(product=product).aggregate(Sum('quantity'))
+                        Product.objects.filter(pk=product.id).update(
+                            units_sold = units_sold['quantity__sum']
+                        )                    
                 except Product.DoesNotExist:
                     messages.error(request, (
                         "One of the products in your bag wasn't found in our database. "

@@ -6,9 +6,8 @@ from django.contrib.auth.models import User
 
 
 class Order(models.Model):
+    readonly_fields = ["order_number","order_date","items_total", "delivery_cost", "grand_total", "stripe_pid"] 
     order_number = models.CharField(max_length=32, null=False, editable=False)
-    # is_fulfilled = models.BooleanField()
-    # is_gift = models.BooleanField()
     user_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     shipping_id = models.ForeignKey(Addresses, on_delete=models.SET_NULL, null=True, blank=True)
     email = models.CharField(max_length=254, null=False, blank=False)
@@ -22,7 +21,6 @@ class Order(models.Model):
     delivery_date = models.DateTimeField()
     items_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     delivery_cost = models.DecimalField(max_digits=6, decimal_places=2, null=False, default=0)
-    other_costs = models.DecimalField(max_digits=6, decimal_places=2, null=False, default=0)
     grand_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     stripe_pid = models.CharField(max_length=254, null=False, blank=False)
 
@@ -56,6 +54,7 @@ class Order(models.Model):
 
 
 class OrderItems(models.Model):
+    readonly_fields = ["order_id", "product_type","product", "price", "quantity", "item_total"] 
     order_id = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')
     product_type = models.CharField()
     product = models.ForeignKey(Product, null=True, blank=True, on_delete=models.SET_NULL)
@@ -64,13 +63,15 @@ class OrderItems(models.Model):
     # discounts = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
     item_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False)
 
+
     def save(self, *args, **kwargs):
         """
         Override the original save method to set the lineitem total
-        and update the order total.
+        and update the order total and set product units sold.
         """
-        self.item_total = self.product.price * self.quantity
+        self.item_total = self.product.price * self.quantity        
         super().save(*args, **kwargs)
+
 
     def __str__(self):
         return f'{self.product.name} on order {self.order_id.order_number}'

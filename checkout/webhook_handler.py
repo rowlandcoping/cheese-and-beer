@@ -6,9 +6,9 @@ from django.conf import settings
 from datetime import datetime, timedelta
 from django.contrib.auth.models import User
 from addresses.models import Addresses
-
 from .models import Order, OrderItems
 from products.models import Product
+from django.db.models import Sum
 
 import json
 import time
@@ -114,7 +114,11 @@ class StripeWH_Handler:
                             price=product.price,
                             quantity=item_data,
                         )
-                    order_item.save()          
+                    order_item.save()
+                    units_sold = OrderItems.objects.filter(product=product).aggregate(Sum('quantity'))
+                    Product.objects.filter(pk=product.id).update(
+                        units_sold = units_sold['quantity__sum']
+                    )          
             except Exception as e:
                 if order:
                     order.delete()
