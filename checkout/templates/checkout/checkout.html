@@ -7,6 +7,23 @@ Cheese and Beer
 {% block content %}
 <hr>
 <div class="checkout-page">
+    {% if messages %}
+    {% for message in messages %}
+    {% with message.level as level %}
+    {% if level == 40 %}
+    <div id="basket-message" class="basket-error">
+    {% elif level == 30 %}
+    <div id="basket-message" class="basket-warning">
+    {% elif level == 25 %}
+    <div id="basket-message" class="basket-success">
+    {% else %}
+    <div id="basket-message" class="basket-warning">
+    {% endif %}
+    {% endwith %}    
+        {{ message }}
+    </div>
+    {% endfor %}    
+    {% endif %}
     <div class="main-section">
         <h3>1) Delivery Address</h3>
         {% if authenticated %}

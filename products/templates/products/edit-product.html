@@ -27,7 +27,9 @@ Cheese and Beer - Admin Console
 <h3>
   {{ product.name }}
   <a href = "{% url 'product_edit' product.id %}"> Edit</a>
+  {% if product.units_sold == 0 %}
   <a href = "{% url 'delete_product' product.id %}"> Delete</a>
+  {% endif %}
 </h3>
 {% endfor %}
 {% else %}

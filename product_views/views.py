@@ -167,8 +167,6 @@ def product_detail(request, product_id):
                 pairings = pairings | Product.objects.filter(beer_category=category)
             except:
                 pairings = Product.objects.filter(beer_category=category)
-
-    print(pairings)
     pairings = pairings.order_by('-units_sold')
     delivery_date = datetime.now().date() + timedelta(days=5)
     template = 'product_views/product-detail.html'

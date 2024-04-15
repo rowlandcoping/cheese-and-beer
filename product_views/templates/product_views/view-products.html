@@ -6,6 +6,23 @@ Cheese and Beer
 
 {% block content %}
 <div id="product-view">
+    {% if messages %}
+    {% for message in messages %}
+    {% with message.level as level %}
+    {% if level == 40 %}
+    <div id="basket-message" class="basket-error">
+    {% elif level == 30 %}
+    <div id="basket-message" class="basket-warning">
+    {% elif level == 25 %}
+    <div id="basket-message" class="basket-success">
+    {% else %}
+    <div id="basket-message" class="basket-warning">
+    {% endif %}
+    {% endwith %}    
+        {{ message }}
+    </div>      
+    {% endfor %}    
+    {% endif %}
     <div id="results and filter" class="alert-disable">
         <div id="results">
             {% if products %}

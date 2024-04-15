@@ -141,6 +141,7 @@ body {
 
 /*RESULTS VIEW PAGE*/
 #product-view {
+    display:relative;
     margin-top:20px;
 }
 .product-section, .pairings-section {
@@ -454,4 +455,35 @@ input[type=number] {
     width:100px;
     height:100px;
     object-fit:cover;
+}
+
+/* BASKET MESSAGES */
+#basket-message {
+    padding:10px;
+    position:absolute;
+    right:-10px;
+    top:50px;
+    z-index: 5;
+    border-width: 1px;
+    border-style: double;
+    width: 250px;
+    text-align:center;
+    background-color: rgb(250, 246, 207);
+}
+
+#basket-message img {
+    padding:15px;
+    width: 150px;
+    height: 150px;
+    object-fit:cover;
+}
+
+.basket-error {
+    border-color: rgb(245, 26, 26)
+}
+.basket-success {
+    border-color: rgb(27, 155, 1)
+}
+.basket-warning {
+    border-color: rgb(253, 201, 30)
 }

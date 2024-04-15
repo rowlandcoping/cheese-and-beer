@@ -366,7 +366,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     //buy it now alert to manage existing basket items.  This is better than Amazon.
-    if (document.getElementById('product-listings') || document.getElementById('product-page') || document.getElementById('order-item-view')) {
+    if (document.getElementById('product-listings') || document.getElementById('product-page') || document.getElementById('order-item-view') || document.getElementById('product-page')) {
         const buyNowButtons = Array.from(document.getElementsByClassName('buy-now'));
         buyNowButtons.forEach(item => {
             item.addEventListener('click', function handleClick(event) {
@@ -486,6 +486,29 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
     })
+
+
+    // Basket message fade
+
+    window.onload=setTimeout(function(){
+        let opacity=0; 
+        let intervalID=0;
+        setInterval(hide, 40); 
+        function hide(){ 
+            let bmessage=document.getElementById("basket-message"); 
+            opacity = Number(window.getComputedStyle(bmessage).getPropertyValue("opacity"))        
+            if(opacity>0){ 
+                opacity=opacity-0.01; 
+                bmessage.style.opacity=opacity 
+            } 
+            else{ 
+                clearInterval(intervalID);
+                document.getElementById("basket-message").style.display="none";
+            } 
+        }
+    }, 500);
+    
+     
 
 });
 

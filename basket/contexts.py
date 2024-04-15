@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404
 from products.models import Product
 from decimal import Decimal
 from django.conf import settings
+from datetime import datetime
 
 
 def basket_total(request):
@@ -31,6 +32,6 @@ def basket_total(request):
         'grand_total': grand_total,
         'basket_items': basket_items,
         'basket_total': total,
-        'product_count': product_count,
+        'product_count': product_count
     }
     return context
