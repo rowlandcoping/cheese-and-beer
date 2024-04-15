@@ -43,7 +43,7 @@ class Product(models.Model):
         max_length=254,
         choices=CountryField().choices
     )
-    units_sold=models.IntegerField(default=0)
+    units_sold = models.IntegerField(default=0)
     # fields specific to cheese
     cheese_category = models.ForeignKey('CheeseCategory', null=True, blank=True, on_delete=models.SET_NULL)
     texture = models.CharField(max_length=254)

@@ -44,7 +44,11 @@ Cheese and Beer
                 <p>
                     Variety: {{ product.variety | lower }}
                 </p>
-                {% if product.beer_category %}
+                {% if product.cheese_category %}
+                <p>
+                    Texture: {{ product.texture | lower }}
+                </p>
+                {% else %}
                 <p>
                     APR: {{ product.alcohol_content }}%
                 </p>

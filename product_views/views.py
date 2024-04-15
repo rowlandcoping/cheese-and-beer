@@ -14,6 +14,7 @@ import cloudinary.uploader
 import PIL
 from PIL import Image
 import decimal
+import operator
 
 # Create your views here.
 
@@ -23,8 +24,8 @@ def view_results(request):
     category = None
     type = None
     view = None
-    sort = None
-    direction = None 
+    sort = 'id'
+    direction = 'desc' 
     if request.GET:
         if 'view_category' in request.GET:
             view = "view_category=" + request.GET['view_category']
@@ -71,31 +72,44 @@ def view_results(request):
                         name__icontains=query
                         ) | Q(
                             variety__icontains=query
-                            )
-                product_list = list(products.filter(queries))
+                            ) | Q(
+                                texture__icontains=query
+                                )
+                product_list = products.filter(queries)
+                product_list_ids = []
+                for product in product_list:
+                    product_list_ids.append(product.id)
                 search_term = query
                 cheese_index = []
                 cheese_query = Q(name__icontains=query)                
-                cheese_categories = list(CheeseCategory.objects.all().filter(cheese_query))
+                cheese_categories = CheeseCategory.objects.all().filter(cheese_query)
                 for category in cheese_categories:
                     cheese_index.append(category.id)
                 for i in cheese_index:
                     index_query= Q(
                         cheese_category__exact=i
                     )                    
-                    product = list(Product.objects.all().filter(index_query))
-                    product_list.extend(product)
+                    product = Product.objects.all().filter(index_query)
+                    for id in product:
+                        if id.id in product_list_ids:
+                            continue
+                        else:
+                            product_list.extend(product)
                 beer_index = []
                 beer_query = Q(name__icontains=query)
-                beer_categories = list(BeerCategory.objects.all().filter(beer_query))
+                beer_categories = BeerCategory.objects.all().filter(beer_query)
                 for category in beer_categories:
                     beer_index.append(category.id)
                 for i in beer_index:
                     index_query= Q(
                         beer_category__exact=i
                     )                    
-                    product = list(Product.objects.all().filter(index_query))
-                    product_list.extend(product)
+                    product = Product.objects.all().filter(index_query)
+                    for id in product:
+                        if id.id in product_list_ids:
+                            continue
+                        else:
+                            product_list.extend(product)
             else:
                 search_term = "all products"
                 product_list = products
@@ -107,12 +121,14 @@ def view_results(request):
             if sortkey == 'price':
                 sortkey = 'price_per_amount'
             if sortkey == 'trending':
-                sortkey = 'price_per_amount'
+                sortkey = 'units_sold'
             if 'direction' in request.GET:                  
                 direction = request.GET['direction']
                 if direction == 'desc':
                     sortkey = f'-{sortkey}'
-            product_list = product_list.order_by(sortkey)                            
+        else:
+            sortkey = "-id"
+    product_list = product_list.order_by(sortkey)                            
     number = len(product_list)
     if number==1:
       result = "result"
@@ -137,15 +153,23 @@ def product_detail(request, product_id):
     if product.product_type == "beer":
         category = get_object_or_404(BeerCategory, name=product.beer_category)
         category_pairs = category.cheese.all()
-        pairings = []
         for category in category_pairs:
-            pairings.extend(list(Product.objects.filter(cheese_category=category.id)))
+            try: 
+                pairings = pairings | Product.objects.filter(cheese_category=category)
+            except:
+                pairings = Product.objects.filter(cheese_category=category)
     else:
         category = get_object_or_404(CheeseCategory, name=product.cheese_category)
         category_pairs = category.pairs_with.all()
-        pairings = []
+        pairings = Product.objects.filter(beer_category=0)
         for category in category_pairs:
-            pairings.extend(list(Product.objects.filter(beer_category=category.id)))
+            try:
+                pairings = pairings | Product.objects.filter(beer_category=category)
+            except:
+                pairings = Product.objects.filter(beer_category=category)
+
+    print(pairings)
+    pairings = pairings.order_by('-units_sold')
     delivery_date = datetime.now().date() + timedelta(days=5)
     template = 'product_views/product-detail.html'
     context = {

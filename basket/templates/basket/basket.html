@@ -22,7 +22,7 @@ Cheese and Beer
                             {{ order.product.name }}
                             {% if order.product.product_type == "cheese" %}
                             ({{ order.product.amount }}g, {{ order.product.cheese_category }} cheese,
-                            {{ order.product.variety | lower }})
+                            {{ order.product.variety | lower }}, {{ order.product.texture }})
                             {% else %}
                             ({{ order.product.amount }}ml {{ order.product.container }}, {{ order.product.beer_category }} beer,
                             {{ order.product.variety | lower }}, {{ order.product.alcohol_content }}% APR)
