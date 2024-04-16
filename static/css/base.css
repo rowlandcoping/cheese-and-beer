@@ -552,3 +552,33 @@ input[type=number] {
 .alert-main-title {
     margin-bottom:10px;
 }
+
+/* 404 page */
+
+#not-found-content img {
+    width:400px;
+}
+
+#not-found-page {
+    display:flex;
+    flex-flow:column;
+    align-items:center;
+    text-align:center;
+}
+
+.not-found-link {
+    display:block;
+    width:400px;
+    padding: 10px;
+    margin-bottom:20px;
+    font-size: 130%;
+    background-color: yellow;
+    color: green;
+    border:2px green solid;
+    border-radius: 6px;
+}
+.not-found-link:hover {
+    background-color: green;
+    color: yellow;
+    border:2px yellow solid;
+}

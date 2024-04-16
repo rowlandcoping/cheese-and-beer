@@ -17,11 +17,6 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 import dj_database_url
-import mimetypes
-
-
-mimetypes.add_type("text/css", ".css", True)
-mimetypes.add_type("application/javascript", ".js", True)
 
 load_dotenv()
 

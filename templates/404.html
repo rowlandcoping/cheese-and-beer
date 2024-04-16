@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cheese and Beer - Admin Console
+{% endblock %}
+
+{% block content %}
+
+<div id="not-found-page">
+    <div id="not-found-content">
+    <h2>404 Page not Found</h2>
+    <img src="/static/images/cheese-cartoon.jpg">
+    </div>
+    <a class="not-found-link" href="{% url 'view_results' %}?category=cheese">
+        <span>Complete Life Goals</span>
+    </a>
+    
+</div>
+<hr>
+{% endblock %}
