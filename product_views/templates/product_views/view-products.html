@@ -5,7 +5,25 @@ Cheese and Beer
 {% endblock %}
 
 {% block content %}
-<div id="product-view">
+<div id="buynow-alert" class="delete-alert not-displayed">
+    <div class="alert-header">
+        <h4>Buy Now Options</h4>
+        <i class="fa-solid fa-xmark cancel-alert"></i>
+    </div>
+    <div class="alert-content">
+        <h4 class="alert-main-title">Buy "<span id="buy-now-name"></span>"</h4>
+        <p>You have other items in your basket, do you wish to keep them?</p>
+    </div>
+    <div class="alert-footer">
+        <a id="keep-products" href="">
+            <span class="alert-buttons yes-button">Yes</span>
+        </a>
+        <a id="remove-products" href="">
+            <span class="alert-buttons cancel-alert no-button">No</span>
+        </a>
+    </div>
+</div>
+<div id="product-view" class="alert-disable">
     {% if messages %}
     {% for message in messages %}
     {% with message.level as level %}
@@ -23,7 +41,7 @@ Cheese and Beer
     </div>      
     {% endfor %}    
     {% endif %}
-    <div id="results and filter" class="alert-disable">
+    <div id="results and filter">
         <div id="results">
             {% if products %}
             {% if type %}
@@ -50,17 +68,17 @@ Cheese and Beer
         {% if product.displayed %}
         <div class="product-section">
             <div class="product-detail">          
-                <div class="product-image alert-disable">
+                <div class="product-image">
                     <a href="{% url 'product_detail' product.id %}">
                         <img src="{{ MEDIA_URL }}products/{{ product.image_url }}">
                     </a>
                 </div>
-                <div class="product-name alert-disable">
+                <div class="product-name">
                     <a href="{% url 'product_detail' product.id %}">
-                        <h4>{{ product.name }}</h4>
+                        <h4 id="buyname-{{ product.id }}">{{ product.name }}</h4>
                     </a>
                 </div>
-                <div class="product-info alert-disable">
+                <div class="product-info">
                     <div>
                         <p>
                             {% if product.cheese_category  %}                            
@@ -100,13 +118,13 @@ Cheese and Beer
                         </p>
                     </div>
                 </div>
-                <div class="action-section alert-disable">
+                <div class="action-section">
                     <a href="{% url 'product_detail' product.id %}">
                         <p><small><em><u>more information</u></em></small></p>
                     </a>                    
                 </div>
                 <div class="view-action-buttons">
-                    <div class="add-from-view alert-disable">
+                    <div class="add-from-view">
                         <form method="POST" action="{% url 'add_to_basket' %}" enctype="multipart/form-data">
                             {% csrf_token %}
                             <input type="hidden" name="view" id="view" value="{{ request.path }}?{{ current_view }}">
@@ -118,29 +136,8 @@ Cheese and Beer
                         </form>
                     </div>
                     <div class="buy-from-view">
-                        <div class="buynow-alert not-displayed" id="alert-{{ product.id }}">
-                            <h4>Buy Now:</h4> 
-                            <h4>{{ product.name }}</h4>
-                            <p>You have other items in your basket, do you wish to remove them?</p>
-                            <div class="alert-buttons-container">
-                                <a id="remove-{{ product.id }}" href="{% url 'buy_now' %}?remove={{ product.id }},1">
-                                    <span class="alert-buttons alert-positive">
-                                        Yes, please.
-                                    </span>
-                                </a>
-                                <a id="addon-{{ product.id }}" href="{% url 'buy_now' %}?addon={{ product.id }},1">
-                                    <span class="alert-buttons alert-negative">
-                                        No, thank you.
-                                    </span>
-                                </a>
-                            </div>
-                            <span class="alert-buttons alert-cancel" id="cancel-{{ product.id }}">
-                               Cancel Action
-                            </span>
-                        </div>
-                        <div class="buynow-buttons alert-disable"> 
-                            {% if basket_total %}
-                            
+                        <div class="buynow-buttons"> 
+                            {% if basket_total %}                            
                             <span class="action-button buy-now" id="basket-{{ product.id }}">
                                 <i class="fa-solid fa-credit-card"></i> Buy
                             </span>

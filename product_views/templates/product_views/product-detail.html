@@ -5,7 +5,25 @@ Cheese and Beer
 {% endblock %}
  
 {% block content %}
-<div id="product-page">
+<div id="buynow-alert" class="delete-alert not-displayed">
+    <div class="alert-header">
+        <h4>Buy Now Options</h4>
+        <i class="fa-solid fa-xmark cancel-alert"></i>
+    </div>
+    <div class="alert-content">
+        <h4>Buy "<span id="buy-now-name"></span>"</h4>
+        <p>You have other items in your basket, do you wish to keep them?</p>
+    </div>
+    <div class="alert-footer">
+        <a id="keep-products" href="">
+            <span class="alert-buttons yes-button">Yes</span>
+        </a>
+        <a id="remove-products" href="">
+            <span class="alert-buttons cancel-alert no-button">No</span>
+        </a>
+    </div>
+</div>
+<div id="product-page" class="alert-disable">
     {% if messages %}
     {% for message in messages %}
     {% with message.level as level %}
@@ -24,13 +42,13 @@ Cheese and Beer
     {% endfor %}    
     {% endif %}
     <div class="product-overview">          
-        <div class="detail-image alert-disable">
+        <div class="detail-image">
             <img src="{{ MEDIA_URL }}products/{{ product.image_url }}">
         </div>
-        <div class="detail-information alert-disable">
+        <div class="detail-information">
             <div>
                 <h3>
-                    {{ product.name }} ({{product.amount }}g{% if product.container %} {{ product.container }}{% endif %})
+                    <span id="buyname-{{ product.id }}">{{ product.name }}</span> ({{product.amount }}g{% if product.container %} {{ product.container }}{% endif %})
                 </h3>
                 {% load countries %}
                 {% get_country product.country_origin as country %}
@@ -91,7 +109,7 @@ Cheese and Beer
             </div>
 
             {% if product.displayed %} 
-            <form class="alert-disable" method="POST" action="{% url 'add_to_basket' %}" enctype="multipart/form-data">
+            <form method="POST" action="{% url 'add_to_basket' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="hidden" name="view" id="view" value="{{ request.path }}?{{ current_view }}">
                 <div class="quantity-box-product">
@@ -105,27 +123,7 @@ Cheese and Beer
                     </button>
                 </div>
             </form>
-            <div class="buynow-alert not-displayed" id="alert-{{ product.id }}">
-                <h4>Buy Now:</h4> 
-                <h4>{{ product.name }}</h4>
-                <p>You have other items in your basket, do you wish to remove them?</p>
-                <div class="alert-buttons-container">
-                    <a id="remove-{{ product.id }}" href="">
-                        <span class="alert-buttons alert-positive">
-                            Yes, please.
-                        </span>
-                    </a>
-                    <a id="addon-{{ product.id }}" href="">
-                        <span class="alert-buttons alert-negative">
-                            No, thank you.
-                        </span>
-                    </a>
-                </div>
-                <span class="alert-buttons alert-cancel" id="cancel-{{ product.id }}">
-                   Cancel Action
-                </span>
-            </div>
-            <div class="product-action-buttons alert-disable"> 
+            <div class="product-action-buttons"> 
                 {% if basket_total %}                
                 <span class="product-action-button buy-now" id="basket-{{ product.id }}">
                     <i class="fa-solid fa-credit-card"></i> Buy
@@ -140,7 +138,7 @@ Cheese and Beer
         </div>
     </div>
     <hr>
-    <div id="product-matching" class="alert-disable">
+    <div id="product-matching">
         {% if pairings %}
         <h3>Pairs Well With:</h3>
         {% for pairing in pairings %}
@@ -153,7 +151,7 @@ Cheese and Beer
                 </div>
                 <div class="product-name">
                     <a href="{% url 'product_detail' pairing.id %}">
-                        <h4>{{ pairing.name }}</h4>
+                        <h4 id="buyname-{{ pairing.id }}">{{ pairing.name }}</h4>
                     </a>
                 </div>
                 <div class="product-info">
@@ -197,7 +195,7 @@ Cheese and Beer
                     </div>
                 </div>
                 <div class="view-action-buttons">
-                    <div class="add-from-view alert-disable">
+                    <div class="add-from-view">
                         <form method="POST" action="{% url 'add_to_basket' %}" enctype="multipart/form-data">
                             {% csrf_token %}
                             <input type="hidden" name="view" id="view" value="{{ request.path }}?{{ current_view }}">
@@ -209,29 +207,8 @@ Cheese and Beer
                         </form>
                     </div>
                     <div class="buy-from-view">
-                        <div class="buynow-alert not-displayed" id="alert-{{ pairing.id }}">
-                            <h4>Buy Now:</h4> 
-                            <h4>{{ pairing.name }}</h4>
-                            <p>You have other items in your basket, do you wish to remove them?</p>
-                            <div class="alert-buttons-container">
-                                <a id="remove-{{ pairing.id }}" href="{% url 'buy_now' %}?remove={{ pairing.id }},1">
-                                    <span class="alert-buttons alert-positive">
-                                        Yes, please.
-                                    </span>
-                                </a>
-                                <a id="addon-{{ pairing.id }}" href="{% url 'buy_now' %}?addon={{ pairing.id }},1">
-                                    <span class="alert-buttons alert-negative">
-                                        No, thank you.
-                                    </span>
-                                </a>
-                            </div>
-                            <span class="alert-buttons alert-cancel" id="cancel-{{ pairing.id }}">
-                               Cancel Action
-                            </span>
-                        </div>
-                        <div class="buynow-buttons alert-disable"> 
-                            {% if basket_total %}
-                            
+                        <div class="buynow-buttons"> 
+                            {% if basket_total %}                            
                             <span class="action-button buy-now" id="basket-{{ pairing.id }}">
                                 <i class="fa-solid fa-credit-card"></i> Buy
                             </span>

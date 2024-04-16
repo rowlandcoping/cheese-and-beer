@@ -549,3 +549,6 @@ input[type=number] {
     text-align:center;
     color:white;
 }
+.alert-main-title {
+    margin-bottom:10px;
+}

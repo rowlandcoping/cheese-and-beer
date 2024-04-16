@@ -366,37 +366,39 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     //buy it now alert to manage existing basket items.  This is better than Amazon.
-    if (document.getElementById('product-listings') || document.getElementById('product-page') || document.getElementById('order-item-view') || document.getElementById('product-page')) {
+    if (document.getElementById('buynow-alert')) {
         const buyNowButtons = Array.from(document.getElementsByClassName('buy-now'));
         buyNowButtons.forEach(item => {
             item.addEventListener('click', function handleClick(event) {
                 const itemId = item.getAttribute('id'); 
                 productId = itemId.split("-")[1];
                 productScenario = itemId.split("-")[0];
+                document.getElementById('buy-now-name').textContent = document.getElementById('buyname-' + productId).textContent
                 if (document.getElementById('product-page')) {
                     quantity = document.getElementById('quantity').value;
                     quantity = Number(quantity);
                 } else {
                     quantity = 1;
                 }
+                // adds url for correct quantity, view-product view only where basket is empty
                 if (productScenario === "single") {
                     url = "/buy-now/?single=" + productId + "," + quantity;
                     window.location.href = url
-                } 
+                }
+                // triggers buy-now alert if items in basket
                 if (productScenario === "basket") {
-                    document.getElementById('alert-' + productId).style.display="block";
-                    document.getElementById('alert-' + productId).focus();
+                    document.getElementById('buynow-alert').style.display="block";
                     const disabledSections = Array.from(document.getElementsByClassName('alert-disable'));
                     for (let i = 0; i < disabledSections.length; i++) {
                         disabledSections[i].style.pointerEvents = "none";
                         disabledSections[i].style.opacity = "0.5";
                     }
-                    document.getElementById('remove-' + productId).href = "/buy-now/?remove=" + productId + "," + quantity;
-                    document.getElementById('addon-' + productId).href = "/buy-now/?addon=" + productId + "," + quantity;
+                    document.getElementById('remove-products').href = "/buy-now/?remove=" + productId + "," + quantity;
+                    document.getElementById('keep-products').href = "/buy-now/?addon=" + productId + "," + quantity;
                     document.addEventListener("click", function(e){
-                        const target = e.target.closest(".alert-cancel");
+                        const target = e.target.closest(".cancel-alert");
                         if(target){
-                            document.getElementById('alert-' + productId).style.display="none";
+                            document.getElementById('buynow-alert').style.display="none";
                             const disabledSections = Array.from(document.getElementsByClassName('alert-disable'));
                             for (let i = 0; i < disabledSections.length; i++) {
                                 disabledSections[i].style.pointerEvents = "auto";
