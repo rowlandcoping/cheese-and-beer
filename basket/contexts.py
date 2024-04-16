@@ -10,15 +10,22 @@ def basket_total(request):
     total = 0
     product_count = 0
     basket = request.session.get('basket', {})
+    removed_products = []
     for id, quantity in basket.items():
-        product = get_object_or_404(Product, pk=id)
-        total += quantity * product.price
-        product_count += quantity
-        basket_items.append({
-            'product_id': id,
-            'quantity': quantity,
-            'product': product
-        })
+        if Product.objects.filter(pk=id).exists():
+            product = get_object_or_404(Product, pk=id)
+            total += quantity * product.price
+            product_count += quantity
+            basket_items.append({
+                'product_id': id,
+                'quantity': quantity,
+                'product': product
+            })
+        else:
+            removed_products.append(id)
+    for removed in removed_products:
+        basket.pop(removed)
+    request.session['basket'] = basket
     if total < settings.DELIVERY_LOWER_THRESHOLD:
         delivery_charge = settings.DELIVERY_LOWER_CHARGE
     elif total < settings.DELIVERY_HIGHER_THRESHOLD:
