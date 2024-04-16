@@ -5,6 +5,25 @@ Cheese and Beer - Admin Console
 {% endblock %}
 
 {% block content %}
+
+{% if messages %}
+{% for message in messages %}
+{% with message.level as level %}
+{% if level == 40 %}
+<div id="general-message" class="error-message alert-disable">
+{% elif level == 30 %}
+<div id="general-message" class="warning-message alert-disable">
+{% elif level == 25 %}
+<div id="general-message" class="success-message alert-disable">
+{% else %}
+<div id="general-message" class="warning-message alert-disable">
+{% endif %}
+{% endwith %}    
+    {{ message }}
+</div>      
+{% endfor %}    
+{% endif %}
+
 <h1>Do Stuff Now</h1>
 <form method="POST" action="{% url 'edit_beer_category' category.id %}" enctype="multipart/form-data">
     {% csrf_token %}
@@ -12,7 +31,7 @@ Cheese and Beer - Admin Console
     <input type="hidden" name="initial_pairings" id="id_initial_pairings" value="{{ initial_pairings }}">
     <input type="hidden" name="pairings" id="id_pairings">
     <div>
-        <img src="{{ MEDIA_URL }}beer-categories/{{ category.image_url }}">
+        <img src="{{ MEDIA_URL }}products/{{ category.image_url }}">
     </div>
     <div class="categories">
         <h2>Select Cheese Pairings</h2>

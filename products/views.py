@@ -55,7 +55,7 @@ def add_cheese_category(request):
             cloudinary.uploader.upload(
                 converted_image,
                 public_id=image_url,
-                folder="cheese-and-beer/cheese-categories")
+                folder="cheese-and-beer/products")
         else:
             image_url = ""
             image_alt = ""
@@ -67,13 +67,17 @@ def add_cheese_category(request):
                 image_url=image_url,
                 image_alt=image_alt
             )
-            return redirect(reverse(add_cheese_category))
-    form = CheeseCategoryForm()
-    template = 'products/add-cheese-category.html'
-    context = {
-        'form': form,
-    }
-    return render(request, template, context)
+            messages.success(request, 'Cheese Category Added')
+            return redirect('admin_console')
+    if request.user.is_superuser:
+        form = CheeseCategoryForm()
+        template = 'products/add-cheese-category.html'
+        context = {
+            'form': form,
+        }
+        return render(request, template, context)
+    else:
+        return redirect('home')
 
 
 def add_beer_category(request):
@@ -98,7 +102,7 @@ def add_beer_category(request):
             cloudinary.uploader.upload(
                 converted_image,
                 public_id=image_url,
-                folder="cheese-and-beer/beer-categories")
+                folder="cheese-and-beer/products")
         else:
             image_url = ""
             image_alt = ""
@@ -110,28 +114,35 @@ def add_beer_category(request):
                 image_url=image_url,
                 image_alt=image_alt
             )
-            return redirect(reverse(add_beer_category))
-    beer_form = BeerCategoryForm()        
-    template = 'products/add-beer-category.html'
-    context = {
-        'form': beer_form,
-    }
+            messages.success(request, 'Beer Category Added')
+            return redirect('admin_console')
+    if request.user.is_superuser:
+        beer_form = BeerCategoryForm()        
+        template = 'products/add-beer-category.html'
+        context = {
+            'form': beer_form,
+        }
 
-    return render(request, template, context)
+        return render(request, template, context)
+    else:
+        return redirect('home')
 
 
 def edit_categories(request):
     """ 
     Returns a list of categories so that they can be edited
     """
-    cheese_categories = CheeseCategory.objects.all()
-    beer_categories = BeerCategory.objects.all()
-    template = 'products/edit-categories.html'
-    context = {
-        'cheese_categories': cheese_categories,
-        'beer_categories': beer_categories
-    }
-    return render(request, template, context)
+    if request.user.is_superuser:
+        cheese_categories = CheeseCategory.objects.all()
+        beer_categories = BeerCategory.objects.all()
+        template = 'products/edit-categories.html'
+        context = {
+            'cheese_categories': cheese_categories,
+            'beer_categories': beer_categories
+        }
+        return render(request, template, context)
+    else:
+        return redirect('home')
 
 def edit_cheese_category(request, category_id):
     """ 
@@ -159,11 +170,11 @@ def edit_cheese_category(request, category_id):
                     ImageUpload, 400, 75, "webp")
                 if category.image_url != "":
                     cloudinary.uploader.destroy(
-                        "cheese-and-beer/cheese-categories/" + category.image_url)
+                        "cheese-and-beer/products/" + category.image_url)
                 cloudinary.uploader.upload(
                     converted_image,
                     public_id=image_url,
-                    folder="cheese-and-beer/cheese-categories")                
+                    folder="cheese-and-beer/products")                
             else:
                 image_url = category.image_url
                 image_alt = category.image_alt        
@@ -203,23 +214,26 @@ def edit_cheese_category(request, category_id):
                 for remove_pairing in pairings_to_remove:
                     beer_to_remove = get_object_or_404(BeerCategory, pk=remove_pairing)
                     category.pairs_with.remove(beer_to_remove)
+            messages.success(request, 'Cheese category updated')
         else:
-            messages.error(request, 'Failed to update product. Please ensure the form is valid.') 
-            return redirect(reverse('edit_cheese_category', args=[category_id]))
+            messages.error(request, 'Failed to update category information') 
     # returns updated data
-    category = get_object_or_404(CheeseCategory, pk=category_id)
-    pairings = category.pairs_with.all()
-    initial_pairings = pairings.values_list('id', flat=True)
-    beer_categories = BeerCategory.objects.all()
-    form = CheeseCategoryForm(instance=category)
-    template = 'products/edit-cheese-category.html'
-    context = {
-        'initial_pairings': list(initial_pairings),
-        'form': form,
-        'category': category,
-        'beer_categories': beer_categories
-    }
-    return render(request, template, context)
+    if request.user.is_superuser:
+        category = get_object_or_404(CheeseCategory, pk=category_id)
+        pairings = category.pairs_with.all()
+        initial_pairings = pairings.values_list('id', flat=True)
+        beer_categories = BeerCategory.objects.all()
+        form = CheeseCategoryForm(instance=category)
+        template = 'products/edit-cheese-category.html'
+        context = {
+            'initial_pairings': list(initial_pairings),
+            'form': form,
+            'category': category,
+            'beer_categories': beer_categories
+        }
+        return render(request, template, context)
+    else:
+        return redirect('home')
 
 
 def edit_beer_category(request, category_id):
@@ -247,11 +261,11 @@ def edit_beer_category(request, category_id):
                     ImageUpload, 400, 75, "webp")
                 if category.image_url != "":
                     cloudinary.uploader.destroy(
-                        "cheese-and-beer/beer-categories/" + category.image_url)
+                        "cheese-and-beer/products/" + category.image_url)
                 cloudinary.uploader.upload(
                     converted_image,
                     public_id=image_url,
-                    folder="cheese-and-beer/beer-categories")                
+                    folder="cheese-and-beer/products")                
             else:
                 image_url = category.image_url
                 image_alt = category.image_alt        
@@ -291,145 +305,164 @@ def edit_beer_category(request, category_id):
                 for remove_pairing in pairings_to_remove:
                     cheese_to_remove = get_object_or_404(CheeseCategory, pk=remove_pairing)
                     category.cheese.remove(cheese_to_remove)
+            messages.success(request, 'Beer category updated')
         else:
-            messages.error(request, 'Failed to update product. Please ensure the form is valid.')
-            return redirect(reverse('edit_beer_category', args=[category_id]))
-    category = get_object_or_404(BeerCategory, pk=category_id)
-    pairings = category.cheese.all()
-    initial_pairings = pairings.values_list('id', flat=True)
-    cheese_categories = CheeseCategory.objects.all()
-    form = BeerCategoryForm(instance=category)
-    template = 'products/edit-beer-category.html'
-    context = {
-        'initial_pairings': list(initial_pairings),
-        'form': form,
-        'category': category,
-        'cheese_categories': cheese_categories,
-    }
-    return render(request, template, context)
+            messages.error(request, 'Failed to update beer category')
+    if request.user.is_superuser:
+        category = get_object_or_404(BeerCategory, pk=category_id)
+        pairings = category.cheese.all()
+        initial_pairings = pairings.values_list('id', flat=True)
+        cheese_categories = CheeseCategory.objects.all()
+        form = BeerCategoryForm(instance=category)
+        template = 'products/edit-beer-category.html'
+        context = {
+            'initial_pairings': list(initial_pairings),
+            'form': form,
+            'category': category,
+            'cheese_categories': cheese_categories,
+        }
+        return render(request, template, context)
+    else:
+        return redirect('home')
 
 
 def add_cheese(request):
-    form = CheeseForm()
-    template = 'products/add-cheese.html'
-    context = {
-        'form': form,
-    }
-    return render(request, template, context)
+    if request.user.is_superuser:
+        form = CheeseForm()
+        template = 'products/add-cheese.html'
+        context = {
+            'form': form,
+        }
+        return render(request, template, context)
+    else:
+        return redirect('home')
 
 
 def add_beer(request):
-    form = BeerForm()
-    template = 'products/add-beer.html'
-    context = {
-        'form': form,
-    }
-    return render(request, template, context)
+    if request.user.is_superuser:
+        form = BeerForm()
+        template = 'products/add-beer.html'
+        context = {
+            'form': form,
+        }
+        return render(request, template, context)
+    else:
+        return redirect('home')
 
 
 def add_product(request):
-    product_type = request.POST.get('product_type')
-    country=request.POST.get('country_origin')
-    # validate custom fields for type of product
-    if product_type == "cheese":
-        form = CheeseForm(request.POST)
-        selected_category = form['cheese_category'].value()
-        product_code="PCH"
-        if selected_category == "":
-            messages.error(request, 'Failed to add cheese, please select a category')
-            return redirect('add_cheese')
-        cheese_category = selected_category        
-    else:
-        form = BeerForm(request.POST)
-        selected_category = form['beer_category'].value()
-        product_code="PBE"
-        if selected_category == "":
-            messages.error(request, 'Failed to add beer, please select a category')
-            return redirect('add_beer')
-        if form['container'].value() == "":
-            messages.error(request, 'Failed to add beer, please select what your beer is sold in')
-            return redirect('add_beer')
-        if form['alcohol_content'].value() == "":
-            messages.error(request, 'Failed to add beer, please reveal the alcohol content of the beer')
-            return redirect('add_beer')
-        beer_category = selected_category
-    if form.is_valid():
-        name = request.POST.get('name').lower()        
-        ImageUpload = request.FILES.get('image')
-        # reverts description to the generic category description if none added
-        if request.POST.get('description'):
-            description = request.POST.get('description')
+    if request.user.is_superuser:
+        product_type = request.POST.get('product_type')
+        # validate custom fields for type of product
+        if product_type == "cheese":
+            form = CheeseForm(request.POST)
+            selected_category = form['cheese_category'].value()
+            product_code="PCH"
+            if selected_category == "":
+                messages.error(request, 'Failed to add cheese, please select a category')
+                return redirect('add_cheese')
+            cheese_category = selected_category        
+        else:
+            form = BeerForm(request.POST)
+            selected_category = form['beer_category'].value()
+            product_code="PBE"
+            if selected_category == "":
+                messages.error(request, 'Failed to add beer, please select a category')
+                return redirect('add_beer')
+            if form['container'].value() == "":
+                messages.error(request, 'Failed to add beer, please select the container your beer is sold in')
+                return redirect('add_beer')
+            if form['alcohol_content'].value() == "":
+                messages.error(request, 'Failed to add beer, please reveal the alcohol content of the beer')
+                return redirect('add_beer')
+            beer_category = selected_category
+        if form.is_valid():
+            name = request.POST.get('name').lower()        
+            ImageUpload = request.FILES.get('image')
+            # reverts image to generic category image if none added
+            # reverts description to the generic category description if none added
+            if request.POST.get('description'):
+                description = request.POST.get('description')
+            else:
+                if product_type == "cheese":
+                    category = get_object_or_404(CheeseCategory, pk=cheese_category)
+                else:
+                    category = get_object_or_404(BeerCategory, pk=beer_category)
+                description = category.description
+            # adds a price per kilo or price per litre so that products can be more accurately compared
+            amount = decimal.Decimal(form['amount'].value())
+            price =  decimal.Decimal(request.POST.get('price'))
+            new_price = (1000/amount)*price
+            price_per_amount = new_price.quantize(decimal.Decimal('0.00'))
+            image_id = str(datetime.now().timestamp()).split('.')[1]
+            product_number = product_code + uuid.uuid4().hex.upper()
+            if ImageUpload:    
+                image_url = str(
+                    re.sub(
+                        "[.!# $%;@&'*+/=?^_` {|}~]",
+                        "-",
+                        name
+                        ) + "-" + image_id
+                    )
+                image_alt = str("An image depicting " + form['name'].value())
+                converted_image = imageConvert(
+                    ImageUpload, 400, 75, "webp")
+                cloudinary.uploader.upload(
+                    converted_image,
+                    public_id=image_url,
+                    folder="cheese-and-beer/products")                
+            else:
+                # reverts image to generic category image if none added
+                if product_type == "cheese":
+                    category = get_object_or_404(CheeseCategory, pk=cheese_category)
+                else:
+                    category = get_object_or_404(BeerCategory, pk=beer_category)
+                image_url = category.image_url
+                image_alt = category.image_alt
+            final_form = form.save(commit=False)
+            final_form.product_number = product_number
+            final_form.product_type = product_type
+            final_form.description = description
+            final_form.image_url = image_url
+            final_form.image_alt = image_alt
+            final_form.price_per_amount = price_per_amount
+            final_form.save()
+            if product_type == "cheese":
+                messages.success(request, 'New Cheese Added')
+                return redirect('admin_console')
+            else:
+                messages.success(request, 'New Beer Added')
+                return redirect('admin_console')
         else:
             if product_type == "cheese":
-                category = get_object_or_404(CheeseCategory, pk=cheese_category)
+                messages.error(request, 'Failed to add cheese, please ensure all fields are filled out correctly')
+                return redirect('add_cheese')
             else:
-                category = get_object_or_404(BeerCategory, pk=beer_category)
-            description = category.description
-        # adds a price per kilo or price per litre so that products can be more accurately compared
-        amount = decimal.Decimal(form['amount'].value())
-        price =  decimal.Decimal(request.POST.get('price'))
-        new_price = (1000/amount)*price
-        price_per_amount = new_price.quantize(decimal.Decimal('0.00'))
-        image_id = str(datetime.now().timestamp()).split('.')[1]
-        product_number = product_code + uuid.uuid4().hex.upper()
-        if ImageUpload:    
-            image_url = str(
-                re.sub(
-                    "[.!# $%;@&'*+/=?^_` {|}~]",
-                    "-",
-                    name
-                    ) + "-" + image_id
-                )
-            image_alt = str("An image depicting " + form['name'].value())
-            converted_image = imageConvert(
-                ImageUpload, 400, 75, "webp")
-            cloudinary.uploader.upload(
-                converted_image,
-                public_id=image_url,
-                folder="cheese-and-beer/products")                
-        else:
-            image_url = ""
-            image_alt = ""
-        final_form = form.save(commit=False)
-        final_form.product_number = product_number
-        final_form.product_type = product_type
-        final_form.description = description
-        final_form.image_url = image_url
-        final_form.image_alt = image_alt
-        final_form.price_per_amount = price_per_amount
-        final_form.save()
-        if product_type == "cheese":
-            messages.success(request, 'New Cheese Added')
-            return redirect('add_cheese')
-        else:
-            messages.success(request, 'New Beer Added')
-            return redirect('add_beer')
+                messages.error(request, 'Failed to add beer, please ensure all fields are filled out correctly')
+                return redirect('add_beer')
     else:
-        if product_type == "cheese":
-            messages.error(request, 'Failed to add cheese, please ensure all fields are filled out correctly')
-            return redirect('add_cheese')
-        else:
-            messages.error(request, 'Failed to add beer, please ensure all fields are filled out correctly')
-            return redirect('add_beer')
-        
+        return redirect('home')
 
 def edit_product(request):
-    products = Product.objects.all()
-    query = None
-    if request.GET:
-        if 'q' in request.GET:
-            query = request.GET['q'].strip()            
-            if not query:
-                messages.error(request, 'Please enter something to search for')
-                return redirect('edit_product')
-        queries = Q(product_number__iexact=query) | Q(name__icontains=query)
-        products = products.filter(queries)
-    template = 'products/edit-product.html'
-    context = {
-        'search_term': query,
-        'products': products,
-    }
-    return render(request, template, context)
+    if request.user.is_superuser:
+        products = Product.objects.all()
+        query = None
+        if request.GET:
+            if 'q' in request.GET:
+                query = request.GET['q'].strip()            
+                if not query:
+                    messages.error(request, 'Please enter something to search for')
+                    return redirect('edit_product')
+            queries = Q(product_number__iexact=query) | Q(name__icontains=query)
+            products = products.filter(queries)
+        template = 'products/edit-product.html'
+        context = {
+            'search_term': query,
+            'products': products,
+        }
+        return render(request, template, context)
+    else:
+        return redirect('home')
 
 
 def product_edit(request, product_id):
@@ -439,22 +472,28 @@ def product_edit(request, product_id):
             form = CheeseForm(request.POST, instance=product)
             selected_category = form['cheese_category'].value()
             if selected_category == "":
-                messages.error(request, 'Failed to add cheese, please select a category')
-                return redirect('add_cheese')
-            cheese_category = selected_category            
+                messages.error(request, 'Failed to edit cheese, please select a category')
+                return redirect(reverse('product_edit', args=[product_id]))
+            if form['texture'].value() == "":
+                messages.error(request, 'Failed to edit product, please add texture')
+                return redirect(reverse('product_edit', args=[product_id]))
+            cheese_category = selected_category        
         else:
             form = BeerForm(request.POST, instance=product)
             selected_category = form['beer_category'].value()
             if selected_category == "":
                 messages.error(request, 'Failed to add beer, please select a category')
-                return redirect('add_beer')
+                return redirect(reverse('product_edit', args=[product_id]))
             if form['container'].value() == "":
                 messages.error(request, 'Failed to add beer, please select what your beer is sold in')
-                return redirect('add_beer')
+                return redirect(reverse('product_edit', args=[product_id]))
             if form['alcohol_content'].value() == "":
                 messages.error(request, 'Failed to add beer, please reveal the alcohol content of the beer')
-                return redirect('add_beer')
+                return redirect(reverse('product_edit', args=[product_id]))
             beer_category = selected_category
+        if form['variety'].value() == "":
+                messages.error(request, 'Failed to edit product, please select variety')
+                return redirect(reverse('product_edit', args=[product_id]))
         if form.is_valid():
             name = request.POST.get('name').lower()        
             ImageUpload = request.FILES.get('image')
@@ -501,45 +540,60 @@ def product_edit(request, product_id):
             final_form.image_alt = image_alt
             final_form.price_per_amount = price_per_amount
             final_form.save()
-            messages.success(request, 'Cheese Updated')
+            if product.product_type == "cheese":
+                messages.success(request, 'Cheese Updated')
+            else:
+                messages.success(request, 'Beer Updated')
         else:
             if product.product_type == "cheese":
                 messages.error(request, 'Failed to edit cheese, please ensure all fields are filled out correctly')
             else:
                 messages.error(request, 'Failed to edit beer, please ensure all fields are filled out correctly')
-    product = get_object_or_404(Product, pk=product_id)
-    if product.product_type == "cheese":
-        form = CheeseForm(instance=product)    
+    if request.user.is_superuser:           
+        product = get_object_or_404(Product, pk=product_id)
+        if product.product_type == "cheese":
+            form = CheeseForm(instance=product)    
+        else:
+            form = BeerForm(instance=product)
+        template = 'products/product-edit.html'
+        context = {
+            'product': product,
+            'form': form,
+        }
+        return render(request, template, context)
     else:
-        form = BeerForm(instance=product)
-    template = 'products/product-edit.html'
-    context = {
-        'product': product,
-        'form': form,
-    }
-    return render(request, template, context)
+        return redirect('home')
 
 
 def product_publish(request, product_id):
-    Product.objects.filter(pk=product_id).update(
-            displayed=True
-        )    
-    return redirect(reverse('product_edit', args=[product_id]))
+    if request.user.is_superuser: 
+        Product.objects.filter(pk=product_id).update(
+                displayed=True
+            )    
+        return redirect(reverse('product_edit', args=[product_id]))
+    else:
+        return redirect('home')
 
 
 def product_unpublish(request, product_id):
-    Product.objects.filter(pk=product_id).update(
-            displayed=False
-        )    
-    return redirect(reverse('product_edit', args=[product_id]))
+    if request.user.is_superuser:
+        Product.objects.filter(pk=product_id).update(
+                displayed=False
+            )    
+        return redirect(reverse('product_edit', args=[product_id]))
+    else:
+        return redirect('home')
 
 
 def delete_product(request, product_id):
-    product = get_object_or_404(Product, pk=product_id)
-    if product.image_url != "":
-        cloudinary.uploader.destroy(
-            "cheese-and-beer/products/" + product.image_url)
-    product.delete()
-    messages.success(request, 'Product Deleted')
-    return redirect('edit_product')
+    if request.user.is_superuser:
+        product = get_object_or_404(Product, pk=product_id)
+        if product.image_url != "":
+            cloudinary.uploader.destroy(
+                "cheese-and-beer/products/" + product.image_url)
+        product.delete()
+        messages.success(request, 'Product Deleted')
+        return redirect('edit_product')
+    else:
+        return redirect('home')
 

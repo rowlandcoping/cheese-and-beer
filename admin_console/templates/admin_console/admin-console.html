@@ -5,33 +5,51 @@ Cheese and Beer - Admin Console
 {% endblock %}
 
 {% block content %}
-<h1>Do Stuff Now</h1>
-<h2>Categories</h2>
-<p>
-    <a href="{% url 'add_cheese_category' %}">Add a new cheese category</a>
-</p>
-<p>
-    <a href="{% url 'add_beer_category' %}">Add a new beer category</a>
-</p>
-<p>
-    <a href="{% url 'edit_categories' %}">Edit Categories</a>
-</p>
-<h2>Products</h2>
-<p>
-    <a href="{% url 'add_cheese' %}">Add a new cheese</a>
-</p>
-<p>
-    <a href="{% url 'add_beer' %}">Add a new beer</a>
-</p>
-<p>
-    <a href="{% url 'edit_product' %}">Edit existing product</a>
-</p>
-<h2>Administration</h2>
-<p>
-    <a href="">Customer Support</a>
-</p>
 
-<h2>
-    <a href="{% url 'home' %}">Back to Homepage</a>
-</h2>
+{% if messages %}
+{% for message in messages %}
+{% with message.level as level %}
+{% if level == 40 %}
+<div id="general-message" class="error-message alert-disable">
+{% elif level == 30 %}
+<div id="general-message" class="warning-message alert-disable">
+{% elif level == 25 %}
+<div id="general-message" class="success-message alert-disable">
+{% else %}
+<div id="general-message" class="warning-message alert-disable">
+{% endif %}
+{% endwith %}    
+    {{ message }}
+</div>      
+{% endfor %}    
+{% endif %}
+<div id="admin-console">
+    <h2>Product Administration</h2>
+    <br>
+    <h3>Categories</h3>
+    <p>
+        <a href="{% url 'add_cheese_category' %}">Add a new cheese category</a>
+    </p>
+    <p>
+        <a href="{% url 'add_beer_category' %}">Add a new beer category</a>
+    </p>
+    <p>
+        <a href="{% url 'edit_categories' %}">Edit Categories</a>
+    </p>
+    <br>
+    <h3>Products</h3>
+    <p>
+        <a href="{% url 'add_cheese' %}">Add a new cheese</a>
+    </p>
+    <p>
+        <a href="{% url 'add_beer' %}">Add a new beer</a>
+    </p>
+    <p>
+        <a href="{% url 'edit_product' %}">Edit existing product</a>
+    </p>
+    <br>
+    <h3>
+        <a href="{% url 'home' %}">Back to Homepage</a>
+    </h3>
+</div>
 {% endblock %}

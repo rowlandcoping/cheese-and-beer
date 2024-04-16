@@ -5,6 +5,25 @@ Cheese and Beer - Admin Console
 {% endblock %}
 
 {% block content %}
+
+{% if messages %}
+{% for message in messages %}
+{% with message.level as level %}
+{% if level == 40 %}
+<div id="general-message" class="error-message alert-disable">
+{% elif level == 30 %}
+<div id="general-message" class="warning-message alert-disable">
+{% elif level == 25 %}
+<div id="general-message" class="success-message alert-disable">
+{% else %}
+<div id="general-message" class="warning-message alert-disable">
+{% endif %}
+{% endwith %}    
+    {{ message }}
+</div>      
+{% endfor %}    
+{% endif %}
+
 <h1>Do Stuff Now</h1>
 <form method="POST" action="{% url 'product_edit' product.id %}" enctype="multipart/form-data">
     {% csrf_token %}

@@ -5,6 +5,24 @@ Cheese and Beer - Admin Console
 {% endblock %}
 
 {% block content %}
+
+{% if messages %}
+{% for message in messages %}
+{% with message.level as level %}
+{% if level == 40 %}
+<div id="general-message" class="error-message alert-disable">
+{% elif level == 30 %}
+<div id="general-message" class="warning-message alert-disable">
+{% elif level == 25 %}
+<div id="general-message" class="success-message alert-disable">
+{% else %}
+<div id="general-message" class="warning-message alert-disable">
+{% endif %}
+{% endwith %}    
+    {{ message }}
+</div>      
+{% endfor %}    
+{% endif %}
 <div id="product-alert" class="delete-alert not-displayed">
     <div class="alert-header">
         <h4>Confirm Deletion</h4>
@@ -26,7 +44,7 @@ Cheese and Beer - Admin Console
         </span>
     </div>
 </div>
-<div id="product-update">
+<div id="product-update" class="alert-disable">
     <h1>Update or Remove Products</h1>
     <h2>Search here to filter by Product ID or name:</h2>
     <form method="GET" action="{% url 'edit_product' %}">
