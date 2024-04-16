@@ -407,8 +407,79 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });    
         });
-
     }
+    //address removal alerts
+    if (document.getElementById('address-alert')) {
+        const removeAddressButtons = Array.from(document.getElementsByClassName('remove-address'));
+        removeAddressButtons.forEach(item => {
+            item.addEventListener('click', function handleClick(event) {
+                const itemId = item.getAttribute('id');
+                id=itemId.split("-")[1];
+                document.getElementById('alert-full-name').textContent = document.getElementById('name-' + id).textContent
+                document.getElementById('alert-line-one').textContent = document.getElementById('one-' + id).textContent
+                if (document.getElementById('two-' + id)) {
+                    document.getElementById('alert-line-two').textContent = document.getElementById('two-' + id).textContent
+                }
+                document.getElementById('alert-city').textContent = document.getElementById('city-' + id).textContent
+                document.getElementById('alert-county').textContent = document.getElementById('county-' + id).textContent
+                document.getElementById('alert-postcode').textContent = document.getElementById('postcode-' + id).textContent
+                document.getElementById('remove-address').href = "/addresses/remove-address/" + id + "/";
+                const disabledSections = Array.from(document.getElementsByClassName('alert-disable'));
+                    for (let i = 0; i < disabledSections.length; i++) {
+                        disabledSections[i].style.pointerEvents = "none";
+                        disabledSections[i].style.opacity = "0.5";
+                    }
+                document.getElementById('address-alert').style.display="block";
+                document.addEventListener("click", function(e){
+                    const target = e.target.closest(".cancel-alert");
+                    if(target){
+                        document.getElementById('address-alert').style.display="none";
+                        const disabledSections = Array.from(document.getElementsByClassName('alert-disable'));
+                        for (let i = 0; i < disabledSections.length; i++) {
+                            disabledSections[i].style.pointerEvents = "auto";
+                            disabledSections[i].style.opacity = "1";
+                        }
+                    }
+                });
+            });
+        });
+    }
+    
+    // Product Deletion Alerts
+
+    if (document.getElementById('product-alert')) {
+        const removeAddressButtons = Array.from(document.getElementsByClassName('delete-product'));
+        removeAddressButtons.forEach(item => {
+            item.addEventListener('click', function handleClick(event) {
+                const itemId = item.getAttribute('id');
+                id=itemId.split("-")[1];
+                document.getElementById('alert-name').textContent = document.getElementById('name-' + id).textContent
+                document.getElementById('remove-product').href = "/products/delete-product/" + id + "/";
+                const disabledSections = Array.from(document.getElementsByClassName('alert-disable'));
+                    for (let i = 0; i < disabledSections.length; i++) {
+                        disabledSections[i].style.pointerEvents = "none";
+                        disabledSections[i].style.opacity = "0.5";
+                    }
+                document.getElementById('product-alert').style.display="block";
+                document.addEventListener("click", function(e){
+                    const target = e.target.closest(".cancel-alert");
+                    if(target){
+                        document.getElementById('product-alert').style.display="none";
+                        const disabledSections = Array.from(document.getElementsByClassName('alert-disable'));
+                        for (let i = 0; i < disabledSections.length; i++) {
+                            disabledSections[i].style.pointerEvents = "auto";
+                            disabledSections[i].style.opacity = "1";
+                        }
+                    }
+                });
+            });
+        });
+    }
+
+
+
+
+    //Add or select addresses from checkout
     if (document.getElementById('add-new-address')) {
         document.addEventListener("click", function(e){
             const target = e.target.closest("#add-new-address");
@@ -442,7 +513,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }
         });
-
+        /*styling for address selector*/
         document.addEventListener("click", function(e){
             const target = e.target.closest(".address-bar");
             if(target){
@@ -460,8 +531,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     formButtons[i].style.pointerEvents = "none";
                 }
             }
-        });
-        
+        });        
     }
 
 
@@ -491,24 +561,24 @@ document.addEventListener("DOMContentLoaded", function() {
     // Basket message fade
 
     window.onload=setTimeout(function(){
-        let opacity=0; 
-        let intervalID=0;
-        setInterval(hide, 40); 
-        function hide(){ 
-            let bmessage=document.getElementById("basket-message"); 
-            opacity = Number(window.getComputedStyle(bmessage).getPropertyValue("opacity"))        
-            if(opacity>0){ 
-                opacity=opacity-0.01; 
-                bmessage.style.opacity=opacity 
-            } 
-            else{ 
-                clearInterval(intervalID);
-                document.getElementById("basket-message").style.display="none";
-            } 
+        if (document.getElementById("basket-message")) {
+            let opacity=0; 
+            let intervalID=0;
+            setInterval(hide, 40); 
+            function hide(){ 
+                let bmessage=document.getElementById("basket-message"); 
+                opacity = Number(window.getComputedStyle(bmessage).getPropertyValue("opacity"))        
+                if(opacity>0){ 
+                    opacity=opacity-0.01; 
+                    bmessage.style.opacity=opacity 
+                } 
+                else{ 
+                    clearInterval(intervalID);
+                    document.getElementById("basket-message").style.display="none";
+                } 
+            }
         }
-    }, 500);
-    
-     
+    }, 500);   
 
 });
 

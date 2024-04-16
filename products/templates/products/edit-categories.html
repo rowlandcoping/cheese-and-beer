@@ -12,7 +12,6 @@ Cheese and Beer - Admin Console
 <h3>
     {{ category.name }}
     <a href = "{% url 'edit_cheese_category' category.id %}"> Edit</a>
-    <a href = ""> Delete</a>
 </h3>
 {% endfor %}
 
@@ -22,7 +21,6 @@ Cheese and Beer - Admin Console
 <h3>
     {{ category.name }}
     <a href = "{% url 'edit_beer_category' category.id %}"> Edit</a>
-    <a href = ""> Delete</a>
 </h3>
 {% endfor %}
 

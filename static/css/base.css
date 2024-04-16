@@ -1,6 +1,7 @@
 /*GENERAL*/
 a, a:visited, a:link, a:active, a:hover, a:focus  {
     text-decoration: none;
+    color: inherit;
     outline: 0;
     cursor: pointer;
 }
@@ -9,13 +10,10 @@ ul {
     margin:0;
     padding:0;
 }
-
-
 h1,h2,h3,h4,p,img{
     margin:0;
     padding:0;
 }
-
 .clickable-element {
     cursor: pointer;
 }
@@ -71,6 +69,10 @@ body {
 .nav-menu-link {
     position:relative;
     display:block;
+}
+
+.nav-menu-link:hover {
+    color:white;
 }
 
 #cheese-nav, #beer-nav, #account-nav {
@@ -460,9 +462,10 @@ input[type=number] {
 /* BASKET MESSAGES */
 #basket-message {
     padding:10px;
-    position:absolute;
-    right:-10px;
-    top:50px;
+    position:fixed;
+    right:10px;
+    border-radius: 6px;
+    top:75px;
     z-index: 5;
     border-width: 1px;
     border-style: double;
@@ -478,12 +481,71 @@ input[type=number] {
     object-fit:cover;
 }
 
-.basket-error {
+
+/*General Messages*/
+
+#general-message {
+    padding:10px;
+    margin: 10px 0;
+    background-color: rgba(192, 192, 192, 0.945);
+    border-width: 2px;
+    border-radius: 6px;
+    border-style: double;
+    width: 100%;
+    text-align:center;
+    font-size: 120%;
+}
+
+.error-message {
     border-color: rgb(245, 26, 26)
 }
-.basket-success {
+.success-message {
     border-color: rgb(27, 155, 1)
 }
-.basket-warning {
+.warning-message {
     border-color: rgb(253, 201, 30)
+}
+
+/* General Alerts */
+.delete-alert {
+    position:fixed;
+    background-color: rgb(255, 255, 255);
+    border:1px solid rgb(70, 70, 70);
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width:300px;
+}
+.alert-header, .alert-content, .alert-footer {
+    padding:10px;
+}
+.alert-header {
+    display:flex;
+    background-color: rgb(247, 241, 213);
+    justify-content: space-between;
+    align-items:center;    
+    border-bottom:1px dashed rgb(160, 159, 159);
+}
+.alert-footer {
+    display:flex;
+    justify-content: space-between;
+    border-top:1px dashed rgb(160, 159, 159);
+    background-color: rgb(247, 241, 213);
+}
+.fa-xmark {
+    margin:0;
+    padding:3px 5px;
+}
+.yes-button {
+    width:125px;
+    background-color: rgb(0, 32, 0);
+    text-align:center;
+    color:white;
+}
+.no-button {
+    width:125px;
+    background-color: rgb(49, 0, 0);
+    text-align:center;
+    color:white;
 }

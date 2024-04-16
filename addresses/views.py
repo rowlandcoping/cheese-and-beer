@@ -40,6 +40,7 @@ def add_address(request):
                 selected_address['address_line_one'] = form.cleaned_data["address_line_one"]
                 request.session['selected_address'] = selected_address
             final_form.save()
+            messages.success(request, 'Address Added')
         else:
             messages.error(request, 'Sorry, your address was not added, please try again.')
         return redirect(return_url)
@@ -67,6 +68,7 @@ def edit_address(request, address_id):
                     )       
                 final_form.default = True
             final_form.save()
+            messages.success(request, 'Address Updated')
             return redirect('manage_addresses')
         else:
             messages.error(request, 'Sorry, your address was not updated, please try again.')
@@ -95,6 +97,7 @@ def remove_address(request, address_id):
                 Addresses.objects.filter(pk=default_default[0]['id']).update(
                     default=True
                 )
+        messages.success(request, 'Address Removed')
         return redirect('manage_addresses')
     else:
         return redirect('home')
@@ -111,6 +114,7 @@ def set_default(request, address_id):
         Addresses.objects.filter(pk=address_id).update(
             default=True
         )
+        messages.success(request, 'Default Address Changed')
         return redirect('manage_addresses')
     else:
         return redirect('home')

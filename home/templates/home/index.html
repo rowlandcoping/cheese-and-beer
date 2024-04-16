@@ -5,6 +5,23 @@ Cheese and Beer
 {% endblock %}
 
 {% block content %}
+{% if messages %}
+{% for message in messages %}
+{% with message.level as level %}
+{% if level == 40 %}
+<div id="general-message" class="error-message">
+{% elif level == 30 %}
+<div id="general-message" class="warning-message">
+{% elif level == 25 %}
+<div id="general-message" class="success-message">
+{% else %}
+<div id="general-message" class="warning-message">
+{% endif %}
+{% endwith %}    
+    {{ message }}
+</div>      
+{% endfor %}    
+{% endif %}
 <div id="homepage-content">
     <div id="homepage-intro"></div>
     <h2>Welcome to Cheese and Beer!</h2>
