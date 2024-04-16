@@ -17,6 +17,11 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 import dj_database_url
+import mimetypes
+
+
+mimetypes.add_type("text/css", ".css", True)
+mimetypes.add_type("application/javascript", ".js", True)
 
 load_dotenv()
 
@@ -222,7 +227,7 @@ if DEVELOPMENT == False:
 # whitenoise
 
 if DEVELOPMENT == False:
-    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 # stripe
 
