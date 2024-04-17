@@ -26,15 +26,17 @@ ul {
     margin:0;
     padding:0;
 }
+
 h1 {
     font-family:title;
     font-size: 300%;
     display:inline-block;
 }
-h1,h2,h3,h4,p,img{
+h1,h2,h3,h4,p,img {
     margin:0;
     padding:0;
 }
+
 .clickable-element {
     cursor: pointer;
 }
@@ -91,7 +93,7 @@ body {
     color: rgb(255, 255, 140);
     background-color:rgb(0, 51, 0);
     border: 2px inset rgb(0, 15, 0);
-    margin-left: 10px;
+    margin-left: 20px;
 }
 .product-menu {
     display:flex;
@@ -221,25 +223,53 @@ body {
     background-color:rgb(255, 255, 140);
     color:rgb(1, 70, 1);
 }
+.checkout {
+    margin-right:10px;
+}
 
 /*HOMEPAGE*/
 
 #homepage-content {
+    margin:75px 100px;
     text-align: center;
+    background-color: rgb(226, 226, 189);
+    border-radius: 20px;
+    padding:75px 20px;
+    box-shadow: 4px 4px 5px rgb(107, 107, 107);  
 }
-
-#homepage-intro {
-    height: 7vh;
-}
-
 #homepage-banners {
-    margin-top:50px;
-    height: 50vh;
     display:flex;
-    justify-content:space-around;
+    justify-content:space-evenly;
     align-items:center;
+    
 }
-
+#homepage-intro {
+    display:flex;
+    flex-flow:column;
+    justify-content:space-evenly;
+    width:400px;
+    height:400px;
+    background-color:rgb(0, 51, 0);
+    color:rgb(255, 255, 140);
+    border-radius: 10px;
+    box-shadow: 4px 4px 5px rgb(107, 107, 107);
+}
+#homepage-intro h2, #homepage-intro p {
+    padding:0 20px;
+}
+#homepage-intro h2 {
+    margin-top:20px;
+    font-size:160%;
+}
+#homepage-intro p {
+    font-size:120%;
+}
+#homepage-intro i {
+    font-size:180%;
+}
+#homepage-intro p:last-child{
+    margin-bottom:20px;
+}
 .homepage-banner {
     display: flex;
     justify-content: center;
@@ -250,9 +280,9 @@ body {
     width: 400px;
     height: 400px;
     color:black;
-    font-family:title;
+    border-radius: 10px;
+    box-shadow: 4px 4px 5px rgb(107, 107, 107);
 }
-
 .banner-text-holder {
     display:inline-block;
     background-color: rgba(0,0,0,0.8);
