@@ -94,7 +94,10 @@ def view_results(request):
                         if id.id in product_list_ids:
                             continue
                         else:
-                            product_list.extend(product)
+                            try: 
+                                product_list = product_list | product
+                            except:
+                                product_list = product
                 beer_index = []
                 beer_query = Q(name__icontains=query)
                 beer_categories = BeerCategory.objects.all().filter(beer_query)
@@ -109,7 +112,10 @@ def view_results(request):
                         if id.id in product_list_ids:
                             continue
                         else:
-                            product_list.extend(product)
+                            try: 
+                                product_list = product_list | product
+                            except:
+                                product_list = product
             else:
                 search_term = "all products"
                 product_list = products

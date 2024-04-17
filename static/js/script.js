@@ -76,62 +76,74 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     //NAV MENU
-
+    document.addEventListener("mouseout", function(e){
+        const target = e.target.closest(".menu-header");
+        if(target){
+            target.style.backgroundColor = "rgb(1, 70, 1)";
+            target.style.color = "rgb(255, 255, 140)";
+        }
+    });
+    document.addEventListener("mouseover", function(e){
+        const target = e.target.closest(".menu-header");
+        if(target){
+            target.style.backgroundColor = "rgb(255, 255, 140)";
+            target.style.color = "rgb(1, 70, 1)";
+        }
+    });
     document.addEventListener("mouseover", function(e){
         const target = e.target.closest("#beer-nav");
         if(target){
-            document.getElementById('beer-desktop-mouseout').style.display = "none";
             document.getElementById('beer-desktop-mouseover').style.display = "block";
         }
     });
     document.addEventListener("mouseout", function(e){
         const target = e.target.closest("#beer-nav");
         if(target){
-            document.getElementById('beer-desktop-mouseout').style.display = "block";
             document.getElementById('beer-desktop-mouseover').style.display = "none";
         }
     });
     document.addEventListener("mouseover", function(e){
         const target = e.target.closest("#cheese-nav");
         if(target){
-            document.getElementById('cheese-desktop-mouseout').style.display = "none";
             document.getElementById('cheese-desktop-mouseover').style.display = "block";
         }
     });
     document.addEventListener("mouseout", function(e){
         const target = e.target.closest("#cheese-nav");
         if(target){
-            document.getElementById('cheese-desktop-mouseout').style.display = "block";
             document.getElementById('cheese-desktop-mouseover').style.display = "none";
         }
     });
+
+
+
+
     document.addEventListener("mouseover", function(e){
         const target = e.target.closest("#account-nav");
         if(target){
-            document.getElementById('account-mouseout').style.display = "none";
             document.getElementById('account-mouseover').style.display = "block";
         }
     });
     document.addEventListener("mouseout", function(e){
         const target = e.target.closest("#account-nav");
         if(target){
-            document.getElementById('account-mouseout').style.display = "block";
             document.getElementById('account-mouseover').style.display = "none";
         }
     });
 
+   
     document.addEventListener("mouseover", function(e){
         const target = e.target.closest(".nav-menu-link");
         if(target){
-            target.style.backgroundColor = "black";
-            target.style.Color = "white";
+            target.style.backgroundColor = "rgb(255, 255, 140)";
+            target.style.color = "rgb(1, 70, 1)";
         }
     });
     document.addEventListener("mouseout", function(e){
         const target = e.target.closest(".nav-menu-link");
         if(target){
-            target.style.backgroundColor = "white";
-            target.style.Color = "black";
+            target.style.backgroundColor = "rgb(1, 70, 1)";
+            target.style.color = "rgb(255, 255, 140)";
         }
     });
     

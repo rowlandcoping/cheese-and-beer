@@ -1,4 +1,20 @@
 /*GENERAL*/
+@font-face {
+    font-family: title;
+    src: url("../fonts/FallIsComingRegular-Mx9B.ttf");
+    font-display: swap;
+}
+@font-face {
+    font-family: main;
+    src: url("../fonts/RobotoFlex-VariableFont_GRAD,XOPQ,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf");
+    font-display: swap;
+}
+
+button {
+    outline: none;
+    border:none;
+}
+
 a, a:visited, a:link, a:active, a:hover, a:focus  {
     text-decoration: none;
     color: inherit;
@@ -9,6 +25,11 @@ ul {
     list-style-type: none;
     margin:0;
     padding:0;
+}
+h1 {
+    font-family:title;
+    font-size: 300%;
+    display:inline-block;
 }
 h1,h2,h3,h4,p,img{
     margin:0;
@@ -21,8 +42,10 @@ h1,h2,h3,h4,p,img{
     display:none;
 }
 body {
+    font-family: main;
     position:relative;
-    margin: 30px 50px;
+    margin:0;
+    padding:0;
 }
 .green-text {
     color: green;
@@ -62,9 +85,26 @@ body {
 
 /*BASE TEMPLATE*/
 
+.title-thing {
+    display:inline-block;
+    padding:15px 10px 0 10px;
+    color: rgb(255, 255, 140);
+    background-color:rgb(0, 51, 0);
+    border: 2px inset rgb(0, 15, 0);
+    margin-left: 10px;
+}
+.product-menu {
+    display:flex;
+    
+}
+
 #main-navigation {    
     display:flex;
     justify-content:space-between;
+    align-items: center;
+    background-color:rgb(1, 70, 1);
+    width:100%;
+    height:100%;
 }
 .nav-menu-link {
     position:relative;
@@ -75,17 +115,111 @@ body {
     color:white;
 }
 
-#cheese-nav, #beer-nav, #account-nav {
+#cheese-nav, #beer-nav, #account-nav, .checkout {
     position:relative;
-    display:inline-block;
-    width: 125px;
+    margin: 0 5px;
+}
+
+#cheese-desktop-mouseout, #beer-desktop-mouseout, #account-mouseout, .checkout {
+    font-size:115%;
+    color: rgb(255, 255, 140);
+    padding:10px;
 }
 #beer-desktop-mouseover, #cheese-desktop-mouseover,
 #beer-desktop-mouseout, #cheese-desktop-mouseout,
 #account-mouseout, #account-mouseover {
-    background-color:white;
+    background-color:rgb(1, 70, 1);
+    color:rgb(255, 255, 140);
+}
+
+.nav-menu-link {
+    border-style: dotted;
+    border-width: 0 1px 1px 1px; 
+    border-color: rgb(0, 15, 0);
+    padding:5px 10px;
+}
+#beer-desktop-mouseout, #cheese-desktop-mouseout {
+    border-radius: 4px 4px 0 4px;
+}
+#account-mouseout {
+    border-radius: 4px 4px 0 0;
+}
+
+#beer-desktop-mouseover, #cheese-desktop-mouseover,
+#account-mouseover {
     position:absolute;
+    top:42px;
     z-index: 1;
+}
+#cheese-desktop-mouseover {
+    left:10px;
+    width:110px;
+}
+#beer-desktop-mouseover {
+    left:11px;
+    width:85px;
+}
+#account-mouseover {
+    width:123px;
+}
+
+.search {
+    flex: 1;
+    margin: 0 10px 0 20px;
+}
+
+.search-input {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar {
+    width:100%;
+    padding:10px 10px;
+    font-size: 110%;
+    border-radius: 4px;
+    outline: none;
+    border:none;
+    border: 1px solid rgb(0, 15, 0);
+}
+.search-bar-button {
+    display:block;
+    padding:5px 10px 6px 10px;
+    margin-left: -50px;
+    border-radius:0 2px 2px 0;
+    background-color:rgb(0, 51, 0);
+    color:rgb(255, 255, 140);
+}
+.search-bar-button:hover {
+    background-color:rgb(1, 70, 1);
+    
+}
+.fa-magnifying-glass {
+    font-size: 220%;
+}
+#basket-total {
+    padding:5px;
+    font-size: 95%;
+}
+#basket-total:hover {
+    background-color:rgb(255, 255, 140);
+    border-radius: 6px;
+    color:rgb(1, 70, 1);
+}
+
+.menu-checkout-button {
+    margin-top:5px;
+    padding:5px;
+    text-align:center;
+    background-color:rgb(0, 51, 0);
+    border: 1px solid rgb(0, 15, 0);
+    color:rgb(255, 255, 140);
+    border-radius: 6px;
+    font-size: 95%;
+}
+.menu-checkout-button:hover {
+    background-color:rgb(255, 255, 140);
+    color:rgb(1, 70, 1);
 }
 
 /*HOMEPAGE*/

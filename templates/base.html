@@ -19,59 +19,50 @@
     <nav class="alert-disable">
         <div id="main-navigation">
             <div id="logo" class="clickable-element">
-                <a href="{% url 'home' %}"><img src="{% static 'images/holdinglogo.svg' %}"></a>
+                <a href="{% url 'home' %}"><span class="title-thing"><h1>Cheese&Beer</h1>.com</span></a>
             </div>
             <div class="search">
-                <h4>Find a product:</h4>
                 <form method="GET" action="{% url 'view_results' %}">
-                    <div class="input-group w-100">
-                        <input type="text" name="query" placeholder="Search">
-                        <div>
-                            <button type="submit">
+                    <div class="search-input">
+                        <input class="search-bar" type="text" name="query" placeholder="search for cheese or beer"><button class="search-bar-button clickable-element" type="submit">
                             <span>
-                                <i>search</i>
+                                <i class="fa-solid fa-magnifying-glass"></i>
                             </span>
-                            </button>
-                        </div>
+                        </button>
+                        </span>
                     </div>
                 </form>
-
             </div>
-            <div class="product-menu clickable-element">
+            <div class="product-menu">
                 <div id="cheese-nav">
-                    <a href=""><div id="cheese-desktop-mouseout">Cheese</div></a>
+                    <a href="{% url 'view_results' %}?category=cheese"><div id="cheese-desktop-mouseout" class="menu-header"><i class="fa-solid fa-cheese"></i> Cheese <i class="fa-solid fa-caret-down"></i></div></a>
                     <div id="cheese-desktop-mouseover" class="not-displayed">
-                        <a href="{% url 'view_results' %}?category=cheese" class="nav-menu-link"><span>Cheese</span></a>
                         {% for category in cheese_categories %}
                         <a href="{% url 'view_results' %}?category=cheese,{{ category.id }}" class="nav-menu-link"><span>{{ category.name }}</span></a>
                         {% endfor %}
                     </div>
                 </div>
                 <div id="beer-nav">
-                    <div id="beer-desktop-mouseout">
-                        <a href="" class="nav-menu-link"><span>Beer</span></a>
-                    </div>
+                    <a href="{% url 'view_results' %}?category=beer"><div id="beer-desktop-mouseout" class="menu-header"><i class="fas fa-beer"></i> <span>Beer</span> <i class="fa-solid fa-caret-down"></i></div></a>
                     <div id="beer-desktop-mouseover" class="not-displayed">
-                        <a href="{% url 'view_results' %}?category=beer" class="nav-menu-link"><span>Beer</span></a>
                         {% for category in beer_categories %}
                         <a href="{% url 'view_results' %}?category=beer,{{ category.id }}" class="nav-menu-link"><span>{{ category.name }}</span></a>
                         {% endfor %}
                     </div>
                 </div>
             </div>
-            <div class="account clickable-element">
+            <div class="account-menu">
                 <div id="account-nav">
-                    <div id="account-mouseout">
-                        <a href="" class="nav-menu-link"><span>My Account</span></a>
-                    </div>
-                    <div id="account-mouseover" class="not-displayed">
+                    <div id="account-mouseout" class="menu-header">
                         {% if authenticated %}
-                        <a href="{% url 'account_overview' %}" class="nav-menu-link"><span>My Account</span></a>
+                        <a href="{% url 'account_overview' %}"><i class="fa-solid fa-user"></i> <span>Account</span> <i class="fa-solid fa-caret-down"></i></a>
                         {% else %}
-                        <span>My Account</span>
+                        <span><i class="fa-solid fa-user"></i> <span>Account</span> <i class="fa-solid fa-caret-down"></i></span>
                         {% endif %}
+                    </div>
+                    <div id="account-mouseover" class="not-displayed">                       
                         {% if superuser %}
-                        <a href="{% url 'admin_console' %}" class="nav-menu-link"><span>Admin Console</span></a>
+                        <a href="{% url 'admin_console' %}" class="nav-menu-link"><span>Administration</span></a>
                         <a href="{% url 'admin:index' %}" class="nav-menu-link"><span>Django Admin</span></a>
                         {% endif %}
                         {% if authenticated %}
@@ -79,22 +70,28 @@
                         <a href="{% url 'view_orders' %}" class="nav-menu-link"><span>Orders</span></a>
                         <a href="{% url 'account_logout' %}" class="nav-menu-link"><span>Log out</span></a>
                         {% else %}
+                        <a href="{% url 'find_order' %}" class="nav-menu-link"><span>Find Order</span></a>
                         <a href="{% url 'account_login' %}" class="nav-menu-link"><span>Log in</span></a>
                         <a href="{% url 'account_signup' %}" class="nav-menu-link"><span>Sign Up</span></a>
                         {% endif %}                   
                     </div>
                 </div>
             </div>
-            <div class="checkout clickable-element">
-                <a href="{% url 'view_basket' %}"><i class="fas fa-shopping-basket"></i>
-                    {% if basket_total %}
-                    £{{ basket_total }}
-                    {% endif %}
+            {% if basket_total %}
+            <div class="checkout">
+                <a href="{% url 'view_basket' %}">
+                    <div id="basket-total">
+                        <i class="fas fa-shopping-basket"></i>                       
+                        £{{ basket_total }}                    
+                    </div>
                 </a>
-                {% if basket_total %}
-                <p><a href="{% url 'checkout' %}">Checkout</a></p>
-                {% endif %}
+                <a href="{% url 'checkout' %}">
+                    <div class="menu-checkout-button">
+                        <span >Checkout</a></span>
+                    </div>
+                </a>
             </div>
+            {% endif %}
         </div>
         <div class="product-menu-mobile not-displayed">
             <ul id="product-navigation">
@@ -110,9 +107,6 @@
             </ul>
         </div>    
     </nav>
-    <div class="divider alert-disable">
-        <hr>
-    </div>
     
     {% block content %}
     {% endblock %}

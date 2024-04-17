@@ -6,12 +6,15 @@ from django.views.decorators.http import require_POST
 
 
 def manage_addresses(request):
-    addresses= Addresses.objects.filter(user_id=request.user.id).order_by('-default', 'id').values()
-    template = 'addresses/addresses.html'    
-    context = {
-        'addresses': addresses,
-    }
-    return render(request, template, context)
+    if request.user.is_authenticated:
+        addresses= Addresses.objects.filter(user_id=request.user.id).order_by('-default', 'id').values()
+        template = 'addresses/addresses.html'    
+        context = {
+            'addresses': addresses,
+        }
+        return render(request, template, context)
+    else:
+        return redirect('account_login')
 
 
 def add_address(request):
@@ -44,13 +47,15 @@ def add_address(request):
         else:
             messages.error(request, 'Sorry, your address was not added, please try again.')
         return redirect(return_url)
-    template = 'addresses/add-address.html'
-    address_form = AddressForm()
-    context = {
-        'address_form': address_form,
-    }
-    return render(request, template, context)
-    
+    if request.user.is_authenticated:
+        template = 'addresses/add-address.html'
+        address_form = AddressForm()
+        context = {
+            'address_form': address_form,
+        }
+        return render(request, template, context)
+    else:
+        return redirect('account_login')
 
 
 def edit_address(request, address_id):
@@ -72,17 +77,20 @@ def edit_address(request, address_id):
             return redirect('manage_addresses')
         else:
             messages.error(request, 'Sorry, your address was not updated, please try again.')
-    address = get_object_or_404(Addresses, pk=address_id)
-    if request.user == address.user_id:
-        template = 'addresses/edit-address.html'
-        address_form = AddressForm(instance=address)
-        context = {
-            'address_form': address_form,
-            'address': address,
-        }
-        return render(request, template, context)
+    if request.user.is_authenticated:
+        address = get_object_or_404(Addresses, pk=address_id)
+        if request.user == address.user_id:
+            template = 'addresses/edit-address.html'
+            address_form = AddressForm(instance=address)
+            context = {
+                'address_form': address_form,
+                'address': address,
+            }
+            return render(request, template, context)
+        else:
+            return redirect('home')
     else:
-        return redirect('home')
+        return redirect('account_login')
 
 
 def remove_address(request, address_id):
