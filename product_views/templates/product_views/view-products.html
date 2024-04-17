@@ -41,20 +41,30 @@ Cheese and Beer
     </div>      
     {% endfor %}    
     {% endif %}
-    <div id="results and filter">
+    <div id="results-and-filter">
         <div id="results">
             {% if products %}
             {% if type %}
-            <h3>{{ number }} {{ result }} for {{ category.name }} {{ type }}</h3>
+            <h3>{{ number }} {{ result }} for 
+                {% if category.name %}
+                {% if type %}
+                <span class="forest-green-text">"{{ category.name }}"</span> {{ type }}
+                {% else %}
+                <span class="forest-green-text">"{{ category.name }}"</span>
+                {% endif %}
+                {% else %}
+                <span class="forest-green-text">"{{ type }}"</span>
+                {% endif %}            
+            </h3>
             {% else %}
-            <h3>{{ number }} {{ result }} for {{ search_term }}</h3>
+            <h3>{{ number }} {{ result }} for <span class="forest-green-text">"{{ search_term }}"</span></h3>
             {% endif %}
             {% else %}
             <h3>You have returned no results.  Please try again.</h3>
             {% endif %}
         </div>
         <div id="filter">
-            <select id="sort-selector" class="{% if current_sorting != 'None_None' %}green-sorter{% else %}black-sorter{% endif %}">
+            <select id="sort-selector" class="product-view-filter">
                 <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
                 <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
                 <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>

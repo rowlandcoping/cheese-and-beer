@@ -50,10 +50,13 @@ body {
     padding:0;
 }
 .green-text {
-    color: green;
+    color: rgb(3, 126, 3);
 }
 .red-text {
-    color: red;
+    color: rgb(255, 0, 0);
+}
+.forest-green-text {
+    color:rgb(1, 70, 1);
 }
 
 
@@ -61,7 +64,7 @@ body {
 .category-selector {
     background-color:grey;
     display:inline-block;
-    color:black;
+    color:rgb(0, 0, 0);
     border:rgb(53, 52, 52) 2px solid;
     cursor: pointer;
     padding:5px;
@@ -76,12 +79,12 @@ body {
 
 .button-on {
     font-size: 200%;
-    color: green;
+    color: rgb(0, 128, 0);
     text-decoration: none;
 }
-.button-off{
+.button-off {
     font-size: 200%;
-    color: red;
+    color: rgb(255, 0, 0);
     text-decoration: none;
 }
 
@@ -295,7 +298,6 @@ body {
     background-color: rgba(255, 255, 255, 0.6);
     color: black;
     border: 1px solid black;
-
 }
 
 #homepage-banner-one {
@@ -308,12 +310,32 @@ body {
 /*RESULTS VIEW PAGE*/
 #product-view {
     display:relative;
-    margin-top:20px;
+    margin:20px 50px 100px 50px;
+    background-color: rgb(226, 226, 189);
+}
+#results-and-filter {
+    display:flex;
+    padding:10px 20px;
+    justify-content:space-between;
+    align-items:center;
+    background-color:rgb(255, 255, 140);
+    border: 1px dotted rgb(105, 105, 105);
+}
+#filter select{
+    padding:5px;
+    width:300px;
+}
+#product-listings {
+    margin:0 10px 0 20px;
 }
 .product-section, .pairings-section {
     width:250px;
     display:inline-block;
-    margin: 20px 5px;
+    margin: 20px 10px;
+    background-color:white;
+    padding-top:20px;
+    padding-bottom:10px;
+    border-radius:4px;
 }
 .product-detail, .pairing-detail{
     display:flex;
