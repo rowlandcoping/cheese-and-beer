@@ -36,7 +36,6 @@ h1,h2,h3,h4,p,img {
     margin:0;
     padding:0;
 }
-
 .clickable-element {
     cursor: pointer;
 }
@@ -396,9 +395,12 @@ body {
     margin:10px 0;
     border-radius: 6px;
 }
-.add-basket {
+
+.add-basket-list {
     width: 101px;
     margin-right:5px;
+}
+.add-basket {    
     background-color:rgb(139, 67, 0);
     border:1px solid rgb(139, 67, 0);
     color:white;
@@ -407,9 +409,12 @@ body {
     background-color:rgb(245, 183, 126);
     color:rgb(0, 15, 0);
 }
-.buy-now {
+
+.buy-now-list {
     width: 95px;
     margin-left:5px;
+}
+.buy-now {    
     background-color:rgb(16, 95, 0);
     border:1px solid rgb(16, 95, 0);
     color:white;
@@ -471,6 +476,9 @@ body {
 
 
 /* VIEW PRODUCT PAGE */
+#product-page {
+    margin:20px 50px 100px 50px;
+}
 .product-overview {
     display: flex;
     justify-content: space-around;
@@ -478,32 +486,66 @@ body {
     margin-bottom:20px;
 }
 .detail-information {
+    margin:0 20px;
     width:40%;
 }
 #product-matching {
     margin-top:20px;
 }
+.quantity-label {
+    display:inline-block;
+}
+.quantity-box-product {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:5px 0;
+    padding:5px 0;
+    border-top: 1px dotted rgb(172, 171, 171);
+    border-bottom: 1px dotted rgb(172, 171, 171);
+}
+.quantity-box-product input {
+    width:40px;
+    text-align:center;
+    padding:3px;
+}
+.quantity-box-product input:focus {
+    border:2px rgb(87, 87, 87) solid;
+    border-radius: 2px;
+    outline:none;
+}
+#decrement-amount, #increment-amount {
+    margin:0 5px;
+    padding:4px 5px;
+    background-color:rgb(201, 198, 198);
+    border:1px solid rgb(128, 128, 128);
+}
+#decrement-amount:hover, #increment-amount:hover {
+    background-color:rgb(128, 128, 128);
+    border:1px solid rgb(87, 87, 87);
+}
 
 .product-action-buttons {
     text-align:center;
+    
 }
 .product-action-button {
     display:inline-block;
     padding:3px;
     font-size:130%;
-    width: 200px;
     margin:5px 0;
     border-radius: 6px;
 }
 .product-add-basket {
+    width: 208px;
     background-color:rgb(139, 67, 0);
     color:white;
 }
 .product-buy-now {
+    width: 200px;
     background-color:rgb(16, 95, 0);
     color:white;
 }
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -512,6 +554,10 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
     appearance: textfield;
+}
+
+#product-matching {
+    background-color: rgb(248, 248, 219);
 }
 
 /* CHECKOUT PAGE */
@@ -680,7 +726,7 @@ input[type=number] {
     align-items:center;
     text-align:center;
     width: 325px;
-    top:87px;
+    top:92px;
     right:20px;
     z-index: 5;
     border-width: 4px;
@@ -746,6 +792,15 @@ input[type=number] {
     align-items:center;    
     border-bottom:1px dashed rgb(160, 159, 159);
 }
+.alert-header .cancel-alert {
+    background-color:rgb(201, 198, 198);
+    border:1px solid rgb(128, 128, 128);
+}
+.alert-header .cancel-alert:hover {
+    background-color:rgb(128, 128, 128);
+    border:1px solid rgb(87, 87, 87);
+}
+
 .alert-footer {
     display:flex;
     justify-content: space-between;
@@ -759,14 +814,22 @@ input[type=number] {
 .yes-button {
     width:125px;
     background-color: rgb(0, 32, 0);
+    border:1px solid rgb(0, 32, 0);
     text-align:center;
     color:white;
+}
+.yes-button:hover {
+    background-color: rgb(50, 90, 50);
 }
 .no-button {
     width:125px;
     background-color: rgb(49, 0, 0);
+    border:1px solid rgb(49, 0, 0);
     text-align:center;
     color:white;
+}
+.no-button:hover {
+    background-color: rgb(94, 42, 42);
 }
 .alert-main-title {
     margin-bottom:10px;

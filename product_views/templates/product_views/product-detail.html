@@ -11,10 +11,10 @@ Cheese and Beer
         <i class="fa-solid fa-xmark cancel-alert"></i>
     </div>
     <div class="alert-content">
-        <h4>Buy "<span id="buy-now-name"></span>"</h4>
+        <h4 class="alert-main-title">Buy "<span id="buy-now-name"></span>"</h4>
         <p>You have other items in your basket, do you wish to keep them?</p>
     </div>
-    <div class="alert-footer">
+    <div class="alert-footer"> 
         <a id="keep-products" href="">
             <span class="alert-buttons yes-button">Yes</span>
         </a>
@@ -23,24 +23,28 @@ Cheese and Beer
         </a>
     </div>
 </div>
-<div id="product-page" class="alert-disable">
-    {% if messages %}
+{% if messages %}
     {% for message in messages %}
     {% with message.level as level %}
     {% if level == 40 %}
     <div id="basket-message" class="error-message">
+        <i class="fa-solid fa-exclamation red-text"></i>
     {% elif level == 30 %}
     <div id="basket-message" class="warning-message">
+        <i class="fa-solid fa-minus red-text"></i>
     {% elif level == 25 %}
     <div id="basket-message" class="success-message">
+        <i class="fa-solid fa-plus green-text"></i>
     {% else %}
     <div id="basket-message" class="warning-message">
+        <i class="fa-solid fa-minus red-text"></i>
     {% endif %}
     {% endwith %}    
         {{ message }}
-    </div>
+    </div>      
     {% endfor %}    
-    {% endif %}
+{% endif %}
+<div id="product-page" class="alert-disable">
     <div class="product-overview">          
         <div class="detail-image">
             <img src="{{ MEDIA_URL }}products/{{ product.image_url }}">
@@ -113,24 +117,24 @@ Cheese and Beer
                 {% csrf_token %}
                 <input type="hidden" name="view" id="view" value="{{ request.path }}?{{ current_view }}">
                 <div class="quantity-box-product">
-                    <label for="quantity"><h4>Quantity:</h4></label>
+                    <label for="quantity"><h4 class="quantity-label">Quantity: </h4></label>
                     <i id="decrement-amount" class="fa fa-minus"></i> <input type="number" name="quantity" id="quantity" min="1" value="1"> <i id="increment-amount" class="fa fa-plus"></i>
                 </div>
                 <input type="hidden" name="product" id="product" value="{{ product.id }}">                     
                 <div class="product-action-buttons">
-                    <button class="product-action-button product-add-basket">
+                    <button class="product-action-button add-basket product-add-basket">
                         <i class="fas fa-shopping-basket"></i> Add to Basket
                     </button>
                 </div>
             </form>
             <div class="product-action-buttons"> 
                 {% if basket_total %}                
-                <span class="product-action-button buy-now" id="basket-{{ product.id }}">
-                    <i class="fa-solid fa-credit-card"></i> Buy
+                <span class="product-action-button buy-now product-buy-now" id="basket-{{ product.id }}">
+                    <i class="fa-solid fa-credit-card"></i> Buy Now
                 </span>
                 {% else %}
-                <span class="product-action-button buy-now" id="single-{{ product.id }}">
-                    <i class="fa-solid fa-credit-card"></i> Buy
+                <span class="product-action-button buy-now product-buy-now" id="single-{{ product.id }}">
+                    <i class="fa-solid fa-credit-card"></i> Buy Now
                 </span>                          
                 {% endif %}
             </div>
@@ -140,7 +144,9 @@ Cheese and Beer
     <hr>
     <div id="product-matching">
         {% if pairings %}
-        <h3>Pairs Well With:</h3>
+        <div id="results-and-filter">
+            <h3>Pairs Well With:</h3>
+        </div>
         {% for pairing in pairings %}
         <div class="pairings-section">
             <div class="pairing-detail">          
@@ -151,7 +157,7 @@ Cheese and Beer
                 </div>
                 <div class="product-name">
                     <a href="{% url 'product_detail' pairing.id %}">
-                        <h4 id="buyname-{{ pairing.id }}">{{ pairing.name }}</h4>
+                        <h4 class="listing-name" id="buyname-{{ pairing.id }}">{{ pairing.name }}</h4>
                     </a>
                 </div>
                 <div class="product-info">
@@ -160,12 +166,12 @@ Cheese and Beer
                             {% if pairing.cheese_category  %}                            
                             Category: 
                             <a href="{% url 'view_results' %}?view_category=cheese,{{ pairing.cheese_category }}">
-                                {{ pairing.cheese_category }}
+                                <span class="forest-green-text listing-link">{{ pairing.cheese_category }}</span>
                             </a>
                             {% else %}                            
                             Category:
                             <a href="{% url 'view_results' %}?view_category=beer,{{ pairing.beer_category }}">
-                            {{ pairing.beer_category }}
+                                <span class="forest-green-text listing-link">{{ pairing.beer_category }}</span>
                             </a>
                             {% endif %}
                         </p>
@@ -173,7 +179,7 @@ Cheese and Beer
                         <p>
                         Variety: 
                         <a href="{% url 'view_results' %}?query={{ pairing.variety }}">
-                            {{ pairing.variety | lower }}
+                            <span class="forest-green-text listing-link">{{ pairing.variety | lower }}</span>
                         </a>
                         </p>
                     </div>
@@ -194,6 +200,11 @@ Cheese and Beer
                         </p>
                     </div>
                 </div>
+                <div class="action-section">
+                    <a href="{% url 'product_detail' pairing.id %}">
+                        <span class="forest-green-text listing-link"><p><small><em><u>more information</u></em></small></p></span>
+                    </a>                    
+                </div>
                 <div class="view-action-buttons">
                     <div class="add-from-view">
                         <form method="POST" action="{% url 'add_to_basket' %}" enctype="multipart/form-data">
@@ -201,7 +212,7 @@ Cheese and Beer
                             <input type="hidden" name="view" id="view" value="{{ request.path }}?{{ current_view }}">
                             <input type="hidden" name="quantity" id="quantity" value="1">
                             <input type="hidden" name="product" id="product" value="{{ pairing.id }}">                     
-                            <button class="action-button add-basket">
+                            <button class="action-button add-basket add-basket-list">
                                 <i class="fas fa-shopping-basket"></i> Add
                             </button>
                         </form>
@@ -209,12 +220,12 @@ Cheese and Beer
                     <div class="buy-from-view">
                         <div class="buynow-buttons"> 
                             {% if basket_total %}                            
-                            <span class="action-button buy-now" id="basket-{{ pairing.id }}">
+                            <span class="action-button buy-now buy-now-list" id="basket-{{ pairing.id }}">
                                 <i class="fa-solid fa-credit-card"></i> Buy
                             </span>
                             {% else %}
                             <a href="{% url 'buy_now' %}?single={{ pairing.id }},1">
-                                <span class="action-button buy-now" id="buy-{{ pairing.id }}">
+                                <span class="action-button buy-now buy-now-list" id="buy-{{ pairing.id }}">
                                     <i class="fa-solid fa-credit-card"></i> Buy
                                 </span>
                             </a>                            
