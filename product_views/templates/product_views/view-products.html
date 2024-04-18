@@ -29,12 +29,16 @@ Cheese and Beer
     {% with message.level as level %}
     {% if level == 40 %}
     <div id="basket-message" class="error-message">
+        <i class="fa-solid fa-exclamation red-text"></i>
     {% elif level == 30 %}
     <div id="basket-message" class="warning-message">
+        <i class="fa-solid fa-minus red-text"></i>
     {% elif level == 25 %}
     <div id="basket-message" class="success-message">
+        <i class="fa-solid fa-plus green-text"></i>
     {% else %}
     <div id="basket-message" class="warning-message">
+        <i class="fa-solid fa-minus red-text"></i>
     {% endif %}
     {% endwith %}    
         {{ message }}
@@ -85,7 +89,7 @@ Cheese and Beer
                 </div>
                 <div class="product-name">
                     <a href="{% url 'product_detail' product.id %}">
-                        <h4 id="buyname-{{ product.id }}">{{ product.name }}</h4>
+                        <h4 class="listing-name" id="buyname-{{ product.id }}">{{ product.name }}</h4>
                     </a>
                 </div>
                 <div class="product-info">
@@ -94,12 +98,12 @@ Cheese and Beer
                             {% if product.cheese_category  %}                            
                             Category: 
                             <a href="{% url 'view_results' %}?view_category=cheese,{{ product.cheese_category }}">
-                                {{ product.cheese_category }}
+                                <span class="forest-green-text listing-link">{{ product.cheese_category }}</span>
                             </a>
                             {% else %}                            
                             Category:
                             <a href="{% url 'view_results' %}?view_category=beer,{{ product.beer_category }}">
-                            {{ product.beer_category }}
+                                <span class="forest-green-text listing-link">{{ product.beer_category }}</span>
                             </a>
                             {% endif %}
                         </p>
@@ -107,7 +111,7 @@ Cheese and Beer
                         <p>
                         Variety: 
                         <a href="{% url 'view_results' %}?query={{ product.variety }}">
-                            {{ product.variety | lower }}
+                            <span class="forest-green-text listing-link">{{ product.variety | lower }}</span>
                         </a>
                         </p>
                     </div>
@@ -130,7 +134,7 @@ Cheese and Beer
                 </div>
                 <div class="action-section">
                     <a href="{% url 'product_detail' product.id %}">
-                        <p><small><em><u>more information</u></em></small></p>
+                        <span class="forest-green-text listing-link"><p><small><em><u>more information</u></em></small></p></span>
                     </a>                    
                 </div>
                 <div class="view-action-buttons">
@@ -140,7 +144,7 @@ Cheese and Beer
                             <input type="hidden" name="view" id="view" value="{{ request.path }}?{{ current_view }}">
                             <input type="hidden" name="quantity" id="quantity" value="1">
                             <input type="hidden" name="product" id="product" value="{{ product.id }}">                     
-                            <button class="action-button add-basket">
+                            <button class="action-button add-basket clickable-element">
                                 <i class="fas fa-shopping-basket"></i> Add
                             </button>
                         </form>
@@ -148,7 +152,7 @@ Cheese and Beer
                     <div class="buy-from-view">
                         <div class="buynow-buttons"> 
                             {% if basket_total %}                            
-                            <span class="action-button buy-now" id="basket-{{ product.id }}">
+                            <span class="action-button buy-now clickable-element" id="basket-{{ product.id }}">
                                 <i class="fa-solid fa-credit-card"></i> Buy
                             </span>
                             {% else %}

@@ -27,7 +27,9 @@ Cheese and Beer
     </form>
 </div>
 <div class="title-section">
+    {% if order %}
     <h2>Order details, Order {{ order.order_number }}</h2>
+    {% endif %}
 </div>
 <div id="order-item-view">
     <div id="basket-listings">

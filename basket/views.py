@@ -34,7 +34,7 @@ def buy_now(request):
             basket[product] = quantity
         request.session['basket'] = basket
     product_info = Product.objects.get(pk=product)
-    message = '<h4>' + product_info.name + ' added to basket</h4>' + '<img src="' + url.strip() + f'products/{ product_info.image_url }">'                         
+    message = '<p>' + product_info.name + ' added to basket</p>' + '<img src="' + url.strip() + f'products/{ product_info.image_url }">'                         
     messages.success(request, make_safe(message))
     return redirect('checkout')    
 
@@ -50,7 +50,7 @@ def add_to_basket(request):
     else:
         basket[product] = quantity
     request.session['basket'] = basket
-    message = '<h4>' + product_info.name + ' added to basket</h4>' + '<img src="' + url.strip() + f'products/{ product_info.image_url }">'                         
+    message = '<p>' + product_info.name + ' added to basket</p>' + '<img src="' + url.strip() + f'products/{ product_info.image_url }">'                         
     messages.success(request, make_safe(message))
     return redirect(view)
 
@@ -62,12 +62,12 @@ def update_basket(request):
     basket = request.session.get('basket', {})
     if action == "increment":
         basket[product_id] += 1
-        message = '<h4>' + product_info.name + ' added to basket</h4>' + '<img src="' + url.strip() + f'products/{ product_info.image_url }">' 
+        message = '<p>' + product_info.name + ' added to basket</p>' + '<img src="' + url.strip() + f'products/{ product_info.image_url }">' 
         messages.success(request, make_safe(message))
     else:
         if basket[product_id] > 1:
             basket[product_id] -= 1
-        message = '<h4>' + product_info.name + ' removed from basket</h4>' + '<img src="' + url.strip() + f'products/{ product_info.image_url }">' 
+        message = '<p>' + product_info.name + ' removed from basket</p>' + '<img src="' + url.strip() + f'products/{ product_info.image_url }">' 
         messages.warning(request, make_safe(message))
     request.session['basket'] = basket
     if origin == "chkt":
@@ -83,7 +83,7 @@ def remove_item(request):
         basket.pop(product_id)
     if basket:
         request.session['basket'] = basket
-        message = '<h4>' + product_info.name + ' removed from basket</h4>' + '<img src="' + url.strip() + f'products/{ product_info.image_url }">' 
+        message = '<p>' + product_info.name + ' removed from basket</p>' + '<img src="' + url.strip() + f'products/{ product_info.image_url }">' 
         messages.warning(request, make_safe(message))
     else:
         if 'basket' in request.session:

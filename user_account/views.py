@@ -56,6 +56,7 @@ def order_info(request, order_id):
 
 def find_order(request):
     order=None
+    items=None
     if request.method == 'POST':
         order_number = request.POST.get('order-number')
         email = request.POST.get('email')

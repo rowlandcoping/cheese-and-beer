@@ -58,6 +58,11 @@ body {
 .forest-green-text {
     color:rgb(1, 70, 1);
 }
+.dark-green-text {
+    color:rgb(0, 51, 0);
+}
+
+
 
 
 /*CHEESE/BEER CATEGORY SELECTOR*/
@@ -96,11 +101,10 @@ body {
     color: rgb(255, 255, 140);
     background-color:rgb(0, 51, 0);
     border: 2px inset rgb(0, 15, 0);
-    margin-left: 20px;
+    margin: 10px 0 10px 20px;
 }
 .product-menu {
-    display:flex;
-    
+    display:flex;  
 }
 
 #main-navigation {    
@@ -311,7 +315,7 @@ body {
 #product-view {
     display:relative;
     margin:20px 50px 100px 50px;
-    background-color: rgb(226, 226, 189);
+    background-color: rgb(248, 248, 219);
 }
 #results-and-filter {
     display:flex;
@@ -357,7 +361,14 @@ body {
 .listing-price {
     margin-top:10px;
 }
-
+.listing-link:hover {
+    color:rgb(0, 15, 0);
+    text-decoration: underline;
+}
+.listing-name:hover {
+    color: rgb(1, 70, 1);
+    text-decoration: underline;
+}
 .detail-section {
     display:flex;
     flex-flow:row;
@@ -379,22 +390,39 @@ body {
 
 .action-button {
     display:inline-block;
+    text-align:center;
     padding:3px;
     font-size:130%;
-    width: 95px;
     margin:10px 0;
     border-radius: 6px;
 }
 .add-basket {
+    width: 101px;
     margin-right:5px;
     background-color:rgb(139, 67, 0);
+    border:1px solid rgb(139, 67, 0);
     color:white;
+}
+.add-basket:hover {
+    background-color:rgb(245, 183, 126);
+    color:rgb(0, 15, 0);
 }
 .buy-now {
+    width: 95px;
     margin-left:5px;
     background-color:rgb(16, 95, 0);
+    border:1px solid rgb(16, 95, 0);
     color:white;
 }
+.buy-now:hover {
+    background-color:rgb(129, 153, 124);
+    color:rgb(0, 15, 0);
+}
+.add-basket i, .buy-now i {
+    margin:0;
+    margin-right: 7px;
+}
+
 
 .buynow-alert {
     text-align:center;
@@ -647,24 +675,29 @@ input[type=number] {
 
 /* BASKET MESSAGES */
 #basket-message {
-    padding:10px;
     position:fixed;
-    right:10px;
-    border-radius: 6px;
-    top:75px;
-    z-index: 5;
-    border-width: 1px;
-    border-style: double;
-    width: 250px;
+    display:flex;
+    align-items:center;
     text-align:center;
+    width: 325px;
+    top:87px;
+    right:20px;
+    z-index: 5;
+    border-width: 4px;
+    border-style: solid;
+    border-radius: 6px;    
     background-color: rgb(250, 246, 207);
 }
-
 #basket-message img {
-    padding:15px;
-    width: 150px;
-    height: 150px;
+    padding:10px;
+    width: 50px;
+    height: 50px;
     object-fit:cover;
+}
+
+#basket-message i {
+    font-size:190%;
+    margin:10px;
 }
 
 
@@ -672,12 +705,12 @@ input[type=number] {
 
 #general-message {
     padding:10px;
-    margin: 10px 0;
+    margin: 10px auto;
     background-color: rgba(192, 192, 192, 0.945);
     border-width: 2px;
     border-radius: 6px;
     border-style: double;
-    width: 100%;
+    width: 95%;
     text-align:center;
     font-size: 120%;
 }
@@ -689,7 +722,7 @@ input[type=number] {
     border-color: rgb(27, 155, 1)
 }
 .warning-message {
-    border-color: rgb(253, 201, 30)
+    border-color: rgb(245, 26, 26)
 }
 
 /* General Alerts */

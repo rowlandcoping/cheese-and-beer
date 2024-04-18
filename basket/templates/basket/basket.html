@@ -14,12 +14,16 @@ Cheese and Beer
     {% with message.level as level %}
     {% if level == 40 %}
     <div id="basket-message" class="error-message">
+        <i class="fa-solid fa-exclamation red-text"></i>
     {% elif level == 30 %}
     <div id="basket-message" class="warning-message">
+        <i class="fa-solid fa-minus red-text"></i>
     {% elif level == 25 %}
     <div id="basket-message" class="success-message">
+        <i class="fa-solid fa-plus green-text"></i>
     {% else %}
     <div id="basket-message" class="warning-message">
+        <i class="fa-solid fa-minus red-text"></i>
     {% endif %}
     {% endwith %}    
         {{ message }}
