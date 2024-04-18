@@ -127,6 +127,12 @@ body {
     position:relative;
     margin: 0 5px;
 }
+#account-nav {
+    margin-right:10px;
+}
+.checkout {
+    margin-left:0;
+}
 
 #cheese-desktop-mouseout, #beer-desktop-mouseout, #account-mouseout, .checkout {
     font-size:115%;
@@ -234,20 +240,19 @@ body {
 }
 
 /*HOMEPAGE*/
-
-#homepage-content {
-    margin:75px 100px;
+#homepage-content { 
+    height:400px;
+    margin:40px 100px;
     text-align: center;
-    background-color: rgb(226, 226, 189);
+    background-color: rgb(226, 226, 189, 0.8);
     border-radius: 20px;
     padding:75px 20px;
-    box-shadow: 4px 4px 5px rgb(107, 107, 107);  
 }
+
 #homepage-banners {
     display:flex;
     justify-content:space-evenly;
-    align-items:center;
-    
+    align-items:center;    
 }
 #homepage-intro {
     display:flex;
@@ -751,8 +756,8 @@ input[type=number] {
 
 #general-message {
     padding:10px;
-    margin: 10px auto;
-    background-color: rgba(192, 192, 192, 0.945);
+    margin: 20px auto;
+    background-color: rgb(247, 241, 213, 0.8);
     border-width: 2px;
     border-radius: 6px;
     border-style: double;
@@ -864,3 +869,74 @@ input[type=number] {
     color: yellow;
     border:2px yellow solid;
 }
+
+/* General Forms (full-page) */
+#background-container {
+    display:flex;
+    flex-flow:column;
+    width:100dvw;
+    background-image: url("../images/gabriella-clare-marino-BtalpxzIiFs-cropped.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: left;
+    height:90dvh;
+}
+#form-large {
+    margin:50px 300px;
+    padding:30px 100px;
+    background-color: rgb(247, 241, 213, .8);
+    border-radius: 20px;
+}
+
+#form-large h2, #form-large p {
+    margin-bottom: 5px;
+}
+#form-large p {
+    padding-bottom:5px;
+    width:70%;
+    border-bottom: 1px dotted grey;
+}
+.general-form {
+    border-spacing: 5px;
+}
+#form-large input {
+    padding: 5px 10px;
+    width:300px;
+}
+#form-large input:focus {
+    border:2px solid rgb(16, 95, 0);
+    outline: 1px solid rgb(0, 15, 0);
+    border-radius: 1px;
+}
+#form-large label {
+    margin-left: -5px;
+    margin-right:5px;
+}
+#form-large button {
+    font-family:main;
+    margin:10px 0;
+    font-size: 120%;
+    background-color:rgb(16, 95, 0);
+    border:2px solid rgb(0, 15, 0);
+    color:white;
+    border-radius:4px;
+    box-shadow: 4px 4px 5px rgb(107, 107, 107);
+}
+#form-large button:hover {
+    background-color:rgb(129, 153, 124);
+    color:rgb(0, 15, 0);
+}
+.form-large-button {
+    margin-top:5px;
+    width:70%;
+    border-top: 1px dotted grey;
+    border-bottom: 1px dotted grey;
+}
+#sign-up-link {
+   color:rgb(16, 95, 0);
+}
+
+#sign-up-link:hover {
+    color:rgb(0, 15, 0);
+    text-decoration: underline;    
+ }
