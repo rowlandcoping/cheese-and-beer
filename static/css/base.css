@@ -244,9 +244,10 @@ body {
     height:400px;
     margin:40px 100px;
     text-align: center;
-    background-color: rgb(226, 226, 189, 0.8);
+    background-color: rgb(226, 226, 189, 0.7);
     border-radius: 20px;
     padding:75px 20px;
+    border: 4px solid rgb(16, 95, 0);
 }
 
 #homepage-banners {
@@ -875,7 +876,7 @@ input[type=number] {
     display:flex;
     flex-flow:column;
     width:100dvw;
-    background-image: url("../images/gabriella-clare-marino-BtalpxzIiFs-cropped.webp");
+    background-image: url("../images/gabriella-clare-marino-BtalpxzIiFs-cropped2-dark.webp");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: left;
@@ -886,6 +887,8 @@ input[type=number] {
     padding:30px 100px;
     background-color: rgb(247, 241, 213, .8);
     border-radius: 20px;
+    border: 4px solid rgb(16, 95, 0);
+    
 }
 
 #form-large h2, #form-large p {
@@ -893,7 +896,7 @@ input[type=number] {
 }
 #form-large p {
     padding-bottom:5px;
-    width:70%;
+    
     border-bottom: 1px dotted grey;
 }
 .general-form {
@@ -915,6 +918,7 @@ input[type=number] {
 #form-large button {
     font-family:main;
     margin:10px 0;
+    padding:2px 7px;
     font-size: 120%;
     background-color:rgb(16, 95, 0);
     border:2px solid rgb(0, 15, 0);
@@ -928,7 +932,6 @@ input[type=number] {
 }
 .form-large-button {
     margin-top:5px;
-    width:70%;
     border-top: 1px dotted grey;
     border-bottom: 1px dotted grey;
 }
@@ -940,3 +943,20 @@ input[type=number] {
     color:rgb(0, 15, 0);
     text-decoration: underline;    
  }
+ .error-container {
+    border-bottom: 1px dotted grey;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+ }
+.error-messages {
+    margin-bottom:5px;
+    display:flex;
+    align-items:center;
+}
+.error-messages:last-child {
+    margin-bottom:0;
+}
+
+.error-messages i {
+    margin-right:10px;
+}

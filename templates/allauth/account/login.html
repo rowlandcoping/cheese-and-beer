@@ -6,6 +6,23 @@
 {% endblock head_title %}
 {% block content %}
 <div id="background-container">
+    {% if messages %}
+    {% for message in messages %}
+    {% with message.level as level %}
+    {% if level == 40 %}
+    <div id="general-message" class="error-message">
+    {% elif level == 30 %}
+    <div id="general-message" class="warning-message">
+    {% elif level == 25 %}
+    <div id="general-message" class="success-message">
+    {% else %}
+    <div id="general-message" class="warning-message">
+    {% endif %}
+    {% endwith %}    
+        {{ message }}
+    </div>      
+    {% endfor %}    
+    {% endif %}
     <div id="form-large">
         {% element h2 %}
             {% trans "Sign In" %}
@@ -18,13 +35,22 @@
         {% element form form=form method="post" action=login_url tags="entrance,login" %}
             {% slot body %}
             {% csrf_token %}
+            {% if form.errors.items %}
+            <div class="error-container">
+                {% for key, value in form.errors.items %}
+                <div class="error-messages red-text">
+                    <i class="fa-solid fa-circle-exclamation"></i> {{ value }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
             <table class="general-form">
                 <tr>
-                    <td><label for="id_login">email address: <span class="red-text">*</span> </label></td>
+                    <td><label for="id_login">email Address: <span class="red-text">*</span> </label></td>
                     <td>{{ form.login }}</td>
                 </tr>
                 <tr>
-                    <td><label for="id_address_line_one">Password:<span class="red-text">*</span> </label></td>
+                    <td><label for="id_address_line_one">Create Password:<span class="red-text">*</span> </label></td>
                     <td>{{ form.password }}</td>
                 </tr>
             </table>

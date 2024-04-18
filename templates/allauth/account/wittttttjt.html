@@ -18,32 +18,26 @@
         {% trans "Sign Up" %}
     {% endelement %}
     <p>
-        {% blocktrans %}Already have an account? Then please <a id="sign-up-link" href="{{ login_url }}">sign in</a>.{% endblocktrans %}
+        {% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}
     </p>
     {% url 'account_signup' as action_url %}
     {% element form form=form method="post" action=action_url tags="entrance,signup" %}
         {% slot body %}
-            {% csrf_token %}            
-            {% if form.errors.items %}
-            <div class="error-container">
-                {% for key, value in form.errors.items %}
-                <div class="error-messages red-text">
-                    <i class="fa-solid fa-circle-exclamation"></i> {{ value }}
-                </div>
-                {% endfor %}
-            </div>
-            {% endif %}
+            {% csrf_token %
+            {% for key, value in form.errors.items %}
+                {{ value }}
+            {% endfor %}}
             <table class="general-form">
                 <tr>
-                    <td><label for="id_login">email Address: <span class="red-text">*</span> </label></td>
+                    <td><label for="id_login">email address: <span class="red-text">*</span> </label></td>
                     <td>{{ form.email }}</td>
                 </tr>
                 <tr>
-                    <td><label for="id_address_line_one">Create Password:<span class="red-text">*</span> </label></td>
+                    <td><label for="id_address_line_one">Password:<span class="red-text">*</span> </label></td>
                     <td>{{ form.password1 }}</td>
                 </tr>
                 <tr>
-                    <td><label for="id_address_line_one">Re-enter Password:<span class="red-text">*</span> </label></td>
+                    <td><label for="id_address_line_one">Password:<span class="red-text">*</span> </label></td>
                     <td>{{ form.password2 }}</td>
                 </tr>
             </table>
@@ -54,11 +48,9 @@
             {% endif %}
         {% endslot %}
         {% slot actions %}
-        <div class="form-large-button">
             {% element button tags="prominent,signup" type="submit" %}
                 {% trans "Sign Up" %}
             {% endelement %}
-        </div>
         {% endslot %}
     {% endelement %}
     {% if SOCIALACCOUNT_ENABLED %}
