@@ -28,8 +28,10 @@
             {% trans "Sign In" %}
         {% endelement %}
         <p>
-            {% blocktrans %}If you have not created an account yet, then please
-        <a id="sign-up-link" href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}
+            If you have not created an account yet, then please
+            <a id="sign-up-link" href="{{ signup_url }}">sign up</a> first.
+            <br>
+            Forgotten your password? Click <a id="sign-up-link" href="{% url 'account_reset_password' %}">here</a> to request a new one!
         </p>
         {% url 'account_login' as login_url %}
         {% element form form=form method="post" action=login_url tags="entrance,login" %}
@@ -50,7 +52,7 @@
                     <td>{{ form.login }}</td>
                 </tr>
                 <tr>
-                    <td><label for="id_address_line_one">Create Password:<span class="red-text">*</span> </label></td>
+                    <td><label for="id_address_line_one">Password:<span class="red-text">*</span> </label></td>
                     <td>{{ form.password }}</td>
                 </tr>
             </table>

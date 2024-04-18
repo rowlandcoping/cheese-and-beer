@@ -18,7 +18,9 @@
         {% trans "Sign Up" %}
     {% endelement %}
     <p>
-        {% blocktrans %}Already have an account? Then please <a id="sign-up-link" href="{{ login_url }}">sign in</a>.{% endblocktrans %}
+        Already have an account? Then please <a id="sign-up-link" href="{{ login_url }}">sign in</a>.
+        <br>
+        Forgotten your password? Click <a id="sign-up-link" href="{% url 'account_reset_password' %}">here</a> to request a new one!
     </p>
     {% url 'account_signup' as action_url %}
     {% element form form=form method="post" action=action_url tags="entrance,signup" %}

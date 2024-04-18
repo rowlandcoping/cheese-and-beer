@@ -759,10 +759,10 @@ input[type=number] {
     padding:10px;
     margin: 20px auto;
     background-color: rgb(247, 241, 213, 0.8);
-    border-width: 2px;
+    border-width: 4px;
     border-radius: 6px;
-    border-style: double;
-    width: 95%;
+    border-style: solid;
+    width: 85%;
     text-align:center;
     font-size: 120%;
 }
@@ -771,7 +771,7 @@ input[type=number] {
     border-color: rgb(245, 26, 26)
 }
 .success-message {
-    border-color: rgb(27, 155, 1)
+    border-color: rgb(16, 95, 0)
 }
 .warning-message {
     border-color: rgb(245, 26, 26)
