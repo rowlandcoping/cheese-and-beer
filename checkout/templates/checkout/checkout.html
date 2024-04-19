@@ -5,173 +5,190 @@ Cheese and Beer
 {% endblock %}
 
 {% block content %}
-<div class="checkout-page">
-    {% if messages %}
-    {% for message in messages %}
-    {% with message.level as level %}
-    {% if level == 40 %}
-    <div id="basket-message" class="error-message">
-    {% elif level == 30 %}
-    <div id="basket-message" class="warning-message">
-    {% elif level == 25 %}
-    <div id="basket-message" class="success-message">
-    {% else %}
-    <div id="basket-message" class="warning-message">
-    {% endif %}
-    {% endwith %}    
-        {{ message }}
-    </div>
-    {% endfor %}    
-    {% endif %}
-    <div class="main-section">
-        <h3>1) Delivery Address</h3>
-        {% if authenticated %}
-        
-        <div class="address-section">
-            {% if address %}
-            <div id ="existing-address-section" class="existing-address">
-                <div class="selected-address">
-                    <p>
-                        {{ address.full_name }}
-                    </p>
-                    <p>
-                        {{ address.address_line_one }}
-                    </p>
-                    {% if address.address_line_two %}
-                    <p>
-                        {{ address.address_line_two }}
-                    </p>
-                    {% endif %}
-                    <p>
-                        {{ address.town_or_city }}
-                    </p>
-                    <p>
-                        {{ address.county }}
-                    </p>
-                    <p>
-                        {{ address.postcode }}
-                    </p>
-                </div>
-                <div class="address-options">
-                    <span class="address-checkout-button" id="add-new-address">Use New Address</span>
-                    {% if user_addresses|length > 1 %}
-                    <br>                    
-                    <span class="address-checkout-button" id="select-address">Select Another Address</span>                    
-                    {% else %}
-                    <span class="address-checkout-button not-displayed" id="select-address">Select Another Address</span>
-                    {% endif %}
-                    {% if not address.default %}
-                    <br>
-                    <a href="{% url 'use_default' %}"><span class="address-checkout-button">Use Default</span></a>
-                    {% endif %}
-                </div>
-            </div>
-            <div id="address-selection" class="not-displayed">
-                <h4>Choose from your existing addresses:</h4>               
-                <form action="{% url 'select_address' %}" method="POST" id="address-selector">
-                    {% csrf_token %}
-                    {% if user_addresses %}
-                    {% for a in user_addresses %}
-                    {% if a.id == address.id %}
-                    <div id="selector-{{ a.id }}" class="address-bar highlighted-address">
-                    {% else %}
-                    <div id="selector-{{ a.id }}" class="address-bar">
-                    {% endif %}
-                        <div class="address-label">
-                            <label for = "{{ a.id }}">{{ a.full_name }}, {{ a.address_line_one }}, {{ a.postcode }}</label>
-                        </div>
-                        <div class="address-input">
-                            {% if a.id == address.id %}
-                            <input type = "radio" id="{{ a.id }}" name="address_selector" value="{{ a.id }}" checked>
-                            {% else %}
-                            <input type = "radio" id="{{ a.id }}" name="address_selector" value="{{ a.id }}">
-                            {% endif %}
-                        </div>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-                    <button type="submit" form="address-selector" class="add-address-button">Select Address</button>
-                    <span class="alert-buttons alert-cancel" id="cancel-address-add">
-                        Cancel
-                    </span>
-                </form>
-            </div>
-            <div id = "add-new-address-form" class="add-user-address not-displayed">
-            {% else %}
-            <div id = "add-new-address-form" class="add-user-address">
-            {% endif %}
-            <h4>Add a new delivery address to your account:</h4>
-                <form action="{% url 'add_address' %}" method="POST" id="address-form">
-                    {% csrf_token %}
-                    <table class="address-form">
-                        <input type="hidden" name="origin" id="origin" value="checkout">
-                        <tr>
-                            <td><label for="id_full_name">Full Name:<span class="red-text">*</span> </label></td>
-                            <td>{{ address_form.full_name }}</td>
-                        </tr>
-                        <tr>
-                            <td><label for="id_address_line_one">Address 1:<span class="red-text">*</span> </label></td>
-                            <td>{{ address_form.address_line_one }}</td>
-                        </tr>
-                        <tr>
-                            <td><label for="id_address_line_two">Address 2: </label></td>
-                            <td>{{ address_form.address_line_two }}</td>
-                        </tr>
-                        <tr>
-                            <td><label for="id_town_or_city">Town or City:<span class="red-text">*</span> </label></td>
-                            <td>{{ address_form.town_or_city }}</td>
-                        </tr>
-                        <tr>
-                            <td><label for="id_county">County:<span class="red-text">*</span> </label></td>
-                            <td>{{ address_form.county }}</td>
-                        </tr>
-                        <tr>
-                            <td><label for="id_postcode">Postcode:<span class="red-text">*</span> </label></td>
-                            <td>{{ address_form.postcode }}</td>
-                        </tr>
-                    </table>
-                    <div id="set-default" class="blue-box">
-                        <label for="default">Set as default? </label>
-                        <input type="checkbox" id="default" name="default">
-                    </div>
-                    <div id="selected-address" class="blue-box">
-                        <label for="selected">Select for this order? </label>
-                        <input type="checkbox" id="selected" name="selected" checked>
-                    </div>
-                    {% if address %}
-                    <span class="alert-buttons alert-cancel" id="cancel-address-add">
-                        Cancel
-                     </span>
-                    {% endif %}
-                    <button type="submit" form="address-form" class="add-address-button">Add Address</button>
-                </form>
-            </div>     
-        </div>
+<div class="listing-container">
+    <div class="checkout-page">
+        {% if messages %}
+        {% for message in messages %}
+        {% with message.level as level %}
+        {% if level == 40 %}
+        <div id="basket-message" class="error-message">
+        {% elif level == 30 %}
+        <div id="basket-message" class="warning-message">
+        {% elif level == 25 %}
+        <div id="basket-message" class="success-message">
+        {% else %}
+        <div id="basket-message" class="warning-message">
         {% endif %}
-        <div class="order-form-section">
-            <form action="{% url 'checkout' %}" method="POST" id="payment-form">
-                {% csrf_token %}
-                {% if authenticated %}
-                <div class="address-form-section not-displayed">
+        {% endwith %}    
+            {{ message }}
+        </div>
+        {% endfor %}    
+        {% endif %}
+        <div id="main-section">
+            <h3>1) Delivery Address</h3>
+            {% if authenticated %}
+            
+            <div class="address-section">
+                {% if address %}
+                <div id ="existing-address-section" class="existing-address">
+                    <div class="selected-address">
+                        <p>
+                            <span class="dark-green-text"><strong>{{ address.full_name }}</strong></span>
+                        </p>
+                        <p>
+                            {{ address.address_line_one }}
+                        </p>
+                        {% if address.address_line_two %}
+                        <p>
+                            {{ address.address_line_two }}
+                        </p>
+                        {% endif %}
+                        <p>
+                            {{ address.town_or_city }}
+                        </p>
+                        <p>
+                            {{ address.county }}
+                        </p>
+                        <p>
+                            {{ address.postcode }}
+                        </p>
+                    </div>
+                    <div class="address-options">
+                        <span class="address-checkout-button clickable-element" id="add-new-address">Use New Address</span>
+                        {% if user_addresses|length > 1 %}
+                        <br>                    
+                        <span class="address-checkout-button clickable-element" id="select-address">Select Another Address</span>                    
+                        {% else %}
+                        <span class="address-checkout-button clickable-element not-displayed" id="select-address">Select Another Address</span>
+                        {% endif %}
+                        {% if not address.default %}
+                        <br>
+                        <a href="{% url 'use_default' %}"><span class="address-checkout-button">Use Default</span></a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div id="address-selection" class="not-displayed">
+                    <p class="bottom-border">Choose from your existing addresses:</p>               
+                    <form action="{% url 'select_address' %}" method="POST" id="address-selector">
+                        {% csrf_token %}
+                        {% if user_addresses %}
+                        <div class="address-selector-container bottom-border">
+                            {% for a in user_addresses %}
+                            {% if a.id == address.id %}
+                            <div id="selector-{{ a.id }}" class="address-bar highlighted-address">
+                            {% else %}
+                            <div id="selector-{{ a.id }}" class="address-bar">
+                            {% endif %}
+                                <div class="address-label">
+                                    <label for = "{{ a.id }}">{{ a.full_name }}, {{ a.address_line_one }}, {{ a.postcode }}</label>
+                                </div>
+                                <div class="address-input">
+                                    {% if a.id == address.id %}
+                                    <input type = "radio" id="{{ a.id }}" name="address_selector" value="{{ a.id }}" checked>
+                                    {% else %}
+                                    <input type = "radio" id="{{ a.id }}" name="address_selector" value="{{ a.id }}">
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        <button type="submit" form="address-selector" class="add-address-button">Select</button>
+                        <a href="{% url 'checkout' %}">
+                            <span class="cancel-button">
+                                Cancel
+                            </span>
+                        </a>
+                    </form>
+                </div>
+                <div id = "add-new-address-form" class="add-user-address not-displayed">
                 {% else %}
-                <div class="address-form-section">
+                <div id = "add-new-address-form" class="add-user-address">
                 {% endif %}
-                    <div class="not-signedin">
-                        <p>Not Registered?  Click <a href="{% url 'account_signup' %}">here</a> to sign up and save your details!</p>
-                        <p>Sign in <a href="{% url 'account_login' %}">here</a> first if you already have an account.</p>
-                    </div>
-                    <div class="guest-email-field">
-                        <label for="order-email">Confirmation e-mail: </label>
-                        <input type="email" name="order_email" id="order-email" class="address-field" value="{{ user_email }}" placeholder="e-mail" required>
-                    </div>
-                    <p><em>Please note that because of Brexit we can only deliver to UK addresses.</em></p>
-                        <table class="address-form">
+                <p class="bottom-border">Add a new delivery address to your account:</p>
+                    <form action="{% url 'add_address' %}" method="POST" id="address-form">
+                        {% csrf_token %}
+                        <div class="new-address-main bottom-border">
+                            <table class="general-form">
+                                <input type="hidden" name="origin" id="origin" value="checkout">
+                                <tr>
+                                    <td><label for="id_full_name">Full Name:<span class="red-text">*</span> </label></td>
+                                    <td>{{ address_form.full_name }}</td>
+                                </tr>
+                                <tr>
+                                    <td><label for="id_address_line_one">Address 1:<span class="red-text">*</span> </label></td>
+                                    <td>{{ address_form.address_line_one }}</td>
+                                </tr>
+                                <tr>
+                                    <td><label for="id_address_line_two">Address 2: </label></td>
+                                    <td>{{ address_form.address_line_two }}</td>
+                                </tr>
+                                <tr>
+                                    <td><label for="id_town_or_city">Town or City:<span class="red-text">*</span> </label></td>
+                                    <td>{{ address_form.town_or_city }}</td>
+                                </tr>
+                                <tr>
+                                    <td><label for="id_county">County:<span class="red-text">*</span> </label></td>
+                                    <td>{{ address_form.county }}</td>
+                                </tr>
+                                <tr>
+                                    <td><label for="id_postcode">Postcode:<span class="red-text">*</span> </label></td>
+                                    <td>{{ address_form.postcode }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="new-address-lower bottom-border">
+                            <table class="green-box">
+                                <tr>
+                                    <td><label for="default">Set as default? </label></td>
+                                    <td><input type="checkbox" id="default" name="default"></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="selected">Select for this order? </label></td>
+                                    <td><input type="checkbox" id="selected" name="selected" checked></td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        <button type="submit" form="address-form" class="add-address-button">Add Address</button>
+                    
+                        {% if address %}
+                        <a href="{% url 'checkout' %}">
+                            <span class="cancel-button">
+                                Cancel
+                            </span>
+                        </a>
+                        {% endif %}
+                        
+                    </form>
+                </div>     
+            </div>
+            {% endif %}
+            <div class="order-form-section">
+                <form action="{% url 'checkout' %}" method="POST" id="payment-form">
+                    {% csrf_token %}
+                    {% if authenticated %}
+                    <div class="address-form-section not-displayed">
+                    {% else %}
+                    <div class="address-form-section">
+                    {% endif %}
+                        <div class="not-signedin bottom-border">
+                            <p>Not Registered?  Click <a class="sign-up-link" href="{% url 'account_signup' %}">here</a> to sign up and save your details!</p>
+                            <p>Sign in <a class="sign-up-link" href="{% url 'account_login' %}">here</a> first if you already have an account.</p>
+                        </div>
+                        <div class="order-email-container bottom-border">
+                            <p>Please provide an e-mail address for order confirmation:</p>
+                            <label for="order-email">Order e-mail:<span class="red-text">*</span> </label></td>
+                            <input type="email" name="order_email" id="order-email" class="address-field" value="{{ user_email }}" placeholder="e-mail" required></td>
+                        </div>
+                        
+                        <table class="general-form">                                
                             <tr>
-                                <td><label for="id_full_name">Full Name:<span class="red">*</span> </label></td>
+                                <td><label for="id_full_name">Full Name:<span class="red-text">*</span> </label></td>
                                 <td>{{ address_form.full_name }}</td>
                             </tr>
                             <tr>
-                                <td><label for="id_address_line_one">Address 1:<span class="red">*</span> </label></td>
+                                <td><label for="id_address_line_one">Address 1:<span class="red-text">*</span> </label></td>
                                 <td>{{ address_form.address_line_one }}</td>
                             </tr>
                             <tr>
@@ -179,103 +196,104 @@ Cheese and Beer
                                 <td>{{ address_form.address_line_two }}</td>
                             </tr>
                             <tr>
-                                <td><label for="id_town_or_city">Town or City:<span class="red">*</span> </label></td>
+                                <td><label for="id_town_or_city">Town or City:<span class="red-text">*</span> </label></td>
                                 <td>{{ address_form.town_or_city }}</td>
                             </tr>
                             <tr>
-                                <td><label for="id_county">County:<span class="red">*</span> </label></td>
+                                <td><label for="id_county">County:<span class="red-text">*</span> </label></td>
                                 <td>{{ address_form.county }}</td>
                             </tr>
                             <tr>
-                                <td><label for="id_postcode">Postcode:<span class="red">*</span> </label></td>
+                                <td><label for="id_postcode">Postcode:<span class="red-text">*</span> </label></td>
                                 <td>{{ address_form.postcode }}</td>
                             </tr>
                             <input type="hidden" name="country" id="country" value="GB" placeholder="country">
                             <input type="hidden" name="address_id" id="address-id" value="{{ address_form.id }}" placeholder="e-mail">
                         </table>
-                </div>
-                <hr>     
-                <div class="payment-detail-section">
-                    <h3>2) Payment Details</h3>
-                    <div>
-                        <!-- A Stripe card element will go here -->
-                        <div class="mb-3" id="card-element"></div>
-                        <!-- Used to display form errors -->
-                        <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
-                        <!-- Pass the client secret to the view so we can get the payment intent id -->
-                        <input type="hidden" value="{{ client_secret }}" name="client_secret">
-                    </div>                    
-                </div>
-                <span class="not-displayed"><button type ="submit" id="form-submit-button" form="payment-form">Submit</button></span>
-            </form>
-            <hr>
-        </div>
-        <div class="order-detail-section">
-            <h3>3) Review Items</h3>
-            {% for order in basket_items %}
-            <div class="order-item-view">
-                <div class="order-image">
-                    <img src="{{ MEDIA_URL }}products/{{ order.product.image_url }}">
-                </div>
-                <div class="order-info">
-                    <p>
-                        {{ order.product.name }}
-                        {% if order.product.product_type == "cheese" %}
-                        ({{ order.product.amount }}g, {{ order.product.cheese_category }} cheese,
-                        {{ order.product.variety | lower }}, {{ order.product.texture }})
-                        {% else %}
-                        ({{ order.product.amount }}ml {{ order.product.container }}, {{ order.product.beer_category }} beer,
-                        {{ order.product.variety | lower }}, {{ order.product.alcohol_content }}% APR)
-                        {% endif %}
-                    </p>
-                    <h4 class="checkout-price">
-                        £{{ order.product.price }}
-                    </h4>
-                    <div class="order-quantity">
-                        Qty: 
-                        <a href="{% url 'update_basket' %}?action=decrement,{{ order.product.id }},chkt">
-                            <i id="decrement-{{ order.product.id }}" class="update-basket fa fa-minus"></i>  
-                        </a>                      
-                        <span class="product-quantity" id="quantity-{{ order.product.id }}">{{ order.quantity }}</span>
-                        <a href="{% url 'update_basket' %}?action=increment,{{ order.product.id }},chkt">
-                            <i id="increment-{{ order.product.id }}" class="update-basket fa fa-plus"></i>
-                        </a>
+                        <p><em><small>Please note that because of Brexit we can only deliver to UK addresses.</small></em></p>
+                    </div>
+                    <hr>     
+                    <div class="payment-detail-section">
+                        <h3>2) Payment Details</h3>
+                        <div>
+                            <!-- A Stripe card element will go here -->
+                            <div class="mb-3" id="card-element"></div>
+                            <!-- Used to display form errors -->
+                            <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+                            <!-- Pass the client secret to the view so we can get the payment intent id -->
+                            <input type="hidden" value="{{ client_secret }}" name="client_secret">
+                        </div>                    
+                    </div>
+                    <span class="not-displayed"><button type ="submit" id="form-submit-button" form="payment-form">Submit</button></span>
+                </form>
+                <hr>
+            </div>
+            <div class="order-detail-section">
+                <h3>3) Review Items</h3>
+                {% for order in basket_items %}
+                <div class="order-item-view">
+                    <div class="order-image">
+                        <img src="{{ MEDIA_URL }}products/{{ order.product.image_url }}">
+                    </div>
+                    <div class="order-info">
+                        <p>
+                            {{ order.product.name }}
+                            {% if order.product.product_type == "cheese" %}
+                            ({{ order.product.amount }}g, {{ order.product.cheese_category }} cheese,
+                            {{ order.product.variety | lower }}, {{ order.product.texture }})
+                            {% else %}
+                            ({{ order.product.amount }}ml {{ order.product.container }}, {{ order.product.beer_category }} beer,
+                            {{ order.product.variety | lower }}, {{ order.product.alcohol_content }}% APR)
+                            {% endif %}
+                        </p>
+                        <h4 class="checkout-price">
+                            £{{ order.product.price }}
+                        </h4>
+                        <div class="order-quantity">
+                            Qty: 
+                            <a href="{% url 'update_basket' %}?action=decrement,{{ order.product.id }},chkt">
+                                <i id="decrement-{{ order.product.id }}" class="update-basket fa fa-minus"></i>  
+                            </a>                      
+                            <span class="product-quantity" id="quantity-{{ order.product.id }}">{{ order.quantity }}</span>
+                            <a href="{% url 'update_basket' %}?action=increment,{{ order.product.id }},chkt">
+                                <i id="increment-{{ order.product.id }}" class="update-basket fa fa-plus"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
+                {% endfor %}
+                <h4>Order sub-total: £{{ basket_total }}</h4>
+                <span class="action-buttons payment-button checkout-button form-button">
+                    Purchase Now
+                </span>
+                <a href="{% url 'view_basket' %}">
+                    <span class="action-buttons basket-button">
+                        Go to Basket
+                    </span>
+                </a>
             </div>
-            {% endfor %}
-            <h4>Order sub-total: £{{ basket_total }}</h4>
+        </div>
+        <div class="purchase-section">
             <span class="action-buttons payment-button checkout-button form-button">
                 Purchase Now
             </span>
-            <a href="{% url 'view_basket' %}">
-                <span class="action-buttons basket-button">
-                    Go to Basket
-                </span>
-            </a>
+            
+            <h4>Order Price: £{{ basket_total }}</h4>
+            <h4>Delivery Cost: £{{ delivery_charge }}</h4>
+            {% if free_remaining_amount > 0 %}
+            <p>Order £{{ free_remaining_amount }} extra for free delivery.</p>
+            {% endif %}
+            <h4><span class="green-text">Grand Total: £{{ grand_total }}</span></h4>
+            <p class="ts-and-cs">
+                <small>
+                    Be aware that any orders placed through this website will not be fulfilled. 
+                    This site is a project built as part of a level 5 Diploma in web development at Code Institute. 
+                    All cheeses depicted on this site are fictional and similarities to cheeses living or dead are entirely co-incidental.
+                </small>
+            </p>
         </div>
     </div>
-    <div class="purchase-section">
-        <span class="action-buttons payment-button checkout-button form-button">
-            Purchase Now
-        </span>
-        
-        <h4>Order Price: £{{ basket_total }}</h4>
-        <h4>Delivery Cost: £{{ delivery_charge }}</h4>
-        {% if free_remaining_amount > 0 %}
-        <p>Order £{{ free_remaining_amount }} extra for free delivery.</p>
-        {% endif %}
-        <h4><span class="green-text">Grand Total: £{{ grand_total }}</span></h4>
-        <p class="ts-and-cs">
-            <small>
-                Be aware that any orders placed through this website will not be fulfilled. 
-                This site is a project built as part of a level 5 Diploma in web development at Code Institute. 
-                All cheeses depicted on this site are fictional and similarities to cheeses living or dead are entirely co-incidental.
-            </small>
-        </p>
-    </div>
 </div>
-
 
 {% endblock %}
 {% block postloadjs %}

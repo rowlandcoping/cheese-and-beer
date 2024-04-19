@@ -106,7 +106,7 @@ Cheese and Beer - Cheese Basket
                 <h4>Order Price: £{{ basket_total }}</h4>
                 <h4>Delivery Cost: £{{ delivery_charge }}</h4>
                 {% if free_remaining_amount > 0 %}
-                <p><span class="red-text">Spend £{{ free_remaining_amount }} for free delivery.</span></p>
+                <p><span class="red-text">£{{ free_remaining_amount }} more for free delivery.</span></p>
                 {% else %}
                 <p><span class="dark-green-text">Free delivery on this order!</p></span>
                 {% endif %}

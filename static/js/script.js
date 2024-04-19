@@ -511,12 +511,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
         document.addEventListener("click", function(e){
-            const target = e.target.closest("#cancel-address-add");
-            if(target){
-                window.location.reload();
-            }
-        });
-        document.addEventListener("click", function(e){
             const target = e.target.closest("#select-address");
             if(target){
                 document.getElementById('address-selection').style.display="block";
@@ -539,7 +533,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
                 document.querySelector('input[name="address_selector"]:checked').checked = false;
                 document.getElementById(selectorId).checked = true;
-                document.getElementById(itemId).style.backgroundColor = "rgb(226, 250, 200)";
+                document.getElementById(itemId).style.backgroundColor = "rgb(255, 255, 140)";
                 const formButtons = Array.from(document.getElementsByClassName('form-button'));
                 for (let i = 0; i < formButtons.length; i++) {
                     formButtons[i].style.pointerEvents = "none";

@@ -15,7 +15,7 @@ html, body {
 
 button {
     outline: none;
-    border:none;
+    border:none;    
 }
 
 a, a:visited, a:link, a:active, a:hover, a:focus  {
@@ -67,6 +67,21 @@ body {
 }
 .grey-text {
     color:rgb(63, 63, 63);
+}
+input[type='checkbox'], input[type='radio'] {
+    outline:none;
+    border:none;
+    accent-color:rgb(16, 95, 0);
+    color:white;
+    cursor: pointer;
+}
+.bottom-border {
+    padding-bottom:10px;
+    border-bottom: 2px dotted grey;
+}
+.bottom-border-thin {
+    padding-bottom:10px;
+    border-bottom: 1px dotted grey;
 }
 
 
@@ -580,12 +595,28 @@ input[type=number] {
     display:flex;
     justify-content: space-between;
 }
-
+.order-email-container {
+    padding-top:10px;
+}
+.order-email-container p {
+    margin-bottom:5px;
+}
+.order-email-container input {
+    padding: 5px 10px;
+    width:300px;
+    margin-left:8px;
+}
+.order-email-container input:focus {
+    border:2px solid rgb(16, 95, 0);
+    outline: 1px solid rgb(0, 15, 0);
+    border-radius: 1px;
+}
 .address-form {
     margin:10px 0;
 }
-.guest-email-field {
-    margin:10px 0;
+.address-form-section .general-form {
+    margin-left: 0;
+    padding-top: 5px;
 }
 .not-signedin {
     margin-top:10px;
@@ -601,7 +632,10 @@ input[type=number] {
     width: 400px;
     display:flex;
 }
-.main-section {
+#main-section {
+    background-color:white;
+    padding:20px;
+    margin-top:20px;
     width:60%;
 }
 .purchase-section {
@@ -613,21 +647,71 @@ input[type=number] {
     font-size:80%;
 }
 .existing-address {
-    width:90%;
     display:flex;
     justify-content:space-between;
 }
 .highlighted-address {
-    background-color:rgb(226, 250, 200);
+    background-color:rgb(255, 255, 140);
 }
 .address-bar {
     display:flex;
     justify-content: space-between;
     align-items:center;
-    margin:5px;
     padding:5px;
+    border-bottom: 1px dotted grey;
 }
-
+.address-bar:first-child {
+    border-top: 1px dotted grey;
+}
+#existing-address-section {
+    width:100%;
+    border-top: 2px dotted grey;
+    padding-top:10px;
+    margin-top:10px;
+}
+.selected-address p {
+    font-size:110%;
+}
+.address-checkout-button {
+    color:rgb(16, 95, 0);
+    text-decoration: underline;
+}
+.address-checkout-button:hover {
+    color: rgb(0, 15, 0);
+}
+#add-new-address-form p, #address-selection p {
+ margin-top:5px;
+}
+#add-new-address-form .general-form {
+    margin-top:10px;
+}
+.green-box {
+    margin-top:10px;
+}
+.add-address-button {
+    width: 130px;
+}
+.add-address-button, .cancel-button {
+    border-radius:4px;
+    box-shadow: 4px 4px 5px rgb(107, 107, 107);
+}
+.cancel-button:hover {
+    background-color:rgb(94, 42, 42);
+}
+.cancel-button {
+    display: inline-block;
+    text-align:center;
+    width:122px;
+    margin:10px 10px;
+    padding:2px 2px;
+    font-size: 120%;
+    background-color:rgb(49, 0, 0);
+    border:2px solid rgb(0, 15, 0);
+    color:white;
+}
+.address-selector-container {
+    padding-top:10px;
+}
 /*-----BASKET PAGE------*/
 .listing-container {
     flex-grow: 1;
@@ -670,16 +754,12 @@ input[type=number] {
 .checkout-button {
     border: 2px solid rgb(0, 15, 0);
     background-color:rgb(0, 51, 0);   
-    color:rgb(255, 255, 140);    
+    color:rgb(255, 255, 140);
+    box-shadow: 4px 4px 5px rgb(107, 107, 107);
 }
 .checkout-button:hover {
     background-color:rgb(255, 255, 140);
     color:rgb(1, 70, 1);
-}
-.listing-button {
-    background-color:rgb(255, 201, 51);
-    border: rgb(47, 71, 0) solid 2px;    
-    color: rgb(47, 71, 0);
 }
 .listing-detail {
     display:flex;
@@ -733,6 +813,7 @@ input[type=number] {
 .basket-quantity {
     margin-bottom:2px;
 }
+
 #remove-item {
     color:rgb(49, 0, 0);
     text-decoration: underline;
@@ -964,20 +1045,20 @@ input[type=number] {
 .general-form {
     border-spacing: 5px;
 }
-#form-large input {
+.general-form input {
     padding: 5px 10px;
     width:300px;
 }
-#form-large input:focus {
+.general-form input:focus {
     border:2px solid rgb(16, 95, 0);
     outline: 1px solid rgb(0, 15, 0);
     border-radius: 1px;
 }
-#form-large label {
+.general-form label {
     margin-left: -5px;
     margin-right:5px;
 }
-#form-large button {
+#form-large button, .add-address-button {
     font-family:main;
     margin:10px 0;
     padding:2px 7px;
@@ -988,7 +1069,7 @@ input[type=number] {
     border-radius:4px;
     box-shadow: 4px 4px 5px rgb(107, 107, 107);
 }
-#form-large button:hover {
+#form-large button:hover, .add-address-button:hover {
     background-color:rgb(129, 153, 124);
     color:rgb(0, 15, 0);
 }
@@ -997,10 +1078,11 @@ input[type=number] {
     border-top: 1px dotted grey;
     border-bottom: 1px dotted grey;
 }
-#sign-up-link {
+
+.listing-container .sign-up-link, #background-container .sign-up-link {
    color:rgb(16, 95, 0);
 }
-#sign-up-link:hover {
+.sign-up-link:hover {
     color:rgb(0, 15, 0);
     text-decoration: underline;    
 }

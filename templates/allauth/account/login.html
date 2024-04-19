@@ -29,9 +29,9 @@ Cheese and Beer - Signin
         {% endelement %}
         <p>
             If you have not created an account yet, then please
-            <a id="sign-up-link" href="{{ signup_url }}">sign up</a> first.
+            <a class="sign-up-link" href="{{ signup_url }}">sign up</a> first.
             <br>
-            Forgotten your password? Click <a id="sign-up-link" href="{% url 'account_reset_password' %}">here</a> to request a new one!
+            Forgotten your password? Click <a class="sign-up-link" href="{% url 'account_reset_password' %}">here</a> to request a new one!
         </p>
         {% url 'account_login' as login_url %}
         {% element form form=form method="post" action=login_url tags="entrance,login" %}
