@@ -1,112 +1,122 @@
 {% extends "base.html" %}
 
 {% block title %}
-Cheese and Beer
+Cheese and Beer - Cheese Basket
 {% endblock %}
 
 {% block content %}
-<div class="title-section">
-    <h2>Your Cheeseboard</h2>
-</div>
-<div id="basket-view">
-    {% if messages %}
-    {% for message in messages %}
-    {% with message.level as level %}
-    {% if level == 40 %}
-    <div id="basket-message" class="error-message">
-        <i class="fa-solid fa-exclamation red-text"></i>
-    {% elif level == 30 %}
-    <div id="basket-message" class="warning-message">
-        <i class="fa-solid fa-minus red-text"></i>
-    {% elif level == 25 %}
-    <div id="basket-message" class="success-message">
-        <i class="fa-solid fa-plus green-text"></i>
-    {% else %}
-    <div id="basket-message" class="warning-message">
-        <i class="fa-solid fa-minus red-text"></i>
-    {% endif %}
-    {% endwith %}    
-        {{ message }}
-    </div>
-    {% endfor %}    
-    {% endif %}
-    <div id="basket-listings">
-        {% for order in basket_items %}    
-        <div class="basket-item-view">
-            <div class="basket-image">
-                <img src="{{ MEDIA_URL }}products/{{ order.product.image_url }}">
+<div class="listing-container">
+    <div id="listing-view">
+        {% if messages %}
+        {% for message in messages %}
+        {% with message.level as level %}
+        {% if level == 40 %}
+        <div id="basket-message" class="error-message">
+            <i class="fa-solid fa-exclamation red-text"></i>
+        {% elif level == 30 %}
+        <div id="basket-message" class="warning-message">
+            <i class="fa-solid fa-minus red-text"></i>
+        {% elif level == 25 %}
+        <div id="basket-message" class="success-message">
+            <i class="fa-solid fa-plus green-text"></i>
+        {% else %}
+        <div id="basket-message" class="warning-message">
+            <i class="fa-solid fa-minus red-text"></i>
+        {% endif %}
+        {% endwith %}    
+            {{ message }}
+        </div>
+        {% endfor %}    
+        {% endif %}
+        <div id="listing-listings">
+            <div class="title-section">
+                <h2>Your Cheeseboard</h2>
             </div>
-            <div class="basket-detail">
-                <div class="basket-info">
-                    <div class="basket-item">
-                        <h4>
-                            {{ order.product.name }}
-                            {% if order.product.product_type == "cheese" %}
-                            ({{ order.product.amount }}g, {{ order.product.cheese_category }} cheese,
-                            {{ order.product.variety | lower }}, {{ order.product.texture }})
+            {% for order in basket_items %}    
+            <div class="listing-item-view">
+                <a href="{% url 'product_detail' order.product.id %}">
+                    <div class="listing-image">
+                        <img src="{{ MEDIA_URL }}products/{{ order.product.image_url }}">
+                    </div>
+                </a>
+                <div class="listing-detail">
+                    <div class="listing-info">
+                        <div class="listing-item">
+                            <a class="listing-name" href="{% url 'product_detail' order.product.id %}">
+                                <h4>
+                                {{ order.product.name }}
+                                {% if order.product.product_type == "cheese" %}
+                                ({{ order.product.amount }}g, {{ order.product.cheese_category }} cheese,
+                                {{ order.product.variety | lower }}, {{ order.product.texture }})
+                                {% else %}
+                                ({{ order.product.amount }}ml {{ order.product.container }}, {{ order.product.beer_category }} beer,
+                                {{ order.product.variety | lower }}, {{ order.product.alcohol_content }}% APR)
+                                {% endif %}
+                                </h4>
+                            </a>
+                            {% if order.product.displayed %}            
+                            <h4 class="green-text">Available</h4>
                             {% else %}
-                            ({{ order.product.amount }}ml {{ order.product.container }}, {{ order.product.beer_category }} beer,
-                            {{ order.product.variety | lower }}, {{ order.product.alcohol_content }}% APR)
+                            <h4 class="red-text">Unavailable</h4>
                             {% endif %}
-                        </h4>
-                        {% if order.product.displayed %}            
-                        <h4 class="green-text">Available</h4>
-                        {% else %}
-                        <h4 class="red-text">Unavailable</h4>
-                        {% endif %}
-                        <p>
-                            <small>ID: {{ order.product.product_number }}</small>
-                        </p>
+                            <p>
+                                <span class="grey-text"><small>ID: {{ order.product.product_number }}</small></span>
+                            </p>
+                        </div>
+                        <div class="listing-item-price">
+                            <h4>Total</h4>
+                            <h4 class="order-checkout-price" id="basket-total-{{order.product.id}}">
+                                {% load order_calculator %}
+                                £{{ order.product.price | totalizer:order.quantity }}
+                            </h4>
+                        </div>
                     </div>
-                    <div class="basket-item-price">
-                        <h4>Total:</h4>
-                        <h4 class="order-checkout-price" id="basket-total-{{order.product.id}}">
-                            {% load order_calculator %}
-                            £{{ order.product.price | totalizer:order.quantity }}
-                        </h4>
+                    <div class="special-offers">
+                        £{{ order.product.price }} each
                     </div>
-                </div>
-                <div class="special-offers">
-                    £{{ order.product.price }} each (<em>no current offers</em>)
-                </div>
-                <div class="basket-adjustment">
-                    <div class="basket-quantity">
-                        Qty: 
-                        <a href="{% url 'update_basket' %}?action=decrement,{{ order.product.id }},bskt">
-                            <i id="decrement-{{ order.product.id }}" class="update-basket fa fa-minus"></i>  
-                        </a>                      
-                        <span class="product-quantity" id="quantity-{{ order.product.id }}">{{ order.quantity }}</span>
-                        <a href="{% url 'update_basket' %}?action=increment,{{ order.product.id }},bskt">
-                            <i id="increment-{{ order.product.id }}" class="update-basket fa fa-plus"></i>
-                        </a>
-                    </div>
-                    <div class="basket-remove">
-                        <a href="{% url 'remove_item' %}?remove={{ order.product.id }}">
-                            Remove
-                        </a>
+                    <div class="basket-adjustment">
+                        <div class="basket-quantity">
+                            Qty: 
+                            <a href="{% url 'update_basket' %}?action=decrement,{{ order.product.id }},bskt">
+                                <i id="decrement-{{ order.product.id }}" class="update-basket decrement-listing fa fa-minus"></i>  
+                            </a>                      
+                            <span class="product-quantity" id="quantity-{{ order.product.id }}">{{ order.quantity }}</span>
+                            <a href="{% url 'update_basket' %}?action=increment,{{ order.product.id }},bskt">
+                                <i id="increment-{{ order.product.id }}" class="update-basket increment-listing fa fa-plus"></i>
+                            </a>
+                        </div>
+                        <div class="basket-remove">
+                            <a id="remove-item" href="{% url 'remove_item' %}?remove={{ order.product.id }}">
+                                remove
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
+            {% endfor %}
+            <div class="order-subtotal">
+                <h4>Order sub-total: £{{ basket_total }}</h4>
+                <a href="{% url 'checkout' %}">
+                    <span class="checkout-button action-buttons">Go to Checkout</span>
+                </a>
+            </div>
         </div>
-        {% endfor %}
-        <h4>Order sub-total: £{{ basket_total }}</h4>
-        <a href="{% url 'checkout' %}">
-            <span class="checkout-button action-buttons">Go to Checkout</span>
-        </a>
-    </div>
-    <div class="checkout-section">
-        <div>
-            <a href="{% url 'checkout' %}">
-                <span class="checkout-button action-buttons">Go to Checkout</span>
-            </a>
-        </div>
-        <div class="order-value-details">
-            <h4>Order Price: £{{ basket_total }}</h4>
-            <h4>Delivery Cost: £{{ delivery_charge }}</h4>
-            {% if free_remaining_amount > 0 %}
-            <p>Order £{{ free_remaining_amount }} extra for free delivery.</p>
-            {% endif %}
-            <h4><span class="green-text">Grand Total: £{{ grand_total }}</span></h4>
+        <div class="checkout-section">            
+            <div class="order-value-details">
+                <h4>Order Price: £{{ basket_total }}</h4>
+                <h4>Delivery Cost: £{{ delivery_charge }}</h4>
+                {% if free_remaining_amount > 0 %}
+                <p><span class="red-text">Spend £{{ free_remaining_amount }} for free delivery.</span></p>
+                {% else %}
+                <p><span class="dark-green-text">Free delivery on this order!</p></span>
+                {% endif %}
+                <h4><span class="forest-green-text">Grand Total: £{{ grand_total }}</span></h4>
+            </div>
+            <div>
+                <a href="{% url 'checkout' %}">
+                    <span class="checkout-button action-buttons">Go to Checkout</span>
+                </a>
+            </div>
         </div>
     </div>
 </div>

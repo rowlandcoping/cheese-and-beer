@@ -9,6 +9,9 @@
     src: url("../fonts/RobotoFlex-VariableFont_GRAD,XOPQ,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf");
     font-display: swap;
 }
+html, body {
+  height: 100%;
+}
 
 button {
     outline: none;
@@ -47,6 +50,8 @@ body {
     position:relative;
     margin:0;
     padding:0;
+    display: flex;
+    flex-direction: column;
 }
 .green-text {
     color: rgb(3, 126, 3);
@@ -59,6 +64,9 @@ body {
 }
 .dark-green-text {
     color:rgb(0, 51, 0);
+}
+.grey-text {
+    color:rgb(63, 63, 63);
 }
 
 
@@ -111,8 +119,8 @@ body {
     justify-content:space-between;
     align-items: center;
     background-color:rgb(1, 70, 1);
+    height:87px;
     width:100%;
-    height:100%;
 }
 .nav-menu-link {
     position:relative;
@@ -621,22 +629,34 @@ input[type=number] {
 }
 
 /*-----BASKET PAGE------*/
-#basket-view {
+.listing-container {
+    flex-grow: 1;
+    background-color: rgb(248, 248, 219);
+}
+#listing-listings, .checkout-section {
+    background-color: white;
+    padding:20px 20px;
+    margin:30px 20px;
+}
+#listing-view {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
-.basket-item-view {
-    width:100%;
+.listing-item-view {
+    width:100%; 
     display:flex;
-    margin:20px;
+    padding:10px 0;
+    border-bottom: 2px dotted grey;
 }
-.basket-image img {
+.listing-image img {
     width:150px;
     height:150px;
     object-fit:cover;
 }
 .checkout-section {
-    margin:10px;
+    margin-top:30px;
+    background-color: white;
+    height:100%;
 }
 .action-buttons {
     display:inline-block;
@@ -648,16 +668,20 @@ input[type=number] {
     margin-bottom:10px;
 }
 .checkout-button {
-    border:rgb(255, 201, 51) solid 2px;
-    background-color: rgb(47, 71, 0);    
-    color: rgb(255, 201, 51);    
+    border: 2px solid rgb(0, 15, 0);
+    background-color:rgb(0, 51, 0);   
+    color:rgb(255, 255, 140);    
 }
-.basket-button {
+.checkout-button:hover {
+    background-color:rgb(255, 255, 140);
+    color:rgb(1, 70, 1);
+}
+.listing-button {
     background-color:rgb(255, 201, 51);
     border: rgb(47, 71, 0) solid 2px;    
     color: rgb(47, 71, 0);
 }
-.basket-detail {
+.listing-detail {
     display:flex;
     flex-flow:column;
     padding-bottom:5px;
@@ -665,12 +689,57 @@ input[type=number] {
     justify-content: space-between;
     width:90%;
 }
-.basket-info {
+.listing-info {
     display:flex;    
     justify-content: space-between;
 }
+.listing-item-price {
+    text-align:center;
+    margin:0 10px;
+}
+.listing-item-price h4{
+    color:rgb(0, 51, 0);
+}
 .title-section {
-    margin-top:30px;
+    padding-bottom:10px;
+    border-bottom: 2px dotted grey;
+}
+.order-subtotal h4 {
+    margin: 10px 0;
+    font-size: 150%;
+}
+.order-value-details p {
+    font-size:90%;
+    margin:5px 0;
+}
+.order-value-details h4 {
+    font-size:130%;
+}
+.order-value-details {
+    width:200px;
+    margin-bottom:20px;
+}
+.decrement-listing, .increment-listing {
+        font-size:80%;
+        margin:0 3px;
+        padding:1px 2px;
+        background-color:rgb(201, 198, 198);
+        border:1px solid rgb(128, 128, 128);
+}
+.decrement-listing:hover, .increment-listing:hover {
+        background-color:rgb(128, 128, 128);
+        border:1px solid rgb(87, 87, 87);
+}
+.basket-quantity {
+    margin-bottom:2px;
+}
+#remove-item {
+    color:rgb(49, 0, 0);
+    text-decoration: underline;
+}
+#remove-item:hover {
+    color:rgb(114, 36, 36);
+    text-decoration: underline;
 }
 
 /*------MANAGE ADDRESSES PAGE------*/
@@ -678,7 +747,6 @@ input[type=number] {
     display:flex;
     flex-wrap: wrap;
 }
-
 .address-container {
     margin:0 30px;
     margin-bottom:20px;
@@ -726,6 +794,7 @@ input[type=number] {
 }
 
 /* BASKET MESSAGES */
+
 #basket-message {
     position:fixed;
     display:flex;
@@ -766,7 +835,6 @@ input[type=number] {
     text-align:center;
     font-size: 120%;
 }
-
 .error-message {
     border-color: rgb(245, 26, 26)
 }
@@ -806,7 +874,6 @@ input[type=number] {
     background-color:rgb(128, 128, 128);
     border:1px solid rgb(87, 87, 87);
 }
-
 .alert-footer {
     display:flex;
     justify-content: space-between;
@@ -846,14 +913,12 @@ input[type=number] {
 #not-found-content img {
     width:400px;
 }
-
 #not-found-page {
     display:flex;
     flex-flow:column;
     align-items:center;
     text-align:center;
 }
-
 .not-found-link {
     display:block;
     width:400px;
@@ -873,15 +938,14 @@ input[type=number] {
 
 /* General Forms (full-page) */
 #background-container {
-    display:flex;
-    flex-flow:column;
+    flex-grow: 1;
     width:100dvw;
     background-image: url("../images/gabriella-clare-marino-BtalpxzIiFs-cropped2-dark.webp");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: left;
-    height:90dvh;
 }
+    
 #form-large {
     margin:50px 300px;
     padding:30px 100px;
@@ -890,13 +954,11 @@ input[type=number] {
     border: 4px solid rgb(16, 95, 0);
     
 }
-
 #form-large h2, #form-large p {
     margin-bottom: 5px;
 }
 #form-large p {
-    padding-bottom:5px;
-    
+    padding-bottom:5px;    
     border-bottom: 1px dotted grey;
 }
 .general-form {
@@ -938,16 +1000,15 @@ input[type=number] {
 #sign-up-link {
    color:rgb(16, 95, 0);
 }
-
 #sign-up-link:hover {
     color:rgb(0, 15, 0);
     text-decoration: underline;    
- }
- .error-container {
+}
+.error-container {
     border-bottom: 1px dotted grey;
     padding-bottom: 5px;
     margin-bottom: 5px;
- }
+}
 .error-messages {
     margin-bottom:5px;
     display:flex;
@@ -956,7 +1017,9 @@ input[type=number] {
 .error-messages:last-child {
     margin-bottom:0;
 }
-
 .error-messages i {
     margin-right:10px;
+}
+#form-large #no-border {
+    border-bottom: 0;
 }
