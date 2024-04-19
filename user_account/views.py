@@ -41,31 +41,39 @@ def view_orders(request):
 
 
 def order_info(request, order_id):
-    order = get_object_or_404(Order, pk=order_id)
+    order = Order.objects.get(Order, pk=order_id)    
     if order.user_id == request.user:
         items = OrderItems.objects.filter(order_id=order).order_by('-id')
-        template = 'user_account/order-info.html'    
-        context = {
-            'order': order,
-            'items': items
-        }
-        return render(request, template, context)
     else:
+        messages.error((request, 'Order unavailable. Either search using this form or log in first'))
         return redirect('find_order')
+    template = 'user_account/order-info.html'    
+    context = {
+        'order': order,
+        'items': items
+    }
+    return render(request, template, context)
 
 
-def find_order(request):
-    order=None
-    items=None
+def found_order(request):
     if request.method == 'POST':
         order_number = request.POST.get('order-number')
         email = request.POST.get('email')
         postcode = request.POST.get('postcode')
         order = Order.objects.get(order_number = order_number, email = email, postcode = postcode)
-        items = OrderItems.objects.filter(order_id__id=order.id)
-    template = 'user_account/find-order.html'    
+        if order:
+            items = OrderItems.objects.filter(order_id__id=order.id)
+        else:
+            messages.error((request, 'Order not found'))
+            return redirect('find_order')
+    template = 'user_account/order-info.html'    
     context = {
         'order': order,
-        'items': items,
+        'items': items
     }
     return render(request, template, context)
+
+
+def find_order(request):
+    template = 'user_account/find-order.html'
+    return render(request, template)

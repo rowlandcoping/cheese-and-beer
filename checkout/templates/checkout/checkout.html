@@ -219,6 +219,7 @@ Cheese and Beer
                     <hr>     
                     <div class="payment-detail-section">
                         <h3>2) Payment Details</h3>
+                        <p>Please enter your payment card details below:</p>
                         <div>
                             <!-- A Stripe card element will go here -->
                             <div class="bottom-border" id="card-element"></div>
@@ -232,7 +233,10 @@ Cheese and Beer
                 </form>
                 <hr>
             </div>
-            <h3>3) Review Items</h3>
+            <div class="order-detail-header">
+                <h3>3) Review Items</h3>
+                <p>If you wish to remove any items please visit your <a class="sign-up-link" href="{% url 'view_basket' %}">shopping basket</a>.</p>
+            </div>
             <div class="order-detail-section">
                 {% for order in basket_items %}
                 <div class="order-item-container bottom-border">
@@ -242,7 +246,7 @@ Cheese and Beer
                         </div>
                         <div class="order-info">
                             <p>
-                                {{ order.product.name }}
+                                <strong>{{ order.product.name }}</strong>
                                 {% if order.product.product_type == "cheese" %}
                                 ({{ order.product.amount }}g, {{ order.product.cheese_category }} cheese,
                                 {{ order.product.variety | lower }}, {{ order.product.texture }})
@@ -257,11 +261,11 @@ Cheese and Beer
                             <div class="order-quantity">
                                 Qty: 
                                 <a href="{% url 'update_basket' %}?action=decrement,{{ order.product.id }},chkt">
-                                    <i id="decrement-{{ order.product.id }}" class="update-basket fa fa-minus"></i>  
+                                    <i id="decrement-{{ order.product.id }}" class="update-basket decrement-listing fa fa-minus"></i>  
                                 </a>                      
                                 <span class="product-quantity" id="quantity-{{ order.product.id }}">{{ order.quantity }}</span>
                                 <a href="{% url 'update_basket' %}?action=increment,{{ order.product.id }},chkt">
-                                    <i id="increment-{{ order.product.id }}" class="update-basket fa fa-plus"></i>
+                                    <i id="increment-{{ order.product.id }}" class="update-basket increment-listing fa fa-plus"></i>
                                 </a>
                             </div>
                         </div>

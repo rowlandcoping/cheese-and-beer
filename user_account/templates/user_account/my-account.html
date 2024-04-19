@@ -5,19 +5,21 @@ Cheese and Beer
 {% endblock %}
 
 {% block content %}
-<div id="account-view">
-    <h2>Manage Account</h2>
-    <div id="account options">
-        {% if addresses %}
-        <div class="manage-addresses">           
-            <a href="{% url 'manage_addresses' %}"><i class="fa-solid fa-house"></i> Manage Addresses</a>
+<div class="listing-container">
+    <div id="account-view">
+        <h2>Manage Account</h2>
+        <div id="account options">
+            {% if addresses %}
+            <div class="manage-addresses">           
+                <a href="{% url 'manage_addresses' %}"><i class="fa-solid fa-house"></i> Manage Addresses</a>
+            </div>
+            {% endif %}
+            {% if orders %}
+            <div class="view-orders">           
+                <a href="{% url 'view_orders' %}"><i class="fa-solid fa-list"></i> View Orders</a>
+            </div>        
+            {% endif %} 
         </div>
-        {% endif %}
-        {% if orders %}
-        <div class="view-orders">           
-            <a href="{% url 'view_orders' %}"><i class="fa-solid fa-list"></i> View Orders</a>
-        </div>        
-        {% endif %} 
     </div>
 </div>
 

@@ -433,6 +433,7 @@ input[type='checkbox'], input[type='radio'] {
     background-color:rgb(139, 67, 0);
     border:1px solid rgb(139, 67, 0);
     color:white;
+    box-shadow: 4px 4px 5px rgb(107, 107, 107);
 }
 .add-basket:hover {
     background-color:rgb(245, 183, 126);
@@ -447,6 +448,7 @@ input[type='checkbox'], input[type='radio'] {
     background-color:rgb(16, 95, 0);
     border:1px solid rgb(16, 95, 0);
     color:white;
+    box-shadow: 4px 4px 5px rgb(107, 107, 107);
 }
 .buy-now:hover {
     background-color:rgb(129, 153, 124);
@@ -594,6 +596,7 @@ input[type=number] {
     margin:10px 150px 0 150px;
     display:flex;
     justify-content: space-evenly;
+    margin-bottom: 50px;
 }
 .order-email-container {
     padding-top:10px;
@@ -634,7 +637,6 @@ input[type=number] {
 }
 .order-detail-section {
     border-top: 2px dotted grey;
-    padding-top:5px;
     margin-top:10px;
 }
 #main-section {
@@ -687,7 +689,7 @@ input[type=number] {
 .address-checkout-button:hover {
     color: rgb(0, 15, 0);
 }
-#add-new-address-form p, #address-selection p {
+#add-new-address-form p, #address-selection p, .payment-detail-section p, .order-detail-header p {
  margin-top:5px;
 }
 #add-new-address-form .general-form {
@@ -733,6 +735,16 @@ input[type=number] {
     margin:10px 0;
     border-top: 2px dotted grey;
     padding:10px;
+}
+.order-info {
+    display:flex;
+    flex-flow:column;
+    justify-content: space-between;
+    margin-left:10px;
+    padding-bottom:5px;
+}
+.order-item-container {
+    padding-top:5px;
 }
 
 
@@ -897,7 +909,11 @@ input[type=number] {
     height:100px;
     object-fit:cover;
 }
-
+.buy-again-button {
+    text-align:center;
+    width: 140px;
+    box-shadow: 4px 4px 5px rgb(107, 107, 107);
+}
 /* BASKET MESSAGES */
 
 #basket-message {
@@ -947,7 +963,7 @@ input[type=number] {
     border-color: rgb(16, 95, 0)
 }
 .warning-message {
-    border-color: rgb(245, 26, 26)
+    border-color: rgb(245, 150, 26)
 }
 
 /* General Alerts */
