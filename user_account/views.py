@@ -41,7 +41,7 @@ def view_orders(request):
 
 
 def order_info(request, order_id):
-    order = Order.objects.get(Order, pk=order_id)    
+    order = get_object_or_404(Order, pk=order_id)    
     if order.user_id == request.user:
         items = OrderItems.objects.filter(order_id=order).order_by('-id')
     else:

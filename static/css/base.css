@@ -914,6 +914,69 @@ input[type=number] {
     width: 140px;
     box-shadow: 4px 4px 5px rgb(107, 107, 107);
 }
+.order-info-subtotal {
+    margin:10px 0;
+}
+.order-info-subtotal h4 {    
+    font-size: 140%;
+}
+
+/* MY ACCOUNT PAGE */
+#account-view {
+    background-color: white;
+    padding:20px 20px;
+    margin:30px 20px;
+}
+#account-options {
+    display:flex;
+    margin-top: 20px;
+}
+.account-purchases {
+    margin-right:20px;
+}
+.account-administration {
+    margin-left:20px;
+}
+.account-purchases h3, .account-administration h3 {
+    text-align:center;
+    font-size:150%;
+    color:rgb(0, 51, 0);
+}
+
+.account-info-section {
+    display:flex;
+    justify-content:space-between;
+    font-size:140%;
+    border: 2px dotted grey;
+    margin:20px;
+    padding:20px;
+}
+.account-info-section i {
+    margin-right:20px;
+}
+.account-info-section:hover {
+    background-color:rgb(194, 194, 194)
+}
+.account-info-section .fa-house {
+    color:rgb(94, 40, 16);
+}
+.account-info-section .fa-list {
+    color:rgb(2, 61, 29);
+}
+.account-info-section .fa-cloud {
+    color:rgb(0, 176, 182);
+}
+.account-info-section .fa-key {
+    color:rgb(241, 160, 83);
+}
+.account-info-section .fa-envelope {
+    color:rgb(148, 147, 147);
+}
+.account-info-section .fa-door-open {
+    color:rgb(126, 16, 16);
+}
+
+
 /* BASKET MESSAGES */
 
 #basket-message {
