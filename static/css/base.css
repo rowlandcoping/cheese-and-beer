@@ -593,7 +593,7 @@ input[type=number] {
 .checkout-page {
     margin:10px 150px 0 150px;
     display:flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 .order-email-container {
     padding-top:10px;
@@ -628,19 +628,27 @@ input[type=number] {
     object-fit:cover;
 }
 .order-item-view {
-    margin:10px 0;
+    padding-top:10px;
     width: 400px;
     display:flex;
+}
+.order-detail-section {
+    border-top: 2px dotted grey;
+    padding-top:5px;
+    margin-top:10px;
 }
 #main-section {
     background-color:white;
     padding:20px;
     margin-top:20px;
-    width:60%;
+    width:50%;
 }
 .purchase-section {
-    text-align:center;
-    width:25%;
+    margin-top:20px;
+    background-color: white;
+    height:100%;
+    width:250px;
+    padding:20px;
 }
 .ts-and-cs {
     margin-top:5px;
@@ -712,6 +720,22 @@ input[type=number] {
 .address-selector-container {
     padding-top:10px;
 }
+#card-element {
+    font-size:500%;
+}
+#error-container {
+    margin-top:10px;
+}
+#card-errors {
+    margin:10px 0;
+}
+#card-element{
+    margin:10px 0;
+    border-top: 2px dotted grey;
+    padding:10px;
+}
+
+
 /*-----BASKET PAGE------*/
 .listing-container {
     flex-grow: 1;

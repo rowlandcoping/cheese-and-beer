@@ -198,19 +198,6 @@ document.addEventListener("DOMContentLoaded", function() {
     // Adds Card element to checkout page(if element exists).  Also adds event listeners and actions to be taken on card submit.
     
     if (document.getElementById('id_stripe_public_key')) {
-        //add event listneres to the buttons that trigger the submit button
-        const paymentSubmitButtons = Array.from(document.getElementsByClassName('payment-button'));
-        paymentSubmitButtons.forEach(item => {
-            item.addEventListener('click', function handleClick(event) {
-                document.getElementById('form-submit-button').click();
-            })
-        })
-        document.addEventListener("submit", function(e){
-            const target = e.target.closest("#payment-form");
-            if(target){
-                e.preventDefault();
-            }
-        })
         const stripePublicKey = document.getElementById('id_stripe_public_key').textContent.slice(1, -1);
         const clientSecret = document.getElementById('id_client_secret').textContent.slice(1, -1);
         const stripe = Stripe(stripePublicKey);
@@ -218,16 +205,16 @@ document.addEventListener("DOMContentLoaded", function() {
         const style = {
             base: {
                 color: '#000',
-                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
                 fontSmoothing: 'antialiased',
                 fontSize: '16px',
                 '::placeholder': {
-                    color: '#aab7c4'
+                    color: 'grey'
                 }
             },
             invalid: {
-                color: '#dc3545',
-                iconColor: '#dc3545'
+                color: 'red',
+                iconColor: 'red'
             }
         };
         const card = elements.create('card',  { hidePostalCode: true, style: style});
@@ -251,24 +238,47 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // HANDLE FORM SUBMISSION
         const form = document.getElementById('payment-form');
-        // adds event listeners to all the payment buttons.       
-        document.addEventListener("click", function(e){
-            const target = e.target.closest("#form-submit-button");
+        document.addEventListener("submit", function(e){
+            const target = e.target.closest("#payment-form");
             if(target){
-                //checks necessary form fields are complete or prevents submission of payment until they are, returning true or false
+                e.preventDefault();
+            }
+        })      
+        //Validates form with Javascript to avoid errors or premature submission
+        const paymentSubmitButtons = Array.from(document.getElementsByClassName('payment-button'));
+        paymentSubmitButtons.forEach(item => {
+            item.addEventListener('click', function handleClick(event) {
                 const addressFields = Array.from(document.getElementsByClassName('address-field'));
-                for (let i = 0; i < addressFields.length; i++) {                    
+                for (let i = 0; i < addressFields.length; i++) {                  
                     if (addressFields[i].required) {
-                        if (addressFields[i].value) {
-                            takePayment=true;                            
+                        if (addressFields[i].value) {   
+                            if (addressFields[i].name === "order_email") {
+                                email = addressFields[i].value
+                                emailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+                                if (email.match(emailFormat)) {
+                                    takePayment=true;
+                                    document.getElementById('error-container').style.display="none"
+                                } else {
+                                    document.getElementById('error-container').style.display="block"
+                                    document.getElementById('form-error-message').textContent = "email address is not in the correct format"
+                                    takePayment=false;
+                                    break;
+                                }
+                            } else {
+                                takePayment=true;
+                                document.getElementById('error-container').style.display="none"
+                            }                     
                         } else {
+                            //console.log(addressFields[i].name)
+                            document.getElementById('error-container').style.display="block";
+                            document.getElementById('form-error-message').textContent = addressFields[i].placeholder + " has not been filled out"
                             takePayment=false;
                             break;
                         }
                     }
-                }
-                
+                }                                   
                 if (takePayment === true) {
+                    document.getElementById('form-submit-button').click();
                     //disables form input etc to prevent multiple submissions
                     card.update({ 'disabled': true});
                     const formButtons = Array.from(document.getElementsByClassName('form-button'));
@@ -278,8 +288,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     if (document.getElementById('add-user-address')) {
                         document.getElementById('add-user-address').setAttribute('disabled', true);
                     }
-                    /*this is for the loading circle thing.  Fade toggle is just an opacity type toggle thing in jquery.
-                    given I don't have a loady circle thing yet I'll park this for now.  Maybe replace with a spinning cheese or whatever*/
+                    /*this is for the loading circle thing.  Fade toggle is just an opacity type toggle thing in jquery. I've recreated similar for adding products to the basket.
+                    given I don't have a loady circle thing and am unlikely to I'll park this for now.  Maybe replace with a spinning cheese or whatever*/
                     //document.getElementById('payment-form').fadeToggle(100);
                     //document.getElementById('loading-overlay').fadeToggle(100);                
                     stripe.confirmCardPayment(clientSecret, {
@@ -327,16 +337,15 @@ document.addEventListener("DOMContentLoaded", function() {
                             }
                         } else {
                             if (result.paymentIntent.status === 'succeeded') {
-                                console.log("it worked")
                                 //this acts like the submit button and submits the form to the checkout view.
                                 form.submit();
                             }
                         }
                     })
                 }
-            }      
-        });    
-    }
+            }) 
+        })
+    }      
     //Quantity form control icons.
     if (document.getElementById('decrement-amount')) {
         document.addEventListener("click", function(e){

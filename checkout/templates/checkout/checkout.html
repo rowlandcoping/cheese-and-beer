@@ -181,7 +181,11 @@ Cheese and Beer
                             <label for="order-email">Order e-mail:<span class="red-text">*</span> </label></td>
                             <input type="email" name="order_email" id="order-email" class="address-field" value="{{ user_email }}" placeholder="e-mail" required></td>
                         </div>
-                        
+                        <div class="not-displayed" id="error-container">
+                            <div class="error-messages red-text">
+                                <i class="fa-solid fa-circle-exclamation"></i><span id="form-error-message"></span>
+                            </div>
+                        </div>                        
                         <table class="general-form">                                
                             <tr>
                                 <td><label for="id_full_name">Full Name:<span class="red-text">*</span> </label></td>
@@ -217,9 +221,9 @@ Cheese and Beer
                         <h3>2) Payment Details</h3>
                         <div>
                             <!-- A Stripe card element will go here -->
-                            <div class="mb-3" id="card-element"></div>
+                            <div class="bottom-border" id="card-element"></div>
                             <!-- Used to display form errors -->
-                            <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+                            <div class="red-text" id="card-errors" role="alert"></div>
                             <!-- Pass the client secret to the view so we can get the payment intent id -->
                             <input type="hidden" value="{{ client_secret }}" name="client_secret">
                         </div>                    
@@ -228,62 +232,66 @@ Cheese and Beer
                 </form>
                 <hr>
             </div>
+            <h3>3) Review Items</h3>
             <div class="order-detail-section">
-                <h3>3) Review Items</h3>
                 {% for order in basket_items %}
-                <div class="order-item-view">
-                    <div class="order-image">
-                        <img src="{{ MEDIA_URL }}products/{{ order.product.image_url }}">
-                    </div>
-                    <div class="order-info">
-                        <p>
-                            {{ order.product.name }}
-                            {% if order.product.product_type == "cheese" %}
-                            ({{ order.product.amount }}g, {{ order.product.cheese_category }} cheese,
-                            {{ order.product.variety | lower }}, {{ order.product.texture }})
-                            {% else %}
-                            ({{ order.product.amount }}ml {{ order.product.container }}, {{ order.product.beer_category }} beer,
-                            {{ order.product.variety | lower }}, {{ order.product.alcohol_content }}% APR)
-                            {% endif %}
-                        </p>
-                        <h4 class="checkout-price">
-                            £{{ order.product.price }}
-                        </h4>
-                        <div class="order-quantity">
-                            Qty: 
-                            <a href="{% url 'update_basket' %}?action=decrement,{{ order.product.id }},chkt">
-                                <i id="decrement-{{ order.product.id }}" class="update-basket fa fa-minus"></i>  
-                            </a>                      
-                            <span class="product-quantity" id="quantity-{{ order.product.id }}">{{ order.quantity }}</span>
-                            <a href="{% url 'update_basket' %}?action=increment,{{ order.product.id }},chkt">
-                                <i id="increment-{{ order.product.id }}" class="update-basket fa fa-plus"></i>
-                            </a>
+                <div class="order-item-container bottom-border">
+                    <div class="order-item-view">
+                        <div class="order-image">
+                            <img src="{{ MEDIA_URL }}products/{{ order.product.image_url }}">
+                        </div>
+                        <div class="order-info">
+                            <p>
+                                {{ order.product.name }}
+                                {% if order.product.product_type == "cheese" %}
+                                ({{ order.product.amount }}g, {{ order.product.cheese_category }} cheese,
+                                {{ order.product.variety | lower }}, {{ order.product.texture }})
+                                {% else %}
+                                ({{ order.product.amount }}ml {{ order.product.container }}, {{ order.product.beer_category }} beer,
+                                {{ order.product.variety | lower }}, {{ order.product.alcohol_content }}% APR)
+                                {% endif %}
+                            </p>
+                            <h4 class="checkout-price">
+                                £{{ order.product.price }}
+                            </h4>
+                            <div class="order-quantity">
+                                Qty: 
+                                <a href="{% url 'update_basket' %}?action=decrement,{{ order.product.id }},chkt">
+                                    <i id="decrement-{{ order.product.id }}" class="update-basket fa fa-minus"></i>  
+                                </a>                      
+                                <span class="product-quantity" id="quantity-{{ order.product.id }}">{{ order.quantity }}</span>
+                                <a href="{% url 'update_basket' %}?action=increment,{{ order.product.id }},chkt">
+                                    <i id="increment-{{ order.product.id }}" class="update-basket fa fa-plus"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
-                <h4>Order sub-total: £{{ basket_total }}</h4>
+                <div class="order-subtotal">
+                    <h4>Order sub-total: £{{ basket_total }}</h4>
+                    <span class="action-buttons payment-button checkout-button form-button">
+                        Purchase Now
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="purchase-section">            
+            <div class="order-value-details">
+                <h4>Order Price: £{{ basket_total }}</h4>
+                <h4>Delivery Cost: £{{ delivery_charge }}</h4>
+                {% if free_remaining_amount > 0 %}
+                <p><span class="red-text">£{{ free_remaining_amount }} more for free delivery.</span></p>
+                {% else %}
+                <p><span class="dark-green-text">Free delivery on this order!</p></span>
+                {% endif %}
+                <h4><span class="forest-green-text">Grand Total: £{{ grand_total }}</span></h4>
+            </div>
+            <div>
                 <span class="action-buttons payment-button checkout-button form-button">
                     Purchase Now
                 </span>
-                <a href="{% url 'view_basket' %}">
-                    <span class="action-buttons basket-button">
-                        Go to Basket
-                    </span>
-                </a>
             </div>
-        </div>
-        <div class="purchase-section">
-            <span class="action-buttons payment-button checkout-button form-button">
-                Purchase Now
-            </span>
-            
-            <h4>Order Price: £{{ basket_total }}</h4>
-            <h4>Delivery Cost: £{{ delivery_charge }}</h4>
-            {% if free_remaining_amount > 0 %}
-            <p>Order £{{ free_remaining_amount }} extra for free delivery.</p>
-            {% endif %}
-            <h4><span class="green-text">Grand Total: £{{ grand_total }}</span></h4>
             <p class="ts-and-cs">
                 <small>
                     Be aware that any orders placed through this website will not be fulfilled. 
