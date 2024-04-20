@@ -609,6 +609,16 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
     }, 500);
+    //ensure correct container checked editing beer product form
+    if (document.getElementById("container-selected")) {
+        container = document.getElementById("container-selected").value;
+        console.log(container);
+        if (container ==="can") {
+            document.getElementById("id_container_1").checked = true;
+        } else {
+            document.getElementById("id_container_0").checked = true;
+        }
+    }
 });
 
 

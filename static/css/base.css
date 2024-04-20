@@ -1291,6 +1291,10 @@ input[type=number] {
 .edit-product-actions .fa-trash:hover {
     color: rgb(95, 0, 0);
 }
+.availability-button {
+    display:inline-block;
+    margin-left:-5px;
+}
 
 /* General Forms (full-page) */
 #background-container {

@@ -1,52 +1,140 @@
 {% extends "base.html" %}
 
 {% block title %}
-Cheese and Beer - Admin Console
+Cheese and Beer - Edit {{ product.name }}
 {% endblock %}
 
 {% block content %}
-
-{% if messages %}
-{% for message in messages %}
-{% with message.level as level %}
-{% if level == 40 %}
-<div id="general-message" class="error-message alert-disable">
-{% elif level == 30 %}
-<div id="general-message" class="warning-message alert-disable">
-{% elif level == 25 %}
-<div id="general-message" class="success-message alert-disable">
-{% else %}
-<div id="general-message" class="warning-message alert-disable">
-{% endif %}
-{% endwith %}    
-    {{ message }}
-</div>      
-{% endfor %}    
-{% endif %}
-
-<h1>Do Stuff Now</h1>
-<form method="POST" action="{% url 'product_edit' product.id %}" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="publish-toggle">Availability
-    {% if product.displayed %}
-    <a class="fa fa-toggle-on btn basic button-on" href="{% url 'product_unpublish' product.id %}"></a>
+<div id="background-container">
+    {% if messages %}
+    {% for message in messages %}
+    {% with message.level as level %}
+    {% if level == 40 %}
+    <div id="general-message" class="error-message alert-disable">
+    {% elif level == 30 %}
+    <div id="general-message" class="warning-message alert-disable">
+    {% elif level == 25 %}
+    <div id="general-message" class="success-message alert-disable">
     {% else %}
-    <a class="fa fa-toggle-off btn basic button-off" href="{% url 'product_publish' product.id %}"></a>
+    <div id="general-message" class="warning-message alert-disable">
     {% endif %}
+    {% endwith %}    
+        {{ message }}
+    </div>      
+    {% endfor %}    
+    {% endif %}
+    <div id="form-large">
+        <h2>Edit {{ product.name }}</h2>
+        <p>Click <a class="sign-up-link" href="{% url 'admin_console' %}">here</a> to return to product administration.
+        <br>Or click <a class="sign-up-link" href="{% url 'edit_product' %}">here</a> to find a different product to edit.</p>
+        <form method="POST" action="{% url 'product_edit' product.id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% if product.beer_category %}
+            <input type="hidden" name="checked" id="container-selected" value="{{ product.container }}">
+            {% endif %}
+            <div>
+                <table class="general-form">
+                    <tr>
+                        <td><span class="availability-button">Availability</span></td>
+                        <td>
+                            {% if product.displayed %}
+                            <a href="{% url 'product_unpublish' product.id %}"><i class="fa fa-toggle-on btn basic button-on green-text"></i></a>
+                            {% else %}
+                            <a href="{% url 'product_publish' product.id %}"><i class="fa fa-toggle-off btn basic button-off red-text"></i></a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="id_login">Name: <span class="red-text">*</span> </label></td>
+                        <td>{{ form.name }}</td>
+                    </tr>
+                    {% if form.beer_category %}
+                    <tr>
+                        <td class="form-large-textarea"><label for="id_address_line_one">Beer Category:<span class="red-text">*</span> </label></td>
+                        <td>{{ form.beer_category }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td class="form-large-textarea"><label for="id_address_line_one">Cheese Category:<span class="red-text">*</span> </label></td>
+                        <td>{{ form.cheese_category }}</td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <td class="form-large-textarea"><label for="id_address_line_one">Description: </label></td>
+                        <td>
+                            {{ form.description }}                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="id_address_line_one">Variety:<span class="red-text">*</span> </label></td>
+                        <td>
+                            {{ form.variety }}                            
+                        </td>
+                    </tr>
+                    {% if form.texture %}
+                    <tr>
+                        <td><label for="id_address_line_one">Texture:<span class="red-text">*</span> </label></td>
+                        <td>
+                            {{ form.texture }}                            
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td><label for="id_address_line_one">Alcohol Content:<span class="red-text">*</span> </label></td>
+                        <td>
+                            {{ form.alcohol_content }}                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="id_address_line_one">Type of Container:<span class="red-text">*</span> </label></td>
+                        <td>
+                            {{ form.container }}                            
+                        </td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <td><label for="id_address_line_one">Amount {% if product.cheese_category %}(g){% else %}(ml){% endif %}:<span class="red-text">*</span> </label></td>
+                        <td>
+                            {{ form.amount}}                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="id_address_line_one">Price (£):<span class="red-text">*</span> </label></td>
+                        <td>
+                            {{ form.price }}                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="id_address_line_one">Country of Origin:<span class="red-text">*</span> </label></td>
+                        <td>
+                            {{ form.country_origin }}                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="id_address_line_one">Image:<span class="red-text">*</span> </label></td>
+                        <td>
+                            {{ form.image }}                            
+                        </td>
+                    </tr>
+                </table>
+                <span id="profile-pic-cancel" class="not-displayed clickable-element">Cancel Upload</span>
+                <div>
+                    {% if product.image_url %}
+                    <img id="current-edit-image" src="{{ MEDIA_URL }}products/{{ product.image_url }}" alt = "{{ product.image_alt }}">
+                    {% endif %}
+                    <img id="image-preview" class="not-displayed" src="{{ MEDIA_URL }}products/{{ product.image_url }}" alt="This is a preview of the uploaded image">
+                </div>
+            </div>
+            {% if product.beer_category %}
+            <div class="form-large-button">
+                <button type="submit">Update Beer</button>
+            </div>
+            {% else %}
+            <div class="form-large-button">
+                <button type="submit">Update Cheese</button>
+            </div>
+            {% endif %}
+        </form>
     </div>
-    {{ form }}
-    <div>
-        <img src="{{ MEDIA_URL }}products/{{ product.image_url }}">
-    </div>
-    <div class="text-right">
-        <a class="btn btn-outline-black rounded-0" href="">Cancel</a>
-        <button class="btn btn-black rounded-0" type="submit">Add Product</button>
-    </div>
-</form>
-
-<h2>
-    <a href="{% url 'admin_console' %}">Back to Admin Console</a>
-    <br>
-    <a href="{% url 'home' %}">Back to Homepage</a>
-</h2>
+</div>
 {% endblock %}
