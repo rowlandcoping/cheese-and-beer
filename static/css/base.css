@@ -1240,6 +1240,22 @@ input[type=number] {
     border:none;
 }
 
+/*PRODUCT FORMS*/
+#id_container label {
+    display: flex;
+    justify-content:left;
+    
+    width:75px;
+}
+#id_container_0, #id_container_1 {
+    width:25px;
+    text-align:left;
+    border:none;
+}
+#id_container label input {
+    outline:none;
+}
+
 
 /* General Forms (full-page) */
 #background-container {
@@ -1269,6 +1285,7 @@ input[type=number] {
 .general-form {
     border-spacing: 5px;
 }
+
 .general-form input {
     padding: 5px 10px;
     width:300px;
@@ -1294,6 +1311,9 @@ input[type=number] {
 .general-form label {
     margin-left: -5px;
     margin-right:5px;
+}
+.general-form select {
+    padding:4px;
 }
 #form-large button, .add-address-button, .orders-search button {
     font-family:main;

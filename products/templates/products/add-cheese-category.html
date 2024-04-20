@@ -29,7 +29,7 @@ Cheese and Beer - Add Cheese Category
         {% endfor %}    
         {% endif %}
         <h2>Add Cheese Category</h2>
-        <p>Click <a class="sign-up-link" href="{% url 'admin_console' %}">here</a> to return to product administration</p>
+        <p>Click <a class="sign-up-link" href="{% url 'admin_console' %}">here</a> to return to product administration.</p>
         <form method="POST" action="{% url 'add_cheese_category' %}" enctype="multipart/form-data">
             {% csrf_token %}
             <div>

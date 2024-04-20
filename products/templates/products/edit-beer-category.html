@@ -1,33 +1,29 @@
 {% extends "base.html" %}
 
 {% block title %}
-Cheese and Beer - Admin Console
+Cheese and Beer - Edit Beer Category
 {% endblock %}
 
 {% block content %}
 <div id="background-container">
+    {% if messages %}
+    {% for message in messages %}
+    {% with message.level as level %}
+    {% if level == 40 %}
+    <div id="general-message" class="error-message">
+    {% elif level == 30 %}
+    <div id="general-message" class="warning-message">
+    {% elif level == 25 %}
+    <div id="general-message" class="success-message">
+    {% else %}
+    <div id="general-message" class="warning-message">
+    {% endif %}
+    {% endwith %}    
+        {{ message }}
+    </div>      
+    {% endfor %}    
+    {% endif %}
     <div id="form-large">
-        {% if messages %}
-        {% for message in messages %}
-        {% with message.level as level %}
-        {% if level == 40 %}
-        <div id="basket-message" class="error-message">
-            <i class="fa-solid fa-exclamation red-text"></i>
-        {% elif level == 30 %}
-        <div id="basket-message" class="warning-message">
-            <i class="fa-solid fa-minus red-text"></i>
-        {% elif level == 25 %}
-        <div id="basket-message" class="success-message">
-            <i class="fa-solid fa-plus green-text"></i>
-        {% else %}
-        <div id="basket-message" class="warning-message">
-            <i class="fa-solid fa-minus red-text"></i>
-        {% endif %}
-        {% endwith %}    
-            {{ message }}
-        </div>
-        {% endfor %}    
-        {% endif %}
         <h2>Edit Beer Category</h2>
         <p>Click <a class="sign-up-link" href="{% url 'admin_console' %}">here</a> to return to product administration.
         <br>Or click <a class="sign-up-link" href="{% url 'edit_categories' %}">here</a> to edit a different category.</p>        
