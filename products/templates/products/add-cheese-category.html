@@ -1,23 +1,64 @@
 {% extends "base.html" %}
 
 {% block title %}
-Cheese and Beer - Admin Console
+Cheese and Beer - Add Cheese Category
 {% endblock %}
 
 {% block content %}
-<h1>Do Stuff Now</h1>
-<form method="POST" action="{% url 'add_cheese_category' %}" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form }}
-    <div class="text-right">
-        <a class="btn btn-outline-black rounded-0" href="">Cancel</a>
-        <button class="btn btn-black rounded-0" type="submit">Add Product</button>
+<div id="background-container">
+    <div id="form-large">
+        {% if messages %}
+        {% for message in messages %}
+        {% with message.level as level %}
+        {% if level == 40 %}
+        <div id="basket-message" class="error-message">
+            <i class="fa-solid fa-exclamation red-text"></i>
+        {% elif level == 30 %}
+        <div id="basket-message" class="warning-message">
+            <i class="fa-solid fa-minus red-text"></i>
+        {% elif level == 25 %}
+        <div id="basket-message" class="success-message">
+            <i class="fa-solid fa-plus green-text"></i>
+        {% else %}
+        <div id="basket-message" class="warning-message">
+            <i class="fa-solid fa-minus red-text"></i>
+        {% endif %}
+        {% endwith %}    
+            {{ message }}
+        </div>
+        {% endfor %}    
+        {% endif %}
+        <h2>Add Cheese Category</h2>
+        <p>Click <a class="sign-up-link" href="{% url 'admin_console' %}">here</a> to return to product administration</p>
+        <form method="POST" action="{% url 'add_cheese_category' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>
+                <table class="general-form">
+                    <tr>
+                        <td><label for="id_login">Name: <span class="red-text">*</span> </label></td>
+                        <td>{{ form.name }}</td>
+                    </tr>
+                    <tr>
+                        <td class="form-large-textarea"><label for="id_address_line_one">Description:<span class="red-text">*</span> </label></td>
+                        <td>{{ form.description }}</td>
+                    </tr>
+                    <tr>
+                        <td><label for="id_address_line_one">Image:<span class="red-text">*</span> </label></td>
+                        <td>
+                            {{ form.image }}                            
+                        </td>
+                    </tr>
+                </table>
+                <span id="profile-pic-cancel" class="not-displayed clickable-element">Cancel Upload</span>
+                
+                <div>
+                    <img id="image-preview" class="not-displayed" src=" " alt="This is a preview of the uploaded image">
+                </div>
+            </div>
+            <div class="form-large-button">
+                <button class="btn btn-black rounded-0" type="submit">Add Category</button>
+            </div>
+        </form>
     </div>
-</form>
-
-<h2>
-    <a href="{% url 'admin_console' %}">Back to Admin Console</a>
-    <br>
-    <a href="{% url 'home' %}">Back to Homepage</a>
-</h2>
+</div>
 {% endblock %}

@@ -5,28 +5,55 @@ Cheese and Beer - Admin Console
 {% endblock %}
 
 {% block content %}
-<h1>Edit Stuff Now</h1>
-<h2>Cheese Categories</h2>
-
-{% for category in cheese_categories %}
-<h3>
-    {{ category.name }}
-    <a href = "{% url 'edit_cheese_category' category.id %}"> Edit</a>
-</h3>
-{% endfor %}
-
-<h2>Beer Categories</h2>
-
-{% for category in beer_categories %}
-<h3>
-    {{ category.name }}
-    <a href = "{% url 'edit_beer_category' category.id %}"> Edit</a>
-</h3>
-{% endfor %}
-
-<h2>
-    <a href="{% url 'admin_console' %}">Back to Admin Console</a>
-    <br>
-    <a href="{% url 'home' %}">Back to Homepage</a>
-</h2>
+<div id="background-container">
+    <div id="form-large">
+        {% if messages %}
+        {% for message in messages %}
+        {% with message.level as level %}
+        {% if level == 40 %}
+        <div id="basket-message" class="error-message">
+            <i class="fa-solid fa-exclamation red-text"></i>
+        {% elif level == 30 %}
+        <div id="basket-message" class="warning-message">
+            <i class="fa-solid fa-minus red-text"></i>
+        {% elif level == 25 %}
+        <div id="basket-message" class="success-message">
+            <i class="fa-solid fa-plus green-text"></i>
+        {% else %}
+        <div id="basket-message" class="warning-message">
+            <i class="fa-solid fa-minus red-text"></i>
+        {% endif %}
+        {% endwith %}    
+            {{ message }}
+        </div>
+        {% endfor %}    
+        {% endif %}
+        <h2>Edit Categories</h2>
+        <p>Click <a class="sign-up-link" href="{% url 'admin_console' %}">here</a> to return to product administration</p>
+        <div id="admin-console">            
+            <div class="edit-category-section bottom-border-thin">
+                <div class="console-headline">
+                    <h3>Cheese Categories</h3>
+                </div>
+                {% for category in cheese_categories %}
+                <div>                
+                    <a href = "{% url 'edit_cheese_category' category.id %}"><i class="fas fa-edit"></i></a>
+                    {{ category.name }}
+                </div>
+                {% endfor %}
+            </div>
+            <div class="edit-category-section bottom-border-thin">
+                <div class="console-headline">
+                    <h3>Beer Categories</h3>
+                </div>
+                {% for category in beer_categories %}                
+                <div>                
+                    <a href = "{% url 'edit_beer_category' category.id %}"><i class="fas fa-edit"></i></a>
+                    {{ category.name }}
+                </div>            
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 
 def admin_console(request):
     """ Returns admin console page"""
-    return render(request, 'admin_console/admin-console.html')
+    if request.user.is_authenticated:
+        return render(request, 'admin_console/admin-console.html')
+    else:
+        return redirect('home')

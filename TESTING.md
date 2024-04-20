@@ -316,6 +316,10 @@ ALLAUTH USERNAME ISSUE
 
 Whilst allauth does great things, it also insists on users providing a username.  Whilst this used to be good pratice in reality few sites these days require this, and most signin activity requires a username.  I was able to set up Django so that allauth used the e-mail address to login, but when I tested the signup process without a required username it started throwing errors.  I tried various combinations of settings before I realised I would have no choice but to customise the user model.  The solution I found, alongside various settings, was to set up a reciever in my user account model which, presave, would set the username to the same value as the e-mail address. That way the field would easily be populated with a unique value.  I feel sure a neater solution must exist (although this is about the neatest solution I've seen so far) but nothing that makes for such a seamless user experience.
 
+UNUPLOADED FILES PERSIST ON PAGE REFRESH
+
+When uploading an image with Django, I have been able to use javascrip to preview files in the form and a cancel button to remove any such files and prevent the image uploading. However, if the page is refreshed the file previously selected seems to persist in the cache (this was also a problem with Boutique Ado).  It could lead to a user unwittingly updating a file. I have searched a lot for answers of doing this in the view - in the end I simply set Javascript to clear the field on page reload.
+
 
 
 

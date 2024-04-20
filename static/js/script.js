@@ -2,6 +2,8 @@
 
 document.addEventListener("DOMContentLoaded", function() {
 
+    
+
 
     //MANY TO MANY FIELD SELECTOR
     //attach event listners to category buttons    
@@ -24,9 +26,9 @@ document.addEventListener("DOMContentLoaded", function() {
         for (let i = 0; i < categoryButtons.length; i++) {
             for (let j = 0; j < categorySelected.length; j++) {
                 if (categoryButtons[i] == categorySelected[j]) {
-                    document.getElementById(categoryButtons[i]).style.backgroundColor = "green";
-                    document.getElementById(categoryButtons[i]).style.color = "white";
-                    document.getElementById(categoryButtons[i]).style.borderColor = "white";
+                    document.getElementById(categoryButtons[i]).style.backgroundColor = "rgb(255, 255, 140)";
+                    document.getElementById(categoryButtons[i]).style.color = "rgb(0, 51, 0)";
+                    document.getElementById(categoryButtons[i]).style.borderColor = "rgb(0, 15, 0)";
                     document.getElementById("id_pairings").value += Number(categoryButtons[i]) + ",";
                 }
             }
@@ -34,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     //changes colour of category when clicked and adds the category to the pairings field
     function addSignupCategory(itemId) {        
-        if (document.getElementById(itemId).style.color === "white") {
+        if (document.getElementById(itemId).style.color === "rgb(0, 51, 0)") {
             document.getElementById(itemId).style.backgroundColor = "grey";
             document.getElementById(itemId).style.color = "black";
             document.getElementById(itemId).style.border = "2px solid rgb(53, 52, 52)";
@@ -42,31 +44,46 @@ document.addEventListener("DOMContentLoaded", function() {
             const newText = oldText.replace(itemId + "," ,'');
             document.getElementById("id_pairings").value = newText;
         } else {
-            document.getElementById(itemId).style.backgroundColor = "green";
-            document.getElementById(itemId).style.color = "white";
-            document.getElementById(itemId).style.border = "2px solid white";
+            document.getElementById(itemId).style.backgroundColor = "rgb(255, 255, 140)";
+            document.getElementById(itemId).style.color = "rgb(0, 51, 0)";
+            document.getElementById(itemId).style.border = "2px solid rgb(0, 15, 0)";
             document.getElementById("id_pairings").value += Number(itemId) + ",";
         }
     }
     //mouseover effects for categories
     //NOT YET IMPLEMENTED
+    const attachMouseoverListners= Array.from(document.getElementsByClassName('category-selector'));
+    attachMouseoverListners.forEach(item => {
+        item.addEventListener('mouseover', function handleClick(event) {
+            const itemId = item.getAttribute('id');                
+            categoryMouseover(itemId);
+        });
+    });
+    //add mouseout effects
+    const attachMouseoutListners= Array.from(document.getElementsByClassName('category-selector'));
+    attachMouseoutListners.forEach(item => {
+        item.addEventListener('mouseout', function handleClick(event) {
+            const itemId = item.getAttribute('id');                
+            categoryMouseout(itemId);
+        });
+    });
 
     function categoryMouseover(itemId) {        
-        if (document.getElementById(itemId).style.backgroundColor === "green") {
-            document.getElementById(itemId).style.backgroundColor = "rgb(49, 68, 49)";
-            document.getElementById(itemId).style.color = "white";
-            document.getElementById(itemId).style.border = "2px solid white";
+        if (document.getElementById(itemId).style.backgroundColor === "rgb(255, 255, 140)") {
+            document.getElementById(itemId).style.backgroundColor = "rgb(134, 134, 53)";
+            document.getElementById(itemId).style.color = "rgb(0, 51, 0)";
+            document.getElementById(itemId).style.border = "2px solid rgb(0, 15, 0)";
         } else {
-            document.getElementById(itemId).style.backgroundColor = "rgb(49, 68, 49)";
+            document.getElementById(itemId).style.backgroundColor = "rgb(134, 134, 53)";
             document.getElementById(itemId).style.color = "black";
             document.getElementById(itemId).style.border = "2px solid rgb(53, 52, 52)";
         }
     }
     function categoryMouseout(itemId) {        
-        if (document.getElementById(itemId).style.color === "white") {
-            document.getElementById(itemId).style.backgroundColor = "green";
-            document.getElementById(itemId).style.color = "white";
-            document.getElementById(itemId).style.border = "2px solid white";
+        if (document.getElementById(itemId).style.color === "rgb(0, 51, 0)") {
+            document.getElementById(itemId).style.backgroundColor = "rgb(255, 255, 140)";
+            document.getElementById(itemId).style.color = "rgb(0, 51, 0)";
+            document.getElementById(itemId).style.border = "2px solid rgb(0, 15, 0)";
         } else {
             document.getElementById(itemId).style.backgroundColor = "grey";
             document.getElementById(itemId).style.color = "black";
@@ -114,10 +131,6 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById('cheese-desktop-mouseover').style.display = "none";
         }
     });
-
-
-
-
     document.addEventListener("mouseover", function(e){
         const target = e.target.closest("#account-nav");
         if(target){
@@ -130,8 +143,6 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById('account-mouseover').style.display = "none";
         }
     });
-
-   
     document.addEventListener("mouseover", function(e){
         const target = e.target.closest(".nav-menu-link");
         if(target){
@@ -146,23 +157,14 @@ document.addEventListener("DOMContentLoaded", function() {
             target.style.color = "rgb(255, 255, 140)";
         }
     });
-    
 
-
-
-
-
-
-
-
-
-
-
-
-
-    //IMAGE HANDLING (NOT YET IMPLEMENTED)
+    //IMAGE HANDLING
+    //clears files on page reload
+    if (document.getElementById('id_image')) {
+        window.onload=document.getElementById('id_image').value = "";
+    }
     //previews images due for upload
-    const imageUpload= document.getElementById('uploaded-image');
+    const imageUpload= document.getElementById('id_image');
     const previewPhoto = () => {
         const previewPic = imageUpload.files;
         if (previewPic) {
@@ -191,6 +193,26 @@ document.addEventListener("DOMContentLoaded", function() {
     if (imageUpload) {
         imageUpload.addEventListener("change", previewPhoto);
     }
+    //cancel image update/add
+    document.addEventListener("click", function(e){
+        const target = e.target.closest("#profile-pic-cancel"); 
+        if(target){
+            if (document.getElementById('current-edit-image')) {
+                document.getElementById('current-edit-image').style.display="inline-block";
+            }
+            document.getElementById('image-preview').style.display="none";
+            document.getElementById('id_image').value = "";
+            document.getElementById('profile-pic-cancel').style.display = "none";
+            if (document.getElementById('image-submit')) {
+                document.getElementById('image-submit').style.display = "none";
+            }
+            if (document.getElementById('remove-picture')) {
+                document.getElementById('remove-picture').style.display = "flex";
+            }
+        }
+    });
+
+
 
 
     // STRIPE JS (needs converting from jQuery and whatever other stuff it uses)

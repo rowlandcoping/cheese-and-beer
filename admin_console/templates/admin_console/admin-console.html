@@ -6,50 +6,59 @@ Cheese and Beer - Admin Console
 
 {% block content %}
 
-{% if messages %}
-{% for message in messages %}
-{% with message.level as level %}
-{% if level == 40 %}
-<div id="general-message" class="error-message alert-disable">
-{% elif level == 30 %}
-<div id="general-message" class="warning-message alert-disable">
-{% elif level == 25 %}
-<div id="general-message" class="success-message alert-disable">
-{% else %}
-<div id="general-message" class="warning-message alert-disable">
-{% endif %}
-{% endwith %}    
-    {{ message }}
-</div>      
-{% endfor %}    
-{% endif %}
-<div id="admin-console">
-    <h2>Product Administration</h2>
-    <br>
-    <h3>Categories</h3>
-    <p>
-        <a href="{% url 'add_cheese_category' %}">Add a new cheese category</a>
-    </p>
-    <p>
-        <a href="{% url 'add_beer_category' %}">Add a new beer category</a>
-    </p>
-    <p>
-        <a href="{% url 'edit_categories' %}">Edit Categories</a>
-    </p>
-    <br>
-    <h3>Products</h3>
-    <p>
-        <a href="{% url 'add_cheese' %}">Add a new cheese</a>
-    </p>
-    <p>
-        <a href="{% url 'add_beer' %}">Add a new beer</a>
-    </p>
-    <p>
-        <a href="{% url 'edit_product' %}">Edit existing product</a>
-    </p>
-    <br>
-    <h3>
-        <a href="{% url 'home' %}">Back to Homepage</a>
-    </h3>
+<div id="background-container">
+    <div id="form-large">
+        {% if messages %}
+        {% for message in messages %}
+        {% with message.level as level %}
+        {% if level == 40 %}
+        <div id="basket-message" class="error-message">
+            <i class="fa-solid fa-exclamation red-text"></i>
+        {% elif level == 30 %}
+        <div id="basket-message" class="warning-message">
+            <i class="fa-solid fa-minus red-text"></i>
+        {% elif level == 25 %}
+        <div id="basket-message" class="success-message">
+            <i class="fa-solid fa-plus green-text"></i>
+        {% else %}
+        <div id="basket-message" class="warning-message">
+            <i class="fa-solid fa-minus red-text"></i>
+        {% endif %}
+        {% endwith %}    
+            {{ message }}
+        </div>
+        {% endfor %}    
+        {% endif %}
+        <h2 class="bottom-border">Product Administration</h2>
+        <div id="admin-console">
+            <div class="console-headline">
+                <h3>Categories</h3>
+            </div>
+            <div>
+                <a href="{% url 'add_cheese_category' %}">Add a new cheese category</a>
+            </div>
+            <div>
+                <a href="{% url 'add_beer_category' %}">Add a new beer category</a>
+            </div>
+            <div class="bottom-border">
+                <a href="{% url 'edit_categories' %}">Edit categories</a>
+            </div>
+            <div class="console-headline">
+                <h3>Products</h3>
+            </div>
+            <div>
+                <a href="{% url 'add_cheese' %}">Add a new cheese</a>
+            </div>
+            <div>
+                <a href="{% url 'add_beer' %}">Add a new beer</a>
+            </div>
+            <div class="bottom-border">
+                <a href="{% url 'edit_product' %}">Edit existing product</a>
+            </div>
+            <div>
+                <a href="{% url 'home' %}"><button>Back to Homepage</button></a>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
