@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 
 
 class Order(models.Model):
-    readonly_fields = ["order_number","order_date","items_total", "delivery_cost", "grand_total", "stripe_pid"] 
     order_number = models.CharField(max_length=32, null=False, editable=False)
     user_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     shipping_id = models.ForeignKey(Addresses, on_delete=models.SET_NULL, null=True, blank=True)
@@ -54,13 +53,11 @@ class Order(models.Model):
 
 
 class OrderItems(models.Model):
-    readonly_fields = ["order_id", "product_type","product", "price", "quantity", "item_total"] 
     order_id = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')
     product_type = models.CharField()
     product = models.ForeignKey(Product, null=True, blank=True, on_delete=models.SET_NULL)
     price = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False)
     quantity = models.IntegerField(null=False, blank=False, default=0)
-    # discounts = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
     item_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False)
 
 

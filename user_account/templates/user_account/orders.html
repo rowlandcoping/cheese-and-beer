@@ -5,58 +5,85 @@ Cheese and Beer
 {% endblock %}
 
 {% block content %}
-<div class="title-section">
-    <h2>Your Orders</h2>
-</div>
-<div class="orders-search">
-    <h2>Search by Order Number or Delivery Postcode</h2>
-    <form method="GET" action="{% url 'view_orders' %}">
-        <div>
-            <input type="text" name="q" placeholder="Search">
-            <div>
-                <button type="submit">
-                    <span>
-                        <i>search</i>
-                    </span>
-                </button>
-            </div>
-        </div>
-    </form>
-
-</div>
-<div id="basket-view">
-    <div id="basket-listings">
-        {% if orders %}
-        <table>
-            <thead>
-                <tr>
-                    <th>Order Date</th>
-                    <th>Billed Amount</th>
-                    <th>Shipped Address</th>
-                    <th>View Items</th>
-                </tr>
-            </thead>        
-            {% for order in orders %}
-            <tr>
-                <td>
-                    {{ order.order_date | date:"d/m/Y"}}
-                </td>
-                <td>
-                    £{{ order.grand_total }}
-                </td>
-                <td>
-                    {{ order.full_name }}, {{ order.address_line_one }}, {{ order.postcode }}
-                </td>
-                <td>
-                    <a href="{% url 'order_info' order.id %}">View</a>
-                </td>
-            </tr>        
-            {% endfor %}
-    </table>
+<div class="listing-container alert-disable">
+    {% if messages %}
+    {% for message in messages %}
+    {% with message.level as level %}
+    {% if level == 40 %}
+    <div id="general-message" class="error-message alert-disable">
+    {% elif level == 30 %}
+    <div id="general-message" class="warning-message alert-disable">
+    {% elif level == 25 %}
+    <div id="general-message" class="success-message alert-disable">
     {% else %}
-    <h3>You have not yet placed any orders</h3>
-    <a href="{% url 'view_results' %}">Buy something!</a>
+    <div id="general-message" class="warning-message alert-disable">
     {% endif %}
+    {% endwith %}    
+        {{ message }}
+    </div>      
+    {% endfor %}    
+    {% endif %}
+    <div id="listing-view">
+        <div class="orders-container">
+            <div class="title-section bottom-border">
+                <h2>Your Orders</h2>
+                <p>Search by Order Number or Delivery Postcode:</p>
+            </div>
+            <div class="orders-search">                
+                <form method="GET" action="{% url 'view_orders' %}">
+                    <div>
+                        <button type="submit">search</button>
+                        <input type="text" name="q" placeholder="Search">                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </form>
+            </div>            
+            {% if orders %}
+            <div class="orders-view">
+                <div class="container-div">
+                    <div class="orders-order-info">
+                        <h4>Order Info</th>
+                    </div>
+                    <div class="orders-shipped-address">
+                        <h4>Shipped Address</h4>
+                    </div>
+                    <div class="orders-products-shipped">
+                        <h4>Products Shipped</h4>
+                    </div>
+                </div>       
+                {% for order in orders %}
+                <div class="container-div">
+                    <div class="orders-order-info">
+                        <p><i class="fas fa-calendar-alt"></i>{{ order.order_date | date:"d/m/Y"}}</p>
+                        <p><i class="fa-solid fa-credit-card"></i>£{{ order.grand_total }}</p>
+                        <a class="orders-view-link" href="{% url 'order_info' order.id %}"><p><i class="fa-solid fa-eye"></i><span class="orders-view-link">View</span></p></a>
+                        <a href=""><p><i class="fa-solid fa-envelope"></i><span class="orders-view-link">Contact</span></p></a>
+                    </div>
+                    <div class="orders-shipped-address">
+                        <span class="dark-green-text"><strong><p>{{ order.full_name }}</p></strong></span>
+                        <p>{{ order.address_line_one }}</p>
+                        {% if order.address_line_two %}
+                        <p>{{ order.address_line_two }}</p>
+                        {% endif %}
+                        <p>{{ order.town_or_city }}</p>
+                        <p>{{ order.county }}</p>
+                        <p>{{ order.postcode }}</p>
+                    </div>
+                    <div class="orders-products-shipped">
+                        {% for item in order.lineitems.all %}
+                        <a class="orders-view-link" href="{% url 'product_detail' item.product.id %} "><p>{{ item.product.name }}</p></a>
+                        {% endfor %}
+                    </div>
+                </div>  
+                {% endfor %}
+        </table>
+        {% else %}
+        <h3>You have not yet placed any orders</h3>
+        <a href="{% url 'view_results' %}">Buy something!</a>
+        {% endif %}
+        </div>
     </div>
 </div>
 

@@ -29,7 +29,7 @@ def view_orders(request):
                 query = request.GET['q'].strip()            
                 if not query:
                     messages.error(request, 'Please enter something to search for')
-                    return redirect('edit_product')
+                    return redirect('view_orders')
             queries = Q(order_number__iexact=query) | Q(postcode__iexact=query)
             orders = orders.filter(queries)
         template = 'user_account/orders.html'    
@@ -45,7 +45,7 @@ def order_info(request, order_id):
     if order.user_id == request.user:
         items = OrderItems.objects.filter(order_id=order).order_by('-id')
     else:
-        messages.error((request, 'Order unavailable. Either search using this form or log in first'))
+        messages.error(request, 'Order unavailable. Either search using this form or log in first.')
         return redirect('find_order')
     template = 'user_account/order-info.html'    
     context = {

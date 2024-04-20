@@ -924,6 +924,67 @@ input[type=number] {
     padding-top:-100px;
 }
 
+/*ORDERS PAGE*/
+
+.container-div {
+    display:flex;
+}
+.orders-container {
+    background-color:white;
+    padding:20px 20px;
+    margin:30px 20px;
+}
+.orders-order-info {
+    width:300px;
+}
+.orders-products-shipped p, .orders-order-info p  {
+    border-bottom: 1px dotted grey;
+    padding:2px 0;
+}
+.orders-shipped-address {
+    width:300px;
+}
+.orders-products-shipped {
+    width:300px;
+}
+.orders-order-info, .orders-shipped-address, .orders-products-shipped {
+    padding:10px;
+    border-bottom: 2px solid grey;
+}
+
+.orders-shipped-address {
+    border-left:2px solid grey;
+    border-right:2px solid grey;
+}
+.orders-order-info .orders-view-link:hover, .orders-products-shipped .orders-view-link:hover {
+    color:rgb(16, 95, 0);
+    text-decoration: underline;
+}
+.orders-products-shipped .orders-view-link {
+    color:rgb(0, 15, 0);        
+}
+.orders-order-info .orders-view-link {
+    color: rgb(0, 51, 0);
+    text-decoration: underline;
+}
+.orders-order-info i {
+    display:inline-block;
+    width:40px;
+    text-align:center;
+    margin-left:-12px;
+}
+
+.orders-search input {
+    margin-left:10px;
+    padding:4px 5px;
+    font-size:100%;
+    width:300px;
+}
+.orders-search {
+    margin-bottom:20px;
+    border-bottom: 2px dotted grey;
+}
+
 /* VIEW ORDER ITEMS PAGE */
 .order-view-image img {
     width:100px;
@@ -991,11 +1052,24 @@ input[type=number] {
 .account-info-section .fa-key {
     color:rgb(241, 160, 83);
 }
-.account-info-section .fa-envelope {
+.fa-envelope {
     color:rgb(148, 147, 147);
+}
+.fa-calendar-alt {
+    color:rgb(197, 0, 66);
+}
+.orders-order-info .fa-credit-card {
+    color:rgb(0, 41, 0);
+}
+.fa-eye {
+    color:rgb(24, 0, 51);
 }
 .account-info-section .fa-door-open {
     color:rgb(126, 16, 16);
+}
+/*CONFIRRMATION PAGE*/
+.confirmation-para {
+    margin-top:5px;
 }
 
 
@@ -1182,7 +1256,7 @@ input[type=number] {
     margin-left: -5px;
     margin-right:5px;
 }
-#form-large button, .add-address-button {
+#form-large button, .add-address-button, .orders-search button {
     font-family:main;
     margin:10px 0;
     padding:2px 7px;
@@ -1193,7 +1267,7 @@ input[type=number] {
     border-radius:4px;
     box-shadow: 4px 4px 5px rgb(107, 107, 107);
 }
-#form-large button:hover, .add-address-button:hover {
+#form-large button:hover, .add-address-button:hover, .orders-search button:hover {
     background-color:rgb(129, 153, 124);
     color:rgb(0, 15, 0);
 }
