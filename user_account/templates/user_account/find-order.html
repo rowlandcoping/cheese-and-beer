@@ -25,7 +25,8 @@ Cheese and Beer
     {% endif %}
     <div id="form-large">
         <div class="orders-search">
-            <h2>Please fill out the following to review your order.</h2>
+            <h2>Find an Order</h2>
+            <p>Please fill out the following details to review your order:</p>
             <form action="{% url 'found_order' %}" method="POST" id="address-form">
                 {% csrf_token %}
                 <table class="general-form">
@@ -42,7 +43,9 @@ Cheese and Beer
                         <td><input type="text" name="postcode" id="postcode" required></td>
                     </tr>
                 </table>
-                <button type="submit" form="address-form">Find Order</button>
+                <div class="form-large-button">
+                    <button type="submit" form="address-form">Find Order</button>
+                </div>
             </form>
         </div>
     </div>

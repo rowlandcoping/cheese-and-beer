@@ -1021,7 +1021,6 @@ input[type=number] {
     height: 50px;
     object-fit:cover;
 }
-
 #basket-message i {
     font-size:190%;
     margin:10px;
@@ -1032,7 +1031,7 @@ input[type=number] {
 
 #general-message {
     padding:10px;
-    margin: 20px auto;
+    margin: 20px auto 0 auto;
     background-color: rgb(247, 241, 213, 0.8);
     border-width: 4px;
     border-radius: 6px;
