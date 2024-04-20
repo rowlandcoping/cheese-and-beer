@@ -28,80 +28,84 @@ Cheese and Beer
     </div>
 </div>
 
-
-{% if messages %}
-{% for message in messages %}
-{% with message.level as level %}
-{% if level == 40 %}
-<div id="general-message" class="error-message alert-disable">
-{% elif level == 30 %}
-<div id="general-message" class="warning-message alert-disable">
-{% elif level == 25 %}
-<div id="general-message" class="success-message alert-disable">
-{% else %}
-<div id="general-message" class="warning-message alert-disable">
-{% endif %}
-{% endwith %}    
-    {{ message }}
-</div>      
-{% endfor %}    
-{% endif %}
-<div id="address-view" class="alert-disable">
-    <h2>Manage Addresses</h2>
-    <div id="address-listings">
-        <div class="address-container">           
-            <div class="add-address-box manage-address-box">
-                <div class="dummy-top">
-                    
-                </div>
-                <div class="dummy-main">
+<div class="listing-container alert-disable">
+    {% if messages %}
+    {% for message in messages %}
+    {% with message.level as level %}
+    {% if level == 40 %}
+    <div id="general-message" class="error-message alert-disable">
+    {% elif level == 30 %}
+    <div id="general-message" class="warning-message alert-disable">
+    {% elif level == 25 %}
+    <div id="general-message" class="success-message alert-disable">
+    {% else %}
+    <div id="general-message" class="warning-message alert-disable">
+    {% endif %}
+    {% endwith %}    
+        {{ message }}
+    </div>      
+    {% endfor %}    
+    {% endif %}
+    <div id="listing-view">
+        <div id="address-view">
+            <h2>Manage Addresses</h2>
+            <div id="address-listings">
+                <div class="address-container">           
                     <a href="{% url 'add_address' %}">
-                    <i class="fa-solid fa-plus"></i>
-                    <h4>ADD AN ADDRESS</h4>
+
+                    <div class="add-address-box manage-address-box">
+                        <div class="dummy-top">
+                            
+                        </div>
+                        <div class="dummy-main">
+                            <i class="fa-solid fa-plus"></i>
+                            <h4>ADD AN ADDRESS</h4>
+                        </div>
+                        <div class="dummy-bottom">                    
+                        </div>            
+                    </div>
                     </a>
-                </div>
-                <div class="dummy-bottom">                    
-                </div>            
+                </div>        
+                {% if addresses %}
+                {% for address in addresses %}
+                <div class="address-container">
+                    <div class="manage-address-box">
+                        <div class="top-section-address">{% if address.default %}<span class="dark-green-text"><small>Default</small></span>{% endif %}</div>
+                        <div class="main-section-address">                
+                            <p id="name-{{ address.id }}"><strong>
+                                {{ address.full_name }}
+                            </strong></p>
+                            <p id="one-{{ address.id }}">
+                                {{ address.address_line_one }}
+                            </p>
+                            {% if address.address_line_two %}
+                            <p id="two-{{ address.id }}">
+                                {{ address.address_line_two }}
+                            </p>
+                            {% endif %}
+                            <p id="city-{{ address.id }}">
+                                {{ address.town_or_city }}
+                            </p>
+                            <p id="county-{{ address.id }}">
+                                {{ address.county }}
+                            </p>
+                            <p id="postcode-{{ address.id }}">
+                                {{ address.postcode }}
+                            </p>
+                        </div>
+                        <div class="bottom-section-address">
+                            <a class="sign-up-link" href="{% url 'edit_address' address.id %}">edit</a>
+                            | <span class="remove-address sign-up-link clickable-element" id="remove-{{ address.id }}">remove</span>
+                            {% if not address.default %}
+                            | <a class="sign-up-link" href="{% url 'set_default' address.id %}">set default</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>      
+                {% endfor %}
+                {% endif %}
             </div>
-        </div>        
-        {% if addresses %}
-        {% for address in addresses %}
-        <div class="address-container">
-            <div class="manage-address-box">
-                <div class="top-section-address">{% if address.default %}<small>Default</small>{% endif %}</div>
-                <div class="main-section-address">                
-                    <p id="name-{{ address.id }}"><strong>
-                        {{ address.full_name }}
-                    </strong></p>
-                    <p id="one-{{ address.id }}">
-                        {{ address.address_line_one }}
-                    </p>
-                    {% if address.address_line_two %}
-                    <p id="two-{{ address.id }}">
-                        {{ address.address_line_two }}
-                    </p>
-                    {% endif %}
-                    <p id="city-{{ address.id }}">
-                        {{ address.town_or_city }}
-                    </p>
-                    <p id="county-{{ address.id }}">
-                        {{ address.county }}
-                    </p>
-                    <p id="postcode-{{ address.id }}">
-                        {{ address.postcode }}
-                    </p>
-                </div>
-                <div class="bottom-section-address">
-                    <a href="{% url 'edit_address' address.id %}">edit</a>
-                     | <span class="remove-address" id="remove-{{ address.id }}">remove</span>
-                     {% if not address.default %}
-                     | <a href="{% url 'set_default' address.id %}">set default</a>
-                     {% endif %}
-                </div>
-            </div>
-        </div>      
-        {% endfor %}
-        {% endif %}
+        </div>
     </div>
 </div>
 

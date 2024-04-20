@@ -860,15 +860,27 @@ input[type=number] {
 }
 
 /*------MANAGE ADDRESSES PAGE------*/
+#address-view {
+    background-color: white;
+    padding:20px;
+    margin:30px 200px;
+}
+#address-view h2 {
+    margin-left:28px;
+}
 #address-listings {
+    margin-top:20px;
     display:flex;
     flex-wrap: wrap;
+}
+#account-options {
+    display:flex;
+    margin-top: 20px;
 }
 .address-container {
     margin:0 30px;
     margin-bottom:20px;
 }
-
 .add-address-box i {
     font-size:200%;
 }
@@ -876,13 +888,19 @@ input[type=number] {
     display: flex;
     flex-flow:column;
     justify-content: space-between;
-    border: 1px  rgb(173, 173, 173) solid;
+    border: 1px rgb(173, 173, 173) solid;
     min-width: 250px;
     min-height: 200px;
 }
 .add-address-box {
     text-align:center;    
     border: 1px  rgb(173, 173, 173) dashed;
+    color: rgb(0, 51, 0);
+}
+.add-address-box:hover {
+    border: 1px  rgb(173, 173, 173) solid;
+    background-color:rgb(247, 241, 213);
+    
 }
 .main-section-address, .bottom-section-address, .top-section-address, .dummy-top, .dummy-bottom, .dummy-main {
     padding: 0 20px;
@@ -890,6 +908,9 @@ input[type=number] {
 .top-section-address, .bottom-section-address, .dummy-top, .dummy-bottom { 
     height:25px;    
     padding-top:5px;
+}
+.top-section-address, .bottom-section-address {
+    background-color:rgb(247, 241, 213);
 }
 
 .bottom-section-address {
@@ -929,7 +950,6 @@ input[type=number] {
 }
 #account-options {
     display:flex;
-    margin-top: 20px;
 }
 .account-purchases {
     margin-right:20px;
@@ -945,11 +965,13 @@ input[type=number] {
 
 .account-info-section {
     display:flex;
-    justify-content:space-between;
+    justify-content:left;
     font-size:140%;
-    border: 2px dotted grey;
+    border: 1px solid grey;
+    width:230px;
     margin:20px;
     padding:20px;
+    box-shadow: 4px 4px 5px rgb(107, 107, 107);
 }
 .account-info-section i {
     margin-right:20px;

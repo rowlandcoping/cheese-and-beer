@@ -11,19 +11,23 @@ Cheese and Beer
             <div id="account-options">
                 <div class="account-purchases">
                     <h3>Personal Information</h3>
-                    {% if addresses %}
-                    <div class="account-info-section">           
-                        <a href="{% url 'manage_addresses' %}"><i class="fa-solid fa-house"></i> Manage Addresses</a>
-                    </div>
-                    {% endif %}
+                    <a href="{% url 'manage_addresses' %}">
+                        <div class="account-info-section">           
+                            <i class="fa-solid fa-house"></i> Manage Addresses
+                        </div>
+                    </a>
                     {% if orders %}
-                    <div class="account-info-section">           
-                        <a href="{% url 'view_orders' %}"><i class="fa-solid fa-list"></i> View Orders</a>
-                    </div>        
+                    <a href="{% url 'view_orders' %}">
+                        <div class="account-info-section">           
+                            <i class="fa-solid fa-list"></i> View Orders
+                        </div>
+                    </a>    
                     {% endif %}
-                    <div class="account-info-section">           
-                        <a href=""><i class="fa-solid fa-cloud"></i> View Wishlist</a>
-                    </div>        
+                    <a href="">
+                        <div class="account-info-section">           
+                            <i class="fa-solid fa-cloud"></i> View Wishlist
+                        </div>
+                    </a>      
                 </div>
                 <div class="account-administration">
                     <h3>Account Administration</h3>
@@ -32,12 +36,16 @@ Cheese and Beer
                             <i class="fas fa-key"></i> Change Password
                         </div>
                     </a>
-                    <div class="account-info-section">           
-                        <a href=""><i class="fa-solid fa-envelope"></i> Contact Us</a>
-                    </div>
-                    <div class="account-info-section">           
-                        <a href="{% url 'account_logout' %}"><i class="fa-solid fa-door-open"></i> Log Out</a>
-                    </div>
+                    <a href="">
+                        <div class="account-info-section">           
+                            <i class="fa-solid fa-envelope"></i> Contact Us
+                        </div>
+                    </a>
+                    <a href="{% url 'account_logout' %}">
+                        <div class="account-info-section">           
+                            <i class="fa-solid fa-door-open"></i> Log Out
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
