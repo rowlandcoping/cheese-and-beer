@@ -6,23 +6,7 @@ Cheese and Beer - Admin Console
 
 {% block content %}
 
-{% if messages %}
-{% for message in messages %}
-{% with message.level as level %}
-{% if level == 40 %}
-<div id="general-message" class="error-message alert-disable">
-{% elif level == 30 %}
-<div id="general-message" class="warning-message alert-disable">
-{% elif level == 25 %}
-<div id="general-message" class="success-message alert-disable">
-{% else %}
-<div id="general-message" class="warning-message alert-disable">
-{% endif %}
-{% endwith %}    
-    {{ message }}
-</div>      
-{% endfor %}    
-{% endif %}
+
 <div id="product-alert" class="delete-alert not-displayed">
     <div class="alert-header">
         <h4>Confirm Deletion</h4>
@@ -44,43 +28,60 @@ Cheese and Beer - Admin Console
         </span>
     </div>
 </div>
-<div id="product-update" class="alert-disable">
-    <h1>Update or Remove Products</h1>
-    <h2>Search here to filter by Product ID or name:</h2>
-    <form method="GET" action="{% url 'edit_product' %}">
-        <div class="input-group w-100">
-            <input type="text" name="q" placeholder="Search">
-            <div>
-                <button type="submit">
-                    <span>
-                        <i>search</i>
-                    </span>
-                </button>
+<div id="background-container">
+    {% if messages %}
+    {% for message in messages %}
+    {% with message.level as level %}
+    {% if level == 40 %}
+    <div id="general-message" class="error-message alert-disable">
+    {% elif level == 30 %}
+    <div id="general-message" class="warning-message alert-disable">
+    {% elif level == 25 %}
+    <div id="general-message" class="success-message alert-disable">
+    {% else %}
+    <div id="general-message" class="warning-message alert-disable">
+    {% endif %}
+    {% endwith %}    
+        {{ message }}
+    </div>      
+    {% endfor %}    
+    {% endif %}
+    <div id="form-large" class="alert-disable">
+        <h2>Update or Remove Products</h2>
+        <p>Click <a class="sign-up-link" href="{% url 'admin_console' %}">here</a> to return to product administration</p>
+            <div class="title-section bottom-border">
+                <h3>Product Search</h3>
+                <span>Search here to filter by Product ID or name:</span>
+                <form method="GET" action="{% url 'edit_product' %}">
+                    <div>
+                        <button type="submit">search</button>
+                        <input type="text" class="search-stuff product-search-stuff" name="q" placeholder="Search">                        
+                    </div>
+                </form>
             </div>
-        </div>
-    </form>
-        {% if products %}
-        {% if search_term %}
-        <h3>Search results for "{{ search_term }}"</h3>
-        {% endif %}
-        {% for product in products %}
-        <h3 id="name-{{ product.id }}">{{ product.name }}</h3>
-            <a href="{% url 'product_edit' product.id %}"> Edit</a>
-            {% if product.units_sold == 0 %}
-            <span class="delete-product" id="delete-{{ product.id }}">
-                Delete
-            </span>
+            {% if products %}
+            {% if search_term %}
+            <h3 class="product-results-text">Search results for "{{ search_term }}"</h3>
+            {% else %}
+            <h3 class="product-results-text">All Products</h3>
             {% endif %}
-        </h3>
-        {% endfor %}
-        {% else %}
-        <h3>No Products Found, please check your search term and try again!</h3>
-        {% endif %}
-        <h2>
-            <a href="{% url 'admin_console' %}">Back to Admin Console</a>
-            <br>
-            <a href="{% url 'home' %}">Back to Homepage</a>
-        </h2>
-  </div>
-
-  {% endblock %}
+            {% for product in products %}
+                <div class="product-container">
+                    <div class="edit-product-actions">     
+                        <a href="{% url 'product_edit' product.id %}"><i class="fas fa-edit dark-green-text"></i></a>
+                        {% if product.units_sold == 0 %}
+                        <span class="delete-product" id="delete-{{ product.id }}"><i class="fas fa-trash dark-red-text clickable-element"></i></span>
+                        {% endif %}
+                    </div>
+                    <div class="edit-product-name">
+                        <span id="name-{{ product.id }}">{{ product.name }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+            {% else %}
+            <h3>No Products Found, please check your search term and try again!</h3>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

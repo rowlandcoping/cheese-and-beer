@@ -309,11 +309,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
                     if (document.getElementById('add-user-address')) {
                         document.getElementById('add-user-address').setAttribute('disabled', true);
-                    }
-                    /*this is for the loading circle thing.  Fade toggle is just an opacity type toggle thing in jquery. I've recreated similar for adding products to the basket.
-                    given I don't have a loady circle thing and am unlikely to I'll park this for now.  Maybe replace with a spinning cheese or whatever*/
-                    //document.getElementById('payment-form').fadeToggle(100);
-                    //document.getElementById('loading-overlay').fadeToggle(100);                
+                    }            
                     stripe.confirmCardPayment(clientSecret, {
                         //sends the data to stripe, 
                         payment_method: {
@@ -344,11 +340,6 @@ document.addEventListener("DOMContentLoaded", function() {
                                 </span>
                                 <span>${result.error.message}</span>`;
                                 errorDiv.innerHTML = html;
-                            console.log(result.error.message)
-                            /*spinny wheel stuff again
-                            $('#payment-form').fadeToggle(100);
-                            $('#loading-overlay').fadeToggle(100);
-                            */
                             // re-enable buttons
                             card.update({ 'disabled': false});
                             for (let i = 0; i < formButtons.length; i++) {

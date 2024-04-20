@@ -451,7 +451,6 @@ def edit_product(request):
             if 'q' in request.GET:
                 query = request.GET['q'].strip()            
                 if not query:
-                    messages.error(request, 'Please enter something to search for')
                     return redirect('edit_product')
             queries = Q(product_number__iexact=query) | Q(name__icontains=query)
             products = products.filter(queries)

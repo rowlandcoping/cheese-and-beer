@@ -59,6 +59,9 @@ body {
 .red-text {
     color: rgb(255, 0, 0);
 }
+.dark-red-text {
+    color: rgb(95, 0, 0);
+}
 .forest-green-text {
     color:rgb(1, 70, 1);
 }
@@ -1070,6 +1073,7 @@ input[type=number] {
 .account-info-section .fa-door-open {
     color:rgb(126, 16, 16);
 }
+
 /*CONFIRRMATION PAGE*/
 .confirmation-para {
     margin-top:5px;
@@ -1223,7 +1227,7 @@ input[type=number] {
     font-size:120%;
     padding:2px;
 }
-/*CATEGORY EDIT*/
+/*CATEGORY ADMIN*/
 .categories {
     border-top: 1px dotted grey;
     border-bottom: 1px dotted grey;
@@ -1240,11 +1244,10 @@ input[type=number] {
     border:none;
 }
 
-/*PRODUCT FORMS*/
+/*PRODUCT ADMIN*/
 #id_container label {
     display: flex;
-    justify-content:left;
-    
+    justify-content:left;    
     width:75px;
 }
 #id_container_0, #id_container_1 {
@@ -1256,6 +1259,38 @@ input[type=number] {
     outline:none;
 }
 
+.product-container {
+    display:flex;
+    margin:5px 0;
+    border-bottom:1px grey dotted;
+}
+
+.product-results-text {
+    margin:10px 0;
+}
+.edit-product-actions {
+    width:70px;
+}
+.edit-product-actions i {
+    font-size:130%;
+    margin-right:5px;
+    padding-bottom:5px;
+}
+.product-search-stuff {
+    margin-left:10px;
+}
+.edit-product-actions .fa-edit {
+    color:rgb(0, 20, 0);
+}
+.edit-product-actions .fa-trash {
+    color: rgb(48, 0, 0);
+}
+.edit-product-actions .fa-edit:hover {
+    color:rgb(1, 70, 1)
+}
+.edit-product-actions .fa-trash:hover {
+    color: rgb(95, 0, 0);
+}
 
 /* General Forms (full-page) */
 #background-container {
@@ -1286,11 +1321,11 @@ input[type=number] {
     border-spacing: 5px;
 }
 
-.general-form input {
+.general-form input, .search-stuff{
     padding: 5px 10px;
     width:300px;
 }
-.general-form input:focus {
+.general-form input:focus, .search-stuff:focus {
     border:2px solid rgb(16, 95, 0);
     outline: 1px solid rgb(0, 15, 0);
     border-radius: 1px;
