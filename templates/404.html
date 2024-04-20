@@ -5,16 +5,18 @@ Cheese and Beer - Admin Console
 {% endblock %}
 
 {% block content %}
-
-<div id="not-found-page">
-    <div id="not-found-content">
-    <h2>404 Page not Found</h2>
-    <img src="/static/images/cheese-cartoon.jpg">
+<div id="background-container">
+    <div id="form-large" class="not-found-container">
+        <div class="not-found-section bottom-border">
+        <h2>404 Page not Found</h2>
+        </div>
+        <div class="not-found-section bottom-border">
+        <img src="/static/images/cheese-cartoon.jpg">
+        </div>
+        <a class="not-found-section" href="{% url 'view_results' %}?category=cheese">
+            <span class="checkout-button action-buttons">Complete Life Goals</span>
+        </a>
     </div>
-    <a class="not-found-link" href="{% url 'view_results' %}?category=cheese">
-        <span>Complete Life Goals</span>
-    </a>
-    
 </div>
 <hr>
 {% endblock %}
