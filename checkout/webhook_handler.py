@@ -78,7 +78,7 @@ class StripeWH_Handler:
             )            
             email = stripe_charge.billing_details.email
             shipping_details = intent.shipping
-            # check if user exists, assign order to them if they do
+            # check if user exists, assigns order to them if they do
             user_check = User.objects.all()
             for check in user_check:
                 if check.email == email:
@@ -98,7 +98,7 @@ class StripeWH_Handler:
                 if value == "":
                     shipping_details.address[field] = None
             items_total=intent.metadata.items_total
-            delivery_cost = intent.metadata.delivery_cost           
+            delivery_cost = intent.metadata.delivery_cost
             time_created = datetime.now()
             delivery_date = datetime.now() + timedelta(days=5)
             grand_total = round(stripe_charge.amount / 100, 2)

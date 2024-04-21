@@ -351,7 +351,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         } else {
                             if (result.paymentIntent.status === 'succeeded') {
                                 //this acts like the submit button and submits the form to the checkout view.
-                                //form.submit();
+                                form.submit();
                             }
                         }
                     })
