@@ -55,7 +55,7 @@ class Order(models.Model):
 class OrderItems(models.Model):
     order_id = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')
     product_type = models.CharField()
-    product = models.ForeignKey(Product, null=True, blank=True, on_delete=models.SET_NULL)
+    product = models.ForeignKey(Product, null=True, blank=True, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False)
     quantity = models.IntegerField(null=False, blank=False, default=0)
     item_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False)

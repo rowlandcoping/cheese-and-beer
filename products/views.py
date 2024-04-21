@@ -40,6 +40,11 @@ def add_cheese_category(request):
     """
     if request.method=='POST':
         name = request.POST.get('name').lower()
+        cat_test=CheeseCategory.objects.all()
+        for test in cat_test:
+            if name == test.name:
+                messages.error(request, "This category already exists, please try again")
+                return redirect('add_cheese_category')
         ImageUpload = request.FILES.get('image')
         if ImageUpload:    
             image_url = str(
@@ -86,8 +91,13 @@ def add_beer_category(request):
     adds new beer category to database
     """
     if request.method=='POST':
+        cat_test=BeerCategory.objects.all()
+        name = request.POST.get('name').lower()
+        for test in cat_test:
+            if name == test.name:
+                messages.error(request, "This category already exists, please try again")
+                return redirect('add_beer_category')
         ImageUpload = request.FILES.get('image')
-        name = request.POST.get('name')
         if ImageUpload:    
             image_url = str(
                 re.sub(
@@ -149,6 +159,17 @@ def edit_cheese_category(request, category_id):
     Allows user to edit individual cheese category
     """
     if request.method=='POST':
+        existing_category = get_object_or_404(CheeseCategory, pk=category_id)
+        existing_name = existing_category.name
+        # ensure there are no identically named (other) products
+        category_test=CheeseCategory.objects.all()
+        for test in category_test:
+            if request.POST.get('name') == test.name:
+                if test.name == existing_name:
+                    continue
+                else:
+                    messages.error(request, "There is already another category with this name, please try again")                
+                    return redirect(reverse('edit_cheese_category', args=[category_id]))
         form = CheeseCategoryForm(request.POST)
         if form.is_valid():
             category = get_object_or_404(CheeseCategory, pk=category_id)
@@ -241,6 +262,17 @@ def edit_beer_category(request, category_id):
     Allows user to edit individual beer category
     """
     if request.method=='POST':
+        existing_category = get_object_or_404(BeerCategory, pk=category_id)
+        existing_name = existing_category.name
+        category_test = BeerCategory.objects.all()
+        # ensure there are no identically named (other) products
+        for test in category_test:
+            if request.POST.get('name') == test.name:
+                if test.name == existing_name:
+                    continue
+                else:
+                    messages.error(request, "There is already another category with this name, please try again")                
+                    return redirect(reverse('edit_beer_category', args=[category_id]))
         form = BeerCategoryForm(request.POST)
         if form.is_valid():
             category = get_object_or_404(BeerCategory, pk=category_id)
@@ -354,9 +386,9 @@ def add_product(request):
     if request.user.is_superuser:
         product_type = request.POST.get('product_type')
         # ensure there are no identically named products
-        products=Product.objects.all()
-        for product in products:
-            if request.POST.get('name') == product.name:
+        products_test=Product.objects.all()
+        for test in products_test:
+            if request.POST.get('name') == test.name:
                 messages.error(request, "This product already exists, please try again")
                 if product_type == "cheese":
                     return redirect('add_cheese')

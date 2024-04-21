@@ -6,6 +6,23 @@ Cheese and Beer - Add Beer Category
 
 {% block content %}
 <div id="background-container">
+    {% if messages %}
+    {% for message in messages %}
+    {% with message.level as level %}
+    {% if level == 40 %}
+    <div id="general-message" class="error-message">
+    {% elif level == 30 %}
+    <div id="general-message" class="warning-message">
+    {% elif level == 25 %}
+    <div id="general-message" class="success-message">
+    {% else %}
+    <div id="general-message" class="warning-message">
+    {% endif %}
+    {% endwith %}    
+        {{ message }}
+    </div>      
+    {% endfor %}    
+    {% endif %}
     <div id="form-large">
         <h2>Add Beer Category</h2>
         <p>Click <a class="sign-up-link" href="{% url 'admin_console' %}">here</a> to return to product administration.</p>
