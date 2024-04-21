@@ -7,6 +7,23 @@ Cheese and Beer - Add Cheese
 {% block content %}
 
 <div id="background-container">
+    {% if messages %}
+    {% for message in messages %}
+    {% with message.level as level %}
+    {% if level == 40 %}
+    <div id="general-message" class="error-message alert-disable">
+    {% elif level == 30 %}
+    <div id="general-message" class="warning-message alert-disable">
+    {% elif level == 25 %}
+    <div id="general-message" class="success-message alert-disable">
+    {% else %}
+    <div id="general-message" class="warning-message alert-disable">
+    {% endif %}
+    {% endwith %}    
+        {{ message }}
+    </div>      
+    {% endfor %}    
+    {% endif %}
     <div id="form-large">
         <h2>Add Cheese</h2>
         <p>Click <a class="sign-up-link" href="{% url 'admin_console' %}">here</a> to return to product administration.</p>

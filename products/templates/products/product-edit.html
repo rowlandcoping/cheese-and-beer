@@ -30,7 +30,7 @@ Cheese and Beer - Edit {{ product.name }}
         <form method="POST" action="{% url 'product_edit' product.id %}" enctype="multipart/form-data">
             {% csrf_token %}
             {% if product.beer_category %}
-            <input type="hidden" name="checked" id="container-selected" value="{{ product.container }}">
+            <input type="hidden" name="container-selected" id="container-selected" value="{{ product.container }}">
             {% endif %}
             <div>
                 <table class="general-form">

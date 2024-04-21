@@ -353,7 +353,17 @@ def add_beer(request):
 def add_product(request):
     if request.user.is_superuser:
         product_type = request.POST.get('product_type')
+        # ensure there are no identically named products
+        products=Product.objects.all()
+        for product in products:
+            if request.POST.get('name') == product.name:
+                messages.error(request, "This product already exists, please try again")
+                if product_type == "cheese":
+                    return redirect('add_cheese')
+                else:
+                    return redirect('add_beer')
         # validate custom fields for type of product
+        
         if product_type == "cheese":
             form = CheeseForm(request.POST)
             selected_category = form['cheese_category'].value()
@@ -467,6 +477,16 @@ def edit_product(request):
 def product_edit(request, product_id):
     if request.method=='POST':
         product = get_object_or_404(Product, pk=product_id)
+        existing_name = product.name
+        # ensure there are no identically named (other) products
+        products_test=Product.objects.all()
+        for test in products_test:
+            if request.POST.get('name') == test.name:
+                if test.name == existing_name:
+                    continue
+                else:
+                    messages.error(request, "There is already another product with this name, please try again")                
+                    return redirect(reverse('product_edit', args=[product_id]))                
         if product.product_type == "cheese":
             form = CheeseForm(request.POST, instance=product)
             selected_category = form['cheese_category'].value()
@@ -505,6 +525,7 @@ def product_edit(request, product_id):
                 else:
                     category = get_object_or_404(BeerCategory, pk=beer_category)
                 description = category.description
+                print(description)
             # adds a price per kilo or price per litre so that products can be more accurately compared
             amount = decimal.Decimal(form['amount'].value())
             price =  decimal.Decimal(request.POST.get('price'))
