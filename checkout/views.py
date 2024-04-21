@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.views.decorators.http import require_POST
 from datetime import datetime, timedelta
 from .models import Order, OrderItems
+from django.contrib.auth.models import User
 from addresses.models import Addresses
 from products.models import Product
 from addresses.forms import AddressForm
@@ -27,7 +28,12 @@ def checkout(request):
                 user_id = request.user
                 address_id = Addresses.objects.get(postcode=request.POST.get('postcode'))                 
             else:
-                user_id = None
+                user_check = User.objects.all()
+                for check in user_check:
+                    if check.email == request.POST.get('order_email'):
+                        user_id = check
+                    else:
+                        user_id = None
                 address_id = None                              
             time_created = datetime.now()
             delivery_date = datetime.now() + timedelta(days=5)

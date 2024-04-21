@@ -41,12 +41,8 @@ def view_orders(request):
 
 
 def order_info(request, order_id):
-    order = get_object_or_404(Order, pk=order_id)    
-    if order.user_id == request.user:
-        items = OrderItems.objects.filter(order_id=order).order_by('-id')
-    else:
-        messages.error(request, 'Order unavailable. Either search using this form or log in first.')
-        return redirect('find_order')
+    order = get_object_or_404(Order, pk=order_id)
+    items = OrderItems.objects.filter(order_id=order).order_by('-id')
     template = 'user_account/order-info.html'    
     context = {
         'order': order,

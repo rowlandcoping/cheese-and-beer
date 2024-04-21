@@ -70,14 +70,30 @@ class StripeWH_Handler:
                 status=200)
         else:
             order = None
+            user_id = None
+            address = None
             basket=intent.metadata.basket
             stripe_charge = stripe.Charge.retrieve(
                 intent.latest_charge
-            )
-            user_id = get_object_or_404(User, username=intent.metadata.username)
-            address= get_object_or_404(Addresses, pk=intent.metadata.address_id)          
-            email = stripe_charge.billing_details.email            
+            )            
+            email = stripe_charge.billing_details.email
             shipping_details = intent.shipping
+            # check if user exists, assign order to them if they do
+            user_check = User.objects.all()
+            for check in user_check:
+                if check.email == email:
+                    user_id = check
+                    print(user_id)
+                    print(user_id.id)
+                    # then check if the address matches any of their saved ones
+                    address_check = Addresses.objects.all()
+                    for check in address_check:
+                        print(check.user_id.id)
+                        if user_id.id == check.user_id.id:
+                            if shipping_details.address.postal_code == check.postcode and shipping_details.name == check.full_name and shipping_details.address.line1 == check.address_line_one:
+                                address = check
+                                break
+                    break
             for field, value in shipping_details.address.items():
                 if value == "":
                     shipping_details.address[field] = None
