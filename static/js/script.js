@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     //NAV MENU
-    if (window.getComputedStyle(document.getElementById('product-menu'), null).display !== "none"){
+    
         document.addEventListener("mouseout", function(e){
             const target = e.target.closest(".menu-header");
             if(target){
@@ -158,10 +158,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 target.style.color = "rgb(255, 255, 140)";
             }
         });
-    }
+    
 
     //MOBILE NAV MENU
-    if (window.getComputedStyle(document.getElementById('product-menu'), null).display === "none"){
+    
         window.addEventListener('click', function(e){   
             if (document.getElementById('cheese-click').contains(e.target)){
                 document.getElementById('cheese-clickout').style.display = "block";
@@ -198,7 +198,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById('account-click').style.color = "rgb(255, 255, 140)";
             }
         });
-    }
+
+    
     
 
     //IMAGE HANDLING

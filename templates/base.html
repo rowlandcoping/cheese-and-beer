@@ -21,6 +21,9 @@
             <div id="logo" class="clickable-element">
                 <a href="{% url 'home' %}"><span class="title-thing"><h1>Cheese&Beer</h1>.com</span></a>
             </div>
+            <div id="mobile-logo" class="clickable-element not-displayed">
+                <a href="{% url 'home' %}"><span class="title-thing"><h1>C&B</h1></span></a>
+            </div>
             <div class="search">
                 <form method="GET" action="{% url 'view_results' %}">
                     <div class="search-input">
@@ -96,34 +99,44 @@
             </div>
             {% endif %}
         </div>
+        <div class="search-mobile not-displayed">
+            <form method="GET" action="{% url 'view_results' %}">
+                <div class="search-input">
+                    <input class="search-bar" type="text" name="query" placeholder="search for cheese or beer"><button class="search-bar-button clickable-element" type="submit">
+                        <span>
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </span>
+                    </button>
+                    </span>
+                </div>
+            </form>
+        </div>
         <div class="nav-menu-mobile not-displayed">
             <div id="cheese-nav-mobile">
-                <div id="cheese-click" class="menu-header"><i class="fa-solid fa-cheese"></i> Cheese <i class="fa-solid fa-caret-down"></i></div>
+                <div id="cheese-click" class="clickable-element"><i class="fa-solid fa-cheese"></i> Cheese <i class="fa-solid fa-caret-down"></i></div>
                 <div id="cheese-clickout" class="not-displayed">
-                    <a href="{% url 'view_results' %}?category=cheese" class="mobile-menu-link"><span>all cheese</span></a>
+                    <a href="{% url 'view_results' %}?category=cheese" class="mobile-menu-link clickable-element"><span>all cheese</span></a>
                     {% for category in cheese_categories %}
-                    <a href="{% url 'view_results' %}?category=cheese,{{ category.id }}" class="mobile-menu-link"><span>{{ category.name }}</span></a>
+                    <a href="{% url 'view_results' %}?category=cheese,{{ category.id }}" class="mobile-menu-link clickable-element"><span>{{ category.name }}</span></a>
                     {% endfor %}
                 </div>
             </div>
             <div id="beer-nav-mobile">
-                <div id="beer-click" class="menu-header"><i class="fas fa-beer"></i> <span></span> Beer <i class="fa-solid fa-caret-down"></i></div>
+                <div id="beer-click" class="clickable-element"><i class="fas fa-beer"></i> <span> Beer </span><i class="fa-solid fa-caret-down"></i></div>
                 <div id="beer-clickout" class="not-displayed">
-                    {% if authenticated %}
-                    <a href="{% url 'view_results' %}?category=beer"><div class="menu-header"><i class="fas fa-beer"></i> <span>all beer</span> <i class="fa-solid fa-caret-down"></i></div></a>
-                    {% endif %}
+                    <a href="{% url 'view_results' %}?category=beer" class="mobile-menu-link"><span>all beer</span></a>
                     {% for category in beer_categories %}
                     <a href="{% url 'view_results' %}?category=beer,{{ category.id }}" class="mobile-menu-link"><span>{{ category.name }}</span></a>
                     {% endfor %}
                 </div>
             </div>
             <div id="account-nav-mobile">
-                <div id="account-click" class="menu-header">
+                <div id="account-click" class="clickable-element">
                     <span><i class="fa-solid fa-user"></i> <span>Account</span> <i class="fa-solid fa-caret-down"></i></span>
                 </div>
                 <div id="account-clickout" class="not-displayed">
                     {% if authenticated %}
-                    <a href="{% url 'account_overview' %}"><i class="fa-solid fa-user"></i> <span>Account</span> <i class="fa-solid fa-caret-down"></i></a>
+                    <a href="{% url 'account_overview' %}" class="mobile-menu-link"><span>my account</span></a>
                     {% endif %}
                     {% if superuser %}
                     <a href="{% url 'admin_console' %}" class="mobile-menu-link"><span>administration</span></a>
