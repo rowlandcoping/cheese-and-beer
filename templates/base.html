@@ -8,8 +8,8 @@
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
 
-    <script type="text/javascript" src="https://kit.fontawesome.com/8c1ab874f9.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+    <script src="https://kit.fontawesome.com/8c1ab874f9.js" crossorigin="anonymous"></script>
+    <script src="https://js.stripe.com/v3/"></script>
     <title>
         {% block title %}
         {% endblock %}
@@ -19,10 +19,10 @@
     <nav class="alert-disable">
         <div id="main-navigation">
             <div id="logo" class="clickable-element">
-                <a href="{% url 'home' %}"><span class="title-thing"><h1>Cheese&Beer</h1>.com</span></a>
+                <a href="{% url 'home' %}"><div class="title-thing"><h1>Cheese&Beer</h1>.com</div></a>
             </div>
             <div id="mobile-logo" class="clickable-element not-displayed">
-                <a href="{% url 'home' %}"><span class="title-thing"><h1>C&B</h1>.com</span></a>
+                <a href="{% url 'home' %}"><div class="title-thing"><h1>C&B</h1>.com</div></a>
             </div>
             <div class="search">
                 <form method="GET" action="{% url 'view_results' %}">
@@ -32,7 +32,6 @@
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </span>
                         </button>
-                        </span>
                     </div>
                 </form>
             </div>
@@ -102,12 +101,12 @@
         <div class="search-mobile not-displayed">
             <form method="GET" action="{% url 'view_results' %}">
                 <div class="search-input">
-                    <input class="search-bar" type="text" name="query" placeholder="search for cheese or beer"><button class="search-bar-button clickable-element" type="submit">
+                    <input class="search-bar" type="text" name="query" placeholder="search for cheese or beer">
+                    <button class="search-bar-button clickable-element" type="submit">
                         <span>
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </span>
                     </button>
-                    </span>
                 </div>
             </form>
         </div>
@@ -161,7 +160,7 @@
     {% block content %}
     {% endblock %}
     {% block postloadjs %}
-    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
     {% endblock %}
 </body>
 </html>

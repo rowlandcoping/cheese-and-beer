@@ -12,33 +12,33 @@ Cheese and Beer
         <form action="{% url 'edit_address' address.id %}" method="POST" id="address-form">
             {% csrf_token %}
             <div class="new-address-main bottom-border-thin">
-                <table class="general-form">
+                <div class="general-form">
                     <input type="hidden" name="origin" id="origin" value="addresses">
-                    <tr>
-                        <td><label for="id_full_name">Full Name:<span class="red-text">*</span> </label></td>
-                        <td>{{ address_form.full_name }}</td>
-                    </tr>
-                    <tr>
-                        <td><label for="id_address_line_one">Address 1:<span class="red-text">*</span> </label></td>
-                        <td>{{ address_form.address_line_one }}</td>
-                    </tr>
-                    <tr>
-                        <td><label for="id_address_line_two">Address 2: </label></td>
-                        <td>{{ address_form.address_line_two }}</td>
-                    </tr>
-                    <tr>
-                        <td><label for="id_town_or_city">Town or City:<span class="red-text">*</span> </label></td>
-                        <td>{{ address_form.town_or_city }}</td>
-                    </tr>
-                    <tr>
-                        <td><label for="id_county">County:<span class="red-text">*</span> </label></td>
-                        <td>{{ address_form.county }}</td>
-                    </tr>
-                    <tr>
-                        <td><label for="id_postcode">Postcode:<span class="red-text">*</span> </label></td>
-                        <td>{{ address_form.postcode }}</td>
-                    </tr>
-                </table>
+                    <div class="form-field-container">
+                        <div class="form-label-container"><label for="id_full_name">Full Name:<span class="red-text">*</span> </label></div>
+                        <div>{{ address_form.full_name }}</div>
+                    </div>
+                    <div class="form-field-container">
+                        <div class="form-label-container"><label for="id_address_line_one">Address 1:<span class="red-text">*</span> </label></div>
+                        <div>{{ address_form.address_line_one }}</div>
+                    </div>
+                    <div class="form-field-container">
+                        <div class="form-label-container"><label for="id_address_line_two">Address 2: </label></div>
+                        <div>{{ address_form.address_line_two }}</div>
+                    </div>
+                    <div class="form-field-container">
+                        <div class="form-label-container"><label for="id_town_or_city">Town or City:<span class="red-text">*</span> </label></div>
+                        <div>{{ address_form.town_or_city }}</div>
+                    </div>
+                    <div class="form-field-container">
+                        <div class="form-label-container"><label for="id_county">County:<span class="red-text">*</span> </label></div>
+                        <div>{{ address_form.county }}</div>
+                    </div>
+                    <div class="form-field-container">
+                        <div class="form-label-container"><label for="id_postcode">Postcode:<span class="red-text">*</span> </label></div>
+                        <div>{{ address_form.postcode }}</div>
+                    </div>
+                </div>
             </div>
             <div class="new-address-lower">
                 {% if address.default %}

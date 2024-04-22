@@ -28,6 +28,7 @@ Cheese and Beer
         <div id="listing-listings">
             <div class="title-section">
                 <h2>Order Detail: <span class="grey-text">{{ order.order_number }}</span></h2>
+                <a class="sign-up-link" href="{% url 'contact_form' %}?order_number={{ order.order_number }}">Contact us</a> about this order.
             </div>
             {% for item in items %}   
             <div class="listing-item-view">

@@ -12,19 +12,19 @@ Cheese and Beer
         <form action="{% url 'contact_form' %}" method="POST" id="contact-form">
             {% csrf_token %}
             <div class="new-address-main">
-                <table class="general-form">
+                <div class="general-form">
                     <input type="hidden" name="origin" id="origin" value="addresses">
-                    <tr>
-                        <td><label for="id_email">email address<span class="red-text">*</span> </label></td>
-                        <td><input type="text" name="email" maxlength="254" placeholder="email" class="contact-field" required id="id_email" value="{{ email }}"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="id_address_line_one">Order Number: </label></td>
-                        <td><input type="text" name="order_number" maxlength="32" placeholder="order_number (optional)" class="contact-field" id="id_order_number" value="{{ order_number }}"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="id_address_line_two">Subject:<span class="red-text">*</span> </label></td>
-                        <td>
+                    <div class="form-field-container">
+                        <div class="form-label-container"><label for="id_email">email address<span class="red-text">*</span> </label></div>
+                        <div><input id="id_email" type="text" name="email" maxlength="254" placeholder="email" class="contact-field" required id="id_email" value="{{ email }}"></div>
+                    </div>
+                    <div class="form-field-container">
+                        <div class="form-label-container"><label for="id_order_number">Order Number: </label></div>
+                        <div><input id="id_order_number" type="text" name="order_number" maxlength="32" placeholder="order_number (optional)" class="contact-field" id="id_order_number" value="{{ order_number }}"></div>
+                    </div>
+                    <div class="form-field-container">
+                        <div class="form-label-container"><label for="id_subject">Subject:<span class="red-text">*</span> </label></div>
+                        <div>
                             <select name="subject" placeholder="subject" class="contact-field" id="id_subject">
                                 {% if order_number %}
                                 <option value="general">general</option>                          
@@ -34,13 +34,13 @@ Cheese and Beer
                                 <option value="order">order</option>
                                 {% endif %}
                             </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="form-large-textarea"><label for="id_town_or_city">Message:<span class="red-text">*</span> </label></td>
-                        <td>{{ form.message }}</td>
-                    </tr>
-                </table>
+                        </div>
+                    </div>
+                    <div class="form-field-container">
+                        <div class="form-label-container"><label for="message">Message:<span class="red-text">*</span> </label></div>
+                        <div>{{ form.message }}</div>
+                    </div>
+                </div>
             </div>
             <div class="form-large-button">
                 <button type="submit">Submit Message</button>

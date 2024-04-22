@@ -673,6 +673,9 @@ input[type=number] {
     margin-left: 0;
     padding-top: 5px;
 }
+#alert-full-name {
+    font-weight: bold;
+}
 .not-signedin {
     margin-top:10px;
 }
