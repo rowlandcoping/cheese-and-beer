@@ -32,98 +32,96 @@ Cheese and Beer - Edit {{ product.name }}
             {% if product.beer_category %}
             <input type="hidden" name="container-selected" id="container-selected" value="{{ product.container }}">
             {% endif %}
-            <div>
-                <table class="general-form">
-                    <tr>
-                        <td><span class="availability-button">Availability</span></td>
-                        <td>
-                            {% if product.displayed %}
-                            <a href="{% url 'product_unpublish' product.id %}"><i class="fa fa-toggle-on btn basic button-on green-text"></i></a>
-                            {% else %}
-                            <a href="{% url 'product_publish' product.id %}"><i class="fa fa-toggle-off btn basic button-off red-text"></i></a>
-                            {% endif %}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label for="id_login">Name: <span class="red-text">*</span> </label></td>
-                        <td>{{ form.name }}</td>
-                    </tr>
-                    {% if form.beer_category %}
-                    <tr>
-                        <td class="form-large-textarea"><label for="id_address_line_one">Beer Category:<span class="red-text">*</span> </label></td>
-                        <td>{{ form.beer_category }}</td>
-                    </tr>
-                    {% else %}
-                    <tr>
-                        <td class="form-large-textarea"><label for="id_address_line_one">Cheese Category:<span class="red-text">*</span> </label></td>
-                        <td>{{ form.cheese_category }}</td>
-                    </tr>
-                    {% endif %}
-                    <tr>
-                        <td class="form-large-textarea"><label for="id_address_line_one">Description: </label></td>
-                        <td>
-                            {{ form.description }}                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label for="id_address_line_one">Variety:<span class="red-text">*</span> </label></td>
-                        <td>
-                            {{ form.variety }}                            
-                        </td>
-                    </tr>
-                    {% if form.texture %}
-                    <tr>
-                        <td><label for="id_address_line_one">Texture:<span class="red-text">*</span> </label></td>
-                        <td>
-                            {{ form.texture }}                            
-                        </td>
-                    </tr>
-                    {% else %}
-                    <tr>
-                        <td><label for="id_address_line_one">Alcohol Content:<span class="red-text">*</span> </label></td>
-                        <td>
-                            {{ form.alcohol_content }}                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label for="id_address_line_one">Type of Container:<span class="red-text">*</span> </label></td>
-                        <td>
-                            {{ form.container }}                            
-                        </td>
-                    </tr>
-                    {% endif %}
-                    <tr>
-                        <td><label for="id_address_line_one">Amount {% if product.cheese_category %}(g){% else %}(ml){% endif %}:<span class="red-text">*</span> </label></td>
-                        <td>
-                            {{ form.amount}}                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label for="id_address_line_one">Price (£):<span class="red-text">*</span> </label></td>
-                        <td>
-                            {{ form.price }}                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label for="id_address_line_one">Country of Origin:<span class="red-text">*</span> </label></td>
-                        <td>
-                            {{ form.country_origin }}                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><label for="id_address_line_one">Image:<span class="red-text">*</span> </label></td>
-                        <td>
-                            {{ form.image }}                            
-                        </td>
-                    </tr>
-                </table>
-                <span id="profile-pic-cancel" class="not-displayed clickable-element">Cancel Upload</span>
-                <div>
-                    {% if product.image_url %}
-                    <img id="current-edit-image" src="{{ MEDIA_URL }}products/{{ product.image_url }}" alt = "{{ product.image_alt }}">
-                    {% endif %}
-                    <img id="image-preview" class="not-displayed" src="{{ MEDIA_URL }}products/{{ product.image_url }}" alt="This is a preview of the uploaded image">
+            <div class="general-form">
+                <div id="toggle-button-container" class="form-field-container">
+                    <div class="form-label-container"><span>Availability:</span></div>
+                    <div>
+                        {% if product.displayed %}
+                        <a class="availability-link" href="{% url 'product_unpublish' product.id %}"><i class="fa fa-toggle-on btn basic button-on green-text"></i></a>
+                        {% else %}
+                        <a href="{% url 'product_publish' product.id %}"><i class="fa fa-toggle-off btn basic button-off red-text"></i></a>
+                        {% endif %}
+                    </div>
                 </div>
+                <div class="form-field-container">
+                    <div class="form-label-container"><label for="id_name">Name: <span class="red-text">*</span></label></div>
+                    <div>{{ form.name }}</div>
+                </div>
+                {% if form.beer_category %}
+                <div class="form-field-container">
+                    <div class="form-label-container"><label for="id_beer_category">Beer Category:<span class="red-text">*</span></label></div>
+                    <div>{{ form.beer_category }}</div>
+                </div>
+                {% else %}
+                <div class="form-field-container">
+                    <div class="form-label-container"><label for="id_cheese_category">Cheese Category:<span class="red-text">*</span></label></div>
+                    <div>{{ form.cheese_category }}</div>
+                </div>
+                {% endif %}
+                <div class="form-field-container">
+                    <div class="form-label-container"><label for="id_description">Description:</label></div>
+                    <div>
+                        {{ form.description }}                            
+                    </div>
+                </div>
+                <div class="form-field-container">
+                    <div class="form-label-container"><label for="id_variety">Variety:<span class="red-text">*</span></label></div>
+                    <div>
+                        {{ form.variety }}                            
+                    </div>
+                </div>
+                {% if form.texture %}
+                <div class="form-field-container">
+                    <div class="form-label-container"><label for="id_texture">Texture:<span class="red-text">*</span></label></div>
+                    <div>
+                        {{ form.texture }}                            
+                    </div>
+                </div>
+                {% else %}
+                <div class="form-field-container">
+                    <div class="form-label-container"><label for="id_alcohol_content">Alcohol Content:<span class="red-text">*</span></label></div>
+                    <div>
+                        {{ form.alcohol_content }}                            
+                    </div>
+                </div>
+                <div class="form-field-container">
+                    <div class="form-label-container"><label for="id_container">Type of Container:<span class="red-text">*</span></label></div>
+                    <div>
+                        {{ form.container }}                            
+                    </div>
+                </div>
+                {% endif %}
+                <div class="form-field-container">
+                    <div class="form-label-container"><label for="id_amount">Amount {% if product.cheese_category %}(g){% else %}(ml){% endif %}:<span class="red-text">*</span></label></div>
+                    <div>
+                        {{ form.amount }}                            
+                    </div>
+                </div>
+                <div class="form-field-container">
+                    <div class="form-label-container"><label for="id_price">Price (£):<span class="red-text">*</span></label></div>
+                    <div>
+                        {{ form.price }}                            
+                    </div>
+                </div>
+                <div class="form-field-container">
+                    <div class="form-label-container"><label for="id_country_origin">Country of Origin:<span class="red-text">*</span></label></div>
+                    <div>
+                        {{ form.country_origin }}                            
+                    </div>
+                </div>
+                <div class="form-field-container">
+                    <div class="form-label-container"><label for="id_image">Image:<span class="red-text">*</span></label></div>
+                    <div>
+                        {{ form.image }}                            
+                    </div>
+                </div>
+            </div>
+            <span id="profile-pic-cancel" class="not-displayed clickable-element">Cancel Upload</span>
+            <div>
+                {% if product.image_url %}
+                <img id="current-edit-image" src="{{ MEDIA_URL }}products/{{ product.image_url }}" alt = "{{ product.image_alt }}">
+                {% endif %}
+                <img id="image-preview" class="not-displayed" src="{{ MEDIA_URL }}products/{{ product.image_url }}" alt="This is a preview of the uploaded image">
             </div>
             {% if product.beer_category %}
             <div class="form-large-button">

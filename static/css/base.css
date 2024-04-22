@@ -88,9 +88,6 @@ input[type='checkbox'], input[type='radio'] {
     border-bottom: 1px dotted grey;
 }
 
-
-
-
 /*CHEESE/BEER CATEGORY SELECTOR*/
 .category-selector {
     background-color:grey;
@@ -1297,7 +1294,7 @@ input[type=number] {
     text-decoration: underline;
 }
 /*EDIT CATEGORIES*/
-.edit-category-section p, .edit-category-section i {
+#edit-category-section p, #edit-category-section i {
     font-size:120%;
     padding:2px;
 }
@@ -1338,7 +1335,6 @@ input[type=number] {
     margin:5px 0;
     border-bottom:1px grey dotted;
 }
-
 .product-results-text {
     margin:10px 0;
 }
@@ -1369,6 +1365,13 @@ input[type=number] {
     display:inline-block;
     margin-left:-5px;
 }
+#form-large .edit-category-section, #form-large .product-list-text-align {
+    text-align:left;
+}
+#product-edit-icon {
+    font-size:95%;
+}
+
 
 /* General Forms (full-page) */
 #background-container {
@@ -1398,8 +1401,11 @@ input[type=number] {
 .form-field-container {
     margin:10px 0;
 }
+#toggle-button-container {
+    align-items:center;
+}
 
-.general-form input, .search-stuff{
+.general-form input, .search-stuff {
     padding: 5px 10px;
     width:300px;
 }
@@ -1588,6 +1594,17 @@ input[type=number] {
 }
 
 @media screen and (max-width:650px) {
+    /*admin site */
+    .select-edit-product #form-large {
+        margin:50px 15px;
+        padding:30px 15px;
+    }
+    .product-search-stuff {
+        width: 250px;
+    }
+    .select-edit-product #form-large button{
+        font-size:100%;
+    }
     /*forms*/
     #form-large {
         display:flex;
@@ -1617,6 +1634,16 @@ input[type=number] {
         flex-direction:column;
         align-items:center;
         margin-bottom:20px;
+    }
+    #toggle-button-container {
+        flex-direction:row;
+        justify-content:center;
+        width:auto;
+    }
+    #toggle-button-container .form-label-container {
+        width: auto;
+        margin-right:20px;
+        padding-top:5px;
     }
     
     /*homepage*/
@@ -1660,12 +1687,22 @@ input[type=number] {
 }
 
 @media screen and (max-width:450px) {
+    /* product admin */
+    .edit-product-name {
+        width:225px;        
+    }
+    .product-search-stuff {
+        width: 180px;
+    }
+    .select-edit-product #form-large button{
+        font-size:95%;
+    }
     /*form*/
     #form-large {
         margin:30px 25px;
         padding:30px 15px;
     }
-    .general-form input, .general-form.textarea {
+    .general-form input, .general-form textarea {
         width: 230px;
     }
     #form-large select {
@@ -1684,7 +1721,7 @@ input[type=number] {
         margin-top:30px;
         width: 225px;
         height: 225px;
-    }
+    }    
 
     /* base template */
     .search {
@@ -1722,6 +1759,10 @@ input[type=number] {
     }
 }
 @media screen and (max-width:359px) {
+    /*product-admin*/
+    .edit-product-name {
+        width:200px;        
+    } 
     /*form*/
     #form-large {
         margin:20px 15px;

@@ -30,38 +30,36 @@ Cheese and Beer - Edit Beer Category
         <form method="POST" action="{% url 'edit_beer_category' category.id %}" enctype="multipart/form-data">
             {% csrf_token %}
             <input type="hidden" name="initial_pairings" id="id_initial_pairings" value="{{ initial_pairings }}">
-            <input type="hidden" name="pairings" id="id_pairings">            
-            <div>
-                <table class="general-form">
-                    <tr>
-                        <td><label for="id_login">Name: <span class="red-text">*</span> </label></td>
-                        <td>{{ form.name }}</td>
-                    </tr>
-                    <tr>
-                        <td class="form-large-textarea"><label for="id_address_line_one">Description:<span class="red-text">*</span> </label></td>
-                        <td>{{ form.description }}</td>
-                    </tr>
-                    <tr>
-                        <td><label for="id_address_line_one">Image:<span class="red-text">*</span> </label></td>
-                        <td>
-                            {{ form.image }}                            
-                        </td>
-                    </tr>
-                </table>
-                <span id="profile-pic-cancel" class="not-displayed clickable-element">Cancel Upload</span>
-                <div>
-                    {% if category.image_url %}
-                    <img id="current-edit-image" src="{{ MEDIA_URL }}products/{{ category.image_url }}" alt = "{{ category.image_alt }}">
-                    {% endif %}
-                    <img id="image-preview" class="not-displayed" src="{{ MEDIA_URL }}products/{{ category.image_url }}" alt="This is a preview of the uploaded image">
+            <input type="hidden" name="pairings" id="id_pairings">
+            <div class="general-form">
+                <div class="form-field-container">
+                    <div class="form-label-container"><label for="id_login">Name: <span class="red-text">*</span> </label></div>
+                    <div>{{ form.name }}</div>
                 </div>
-                <div class="categories">
-                    <h3>Select Cheese Pairings</h3>
-                    {% for category in cheese_categories %}
-                    <div class="category-selector" id ="{{ category.id }}">{{ category.name}}</div>
-                    {% endfor %}
-                <div>
+                <div class="form-field-container">
+                    <div class="form-label-container"><label for="id_address_line_one">Description:<span class="red-text">*</span> </label></div>
+                    <div>{{ form.description }}</div>
+                </div>
+                <div class="form-field-container">
+                    <div class="form-label-container"><label for="id_address_line_one">Image:<span class="red-text">*</span> </label></div>
+                    <div>
+                        {{ form.image }}                            
+                    </div>
+                </div>
             </div>
+            <span id="profile-pic-cancel" class="not-displayed clickable-element">Cancel Upload</span>
+            <div>
+                {% if category.image_url %}
+                <img id="current-edit-image" src="{{ MEDIA_URL }}products/{{ category.image_url }}" alt = "{{ category.image_alt }}">
+                {% endif %}
+                <img id="image-preview" class="not-displayed" src="{{ MEDIA_URL }}products/{{ category.image_url }}" alt="This is a preview of the uploaded image">
+            </div>
+            <div class="categories">
+                <h3>Select Cheese Pairings</h3>
+                {% for category in cheese_categories %}
+                <div class="category-selector" id ="{{ category.id }}">{{ category.name}}</div>
+                {% endfor %}
+            <div>
             <div class="form-large-button">
                 <button type="submit">Update Category</button>
             </div>

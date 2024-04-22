@@ -28,28 +28,26 @@ Cheese and Beer - Add Beer Category
         <p>Click <a class="sign-up-link" href="{% url 'admin_console' %}">here</a> to return to product administration.</p>
         <form method="POST" action="{% url 'add_beer_category' %}" enctype="multipart/form-data">
             {% csrf_token %}
-            <div>
-                <table class="general-form">
-                    <tr>
-                        <td><label for="id_login">Name: <span class="red-text">*</span> </label></td>
-                        <td>{{ form.name }}</td>
-                    </tr>
-                    <tr>
-                        <td class="form-large-textarea"><label for="id_address_line_one">Description:<span class="red-text">*</span> </label></td>
-                        <td>{{ form.description }}</td>
-                    </tr>
-                    <tr>
-                        <td><label for="id_address_line_one">Image:<span class="red-text">*</span> </label></td>
-                        <td>
-                            {{ form.image }}                            
-                        </td>
-                    </tr>
-                </table>
-                <span id="profile-pic-cancel" class="not-displayed clickable-element">Cancel Upload</span>
-                
-                <div>
-                    <img id="image-preview" class="not-displayed" src=" " alt="This is a preview of the uploaded image">
+            <div class="general-form">
+                <div class="form-field-container">
+                    <div class="form-label-container"><label for="id_name">Name: <span class="red-text">*</span> </label></div>
+                    <div>{{ form.name }}</div>
+                    </div>
+                <div class="form-field-container">
+                    <div class="form-label-container"><label for="id_description">Description:<span class="red-text">*</span> </label></div>
+                    <div>{{ form.description }}</div>
                 </div>
+                <div class="form-field-container">
+                    <div class="form-label-container"><label for="id_image">Image:<span class="red-text">*</span> </label></div>
+                    <div>
+                        {{ form.image }}                            
+                    </div>
+                </div>
+            </div>
+            <span id="profile-pic-cancel" class="not-displayed clickable-element">Cancel Upload</span>
+            
+            <div>
+                <img id="image-preview" class="not-displayed" src=" " alt="This is a preview of the uploaded image">
             </div>
             <div class="form-large-button">
                 <button type="submit">Add Category</button>

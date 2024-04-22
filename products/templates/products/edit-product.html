@@ -46,41 +46,45 @@ Cheese and Beer - Edit Products
     </div>      
     {% endfor %}    
     {% endif %}
-    <div id="form-large" class="alert-disable">
-        <h2>Update or Remove Products</h2>
-        <p>Click <a class="sign-up-link" href="{% url 'admin_console' %}">here</a> to return to product administration</p>
-            <div class="title-section bottom-border">
-                <h3>Product Search</h3>
-                <span>Search here to filter by Product ID or name:</span>
-                <form method="GET" action="{% url 'edit_product' %}">
-                    <div>
-                        <button type="submit">search</button>
-                        <input type="text" class="search-stuff product-search-stuff" name="q" placeholder="Search">                        
-                    </div>
-                </form>
-            </div>
-            {% if products %}
-            {% if search_term %}
-            <h3 class="product-results-text">Search results for "{{ search_term }}"</h3>
-            {% else %}
-            <h3 class="product-results-text">All Products</h3>
-            {% endif %}
-            {% for product in products %}
-                <div class="product-container">
-                    <div class="edit-product-actions">     
-                        <a href="{% url 'product_edit' product.id %}"><i class="fas fa-edit dark-green-text"></i></a>
-                        {% if product.units_sold == 0 %}
-                        <span class="delete-product" id="delete-{{ product.id }}"><i class="fas fa-trash dark-red-text clickable-element"></i></span>
-                        {% endif %}
-                    </div>
-                    <div class="edit-product-name">
-                        <span id="name-{{ product.id }}">{{ product.name }}</span>
-                    </div>
+    <div class="select-edit-product">
+        <div id="form-large" class="alert-disable">
+            <h2>Update or Remove Products</h2>
+            <p>Click <a class="sign-up-link" href="{% url 'admin_console' %}">here</a> to return to product administration</p>
+                <div class="title-section bottom-border">
+                    <h3>Product Search</h3>
+                    <span>Search here to filter by Product ID or name:</span>
+                    <form method="GET" action="{% url 'edit_product' %}">
+                        <div>
+                            <button type="submit"><i id="product-edit-icon" class="fa-solid fa-magnifying-glass"></i></button>
+                            <input type="text" class="search-stuff product-search-stuff" name="q" placeholder="Search">                        
+                        </div>
+                    </form>
                 </div>
-            {% endfor %}
-            {% else %}
-            <h3>No Products Found, please check your search term and try again!</h3>
-            {% endif %}
+                {% if products %}
+                {% if search_term %}
+                <h3 class="product-results-text">Search results for "{{ search_term }}"</h3>
+                {% else %}
+                <h3 class="product-results-text">All Products</h3>
+                {% endif %}
+                <div class="product-list-text-align">
+                {% for product in products %}
+                    <div class="product-container">
+                        <div class="edit-product-actions">     
+                            <a href="{% url 'product_edit' product.id %}"><i class="fas fa-edit dark-green-text"></i></a>
+                            {% if product.units_sold == 0 %}
+                            <span class="delete-product" id="delete-{{ product.id }}"><i class="fas fa-trash dark-red-text clickable-element"></i></span>
+                            {% endif %}
+                        </div>
+                        <div class="edit-product-name">
+                            <span id="name-{{ product.id }}">{{ product.name }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+                {% else %}
+                <h3>No Products Found, please check your search term and try again!</h3>
+                {% endif %}
+            </div>
         </div>
     </div>
 </div>
