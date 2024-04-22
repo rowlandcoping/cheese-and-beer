@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.db.models.functions import Lower
 from datetime import datetime
 from products.models import CheeseCategory, BeerCategory, Product
+from user_account.models import Wishlist
 from datetime import datetime, timedelta
 import uuid
 import io
@@ -173,10 +174,18 @@ def product_detail(request, product_id):
                 pairings = pairings | Product.objects.filter(beer_category=category)
             except:
                 pairings = Product.objects.filter(beer_category=category)
+    if request.user:
+        wishlist_objects = Wishlist.objects.filter(user_id=request.user.id)
+        wishlist=[]
+        for wish in wishlist_objects:
+            wishlist.append(wish.product.id)
+        print(wishlist)
+
     pairings = pairings.order_by('-units_sold')
     delivery_date = datetime.now().date() + timedelta(days=5)
     template = 'product_views/product-detail.html'
     context = {
+        'wishlist': wishlist,
         'product': product,
         'pairings': pairings,
         'delivery_date': delivery_date,

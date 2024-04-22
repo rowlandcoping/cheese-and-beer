@@ -1,7 +1,10 @@
 from django.db.models.signals import pre_save
 from django.contrib.auth.models import User
+from products.models import Product
+from checkout.models import Order
 from django.dispatch import receiver
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
+from django.db import models
 
 class CustomSocialAccountAdapter(DefaultSocialAccountAdapter):
 
@@ -12,3 +15,24 @@ class CustomSocialAccountAdapter(DefaultSocialAccountAdapter):
         while User.objects.exclude(pk=instance.pk).filter(username=username).exists():
             n += 1
         instance.username = username
+
+
+class Wishlist(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=False)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=False, blank=False)
+
+    def __str__(self):
+        return f'{self.product.name}'
+
+
+class ContactForm(models.Model):
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, null=True, blank=True, on_delete=models.CASCADE)
+    email = models.CharField(max_length=254, null=False, blank=False)    
+    order_number = models.CharField(max_length=32, null=True, blank=True, editable=True)
+    subject = models.CharField(max_length=254, null=False, blank=False)
+    message = models.TextField(null=False, blank=False)
+
+    def __str__(self):
+        return self.subject
+

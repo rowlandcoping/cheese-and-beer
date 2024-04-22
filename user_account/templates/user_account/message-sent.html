@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cheese and Beer - Order Confirmation
+{% endblock title %}
+{% block content %}
+<div id="background-container">
+    <div id="form-large">
+    <h2>Message Sent</h2>
+    <h4 class="bottom-border-thin">Your message has been successfully submitted</span></h4>
+    <div class="confirmation-para">
+        <p>
+        {% if user.is_authenticated %}
+        Click <a class="sign-up-link" href="{% url 'account_overview' %}">here</a> to return to your account page.<br>
+        {% endif %}
+        A confirmation e-mail has been sent to {{ email }}.</p>
+    </div>
+{% endblock content %}
+
+

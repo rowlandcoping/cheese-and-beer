@@ -92,7 +92,29 @@ Cheese and Beer
                     APR: {{ product.alcohol_content }}%
                 </p>
                 {% endif %}
-                
+                {% if user.is_authenticated %}
+                <div class="wishlist-button">
+                    {% if product.id in wishlist %}
+                    <form method="POST" action="{% url 'remove_from_wishlist' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="view" id="view" value="{{ request.path }}?{{ current_view }}">
+                        <input type="hidden" name="product" id="product" value="{{ product.id }}">                           
+                        <button class="clickable-element wishlist-add-hide">
+                            <i class="fas fa-cloud"></i>remove from wishlist
+                        </button>                     
+                    </form>
+                    {% else %}
+                    <form method="POST" action="{% url 'add_to_wishlist' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="view" id="view" value="{{ request.path }}?{{ current_view }}">
+                        <input type="hidden" name="product" id="product" value="{{ product.id }}">                
+                        <button class="clickable-element wishlist-add-hide">
+                            <i class="fas fa-cloud"></i>add to wishlist
+                        </button>                     
+                    </form>
+                    {% endif %} 
+                </div>
+                {% endif %}                
             </div>        
             <hr>
             <div class="detail-description">
@@ -118,22 +140,22 @@ Cheese and Beer
                 <input type="hidden" name="view" id="view" value="{{ request.path }}?{{ current_view }}">
                 <div class="quantity-box-product">
                     <label for="quantity"><h4 class="quantity-label">Quantity: </h4></label>
-                    <i id="decrement-amount" class="fa fa-minus"></i> <input type="number" name="quantity" id="quantity" min="1" value="1"> <i id="increment-amount" class="fa fa-plus"></i>
+                    <i id="decrement-amount" class="fa fa-minus clickable-element"></i> <input type="number" name="quantity" id="quantity" min="1" value="1"> <i id="increment-amount" class="fa fa-plus clickable-element"></i>
                 </div>
                 <input type="hidden" name="product" id="product" value="{{ product.id }}">                     
                 <div class="product-action-buttons">
-                    <button class="product-action-button add-basket product-add-basket">
+                    <button class="product-action-button add-basket product-add-basket clickable-element">
                         <i class="fas fa-shopping-basket"></i> Add to Basket
                     </button>
                 </div>
             </form>
             <div class="product-action-buttons"> 
                 {% if basket_total %}                
-                <span class="product-action-button buy-now product-buy-now" id="basket-{{ product.id }}">
+                <span class="product-action-button buy-now product-buy-now clickable-element" id="basket-{{ product.id }}">
                     <i class="fa-solid fa-credit-card"></i> Buy Now
                 </span>
                 {% else %}
-                <span class="product-action-button buy-now product-buy-now" id="single-{{ product.id }}">
+                <span class="product-action-button buy-now product-buy-now clickable-element" id="single-{{ product.id }}">
                     <i class="fa-solid fa-credit-card"></i> Buy Now
                 </span>                          
                 {% endif %}
@@ -212,7 +234,7 @@ Cheese and Beer
                             <input type="hidden" name="view" id="view" value="{{ request.path }}?{{ current_view }}">
                             <input type="hidden" name="quantity" id="quantity" value="1">
                             <input type="hidden" name="product" id="product" value="{{ pairing.id }}">                     
-                            <button class="action-button add-basket add-basket-list">
+                            <button class="action-button add-basket add-basket-list clickable-element">
                                 <i class="fas fa-shopping-basket"></i> Add
                             </button>
                         </form>
@@ -225,7 +247,7 @@ Cheese and Beer
                             </span>
                             {% else %}
                             <a href="{% url 'buy_now' %}?single={{ pairing.id }},1">
-                                <span class="action-button buy-now buy-now-list" id="buy-{{ pairing.id }}">
+                                <span class="action-button buy-now buy-now-list clickable-element" id="buy-{{ pairing.id }}">
                                     <i class="fa-solid fa-credit-card"></i> Buy
                                 </span>
                             </a>                            

@@ -1,10 +1,22 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from django.contrib import messages
-from checkout .models import Order, OrderItems
-from addresses .models import Addresses
+from checkout.models import Order, OrderItems
+from products.models import Product
+from addresses.models import Addresses
+from .forms import ContactForm
 from django.db.models import Q
+from .models import Wishlist
+from django.contrib.auth.models import User
+from django.utils.safestring import mark_safe
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.conf import settings
 
-from django.views.decorators.http import require_POST
+
+url = settings.MEDIA_URL
+def make_safe(message):
+    return mark_safe(message)
 
 
 def account_overview(request):
@@ -73,3 +85,112 @@ def found_order(request):
 def find_order(request):
     template = 'user_account/find-order.html'
     return render(request, template)
+
+def wishlist(request):
+    if request.user.is_authenticated:
+        wishlist = Wishlist.objects.filter(user=request.user.id)
+        template = 'user_account/wishlist.html'    
+        context = {
+            'wishlist': wishlist,
+        }
+        return render(request, template, context)
+    else:
+        messages.error(request, "You need to be logged in to view your wishlist")
+        return redirect('home')
+    
+
+def add_to_wishlist(request):
+    if request.method == 'POST':
+        view = request.POST.get('view')
+        product_id = request.POST.get('product')
+        product = Product.objects.get(pk=product_id)
+        user = request.user
+        Wishlist.objects.create(
+                    user=user,
+                    product=product,
+                )        
+        message = '<p>' + product.name + ' added to wishlist</p>' + '<img src="' + url.strip() + f'products/{ product.image_url }">'                         
+        messages.success(request, make_safe(message))
+        return redirect(view)
+    else:
+        return redirect('home')
+    
+
+def remove_from_wishlist(request):
+    if request.method == 'POST':
+        view = request.POST.get('view')
+        product_id = request.POST.get('product')
+        product = Product.objects.get(pk=product_id)        
+        item = Wishlist.objects.get(user=request.user, product=product)
+        item.delete()        
+        message = '<p>' + product.name + ' removed from wishlist</p>' + '<img src="' + url.strip() + f'products/{ product.image_url }">'                         
+        messages.warning(request, make_safe(message))
+        return redirect(view)
+    else:
+        return redirect('home')
+    
+
+def contact_form(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            if request.user.is_authenticated:
+                user = request.user
+            else:
+                user = None
+            order_number = request.POST.get('order_number')
+            if order_number:
+                order = Order.objects.get(order_number=order_number)
+            else:
+                order = None
+            email = request.POST.get('email')
+            message = request.POST.get('message')
+            final_form = form.save(commit=False)
+            final_form.user = user
+            final_form.order = order
+            final_form.save()
+            cust_email = email
+            subject = render_to_string(
+                'user_account/confirmation_emails/header.txt',
+                {})
+            message = render_to_string(
+                'user_account/confirmation_emails/body.txt',
+                {'order_number': order_number, 'message': message})        
+            send_mail(
+                subject,
+                message, 
+                settings.DEFAULT_FROM_EMAIL,                       
+                [cust_email]
+            )
+            return redirect(reverse('message_sent', args=[email]))
+    if request.GET:
+        if 'order_number' in request.GET:
+            order_number = request.GET['order_number']
+    else:
+        order_number = ""
+    if request.user.is_authenticated:
+        user_email = request.user.email
+    else:
+        user_email = ""
+    form = ContactForm()
+    print(form)
+    template = 'user_account/contact.html'    
+    context = {
+        'order_number': order_number,
+        'form': form,
+        'email': user_email
+    }
+    return render(request, template, context)
+
+
+def message_sent(request, email):
+    template = 'user_account/message-sent.html'
+    context = {
+        'email': email,
+    }
+    return render(request, template, context)
+
+
+
+
+

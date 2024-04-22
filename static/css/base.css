@@ -596,6 +596,23 @@ input[type=number] {
 #product-matching {
     background-color: rgb(248, 248, 219);
 }
+.wishlist-button button {
+    background-color: rgb(238, 230, 182);
+    border: 1px solid rgb(114, 113, 113);
+    color:rgb(61, 61, 61);
+    border-radius: 10px;
+    padding:2px 10px;
+    margin-top:3px;
+    
+    box-shadow: 4px 4px 5px rgb(107, 107, 107);
+}
+.wishlist-button button:hover {
+    background-color:rgb(248, 248, 219);
+}
+.wishlist-button i {
+    margin-right:5px;
+}
+
 
 /* CHECKOUT PAGE */
 .checkout-page {
@@ -929,6 +946,9 @@ input[type=number] {
 .layout-correction {
     padding-top:-100px;
 }
+#address-view .address-para {
+    margin-left: 30px;
+}
 
 /*ORDERS PAGE*/
 
@@ -1052,7 +1072,7 @@ input[type=number] {
 .account-info-section .fa-list {
     color:rgb(2, 61, 29);
 }
-.account-info-section .fa-cloud {
+.account-info-section .fa-cloud, .wishlist-button .fa-cloud {
     color:rgb(0, 176, 182);
 }
 .account-info-section .fa-key {
@@ -1077,6 +1097,28 @@ input[type=number] {
 /*CONFIRRMATION PAGE*/
 .confirmation-para {
     margin-top:5px;
+}
+/*WISHLIST PAGE */
+#wishlist-view {
+    width:170px;
+    margin-bottom:-10px;
+}
+
+#wishlist-view .buy-now {
+    font-size:110%;
+    width:76px;
+    padding:1px;
+}
+#wishlist-view .add-basket {
+    font-size:100%;
+    width:80px;
+    padding:2px;
+}
+.wishlist-add-hide {
+    display:none;
+}
+.wishlist-add-hide:last-child {
+    display:block;
 }
 
 

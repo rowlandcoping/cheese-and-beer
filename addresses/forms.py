@@ -22,12 +22,12 @@ class AddressForm(forms.ModelForm):
         """
         super().__init__(*args, **kwargs)        
         placeholders = {
-            'full_name': 'Full Name',
-            'address_line_one': 'Address 1',
-            'address_line_two': 'Address 2',
-            'town_or_city': 'Town or City',
-            'county': 'County',
-            'postcode': 'Postcode',      
+            'full_name': 'full name',
+            'address_line_one': 'address 1',
+            'address_line_two': 'address 2',
+            'town_or_city': 'town or city',
+            'county': 'county',
+            'postcode': 'postcode',      
         }
         for field in self.fields:
             placeholder = placeholders[field]

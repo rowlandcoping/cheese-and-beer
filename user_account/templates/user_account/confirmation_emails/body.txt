@@ -1,0 +1,16 @@
+Your message has been received, and our team will endeavour to get back to you within the next 48 hours.
+
+-------------
+
+Your Message:
+
+{% if order_number %}
+RE: {{ order_number }}
+{% endif %}
+
+{{ message }}
+
+-------------
+
+kind regards
+Cheese and Beer

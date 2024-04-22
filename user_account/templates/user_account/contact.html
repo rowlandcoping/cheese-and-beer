@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cheese and Beer
+{% endblock %}
+
+{% block content %}
+<div id="background-container">
+    <div id="form-large">
+        <h2>Contact Us</h2>
+        <p>Click <a class="sign-up-link" href="{% url 'account_overview' %}">here</a> to return to your account page.</p>
+        <form action="{% url 'contact_form' %}" method="POST" id="contact-form">
+            {% csrf_token %}
+            <div class="new-address-main">
+                <table class="general-form">
+                    <input type="hidden" name="origin" id="origin" value="addresses">
+                    <tr>
+                        <td><label for="id_email">email address<span class="red-text">*</span> </label></td>
+                        <td><input type="text" name="email" maxlength="254" placeholder="email" class="contact-field" required id="id_email" value="{{ email }}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="id_address_line_one">Order Number: </label></td>
+                        <td><input type="text" name="order_number" maxlength="32" placeholder="order_number (optional)" class="contact-field" id="id_order_number" value="{{ order_number }}"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="id_address_line_two">Subject:<span class="red-text">*</span> </label></td>
+                        <td>
+                            <select name="subject" placeholder="subject" class="contact-field" id="id_subject">
+                                {% if order_number %}
+                                <option value="general">general</option>                          
+                                <option value="order" selected>order</option>
+                                {% else %}
+                                <option value="general" selected>general</option>                          
+                                <option value="order">order</option>
+                                {% endif %}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form-large-textarea"><label for="id_town_or_city">Message:<span class="red-text">*</span> </label></td>
+                        <td>{{ form.message }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="form-large-button">
+                <button type="submit">Submit Message</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -62,17 +62,18 @@
                     </div>
                     <div id="account-mouseover" class="not-displayed">                       
                         {% if superuser %}
-                        <a href="{% url 'admin_console' %}" class="nav-menu-link"><span>Administration</span></a>
-                        <a href="{% url 'admin:index' %}" class="nav-menu-link"><span>Django Admin</span></a>
+                        <a href="{% url 'admin_console' %}" class="nav-menu-link"><span>administration</span></a>
+                        <a href="{% url 'admin:index' %}" class="nav-menu-link"><span>Django admin</span></a>
                         {% endif %}
                         {% if authenticated %}
-                        <a href="{% url 'manage_addresses' %}" class="nav-menu-link"><span>Addresses</span></a>
-                        <a href="{% url 'view_orders' %}" class="nav-menu-link"><span>Orders</span></a>
-                        <a href="{% url 'account_logout' %}" class="nav-menu-link"><span>Log out</span></a>
+                        <a href="{% url 'manage_addresses' %}" class="nav-menu-link"><span>addresses</span></a>
+                        <a href="{% url 'view_orders' %}" class="nav-menu-link"><span>orders</span></a>
+                        <a href="{% url 'wishlist' %}" class="nav-menu-link"><span>wishlist</span></a>
+                        <a href="{% url 'account_logout' %}" class="nav-menu-link"><span>log out</span></a>
                         {% else %}
-                        <a href="{% url 'find_order' %}" class="nav-menu-link"><span>Find Order</span></a>
-                        <a href="{% url 'account_login' %}" class="nav-menu-link"><span>Log in</span></a>
-                        <a href="{% url 'account_signup' %}" class="nav-menu-link"><span>Sign Up</span></a>
+                        <a href="{% url 'find_order' %}" class="nav-menu-link"><span>find order</span></a>
+                        <a href="{% url 'account_login' %}" class="nav-menu-link"><span>log in</span></a>
+                        <a href="{% url 'account_signup' %}" class="nav-menu-link"><span>sign up</span></a>
                         {% endif %}                   
                     </div>
                 </div>
