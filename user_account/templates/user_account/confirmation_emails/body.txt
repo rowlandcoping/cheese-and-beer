@@ -5,7 +5,7 @@ Your message has been received, and our team will endeavour to get back to you w
 Your Message:
 
 {% if order_number %}
-RE: {{ order_number }}
+RE: Order Number {{ order_number }}
 {% endif %}
 
 {{ message }}

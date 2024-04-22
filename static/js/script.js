@@ -480,6 +480,35 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         });
     }
+    // message removal alerts
+    if (document.getElementById('message-alert')) {
+        const removeAddressButtons = Array.from(document.getElementsByClassName('remove-message'));
+        removeAddressButtons.forEach(item => {
+            item.addEventListener('click', function handleClick(event) {
+                const itemId = item.getAttribute('id');
+                id=itemId.split("-")[1];
+                console.log(id)
+                document.getElementById('remove-message').href = "/admin-console/remove-message/" + id + "/";
+                const disabledSections = Array.from(document.getElementsByClassName('alert-disable'));
+                    for (let i = 0; i < disabledSections.length; i++) {
+                        disabledSections[i].style.pointerEvents = "none";
+                        disabledSections[i].style.opacity = "0.5";
+                    }
+                document.getElementById('message-alert').style.display="block";
+                document.addEventListener("click", function(e){
+                    const target = e.target.closest(".cancel-alert");
+                    if(target){
+                        document.getElementById('message-alert').style.display="none";
+                        const disabledSections = Array.from(document.getElementsByClassName('alert-disable'));
+                        for (let i = 0; i < disabledSections.length; i++) {
+                            disabledSections[i].style.pointerEvents = "auto";
+                            disabledSections[i].style.opacity = "1";
+                        }
+                    }
+                });
+            });
+        });
+    }
     
     // Product Deletion Alerts
 

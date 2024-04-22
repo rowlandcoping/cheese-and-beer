@@ -25,7 +25,7 @@ Cheese and Beer - Admin Console
     {% endfor %}    
     {% endif %}
     <div id="form-large">
-        <h2 class="bottom-border">Product Administration</h2>
+        <h2 class="bottom-border">Cheese and Beer Admin</h2>
         <div id="admin-console">
             <div class="console-headline">
                 <h3>Categories</h3>
@@ -51,9 +51,16 @@ Cheese and Beer - Admin Console
             <div class="bottom-border">
                 <a href="{% url 'edit_product' %}">Edit existing product</a>
             </div>
+            <div class="console-headline">
+                <h3>Customer Service</h3>
+            </div>
+            <div>
+                <a href="{% url 'view_messages' %}">View submitted requests</a>
+            </div>
             <div>
                 <a href="{% url 'home' %}"><button>Back to Homepage</button></a>
             </div>
+            
         </div>
     </div>
 </div>

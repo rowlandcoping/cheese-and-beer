@@ -173,7 +173,6 @@ def contact_form(request):
     else:
         user_email = ""
     form = ContactForm()
-    print(form)
     template = 'user_account/contact.html'    
     context = {
         'order_number': order_number,
