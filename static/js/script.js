@@ -93,70 +93,113 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     //NAV MENU
-    document.addEventListener("mouseout", function(e){
-        const target = e.target.closest(".menu-header");
-        if(target){
-            target.style.backgroundColor = "rgb(1, 70, 1)";
-            target.style.color = "rgb(255, 255, 140)";
-        }
-    });
-    document.addEventListener("mouseover", function(e){
-        const target = e.target.closest(".menu-header");
-        if(target){
-            target.style.backgroundColor = "rgb(255, 255, 140)";
-            target.style.color = "rgb(1, 70, 1)";
-        }
-    });
-    document.addEventListener("mouseover", function(e){
-        const target = e.target.closest("#beer-nav");
-        if(target){
-            document.getElementById('beer-desktop-mouseover').style.display = "block";
-        }
-    });
-    document.addEventListener("mouseout", function(e){
-        const target = e.target.closest("#beer-nav");
-        if(target){
-            document.getElementById('beer-desktop-mouseover').style.display = "none";
-        }
-    });
-    document.addEventListener("mouseover", function(e){
-        const target = e.target.closest("#cheese-nav");
-        if(target){
-            document.getElementById('cheese-desktop-mouseover').style.display = "block";
-        }
-    });
-    document.addEventListener("mouseout", function(e){
-        const target = e.target.closest("#cheese-nav");
-        if(target){
-            document.getElementById('cheese-desktop-mouseover').style.display = "none";
-        }
-    });
-    document.addEventListener("mouseover", function(e){
-        const target = e.target.closest("#account-nav");
-        if(target){
-            document.getElementById('account-mouseover').style.display = "block";
-        }
-    });
-    document.addEventListener("mouseout", function(e){
-        const target = e.target.closest("#account-nav");
-        if(target){
-            document.getElementById('account-mouseover').style.display = "none";
-        }
-    });
-    document.addEventListener("mouseover", function(e){
-        const target = e.target.closest(".nav-menu-link");
-        if(target){
-            target.style.backgroundColor = "rgb(255, 255, 140)";
-            target.style.color = "rgb(1, 70, 1)";
-        }
-    });
-    document.addEventListener("mouseout", function(e){
-        const target = e.target.closest(".nav-menu-link");
-        if(target){
-            target.style.backgroundColor = "rgb(1, 70, 1)";
-            target.style.color = "rgb(255, 255, 140)";
-        }
-    });
+    if (window.getComputedStyle(document.getElementById('product-menu'), null).display !== "none"){
+        document.addEventListener("mouseout", function(e){
+            const target = e.target.closest(".menu-header");
+            if(target){
+                target.style.backgroundColor = "rgb(1, 70, 1)";
+                target.style.color = "rgb(255, 255, 140)";
+            }
+        });
+        document.addEventListener("mouseover", function(e){
+            const target = e.target.closest(".menu-header");
+            if(target){
+                target.style.backgroundColor = "rgb(255, 255, 140)";
+                target.style.color = "rgb(1, 70, 1)";
+            }
+        });
+        document.addEventListener("mouseover", function(e){
+            const target = e.target.closest("#beer-nav");
+            if(target){
+                document.getElementById('beer-desktop-mouseover').style.display = "block";
+            }
+        });
+        document.addEventListener("mouseout", function(e){
+            const target = e.target.closest("#beer-nav");
+            if(target){
+                document.getElementById('beer-desktop-mouseover').style.display = "none";
+            }
+        });
+        document.addEventListener("mouseover", function(e){
+            const target = e.target.closest("#cheese-nav");
+            if(target){
+                document.getElementById('cheese-desktop-mouseover').style.display = "block";
+            }
+        });
+        document.addEventListener("mouseout", function(e){
+            const target = e.target.closest("#cheese-nav");
+            if(target){
+                document.getElementById('cheese-desktop-mouseover').style.display = "none";
+            }
+        });
+        document.addEventListener("mouseover", function(e){
+            const target = e.target.closest("#account-nav");
+            if(target){
+                document.getElementById('account-mouseover').style.display = "block";
+            }
+        });
+        document.addEventListener("mouseout", function(e){
+            const target = e.target.closest("#account-nav");
+            if(target){
+                document.getElementById('account-mouseover').style.display = "none";
+            }
+        });
+        document.addEventListener("mouseover", function(e){
+            const target = e.target.closest(".nav-menu-link");
+            if(target){
+                target.style.backgroundColor = "rgb(255, 255, 140)";
+                target.style.color = "rgb(1, 70, 1)";
+            }
+        });
+        document.addEventListener("mouseout", function(e){
+            const target = e.target.closest(".nav-menu-link");
+            if(target){
+                target.style.backgroundColor = "rgb(1, 70, 1)";
+                target.style.color = "rgb(255, 255, 140)";
+            }
+        });
+    }
+
+    //MOBILE NAV MENU
+    if (window.getComputedStyle(document.getElementById('product-menu'), null).display === "none"){
+        window.addEventListener('click', function(e){   
+            if (document.getElementById('cheese-click').contains(e.target)){
+                document.getElementById('cheese-clickout').style.display = "block";
+                document.getElementById('cheese-click').style.backgroundColor = "rgb(255, 255, 140)";
+                document.getElementById('cheese-click').style.color = "rgb(1, 70, 1)";
+                document.getElementById('cheese-clickout').style.color = "rgb(255, 255, 140)";
+            } else{
+                document.getElementById('cheese-clickout').style.display = "none";
+                document.getElementById('cheese-click').style.backgroundColor = "rgb(1, 70, 1)";
+                document.getElementById('cheese-click').style.color = "rgb(255, 255, 140)";
+            }
+        });
+        window.addEventListener('click', function(e){   
+            if (document.getElementById('beer-click').contains(e.target)){
+                document.getElementById('beer-clickout').style.display = "block";
+                document.getElementById('beer-click').style.backgroundColor = "rgb(255, 255, 140)";
+                document.getElementById('beer-click').style.color = "rgb(1, 70, 1)";
+                document.getElementById('beer-clickout').style.color = "rgb(255, 255, 140)";
+            } else{
+                document.getElementById('beer-clickout').style.display = "none";
+                document.getElementById('beer-click').style.backgroundColor = "rgb(1, 70, 1)";
+                document.getElementById('beer-click').style.color = "rgb(255, 255, 140)";
+            }
+        });
+        window.addEventListener('click', function(e){   
+            if (document.getElementById('account-click').contains(e.target)){
+                document.getElementById('account-clickout').style.display = "block";
+                document.getElementById('account-click').style.backgroundColor = "rgb(255, 255, 140)";
+                document.getElementById('account-click').style.color = "rgb(1, 70, 1)";
+                document.getElementById('account-clickout').style.color = "rgb(255, 255, 140)";
+            } else{
+                document.getElementById('account-clickout').style.display = "none";
+                document.getElementById('account-click').style.backgroundColor = "rgb(1, 70, 1)";
+                document.getElementById('account-click').style.color = "rgb(255, 255, 140)";
+            }
+        });
+    }
+    
 
     //IMAGE HANDLING
     //clears files on page reload

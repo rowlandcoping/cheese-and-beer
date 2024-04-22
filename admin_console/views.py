@@ -16,7 +16,7 @@ def admin_console(request):
 def view_messages(request):
     if request.user.is_authenticated:
         if request.user.is_superuser:
-            messages = ContactForm.objects.all().order_by('date')
+            messages = ContactForm.objects.all().order_by('-date')
             template = 'admin_console/view-messages.html',
             context = {
                 'user_messages': messages,

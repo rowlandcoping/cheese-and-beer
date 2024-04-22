@@ -72,9 +72,10 @@ Cheese and Beer
                     </div>
                     <div class="orders-shipped-address">
                         {% if contact.order_number %}
-                        <span class="dark-green-text"><strong><p>Order No: {{ contact.order_number }}</p></strong></span>
+                        <span class="dark-green-text"><p><strong><small>ID: {{ contact.order_number }}</small></strong></p></span>
                         {% endif %}
-                        <p>{{ contact.message }}</p>
+                        <br>
+                        <p>{{ contact.message|linebreaksbr }}</p>
                     </div>
                     <div class="orders-products-shipped">
                         <span class="remove-message" id="delete-{{ contact.id }}"><i class="fas fa-trash dark-red-text clickable-element"></i> Delete Message</span>

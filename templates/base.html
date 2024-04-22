@@ -33,7 +33,7 @@
                     </div>
                 </form>
             </div>
-            <div class="product-menu">
+            <div id="product-menu">
                 <div id="cheese-nav">
                     <a href="{% url 'view_results' %}?category=cheese"><div id="cheese-desktop-mouseout" class="menu-header"><i class="fa-solid fa-cheese"></i> Cheese <i class="fa-solid fa-caret-down"></i></div></a>
                     <div id="cheese-desktop-mouseover" class="not-displayed">
@@ -51,7 +51,7 @@
                     </div>
                 </div>
             </div>
-            <div class="account-menu">
+            <div id="account-menu">
                 <div id="account-nav">
                     <div id="account-mouseout" class="menu-header">
                         {% if authenticated %}
@@ -96,18 +96,53 @@
             </div>
             {% endif %}
         </div>
-        <div class="product-menu-mobile not-displayed">
-            <ul id="product-navigation">
-                <li id="cheese-nav">
-                    <span id="cheese-desktop">Cheese</span>
-                </li>
-                <li id="beer-nav">
-                    <span id="beer-desktop">Beer</span>
-                </li>
-                <li id="product-filter">
-                    <span id="filter-desktop">Filter</span>
-                </li>
-            </ul>
+        <div class="nav-menu-mobile not-displayed">
+            <div id="cheese-nav-mobile">
+                <div id="cheese-click" class="menu-header"><i class="fa-solid fa-cheese"></i> Cheese <i class="fa-solid fa-caret-down"></i></div>
+                <div id="cheese-clickout" class="not-displayed">
+                    <a href="{% url 'view_results' %}?category=cheese" class="mobile-menu-link"><span>all cheese</span></a>
+                    {% for category in cheese_categories %}
+                    <a href="{% url 'view_results' %}?category=cheese,{{ category.id }}" class="mobile-menu-link"><span>{{ category.name }}</span></a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div id="beer-nav-mobile">
+                <div id="beer-click" class="menu-header"><i class="fas fa-beer"></i> <span></span> Beer <i class="fa-solid fa-caret-down"></i></div>
+                <div id="beer-clickout" class="not-displayed">
+                    {% if authenticated %}
+                    <a href="{% url 'view_results' %}?category=beer"><div class="menu-header"><i class="fas fa-beer"></i> <span>all beer</span> <i class="fa-solid fa-caret-down"></i></div></a>
+                    {% endif %}
+                    {% for category in beer_categories %}
+                    <a href="{% url 'view_results' %}?category=beer,{{ category.id }}" class="mobile-menu-link"><span>{{ category.name }}</span></a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div id="account-nav-mobile">
+                <div id="account-click" class="menu-header">
+                    <span><i class="fa-solid fa-user"></i> <span>Account</span> <i class="fa-solid fa-caret-down"></i></span>
+                </div>
+                <div id="account-clickout" class="not-displayed">
+                    {% if authenticated %}
+                    <a href="{% url 'account_overview' %}"><i class="fa-solid fa-user"></i> <span>Account</span> <i class="fa-solid fa-caret-down"></i></a>
+                    {% endif %}
+                    {% if superuser %}
+                    <a href="{% url 'admin_console' %}" class="mobile-menu-link"><span>administration</span></a>
+                    <a href="{% url 'admin:index' %}" class="mobile-menu-link"><span>Django admin</span></a>
+                    {% endif %}
+                    {% if authenticated %}
+                    <a href="{% url 'manage_addresses' %}" class="mobile-menu-link"><span>addresses</span></a>
+                    <a href="{% url 'view_orders' %}" class="mobile-menu-link"><span>orders</span></a>
+                    <a href="{% url 'wishlist' %}" class="mobile-menu-link"><span>wishlist</span></a>
+                    <a href="{% url 'contact_form' %}" class="mobile-menu-link"><span>contact</span></a>
+                    <a href="{% url 'account_logout' %}" class="mobile-menu-link"><span>log out</span></a>
+                    {% else %}
+                    <a href="{% url 'find_order' %}" class="mobile-menu-link"><span>find order</span></a>
+                    <a href="{% url 'contact_form' %}" class="mobile-menu-link"><span>contact</span></a>
+                    <a href="{% url 'account_login' %}" class="mobile-menu-link"><span>log in</span></a>
+                    <a href="{% url 'account_signup' %}" class="mobile-menu-link"><span>sign up</span></a>
+                    {% endif %} 
+                </div>
+            </div>            
         </div>    
     </nav>
     {% block content %}
