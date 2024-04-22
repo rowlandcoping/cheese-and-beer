@@ -141,9 +141,15 @@ def view_results(request):
       result = "result"
     else:
       result = "results"
+    if request.user:
+        wishlist_objects = Wishlist.objects.filter(user_id=request.user.id)
+        wishlist=[]
+        for wish in wishlist_objects:
+            wishlist.append(wish.product.id)
     template = 'product_views/view-products.html'
     current_sorting = f'{sort}_{direction}'
     context = {
+        'wishlist': wishlist,
         'current_view': view,
         'number': number,
         'search_term': search_term,
@@ -154,6 +160,7 @@ def view_results(request):
         'current_sorting':current_sorting,
     }
     return render(request, template, context)
+
 
 def product_detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
@@ -179,7 +186,6 @@ def product_detail(request, product_id):
         wishlist=[]
         for wish in wishlist_objects:
             wishlist.append(wish.product.id)
-        print(wishlist)
 
     pairings = pairings.order_by('-units_sold')
     delivery_date = datetime.now().date() + timedelta(days=5)

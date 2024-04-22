@@ -124,7 +124,7 @@ def remove_from_wishlist(request):
         item = Wishlist.objects.get(user=request.user, product=product)
         item.delete()        
         message = '<p>' + product.name + ' removed from wishlist</p>' + '<img src="' + url.strip() + f'products/{ product.image_url }">'                         
-        messages.warning(request, make_safe(message))
+        messages.error(request, make_safe(message))
         return redirect(view)
     else:
         return redirect('home')

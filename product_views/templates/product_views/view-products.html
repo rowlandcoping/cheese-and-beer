@@ -28,16 +28,16 @@ Cheese and Beer
     {% with message.level as level %}
     {% if level == 40 %}
     <div id="basket-message" class="error-message">
-        <i class="fa-solid fa-exclamation red-text"></i>
+        <i class="fa-solid fa-minus red-text"></i>
     {% elif level == 30 %}
     <div id="basket-message" class="warning-message">
-        <i class="fa-solid fa-minus red-text"></i>
+        <i class="fa-solid fa-exclamation orange-text"></i>
     {% elif level == 25 %}
     <div id="basket-message" class="success-message">
         <i class="fa-solid fa-plus green-text"></i>
     {% else %}
     <div id="basket-message" class="warning-message">
-        <i class="fa-solid fa-minus red-text"></i>
+        <i class="fa-solid fa-exclamation orange-text"></i>
     {% endif %}
     {% endwith %}    
         {{ message }}
@@ -91,7 +91,7 @@ Cheese and Beer
                     <a href="{% url 'product_detail' product.id %}">
                         <h4 class="listing-name" id="buyname-{{ product.id }}">{{ product.name }}</h4>
                     </a>
-                </div>
+                </div>                
                 <div class="product-info">
                     <div>
                         <p>
@@ -115,6 +115,7 @@ Cheese and Beer
                         </a>
                         </p>
                     </div>
+                    
                     <div class="listing-price">
                         <h4>
                             {% if product.product_type == "cheese" %}
@@ -132,6 +133,29 @@ Cheese and Beer
                         </p>
                     </div>
                 </div>
+                {% if user.is_authenticated %}
+                <div class="wishlist-button">
+                    {% if product.id in wishlist %}
+                    <form method="POST" action="{% url 'remove_from_wishlist' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="view" id="view" value="{{ request.path }}?{{ current_view }}">
+                        <input type="hidden" name="product" id="product" value="{{ product.id }}">                           
+                        <button class="clickable-element wishlist-add-hide">
+                            <i class="fas fa-cloud"></i>remove from wishlist
+                        </button>                     
+                    </form>
+                    {% else %}
+                    <form method="POST" action="{% url 'add_to_wishlist' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="view" id="view" value="{{ request.path }}?{{ current_view }}">
+                        <input type="hidden" name="product" id="product" value="{{ product.id }}">                
+                        <button class="clickable-element wishlist-add-hide">
+                            <i class="fas fa-cloud"></i>add to wishlist
+                        </button>                     
+                    </form>
+                    {% endif %}                    
+                </div>
+                {% endif %}
                 <div class="action-section">
                     <a href="{% url 'product_detail' product.id %}">
                         <span class="forest-green-text listing-link"><p><small><em><u>more information</u></em></small></p></span>

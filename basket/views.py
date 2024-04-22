@@ -94,7 +94,7 @@ def remove_item(request):
         if basket:
             request.session['basket'] = basket
             message = '<p>' + product_info.name + ' removed from basket</p>' + '<img src="' + url.strip() + f'products/{ product_info.image_url }">' 
-            messages.warning(request, make_safe(message))
+            messages.error(request, make_safe(message))
         else:
             if 'basket' in request.session:
                 del request.session['basket']
@@ -102,7 +102,7 @@ def remove_item(request):
                 del request.session['intent_id']
             if 'selected_address' in request.session:
                 del request.session['selected_address']
-            messages.warning(request, (
+            messages.error(request, (
                             "You have removed everything from your basket.")
                         )
             return redirect('home')
