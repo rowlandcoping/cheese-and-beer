@@ -1684,7 +1684,7 @@ margin-right:10px;
 @media screen and (max-width:650px) {
     /* orders view */
     .orders-order-info {
-        max-width: 75px;
+        max-width: 85px;
         text-align:center;
     }
     .orders-order-info .fa-credit-card, .orders-order-info .fa-eye, .orders-order-info .fa-calendar-alt, .orders-order-info .fa-envelope {
@@ -1693,11 +1693,19 @@ margin-right:10px;
         margin:0;
         width:100%;
     }
+    .orders-order-info, .orders-shipped-address, .orders-products-shipped {
+        padding:10px;
+    }
     .orders-shipped-address, .orders-products-shipped {
         max-width:130px;
     }
     .orders-search .search-stuff {
         width:220px;
+    }
+    .orders-container {
+        background-color:white;
+        padding:20px 10px;
+        margin:30px 5px;
     }
     /*view-messages page*/    
     .messages-specicifity .orders-shipped-address {
@@ -1878,8 +1886,12 @@ margin-right:10px;
         font-size:90%;
     }
      /* orders view */
-    .orders-shipped-address, .orders-products-shipped {
-        max-width:100px;
+    .orders-shipped-address{
+        max-width:200px;
+        border-right:none;
+    }
+    .orders-products-shipped {
+        display:none;
     }
     .orders-search .search-stuff {
         width:220px;
@@ -1985,8 +1997,14 @@ margin-right:10px;
 }
 @media screen and (max-width:359px) {
     /* orders view */
-    .orders-shipped-address, .orders-products-shipped {
-        max-width:80px;
+    .orders-order-info, .orders-shipped-address, .orders-products-shipped {
+        padding:10px;
+    }
+    .orders-shipped-address {
+        max-width:170px;
+    }
+    .orders-products-shipped {
+        max-width:90px;
     }
     .orders-search .search-stuff {
         width:180px;
