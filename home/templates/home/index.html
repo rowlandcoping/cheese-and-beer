@@ -26,25 +26,30 @@ Cheese and Beer
     <div class="homepage-container">
         <div id="form-large">
             <div class="homepage-container">
-            <div id="homepage-intro">
-                <h2>Welcome to Cheese and Beer!</h2>
-                <p>Cheese and Beer is a place devoted to the joy of a decadent cheeseboard washed down with a tasty glass of beer.</p>
-                <p>Whether buying for yourself or as a gift, we'll help find the perfect cheese or beer for you.</p>               
-            </div>  
-            <div id="homepage-banners">
-                <div id="homepage-banner-one" class="homepage-banner">
-                    <a href="{% url 'view_results' %}?category=cheese">
-                        <span class="banner-text-holder">
-                            <h3>BUY CHEESE</h3>
-                        </span>
-                    </a>
-                </div>
-                <div id="homepage-banner-two" class="homepage-banner">
-                    <a href="{% url 'view_results' %}?category=beer">
-                        <span class="banner-text-holder">
-                            <h3>BUY BEER</h3>
-                        </span>
-                    </a>
+                <div id="homepage-intro">
+                    <h2>Welcome to Cheese and Beer!</h2>
+                    <p>Cheese and Beer is a place devoted to the joy of a decadent cheeseboard washed down with a tasty glass of beer.</p>
+                    <p>Whether buying for yourself or as a gift, we'll help find the perfect cheese or beer for you.</p>               
+                </div>  
+                <div id="homepage-banners">
+                    <div id="homepage-banner-one" class="homepage-banner">
+                        <a href="{% url 'view_results' %}?category=cheese">
+                            <h3>
+                                <span class="banner-text-holder">
+                                    BUY CHEESE                                
+                                </span>
+                            </h3>
+                        </a>
+                    </div>
+                    <div id="homepage-banner-two" class="homepage-banner">
+                        <a href="{% url 'view_results' %}?category=beer">
+                            <h3>
+                                <span class="banner-text-holder">
+                                    BUY BEER
+                                </span>
+                            </h3>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

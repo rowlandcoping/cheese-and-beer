@@ -57,6 +57,7 @@ def view_orders(request):
             orders = orders.filter(queries)
         template = 'user_account/orders.html'
         context = {
+            'query': query,
             'orders': orders
         }
         return render(request, template, context)

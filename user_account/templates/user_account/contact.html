@@ -16,16 +16,16 @@ Cheese and Beer
                     <input type="hidden" name="origin" id="origin" value="addresses">
                     <div class="form-field-container">
                         <div class="form-label-container"><label for="id_email">email address<span class="red-text">*</span> </label></div>
-                        <div><input id="id_email" type="text" name="email" maxlength="254" placeholder="email" class="contact-field" required id="id_email" value="{{ email }}"></div>
+                        <div><input id="id_email" type="text" name="email" maxlength="254" placeholder="email" class="contact-field" required value="{{ email }}"></div>
                     </div>
                     <div class="form-field-container">
                         <div class="form-label-container"><label for="id_order_number">Order Number: </label></div>
-                        <div><input id="id_order_number" type="text" name="order_number" maxlength="32" placeholder="order_number (optional)" class="contact-field" id="id_order_number" value="{{ order_number }}"></div>
+                        <div><input id="id_order_number" type="text" name="order_number" maxlength="32" placeholder="order_number (optional)" class="contact-field" value="{{ order_number }}"></div>
                     </div>
                     <div class="form-field-container">
                         <div class="form-label-container"><label for="id_subject">Subject:<span class="red-text">*</span> </label></div>
                         <div>
-                            <select name="subject" placeholder="subject" class="contact-field" id="id_subject">
+                            <select name="subject" class="contact-field" id="id_subject">
                                 {% if order_number %}
                                 <option value="general">general</option>                          
                                 <option value="order" selected>order</option>
@@ -37,7 +37,7 @@ Cheese and Beer
                         </div>
                     </div>
                     <div class="form-field-container">
-                        <div class="form-label-container"><label for="message">Message:<span class="red-text">*</span> </label></div>
+                        <div class="form-label-container"><label for="id_message">Message:<span class="red-text">*</span> </label></div>
                         <div>{{ form.message }}</div>
                     </div>
                 </div>

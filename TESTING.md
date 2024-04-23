@@ -29,18 +29,97 @@
 
 I have validated the html code by copying and pasting the source code from each page into the w3c validator [HERE](https://validator.w3.org/).  When formatting the code I have decided to format the Jinja2 templating without indents to preserve the integrity of the HTML.
 
-Please note I have not validated (or styled) the admin only pages as they are not intended to be user facing.\
-Only myself and the user created for assessment purposes will have admin access for this iteration of the site.
 
-Page validated: Landing Page\
-URL: https://hopes-and-dreams-15b83f2d1383.herokuapp.com/ \
-Repaired Issues: Missing image alt tags.\
+UNIVERSAL PAGES
+
+Page validated: Home\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/ \
+Repaired Issues: stray tags\
+Outstanding Issues: None.
+
+Page validated: Find Order\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/my-account/find-order/ \
+Repaired Issues: label for attributes remained from a different form\
+Outstanding Issues: None.
+
+Page validated: 404 page\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/typeanthinghere/ \
+Repaired Issues: missing image alt\
+Outstanding Issues: None.
+
+
+
+ALLAUTH PAGES
+
+Page validated: Login Page\
+URL: http://127.0.0.1:8000/accounts/login/ \
+Repaired Issues: Allauth ariadescribedby attribute in password field didn't have companion field.  Solved by pasting the source code instead and deleting it.\
 Outstanding Issues: None.
 
 Page validated: Signup Page\
-URL: https://hopes-and-dreams-15b83f2d1383.herokuapp.com/dare-to-dream \
-Repaired Issues: H2 tag not closed, missing image alts, stray closing tag for div.\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/accounts/signup/ \
+Repaired Issues: Allauth ariadescribedby attribute in password field didn't have companion field.  Solved by pasting the source code instead and deleting it.\
 Outstanding Issues: None.
+
+Page validated: Password Reset Page\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/accounts/password/reset/ \
+Repaired Issues: None. \
+Outstanding Issues: None.
+
+Page validated: Password Reset Done\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/accounts/password/reset/done/ \
+Repaired Issues: Unclosed elements. \
+Outstanding Issues: None.
+
+Page validated: Password Reset From Key\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/accounts/password/reset/key/done/ \
+Repaired Issues: Unclosed Elements. \
+Outstanding Issues: None.
+
+USER ACCOUNT PAGES
+
+Page validated: My Account\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/my-account/ \
+Repaired Issues: None. \
+Outstanding Issues: None.
+
+Page validated: Manage Addresses\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/addresses/ \
+Repaired Issues: None. \
+Outstanding Issues: None.
+
+Page validated: Add an Address\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/addresses/add-address/ \
+Repaired Issues: None. \
+Outstanding Issues: None.
+
+Page validated: Add an Address\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/addresses/edit-address/<address_id>/ \
+Repaired Issues: None. \
+Outstanding Issues: None.
+
+Page validated: Orders Page\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/my-account/orders/ \
+Repaired Issues: Stray tags, nesting issues \
+Outstanding Issues: None.
+
+Page validated: View Order Info\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/my-account/order-info/<order_id>/ \
+Repaired Issues: missing image alts, duplicate id in undisplayed element. Solved this by removing id as it was superfluous. \
+Outstanding Issues: None.
+
+Page validated: View Wishlist\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/my-account/wishlist/ \
+Repaired Issues: missing image alts, duplicate superfluous ids. Also duplicate ids which meant creating a container div \
+Outstanding Issues: None.
+
+Page validated: Contact Us\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/my-account/contact/ \
+Repaired Issues: duplicate stray ids in input elements \
+Outstanding Issues: None.
+
+
+
 
 ### CSS Validation
 ([back to top](#testing-documentation))

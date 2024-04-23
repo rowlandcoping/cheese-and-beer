@@ -42,7 +42,7 @@ Cheese and Beer
             <div class="orders-view">
                 <div class="container-div">
                     <div class="orders-order-info">
-                        <h4>Order Info</th>
+                        <h4>Order Info</h4>
                     </div>
                     <div class="orders-shipped-address">
                         <h4>Shipped Address</h4>
@@ -60,7 +60,7 @@ Cheese and Beer
                         <a href="{% url 'contact_form' %}?order_number={{ order.order_number }}"><p><i class="fa-solid fa-envelope"></i><span class="orders-view-link">Contact</span></p></a>
                     </div>
                     <div class="orders-shipped-address">
-                        <span class="dark-green-text"><strong><p>{{ order.full_name }}</p></strong></span>
+                        <p><span class="dark-green-text"><strong>{{ order.full_name }}</strong></span></p>
                         <p>{{ order.address_line_one }}</p>
                         {% if order.address_line_two %}
                         <p>{{ order.address_line_two }}</p> 
@@ -78,9 +78,15 @@ Cheese and Beer
                 {% endfor %}
             </div>       
             {% else %}
-            <h3>You have not yet placed any orders</h3>
-            <a href="{% url 'view_results' %}">Buy something!</a>
-            {% endif %}            
+            <div class="bottom-border">
+                {% if query %}
+                <h3>No orders found, please try again.</h3>
+                {% else %}
+                <h3>You have not yet placed any orders.</h3>
+                {% endif %}
+                Why not buy some <a class="sign-up-link" href="{% url 'view_results' %}?category=cheese">cheese</a> or <a class="sign-up-link" href="{% url 'view_results' %}?category=cheese">beer</a>?
+            </div>
+            {% endif %}     
         </div>
     </div>
 </div>

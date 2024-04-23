@@ -16,13 +16,11 @@ Cheese and Beer
                             <i class="fa-solid fa-house"></i> Manage Addresses
                         </div>
                     </a>
-                    {% if orders %}
                     <a href="{% url 'view_orders' %}">
                         <div class="account-info-section">           
                             <i class="fa-solid fa-list"></i> View Orders
                         </div>
-                    </a>    
-                    {% endif %}
+                    </a>
                     <a href="{% url 'wishlist' %}">
                         <div class="account-info-section">           
                             <i class="fa-solid fa-cloud"></i> View Wishlist

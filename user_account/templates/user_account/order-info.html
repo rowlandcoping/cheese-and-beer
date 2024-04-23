@@ -35,7 +35,7 @@ Cheese and Beer
             <div class="listing-item-view">
                 <a href="{% url 'product_detail' item.product.id %}">
                     <div class="listing-image">
-                        <img src="{{ MEDIA_URL }}products/{{ item.product.image_url }}">
+                        <img src="{{ MEDIA_URL }}products/{{ item.product.image_url }}" alt="{{ item.product.image_alt }}">
                     </div>
                 </a>
                 <div class="listing-detail">
@@ -64,7 +64,7 @@ Cheese and Beer
                         </div>
                         <div class="listing-item-price">
                             <h4>Total</h4>
-                            <h4 class="order-checkout-price" id="basket-total-{{item.product.id}}">
+                            <h4 class="order-checkout-price">
                                 {% load order_calculator %}
                                 £{{ item.product.price | totalizer:item.quantity }}
                             </h4>
@@ -76,7 +76,7 @@ Cheese and Beer
                     <div class="listing-item-price-mobile not-displayed">
                         <h4>
                             Sub-total:
-                            <span class="order-checkout-price" id="basket-total-{{item.product.id}}">
+                            <span class="order-checkout-price">
                                 {% load order_calculator %}
                                 £{{ item.product.price | totalizer:item.quantity }}
                             </span>

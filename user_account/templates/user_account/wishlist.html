@@ -52,84 +52,86 @@ Cheese and Beer
                 Click <a class="sign-up-link" href="{% url 'account_overview' %}">here</a> to return to your account page.
             </div>
             {% if wishlist %}
-            {% for wish in wishlist %}   
-            <div class="listing-item-view">
-                <a href="{% url 'product_detail' wish.product.id %}">
-                    <div class="listing-image">
-                        <img src="{{ MEDIA_URL }}products/{{ wish.product.image_url }}">
-                    </div>
-                </a>
-                <div class="listing-detail">
-                    <div class="listing-info">
-                        <div class="listing-item">
-                            <a class="listing-name" href="{% url 'product_detail' wish.product.id %}">
-                                <h4>
-                                <span id="buyname-{{ wish.product.id }}">{{ wish.product.name }}</span>
-                                {% if wish.product.product_type == "cheese" %}
-                                ({{ wish.product.amount }}g, {{ wish.product.cheese_category }} cheese,
-                                {{ wish.product.variety | lower }}, {{ wish.product.texture }})
-                                {% else %}
-                                ({{ wish.product.amount }}ml {{ wish.product.container }}, {{ wish.product.beer_category }} beer,
-                                {{ wish.product.variety | lower }}, {{ wish.product.alcohol_content }}% APR)
-                                {% endif %}
-                                </h4>
-                            </a>
-                            {% if wish.product.displayed %}            
-                            <h4 class="green-text">Available</h4>
-                            {% else %}
-                            <h4 class="red-text">Unavailable</h4>
-                            {% endif %}
-                            <p>
-                                <span class="grey-text"><small>{{ wish.product.product_number }}</small></span>
-                            </p>
+            <div id="wishlist-view">                
+                {% for wish in wishlist %}   
+                <div class="listing-item-view">
+                    <a href="{% url 'product_detail' wish.product.id %}">
+                        <div class="listing-image">
+                            <img src="{{ MEDIA_URL }}products/{{ wish.product.image_url }}" alt="{{ wish.product.image_alt }}">
                         </div>
-                    </div>
-                    <div class="special-offers">
-                        <strong>£{{ wish.product.price }}</strong> 
-                    </div>
-                    <div class="wishlist-button">
-                        <form method="POST" action="{% url 'remove_from_wishlist' %}" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <input type="hidden" name="view" id="view" value="{{ request.path }}?{{ current_view }}">
-                            <input type="hidden" name="product" id="product" value="{{ wish.product.id }}">                     
-                            <button class="clickable-element">
-                                <i class="fas fa-cloud"></i>remove from wishlist
-                            </button>
-                        </form>
-                    </div>
-                    {% if wish.product.displayed %}
-                    <div id="wishlist-view" class="view-action-buttons">
-                        <div class="add-from-view">
-                            <form method="POST" action="{% url 'add_to_basket' %}" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                <input type="hidden" name="view" id="view" value="{{ request.path }}?{{ current_view }}">
-                                <input type="hidden" name="quantity" id="quantity" value="1">
-                                <input type="hidden" name="product" id="product" value="{{ wish.product.id }}">                     
-                                <button class="action-button add-basket add-basket-list clickable-element">
-                                    <i class="fas fa-shopping-basket"></i> Add
-                                </button>
-                            </form>
-                        </div> 
-                        <div class="buy-from-view">
-                            <div class="buynow-buttons"> 
-                                {% if basket_total %}                            
-                                <span class="action-button buy-now buy-now-list clickable-element" id="basket-{{ wish.product.id }}">
-                                    <i class="fa-solid fa-credit-card"></i> Buy
-                                </span>
+                    </a>
+                    <div class="listing-detail">
+                        <div class="listing-info">
+                            <div class="listing-item">
+                                <a class="listing-name" href="{% url 'product_detail' wish.product.id %}">
+                                    <h4>
+                                    <span id="buyname-{{ wish.product.id }}">{{ wish.product.name }}</span>
+                                    {% if wish.product.product_type == "cheese" %}
+                                    ({{ wish.product.amount }}g, {{ wish.product.cheese_category }} cheese,
+                                    {{ wish.product.variety | lower }}, {{ wish.product.texture }})
+                                    {% else %}
+                                    ({{ wish.product.amount }}ml {{ wish.product.container }}, {{ wish.product.beer_category }} beer,
+                                    {{ wish.product.variety | lower }}, {{ wish.product.alcohol_content }}% APR)
+                                    {% endif %}
+                                    </h4>
+                                </a>
+                                {% if wish.product.displayed %}            
+                                <h4 class="green-text">Available</h4>
                                 {% else %}
-                                <a href="{% url 'buy_now' %}?single={{ wish.product.id }},1">
-                                    <span class="action-button buy-now buy-now-list" id="buy-{{ wish.product.id }}">
-                                        <i class="fa-solid fa-credit-card"></i> Buy
-                                    </span>
-                                </a>                            
+                                <h4 class="red-text">Unavailable</h4>
                                 {% endif %}
+                                <p>
+                                    <span class="grey-text"><small>{{ wish.product.product_number }}</small></span>
+                                </p>
                             </div>
                         </div>
+                        <div class="special-offers">
+                            <strong>£{{ wish.product.price }}</strong> 
+                        </div>
+                        <div class="wishlist-button">
+                            <form method="POST" action="{% url 'remove_from_wishlist' %}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <input type="hidden" name="view" value="{{ request.path }}?{{ current_view }}">
+                                <input type="hidden" name="product" value="{{ wish.product.id }}">                     
+                                <button class="clickable-element">
+                                    <i class="fas fa-cloud"></i>remove from wishlist
+                                </button>
+                            </form>
+                        </div>
+                        {% if wish.product.displayed %}                    
+                        <div class="view-action-buttons">
+                            <div class="add-from-view">
+                                <form method="POST" action="{% url 'add_to_basket' %}" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="view" value="{{ request.path }}?{{ current_view }}">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <input type="hidden" name="product" value="{{ wish.product.id }}">                     
+                                    <button class="action-button add-basket add-basket-list clickable-element">
+                                        <i class="fas fa-shopping-basket"></i> Add
+                                    </button>
+                                </form>
+                            </div> 
+                            <div class="buy-from-view">
+                                <div class="buynow-buttons"> 
+                                    {% if basket_total %}                            
+                                    <span class="action-button buy-now buy-now-list clickable-element" id="basket-{{ wish.product.id }}">
+                                        <i class="fa-solid fa-credit-card"></i> Buy
+                                    </span>
+                                    {% else %}
+                                    <a href="{% url 'buy_now' %}?single={{ wish.product.id }},1">
+                                        <span class="action-button buy-now buy-now-list" id="buy-{{ wish.product.id }}">
+                                            <i class="fa-solid fa-credit-card"></i> Buy
+                                        </span>
+                                    </a>                            
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}                  
                     </div>
-                    {% endif %}                  
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
             {% else %}
             <br>
             <h4>You have yet to wish for anything</h4>
