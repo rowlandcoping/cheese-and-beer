@@ -7,6 +7,12 @@ from . import views
 urlpatterns = [
     path('', views.admin_console, name='admin_console'),
     path('view-messages/', views.view_messages, name='view_messages'),
-    path('remove-message/<int:message_id>/', views.remove_message, name='remove_message'),
-    path('order-messages/<order_number>/', views.order_from_messages, name='order_from_messages'),
+    path(
+        'remove-message/<int:message_id>/',
+        views.remove_message, name='remove_message'
+        ),
+    path(
+        'order-messages/<order_number>/',
+        views.order_from_messages, name='order_from_messages'
+        ),
 ]

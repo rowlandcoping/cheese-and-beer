@@ -1,6 +1,7 @@
 from django import forms
 from .models import Order
 
+
 class OrderForm(forms.ModelForm):
 
     class Meta:
@@ -20,5 +21,5 @@ class OrderForm(forms.ModelForm):
             'items_total',
             'delivery_cost',
             'grand_total',
-            'stripe_pid',       
+            'stripe_pid',
         )

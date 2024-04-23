@@ -1,8 +1,7 @@
-from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
 from django.urls import reverse
 from django.contrib import messages
-from django.views.decorators.http import require_POST
 from datetime import datetime, timedelta
 from .models import Order, OrderItems
 from django.contrib.auth.models import User
@@ -15,7 +14,12 @@ import stripe
 import json
 
 
-def checkout(request):    
+def checkout(request):
+    """
+    Loads the checkout page, also processes orders on checkout form submission
+    On load the page updates any existing payment intent, or creates a new one.
+    It also sends the correct address to the view (selected, default or none).
+    """
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
     basket = request.session.get('basket', {})
@@ -26,7 +30,8 @@ def checkout(request):
         if address_form.is_valid():
             if request.user.is_authenticated:
                 user_id = request.user
-                address_id = Addresses.objects.get(postcode=request.POST.get('postcode'))                 
+                address_id = Addresses.objects.get(
+                    postcode=request.POST.get('postcode'))
             else:
                 user_check = User.objects.all()
                 for check in user_check:
@@ -34,26 +39,26 @@ def checkout(request):
                         user_id = check
                     else:
                         user_id = None
-                address_id = None                              
+                address_id = None
             time_created = datetime.now()
             delivery_date = datetime.now() + timedelta(days=5)
             stripe_pid = request.POST.get('client_secret').split('_secret')[0]
             order = Order.objects.create(
-                user_id = user_id,
-                shipping_id = address_id,
-                email = request.POST.get('order_email'),
-                full_name = request.POST.get('full_name'),
-                address_line_one = request.POST.get('address_line_one'),
-                address_line_two = request.POST.get('address_line_two'),
-                town_or_city = request.POST.get('town_or_city'),
-                county = request.POST.get('county'),
-                postcode = request.POST.get('postcode'),
-                order_date = time_created,
-                delivery_date = delivery_date,
-                items_total = current_basket['basket_total'],
-                delivery_cost = current_basket['delivery_charge'],
-                grand_total = current_basket['grand_total'],
-                stripe_pid = stripe_pid,
+                user_id=user_id,
+                shipping_id=address_id,
+                email=request.POST.get('order_email'),
+                full_name=request.POST.get('full_name'),
+                address_line_one=request.POST.get('address_line_one'),
+                address_line_two=request.POST.get('address_line_two'),
+                town_or_city=request.POST.get('town_or_city'),
+                county=request.POST.get('county'),
+                postcode=request.POST.get('postcode'),
+                order_date=time_created,
+                delivery_date=delivery_date,
+                items_total=current_basket['basket_total'],
+                delivery_cost=current_basket['delivery_charge'],
+                grand_total=current_basket['grand_total'],
+                stripe_pid=stripe_pid,
             )
             for item_id, item_data in basket.items():
                 try:
@@ -61,23 +66,25 @@ def checkout(request):
                     if isinstance(item_data, int):
                         order_item = OrderItems(
                             order_id=order,
-                            product_type = product.product_type,
+                            product_type=product.product_type,
                             product=product,
                             price=product.price,
                             quantity=item_data,
                         )
                         order_item.save()
-                        units_sold = OrderItems.objects.filter(product=product).aggregate(Sum('quantity'))
+                        units_sold = OrderItems.objects.filter(
+                            product=product).aggregate(Sum('quantity'))
                         Product.objects.filter(pk=product.id).update(
-                            units_sold = units_sold['quantity__sum']
-                        )                    
+                            units_sold=units_sold['quantity__sum']
+                        )
                 except Product.DoesNotExist:
                     messages.error(request, (
-                        "One of the products in your bag wasn't found in our database. "
-                        "Please call us for assistance!")
+                        "One of the products in your "
+                        "basket wasn't found in our database. "
+                        "Please contact us for assistance.")
                     )
                     order.delete()
-                    return redirect('home')
+                    return redirect('contact_form')
         if 'basket' in request.session:
             del request.session['basket']
         if 'intent_id' in request.session:
@@ -88,10 +95,13 @@ def checkout(request):
     if not basket:
         return redirect('home')
     if request.user.is_authenticated:
-        addresses = Addresses.objects.filter(user_id=request.user.id).order_by('-default', 'id')
+        addresses = Addresses.objects.filter(
+            user_id=request.user.id).order_by('-default', 'id')
         if addresses:
             if selected_address:
-                address = get_object_or_404(addresses, postcode=selected_address['postcode'], address_line_one=selected_address['address_line_one'])
+                address = get_object_or_404(
+                    addresses, postcode=selected_address['postcode'],
+                    address_line_one=selected_address['address_line_one'])
                 email = request.user.email
             else:
                 address = get_object_or_404(addresses, default=True)
@@ -103,7 +113,6 @@ def checkout(request):
         addresses = None
         address = None
         email = ""
-    
     stripe.api_key = stripe_secret_key
     current_basket = basket_total(request)
     total = current_basket['grand_total']
@@ -171,6 +180,10 @@ def checkout(request):
 
 
 def confirmation(request, order_number):
+    """
+    On sucessful checkout redirects the user to the order confirmation page.
+    It passes the order number so the user can review their order.
+    """
     order = get_object_or_404(Order, order_number=order_number)
     template = 'checkout/confirmation.html'
     context = {

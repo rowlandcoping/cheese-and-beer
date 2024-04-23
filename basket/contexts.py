@@ -2,7 +2,6 @@ from django.shortcuts import get_object_or_404
 from products.models import Product
 from decimal import Decimal
 from django.conf import settings
-from datetime import datetime
 
 
 def basket_total(request):
@@ -32,10 +31,12 @@ def basket_total(request):
         delivery_charge = settings.DELIVERY_HIGHER_CHARGE
     else:
         delivery_charge = 0
-    grand_total = round((Decimal(delivery_charge) + Decimal(total)) , 2)
+    grand_total = round((Decimal(delivery_charge) + Decimal(total)), 2)
     context = {
         'delivery_charge': round(delivery_charge, 2),
-        'free_remaining_amount': round((Decimal(settings.DELIVERY_HIGHER_THRESHOLD - Decimal(total))), 2),
+        'free_remaining_amount': round(
+            (Decimal(
+                settings.DELIVERY_HIGHER_THRESHOLD - Decimal(total))), 2),
         'grand_total': grand_total,
         'basket_items': basket_items,
         'basket_total': total,

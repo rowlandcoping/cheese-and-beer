@@ -65,12 +65,52 @@ Outstanding Issues: None.
 ### Python Validation
 ([back to top](#testing-documentation))
 
-I have used the [CI Python Linter](https://pep8ci.herokuapp.com/#) to ensure my app.py file is PEP 8 compliant.
+I have used the [CI Python Linter](https://pep8ci.herokuapp.com/#) to ensure my python files are PEP 8 compliant:
 
-Repaired Issues: The majority of issues involved whitespace, intentation or line length issues.\
-Outstanding Issues: None.
+App: addresses\
+Files Linted: forms.py, models.py, urls.py, views.py\
+Repaired Issues: whitespace, spaces around operators and line length\
+Outstanding Issues: None.\
 
-![image](static/images/testing/python-validation.png)
+App: admin_console\
+Files Linted: urls.py, views.py\
+Repaired Issues: whitespace, spaces around operators and line length\
+Outstanding Issues: None.\
+
+App: basket\
+Files Linted: contexts.py, urls.py, views.py, order_calculator.py\
+Repaired Issues: whitespace, spaces around operators and line length\
+Outstanding Issues: None.\
+
+App: checkout\
+Files Linted: forms.py, models.py, urls.py, views.py, webhook_handler.py, webhooks.py\
+Repaired Issues: whitespace, spaces around operators and line length.  Line length issues meant I had to refactor code with variables and functions assigned shorted names and swap some fstrings for regularly constructed ones.
+Outstanding Issues: None.\
+
+App: cheese_beer\
+Files Linted: settings.py, urls.py\
+Repaired Issues: whitespace, spaces around operators, using operator to test for boolean False (changed to 'is')
+Outstanding Issues: None.\
+
+App: home\
+Files Linted: urls.py, views.py\
+Repaired Issues: whitespace, spaces around operators and line length\
+Outstanding Issues: None.\
+
+App: product_views\
+Files Linted: urls.py, views.py\
+Repaired Issues: whitespace, spaces around operators and line length\
+Outstanding Issues: None.\
+
+App: products\
+Files Linted: contexts.py, signals.py, forms.py, models.py, urls.py, views.py\
+Repaired Issues: whitespace, spaces around operators and line length\
+Outstanding Issues: None.\
+
+App: user_account\
+Files Linted: forms.py, models.py, urls.py, views.py\
+Repaired Issues: whitespace, spaces around operators and line length\
+Outstanding Issues: None.\
 
 ## User Stories
 ([back to top](#testing-documentation))

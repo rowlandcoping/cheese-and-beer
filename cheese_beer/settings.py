@@ -36,7 +36,7 @@ DEVELOPMENT = os.getenv("DEVELOPMENT") == "True"
 
 ALLOWED_HOSTS = [os.getenv("HOST")]
 
-#cloudinary
+# cloudinary
 
 cloudinary.config(
     cloud_name=os.environ.get('CLOUD_NAME'),
@@ -52,8 +52,8 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.messages',    
-    #locally installed apps
+    'django.contrib.messages',
+    # locally installed apps
     'home',
     'admin_console',
     'products',
@@ -102,7 +102,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
            os.path.join(BASE_DIR, 'templates'),
-           os.path.join(BASE_DIR, 'templates', 'allauth'), 
+           os.path.join(BASE_DIR, 'templates', 'allauth'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -121,7 +121,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'cheese_beer.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
@@ -136,22 +135,25 @@ DATABASES = {
    'default': dj_database_url.parse(os.getenv("DATABASE_URL"))
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.' +
+        'password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.' +
+        'password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.' +
+        'password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.' +
+        'password_validation.NumericPasswordValidator',
     },
 ]
 
@@ -170,10 +172,9 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = False
-ACCOUNT_LOGOUT_ON_GET = True 
+ACCOUNT_LOGOUT_ON_GET = True
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
@@ -186,11 +187,8 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
-
-
 
 STATIC_URL = '/static/'
 if DEVELOPMENT:
@@ -204,15 +202,15 @@ MEDIA_URL = os.getenv("CLOUDINARY_BASE")
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-SITE_ID=1
+SITE_ID = 1
 
-#email
+# email
 
 EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
 DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-if DEVELOPMENT == False:
+if DEVELOPMENT is False:
     EMAIL_USE_TLS = False
     EMAIL_USE_SSL = True
     EMAIL_PORT = 465
@@ -220,7 +218,7 @@ if DEVELOPMENT == False:
 
 # whitenoise
 
-if DEVELOPMENT == False:
+if DEVELOPMENT is False:
     STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 # stripe
@@ -236,6 +234,3 @@ DELIVERY_LOWER_THRESHOLD = 10
 DELIVERY_HIGHER_THRESHOLD = 25
 DELIVERY_LOWER_CHARGE = 1.99
 DELIVERY_HIGHER_CHARGE = 2.99
-
-
-
