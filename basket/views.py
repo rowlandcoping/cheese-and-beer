@@ -74,7 +74,7 @@ def update_basket(request):
             if basket[product_id] > 1:
                 basket[product_id] -= 1
             message = '<p>' + product_info.name + ' removed from basket</p>' + '<img src="' + url.strip() + f'products/{ product_info.image_url }">' 
-            messages.warning(request, make_safe(message))
+            messages.error(request, make_safe(message))
         request.session['basket'] = basket
         if origin == "chkt":
             return redirect('checkout')
