@@ -57,7 +57,8 @@ def buy_now(request):
 def add_to_basket(request):
     """
     Processes any add to basket request from across the site, and returns
-    the user to the view they were previously at.
+    the user to the view they were previously at. This view is similar to one
+    from the Boutique Ado project, albeit considerable modified.
     """
     if request.method == 'POST':
         quantity = int(request.POST.get('quantity'))
@@ -84,7 +85,8 @@ def add_to_basket(request):
 def update_basket(request):
     """
     Processes any updates to the basket from the basket or checkout view,
-    and returns the user to the page they were on.
+    and returns the user to the page they were on. This view is similar to one
+    from the Boutique Ado project, albeit considerable modified.
     """
     if 'action' in request.GET:
         action = request.GET['action'].split(',')[0]

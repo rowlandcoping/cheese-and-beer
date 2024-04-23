@@ -89,17 +89,18 @@ Outstanding Issues: None.\
 
 App: cheese_beer\
 Files Linted: settings.py, urls.py\
-Repaired Issues: whitespace, spaces around operators, using operator to test for boolean False (changed to 'is')
+Repaired Issues: whitespace, spaces around operators, issue using '==' operator to test for boolean False (changed to 'is')
 Outstanding Issues: None.\
 
 App: home\
 Files Linted: urls.py, views.py\
-Repaired Issues: whitespace, spaces around operators and line length\
+Repaired Issues: whitespace
 Outstanding Issues: None.\
 
 App: product_views\
 Files Linted: urls.py, views.py\
-Repaired Issues: whitespace, spaces around operators and line length\
+Repaired Issues: whitespace, spaces around operators and line length, also cannot use bare except so i had to look up the error
+I was testing for and add it to the code.
 Outstanding Issues: None.\
 
 App: products\

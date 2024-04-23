@@ -3,6 +3,10 @@ from django.contrib.auth.models import User
 
 
 class Addresses(models.Model):
+    """
+    This model is for the user address management module which also integrates
+    with the checkout view
+    """
     user_id = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=254, null=False, blank=False)
     address_line_one = models.CharField(

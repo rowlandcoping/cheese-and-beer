@@ -20,6 +20,7 @@ class StripeWH_Handler:
     def _send_confirmation_email(self, order):
         """
         Function to send the user a confirmation e-mail.
+        I have adapted this code from the Boutique Ado tutorial site
         """
         cust_email = order.email
         subject = render_to_string(
@@ -37,7 +38,8 @@ class StripeWH_Handler:
 
     def handle_event(self, event):
         """
-        Handle a generic/unknown/unexpected webhook event
+        Handle a generic/unknown/unexpected webhook event.
+        This function originates from the Boutique Ado tutorial site
         """
         return HttpResponse(
             content=f'Unhandled Webhook happened: {event["type"]}',
@@ -46,6 +48,8 @@ class StripeWH_Handler:
     def handle_payment_intent_succeeded(self, event):
         """
         Handle a webhook indicating a payment has been processed.
+        Some elements of this code are from the Boutique Ado tutorial site,
+        however it has been heavily customised
         """
         # retrieve pid from intent to check if order exists
         intent = event.data.object
@@ -156,6 +160,7 @@ class StripeWH_Handler:
     def handle_failure(self, event):
         """
         Handle a webhook indicating a payment has failed to be processed.
+        This function originates from the Boutique Ado tutorial site
         """
         return HttpResponse(
             content=f'Webhook failure notification received:{event["type"]}',

@@ -6,6 +6,12 @@ from django.contrib.auth.models import User
 
 
 class Order(models.Model):
+    """
+    This Model is for an individual order. It originates from the Boutique Ado
+    tutorial site however it is not linked to a User Profile model, as I have
+    created a seperate address management module which stores user details.
+    It has also been customised a fair amount to reflect this.
+    """
     order_number = models.CharField(
         max_length=32, null=False, editable=False)
     user_id = models.ForeignKey(
@@ -38,9 +44,10 @@ class Order(models.Model):
 
     def save(self, *args, **kwargs):
         """
-        Override the original save method to set the order number
-        if it hasn't been set already, and updates the shipping address
-        if the foreign key is updated on the back end.
+        Override the original save method to set the order number. This
+        originates from the Boutique Ado project. I have added a function
+        to update the shipping address if the foreign key is updated on
+        the back end and avoid any dissonance.
         """
         if not self.order_number:
             self.order_number = self._generate_order_number()
@@ -58,6 +65,11 @@ class Order(models.Model):
 
 
 class OrderItems(models.Model):
+    """
+    This model is for individual components of an order.
+    It originates from the Boutique Ado project, but is not
+    implemented in the same way.
+    """
     order_id = models.ForeignKey(
         Order, null=False, blank=False,
         on_delete=models.CASCADE, related_name='lineitems')
@@ -74,6 +86,7 @@ class OrderItems(models.Model):
         """
         Override the original save method to set the lineitem total
         and update the order total and set product units sold.
+        This originates from the Boutique Ado project.
         """
         self.item_total = self.product.price * self.quantity
         super().save(*args, **kwargs)

@@ -5,6 +5,10 @@ from django.conf import settings
 
 
 def basket_total(request):
+    """
+    This function returns a running total of items in the user's basket. It is
+    based on the shopping bag function from the Boutique Ado project.
+    """
     basket_items = []
     total = 0
     product_count = 0

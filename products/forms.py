@@ -7,16 +7,16 @@ class BeerCategoryForm(forms.ModelForm):
     class Meta:
         model = BeerCategory
         fields = ('name', 'description',)
-        
+
     image = forms.ImageField(label='Image', required=False)
-    
+
 
 class CheeseCategoryForm(forms.ModelForm):
 
     class Meta:
         model = CheeseCategory
         fields = ('name', 'description')
-    
+
     image = forms.ImageField(label='Image', required=False)
 
 
@@ -30,11 +30,14 @@ class BeerForm(forms.ModelForm):
     )
     type_options = (
         ('bottle', 'bottle'),
-        ('can', 'can'), 
+        ('can', 'can'),
     )
-    container = forms.ChoiceField(label='Comes In', widget=forms.RadioSelect, choices=type_options)
-    amount = forms.ChoiceField(label='Amount', widget=forms.Select, choices=quantity_options)
-    image = forms.ImageField(label='Image', required=False)
+    container = forms.ChoiceField(
+        label='Comes In', widget=forms.RadioSelect, choices=type_options)
+    amount = forms.ChoiceField(
+        label='Amount', widget=forms.Select, choices=quantity_options)
+    image = forms.ImageField(
+        label='Image', required=False)
 
     class Meta:
         model = Product
@@ -45,12 +48,12 @@ class BeerForm(forms.ModelForm):
             'variety',
             'alcohol_content',
             'container',
-            'amount',           
-            'price',            
+            'amount',
+            'price',
             'country_origin',
             'image',
         )
-    
+
 
 class CheeseForm(forms.ModelForm):
     quantity_options = (
@@ -63,8 +66,10 @@ class CheeseForm(forms.ModelForm):
         ('350', '350g'),
         ('500', '500g'),
     )
-    amount = forms.ChoiceField(label='Amount', widget=forms.Select, choices=quantity_options)
-    image = forms.ImageField(label='Image', required=False)
+    amount = forms.ChoiceField(
+        label='Amount', widget=forms.Select, choices=quantity_options)
+    image = forms.ImageField(
+        label='Image', required=False)
 
     class Meta:
         model = Product

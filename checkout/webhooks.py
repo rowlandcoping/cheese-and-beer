@@ -11,6 +11,7 @@ import stripe
 def webhook(request):
     """
     Listen for webhooks from Stripe
+    This function originates from the Boutique Ado tutorial site.
     """
     # Setup
     wh_secret = settings.STRIPE_WH_SECRET

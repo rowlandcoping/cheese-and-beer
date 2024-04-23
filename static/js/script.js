@@ -460,7 +460,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
                 // adds url for correct quantity, view-product view only where basket is empty
                 if (productScenario === "single") {
-                    url = "/buy-now/?single=" + productId + "," + quantity;
+                    url = "/basket/buy-now/?single=" + productId + "," + quantity;
                     window.location.href = url
                 }
                 // triggers buy-now alert if items in basket
@@ -471,8 +471,8 @@ document.addEventListener("DOMContentLoaded", function() {
                         disabledSections[i].style.pointerEvents = "none";
                         disabledSections[i].style.opacity = "0.5";
                     }
-                    document.getElementById('remove-products').href = "/buy-now/?remove=" + productId + "," + quantity;
-                    document.getElementById('keep-products').href = "/buy-now/?addon=" + productId + "," + quantity;
+                    document.getElementById('remove-products').href = "/basket/buy-now/?remove=" + productId + "," + quantity;
+                    document.getElementById('keep-products').href = "/basket/buy-now/?addon=" + productId + "," + quantity;
                     document.addEventListener("click", function(e){
                         const target = e.target.closest(".cancel-alert");
                         if(target){

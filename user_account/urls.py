@@ -11,7 +11,11 @@ urlpatterns = [
     path('order-details/', views.found_order, name='found_order'),
     path('order-info/<int:order_id>/', views.order_info, name='order_info'),
     path('add-wishlist/', views.add_to_wishlist, name='add_to_wishlist'),
-    path('remove-wishlist/', views.remove_from_wishlist, name='remove_from_wishlist'),
+    path(
+        'remove-wishlist/',
+        views.remove_from_wishlist,
+        name='remove_from_wishlist'
+        ),
     path('wishlist/', views.wishlist, name='wishlist'),
     path('contact/', views.contact_form, name='contact_form'),
     path('message-sent/<email>', views.message_sent, name='message_sent'),
