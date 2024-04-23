@@ -60,7 +60,7 @@ Cheese and Beer - Cheese Basket
                             <h4 class="red-text">Unavailable</h4>
                             {% endif %}
                             <p>
-                                <span class="grey-text"><small>ID: {{ order.product.product_number }}</small></span>
+                                <span class="grey-text order-number"><small>{{ order.product.product_number }}</small></span>
                             </p>
                         </div>
                         <div class="listing-item-price">
@@ -73,6 +73,15 @@ Cheese and Beer - Cheese Basket
                     </div>
                     <div class="special-offers">
                         £{{ order.product.price }} each
+                    </div>
+                    <div class="listing-item-price-mobile not-displayed">
+                        <h4>
+                            Sub-total:
+                            <span class="order-checkout-price" id="basket-total-{{order.product.id}}">
+                                {% load order_calculator %}
+                                £{{ order.product.price | totalizer:order.quantity }}
+                            </span>
+                        </h4>
                     </div>
                     <div class="basket-adjustment">
                         <div class="basket-quantity">
@@ -99,6 +108,23 @@ Cheese and Beer - Cheese Basket
                 <a href="{% url 'checkout' %}">
                     <span class="checkout-button action-buttons">Go to Checkout</span>
                 </a>
+            </div>
+            <div class="checkout-section-mobile not-displayed">            
+                <div class="order-value-details">
+                    <h4>Order Price: £{{ basket_total }}</h4>
+                    <h4>Delivery Cost: £{{ delivery_charge }}</h4>
+                    {% if free_remaining_amount > 0 %}
+                    <p><span class="red-text">£{{ free_remaining_amount }} more for free delivery.</span></p>
+                    {% else %}
+                    <p><span class="dark-green-text">Free delivery on this order!</p></span>
+                    {% endif %}
+                    <h4><span class="forest-green-text">Grand Total: £{{ grand_total }}</span></h4>
+                </div>
+                <div>
+                    <a href="{% url 'checkout' %}">
+                        <span class="checkout-button action-buttons">Go to Checkout</span>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="checkout-section">            
