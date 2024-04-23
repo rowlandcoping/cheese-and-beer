@@ -273,7 +273,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 color: '#000',
                 fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
                 fontSmoothing: 'antialiased',
-                fontSize: '16px',
+                fontSize: '14px',
                 '::placeholder': {
                     color: 'grey'
                 }

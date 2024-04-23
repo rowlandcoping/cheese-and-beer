@@ -97,12 +97,14 @@ Cheese and Beer
                             {% endfor %}
                         </div>
                         {% endif %}
-                        <button type="submit" form="address-selector" class="add-address-button">Select</button>
-                        <a href="{% url 'checkout' %}">
-                            <span class="cancel-button">
-                                Cancel
-                            </span>
-                        </a>
+                        <div class="checkout-address-button-container">
+                            <button type="submit" form="address-selector" class="add-address-button">Select</button>
+                            <a href="{% url 'checkout' %}">
+                                <span class="cancel-button">
+                                    Cancel
+                                </span>
+                            </a>
+                        </div>
                     </form>
                 </div>
                 <div id = "add-new-address-form" class="add-user-address not-displayed">
@@ -113,55 +115,55 @@ Cheese and Beer
                     <form action="{% url 'add_address' %}" method="POST" id="address-form">
                         {% csrf_token %}
                         <div class="new-address-main bottom-border">
-                            <table class="general-form">
+                            <div class="general-form">
                                 <input type="hidden" name="origin" id="origin" value="checkout">
-                                <tr>
-                                    <td><label for="id_full_name">Full Name:<span class="red-text">*</span> </label></td>
-                                    <td>{{ address_form.full_name }}</td>
-                                </tr>
-                                <tr>
-                                    <td><label for="id_address_line_one">Address 1:<span class="red-text">*</span> </label></td>
-                                    <td>{{ address_form.address_line_one }}</td>
-                                </tr>
-                                <tr>
-                                    <td><label for="id_address_line_two">Address 2: </label></td>
-                                    <td>{{ address_form.address_line_two }}</td>
-                                </tr>
-                                <tr>
-                                    <td><label for="id_town_or_city">Town or City:<span class="red-text">*</span> </label></td>
-                                    <td>{{ address_form.town_or_city }}</td>
-                                </tr>
-                                <tr>
-                                    <td><label for="id_county">County:<span class="red-text">*</span> </label></td>
-                                    <td>{{ address_form.county }}</td>
-                                </tr>
-                                <tr>
-                                    <td><label for="id_postcode">Postcode:<span class="red-text">*</span> </label></td>
-                                    <td>{{ address_form.postcode }}</td>
-                                </tr>
-                            </table>
+                                <div class="form-field-container">
+                                    <div class="form-label-container"><label for="id_full_name">Full Name:<span class="red-text">*</span> </label></div>
+                                    <div>{{ address_form.full_name }}</div>
+                                </div>
+                                <div class="form-field-container">
+                                    <div class="form-label-container"><label for="id_address_line_one">Address 1:<span class="red-text">*</span> </label></div>
+                                    <div>{{ address_form.address_line_one }}</div>
+                                </div>
+                                <div class="form-field-container">
+                                    <div class="form-label-container"><label for="id_address_line_two">Address 2: </label></div>
+                                    <div>{{ address_form.address_line_two }}</div>
+                                </div>
+                                <div class="form-field-container">
+                                    <div class="form-label-container"><label for="id_town_or_city">Town or City:<span class="red-text">*</span> </label></div>
+                                    <div>{{ address_form.town_or_city }}</div>
+                                </div>
+                                <div class="form-field-container">
+                                    <div class="form-label-container"><label for="id_county">County:<span class="red-text">*</span> </label></div>
+                                    <div>{{ address_form.county }}</div>
+                                </div>
+                                <div class="form-field-container">
+                                    <div class="form-label-container"><label for="id_postcode">Postcode:<span class="red-text">*</span> </label></div>
+                                    <div>{{ address_form.postcode }}</div>
+                                </div>
+                            </div>
                         </div>
                         <div class="new-address-lower bottom-border">
                             <table class="green-box">
                                 <tr>
                                     <td><label for="default">Set as default? </label></td>
                                     <td><input type="checkbox" id="default" name="default"></td>
-                                </tr>
+                                </div>
                                 <tr>
                                     <td><label for="selected">Select for this order? </label></td>
                                     <td><input type="checkbox" id="selected" name="selected" checked></td>
-                                </tr>
+                                </div>
                             </table>
                         </div>
-                        
-                        <button type="submit" form="address-form" class="add-address-button">Add Address</button>
-                    
-                        {% if address %}
-                        <a href="{% url 'checkout' %}">
-                            <span class="cancel-button">
-                                Cancel
-                            </span>
-                        </a>
+                        <div class="checkout-address-button-container">
+                            <button type="submit" form="address-form" class="add-address-button">Add Address</button>
+                            {% if address %}
+                            <a href="{% url 'checkout' %}">
+                                <span class="cancel-button">
+                                    Cancel
+                                </span>
+                            </a>
+                        </div>
                         {% endif %}
                         
                     </form>
@@ -182,42 +184,46 @@ Cheese and Beer
                         </div>
                         <div class="order-email-container bottom-border">
                             <p>Please provide an e-mail address for order confirmation:</p>
-                            <label for="order-email">Order e-mail:<span class="red-text">*</span> </label></td>
-                            <input type="email" name="order_email" id="order-email" class="address-field" value="{{ user_email }}" placeholder="e-mail" required></td>
+                            <div class="general-form">                                
+                                <div class="form-field-container">
+                                    <div class="form-label-container"><label for="order-email">e-mail:<span class="red-text">*</span></label></div>
+                                    <div><input type="email" name="order_email" id="order-email" class="address-field" value="{{ user_email }}" placeholder="e-mail" required></div>
+                                </div>
+                            </div>
                         </div>
                         <div class="not-displayed" id="error-container">
                             <div class="error-messages red-text">
                                 <i class="fa-solid fa-circle-exclamation"></i><span id="form-error-message"></span>
                             </div>
                         </div>                        
-                        <table class="general-form">                                
-                            <tr>
-                                <td><label for="id_full_name">Full Name:<span class="red-text">*</span> </label></td>
-                                <td>{{ address_form.full_name }}</td>
-                            </tr>
-                            <tr>
-                                <td><label for="id_address_line_one">Address 1:<span class="red-text">*</span> </label></td>
-                                <td>{{ address_form.address_line_one }}</td>
-                            </tr>
-                            <tr>
-                                <td><label for="id_address_line_two">Address 2: </label></td>
-                                <td>{{ address_form.address_line_two }}</td>
-                            </tr>
-                            <tr>
-                                <td><label for="id_town_or_city">Town or City:<span class="red-text">*</span> </label></td>
-                                <td>{{ address_form.town_or_city }}</td>
-                            </tr>
-                            <tr>
-                                <td><label for="id_county">County:<span class="red-text">*</span> </label></td>
-                                <td>{{ address_form.county }}</td>
-                            </tr>
-                            <tr>
-                                <td><label for="id_postcode">Postcode:<span class="red-text">*</span> </label></td>
-                                <td>{{ address_form.postcode }}</td>
-                            </tr>
+                        <div class="general-form">                                
+                            <div class="form-field-container">
+                                <div class="form-label-container"><label for="id_full_name">Full Name:<span class="red-text">*</span> </label></div>
+                                <div>{{ address_form.full_name }}</div>
+                            </div>
+                            <div class="form-field-container">
+                                <div class="form-label-container"><label for="id_address_line_one">Address 1:<span class="red-text">*</span> </label></div>
+                                <div>{{ address_form.address_line_one }}</div>
+                            </div>
+                            <div class="form-field-container">
+                                <div class="form-label-container"><label for="id_address_line_two">Address 2: </label></div>
+                                <div>{{ address_form.address_line_two }}</div>
+                            </div>
+                            <div class="form-field-container">
+                                <div class="form-label-container"><label for="id_town_or_city">Town or City:<span class="red-text">*</span> </label></div>
+                                <div>{{ address_form.town_or_city }}</div>
+                            </div>
+                            <div class="form-field-container">
+                                <div class="form-label-container"><label for="id_county">County:<span class="red-text">*</span> </label></div>
+                                <div>{{ address_form.county }}</div>
+                            </div>
+                            <div class="form-field-container">
+                                <div class="form-label-container"><label for="id_postcode">Postcode:<span class="red-text">*</span> </label></div>
+                                <div>{{ address_form.postcode }}</div>
+                            </div>
                             <input type="hidden" name="country" id="country" value="GB" placeholder="country">
                             <input type="hidden" name="address_id" id="address-id" value="{{ address_form.id }}" placeholder="e-mail">
-                        </table>
+                        </div>
                         <p><em><small>Please note that because of Brexit we can only deliver to UK addresses.</small></em></p>
                     </div>
                     <hr>     
@@ -281,6 +287,30 @@ Cheese and Beer
                     <span class="action-buttons payment-button checkout-button form-button">
                         Purchase Now
                     </span>
+                </div>
+                <div class="purchase-section-mobile not-displayed">            
+                    <div class="order-value-details">
+                        <h4>Order Price: £{{ basket_total }}</h4>
+                        <h4>Delivery Cost: £{{ delivery_charge }}</h4>
+                        {% if free_remaining_amount > 0 %}
+                        <p><span class="red-text">£{{ free_remaining_amount }} more for free delivery.</span></p>
+                        {% else %}
+                        <p><span class="dark-green-text">Free delivery on this order!</p></span>
+                        {% endif %}
+                        <h4><span class="forest-green-text">Grand Total: £{{ grand_total }}</span></h4>
+                    </div>
+                    <div>
+                        <span class="action-buttons payment-button checkout-button form-button">
+                            Purchase Now
+                        </span>
+                    </div>
+                    <p class="ts-and-cs">
+                        <small>
+                            Be aware that any orders placed through this website will not be fulfilled. 
+                            This site is a project built as part of a level 5 Diploma in web development at Code Institute. 
+                            All cheeses depicted on this site are fictional and similarities to cheeses living or dead are entirely co-incidental.
+                        </small>
+                    </p>
                 </div>
             </div>
         </div>
