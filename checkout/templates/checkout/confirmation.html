@@ -7,7 +7,7 @@ Cheese and Beer - Order Confirmation
 <div id="background-container">
     <div id="form-large">
     <h2>Congratulations on your Purchase</h2>
-    <h4 class="bottom-border-thin">Your order number is <span class="forest-green-text">{{order.order_number}}</span></h4>
+    <h4 class="bottom-border-thin">Your order number is <span class="forest-green-text confirmation-order-number">{{order.order_number}}</span></h4>
     <div class="confirmation-para">
         <p>Click <a class="sign-up-link" href="{% url 'order_info' order.id %}">here</a> to review the order.
         <br>A confirmation e-mail has been sent to {{ order.email }}.</p>

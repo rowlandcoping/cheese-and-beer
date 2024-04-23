@@ -1021,6 +1021,7 @@ input[type=number] {
 .orders-order-info, .orders-shipped-address, .orders-products-shipped {
     padding:10px;
     border-bottom: 2px solid grey;
+    overflow-wrap: anywhere;
 }
 
 .orders-shipped-address {
@@ -1383,6 +1384,16 @@ input[type=number] {
 #product-edit-icon {
     font-size:95%;
 }
+.view-order-message-link {
+    display:flex;
+}
+.messages-specicifity .orders-order-info .orders-view-link .fa-eye {
+    display:inline-block;
+}
+
+.messages-specicifity .orders-order-info .orders-view-link {
+margin-right:10px;
+}
 
 
 /* General Forms (full-page) */
@@ -1684,7 +1695,6 @@ input[type=number] {
     }
     .orders-shipped-address, .orders-products-shipped {
         max-width:130px;
-        overflow-wrap: anywhere;
     }
     .orders-search .search-stuff {
         width:220px;
@@ -1863,6 +1873,10 @@ input[type=number] {
 }
 
 @media screen and (max-width:450px) {
+    /*confirmation page*/
+    .confirmation-order-number {
+        font-size:90%;
+    }
      /* orders view */
     .orders-shipped-address, .orders-products-shipped {
         max-width:100px;
