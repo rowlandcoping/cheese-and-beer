@@ -388,7 +388,10 @@ input[type='checkbox'], input[type='radio'] {
     background-color:rgb(255, 255, 140);
     border: 1px dotted rgb(105, 105, 105);
 }
-#filter select{
+#filter {
+    margin-left:10px;
+}
+#filter select {
     padding:5px;
     width:300px;
 }
@@ -1579,8 +1582,8 @@ input[type=number] {
 
 @media screen and (max-width:940px) {
     /*product list view*/
-    #product-view {
-        margin:20px 30px 100px 30px;  
+    #filter select {
+        width:200px;
     }
     /*addresses*/
     #address-view {        
@@ -1628,6 +1631,28 @@ input[type=number] {
 }
 
 @media screen and (max-width:650px) {
+    /*product list view*/
+    #filter {
+        margin-top:10px;
+        margin-left:0;
+    }
+    #filter select {
+        width:300px;
+    }
+    #results-and-filter {
+        flex-direction:column;
+    }
+    #product-listings {
+        display:flex;
+        flex-direction: column;
+        align-items:center;
+    }
+    #product-view {
+        margin:20px 60px 100px 60px;  
+    }    
+    .product-section, .pairings-section {
+        display:block;
+    }
     /*404*/
     .not-found-section {
         width:320px;
@@ -1748,6 +1773,9 @@ input[type=number] {
 }
 
 @media screen and (max-width:450px) {
+    #product-view {
+        margin:20px 20px 100px 20px;  
+    }
     /*404*/
     .not-found-section {
         width:280px;
@@ -1831,6 +1859,10 @@ input[type=number] {
     }
 }
 @media screen and (max-width:359px) {
+    /*product list view*/
+    #filter select {
+        width:250px;
+    }
     /*404*/
     .not-found-section {
         width:270px;
