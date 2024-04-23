@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from user_account.models import ContactForm
+from checkout.models import Order
 from django.contrib import messages
+from django.urls import reverse
 
 # Create your views here.
 
@@ -25,6 +27,15 @@ def view_messages(request):
         return redirect('home')
     else:
         return redirect('home')
+    
+
+def order_from_messages(request, order_number):
+    if request.user.is_superuser:
+        order = get_object_or_404(Order, order_number=order_number)
+        return redirect(reverse('order_info', args=[order.id]))
+    else:
+        return redirect('home')
+
     
 def remove_message(request, message_id):
     if request.user.is_superuser:

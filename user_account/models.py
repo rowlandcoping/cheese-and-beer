@@ -28,7 +28,7 @@ class Wishlist(models.Model):
 
 class ContactForm(models.Model):
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
-    date = models.DateField(default=datetime.now)
+    date = models.DateTimeField(default=datetime.now)
     order = models.ForeignKey(Order, null=True, blank=True, on_delete=models.CASCADE)
     email = models.CharField(max_length=254, null=False, blank=False)    
     order_number = models.CharField(max_length=32, null=True, blank=True, editable=True)

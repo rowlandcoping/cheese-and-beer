@@ -1027,6 +1027,9 @@ input[type=number] {
     border-left:2px solid grey;
     border-right:2px solid grey;
 }
+.messages-specicifity .orders-shipped-address {
+    border-right:none;
+}
 .orders-order-info .orders-view-link:hover, .orders-products-shipped .orders-view-link:hover {
     color:rgb(16, 95, 0);
     text-decoration: underline;
@@ -1530,6 +1533,10 @@ input[type=number] {
 } 
 
 @media screen and (max-width:1200px) {
+    /* orders view */
+    .orders-order-info, .orders-shipped-address, .orders-products-shipped {
+        max-width:200px;
+    }
     /*product detail page*/
     .detail-image img {
         width:300px;
@@ -1584,6 +1591,17 @@ input[type=number] {
 }
 
 @media screen and (max-width:940px) {
+    /* orders view */
+    .orders-order-info, .orders-shipped-address, .orders-products-shipped {
+        max-width:150px;
+    }
+    /*view-messages page*/    
+    .messages-specicifity .orders-shipped-address {
+        max-width:200px;
+    }
+    .messages-specicifity .orders-order-info {
+        max-width:200px;
+    }
     /*product detail view*/
     .product-view-title-section {
         border-top:2px dotted grey;
@@ -1653,6 +1671,31 @@ input[type=number] {
 }
 
 @media screen and (max-width:650px) {
+    /* orders view */
+    .orders-order-info {
+        max-width: 75px;
+        text-align:center;
+    }
+    .orders-order-info .fa-credit-card, .orders-order-info .fa-eye, .orders-order-info .fa-calendar-alt, .orders-order-info .fa-envelope {
+        display:block;
+        margin:auto;
+        margin:0;
+        width:100%;
+    }
+    .orders-shipped-address, .orders-products-shipped {
+        max-width:130px;
+        overflow-wrap: anywhere;
+    }
+    .orders-search .search-stuff {
+        width:220px;
+    }
+    /*view-messages page*/    
+    .messages-specicifity .orders-shipped-address {
+        max-width:200px;
+    }
+    .messages-specicifity .orders-order-info {
+        max-width:150px;
+    }
     /*product detail view*/
     .product-overview {
         flex-direction:column;
@@ -1820,6 +1863,22 @@ input[type=number] {
 }
 
 @media screen and (max-width:450px) {
+     /* orders view */
+    .orders-shipped-address, .orders-products-shipped {
+        max-width:100px;
+    }
+    .orders-search .search-stuff {
+        width:220px;
+    }
+    /*view messages*/
+    .messages-specicifity .orders-shipped-address {
+        max-width:175px;
+        font-size:90%;
+    }
+    .messages-specicifity .orders-order-info {
+        max-width:75px;
+        font-size:90%;
+    }
     /*product detail view*/
     #product-page {
         margin:20px 25px 100px 25px;
@@ -1911,6 +1970,13 @@ input[type=number] {
     }
 }
 @media screen and (max-width:359px) {
+    /* orders view */
+    .orders-shipped-address, .orders-products-shipped {
+        max-width:80px;
+    }
+    .orders-search .search-stuff {
+        width:180px;
+    }
     /*product detail view*/
     #product-page {
         margin:0 10px 100px 10px;
