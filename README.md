@@ -349,75 +349,149 @@ Please find the wireframes [HERE](WIREFRAMES.md).
 ## UX - Surface
 ([back to top](#contents))
 
+The main site inspiration when it comes to much of the layout is Amazon, mainly because I know that all potential users will be highly familiar with it. What I have focussed on is reducing clutter and maximising reponsiveness but still providing the user with plenty of elements to interact with and keep them engaged.  The green and gold scheme is evocotive of quality, and also of cheese.  The color scheme background is intended to provide a slight contrast for item elements across the product and purchase pages. The grey border and dividing lines break up the page without being as obtrusive as a horizontal rule, although I have used these for hard dividing lines, for example in the checkout section. For all forms and indeed any page without a lot of complex content (for example the whole admin site) I have used an image background to provide some depth to the page.
+
 ### Color Palate
 
-#### Color Names
+HELPER CLASSES
 
-TBC
+rgb(3, 126, 3): green-text
+rgb(255, 0, 0): red-text
+rgb(95, 0, 0): dark-red-text
+rgb(1, 70, 1): forest-green-text
+rgb(0, 51, 0): dark-green-text
+rgb(63, 63, 63): grey-text
 
-#### RGB
+SITE THEME
 
-TBC
+rgb(1, 70, 1): background for top section of site containing navigation and search, also used for form buttons and links, and a border on focussed form elements.
+rgb(0, 51, 0): background for checkout buttons and the main site logo. generally used to accent the main green theme, also used for links.
+rgb(0, 15, 0) : dark green border used in title banner, also used to accent form fields
+rgb(255, 255, 140): text color for titles and navigation, also inverted with the forest green for mouseover effect.  Also used on mousover for checkout and basket buttons.
+rgb(255, 255, 255): white is used as the immediate background for across the listing and purchases sections of the site.  It provides a contrast with the light yellow used for page backgrounds on these pages.
+rgb(247, 241, 213): the off-yellow base background for the listing and product pages.  also forms the text background on form pages, the header and footer background on alerts, and the background for basket alerts.
+grey (50 shades of): used for border helper classes, and generally any borders or boundaries anywhere across the site.
+rgb(107, 107, 107): the grey used for the box shadow effect site-wide.
+rgb(129, 153, 124): used for the hover state for most form buttons.
+
+PURCHASE BUTTONS
+
+rgb(139, 67, 0): the color for the add to basket button, universally
+(245, 183, 126): hover state for add to basket button
+rgb(16, 95, 0): the color for the buy now button, site-wide.
+rgb(129, 153, 124): hover state for the buy now button.
+
+MESSAGES AND ALERTS
+
+rgb(245, 26, 26) - used as border for error messages
+rgb(16, 95, 0) - used as border for success messages
+rgb(245, 150, 26) - used as border for warning messages
+rgb(0, 32, 0) - background for the yes button
+rgb(50, 90, 50) - hover background for yes button
+rgb(49, 0, 0) - background for no button
+rgb(94, 42, 42) - hover background for no button
 
 ### Fonts
 
-TBC
-
-#### Titles/some buttons
-
-CfDavesDreamPersonalRegular-WyAGn.ttf
-
-#### Main font
-
-OpenSans-Regular.ttf
+Title: FallIsComingRegular-Mx9B (Fontspace)
+Content: RobotoFlex (google fonts)
 
 ### Images
 
-#### Site Theme
-
-TBC
-
-#### User Avatars
-
-TBC
+The only static image is the background used on form pages, which comes from usplash.
 
 ### Navigation
 
-TBC
+The navigation is drop-down on desktop to limit the number of clicks between a user and their destination. The idea is that by simply having a drop-down category selector a user can immediately navigate to the content they want.  This is a two tap process on mobile but the principle remains the same.  The navigation is very much in keeping with the site theme, and to some degree actually sets the site theme.
+
+Buttons are clearly styled according to their purpose, so without even reading them a user can know what they are expected to do.  So the outise green buttons to make purchases clearly indicate a major action, whilst the buy now and add buttons are consistently styled and retain an icon to make their purpose clear.
+
+Results from searches are clearly indicated, and in the search listings I have underlined key links either immediately or in the case of listing titles on hover to make the action which the user needs to take as clear as possible. When a user adds a product to their basket there is a clear message on the page, indicating the specific product, and the user is taken back to the view that they were in so they retain their search results.
+
+Across the user account section, all pages have a link back to the user's most likely point of origin, which I think really helps the flow of the site.
+
+Of course user experience is key, but the focus of this site is driving people to make purchases.  As such most calls to action are focussed around pointing people in this direction, including buy now buttons on every product listing (even 'buy again' on the order view page) which take the user directly to checkout, and multiple purchase buttons on the checkout page itself, which on desktop are prominently located at the top right of the page.
 
 ### Alerts
 
-TBC
+The alert system on cheese and beer is key to the user experience.  So if a user adds or updates a product to their basket from any screen, they see an alert detailing the specific product next to the checkout button, which fades to avoid obscuring the navigation.  I learned from Amazon's Buy Now process which is confusing and inconsistent, by providing the user with a 'buy now' alert if they click buy now with products already in their basket.  In this case they are asked if they want to clear other products in their basket or retain them, before the new product is added and they are taken to the checkout screen.  This is aimed at making the process as clear and seamless as possible.  
+
+Additionally users are warned if they are about to delete an address from their addresses page, although the same doesn't apply to items in the wishlist or basket as they can easily be re-added.
+
+On the admin site the same alerts provide clear feedback for user actions.
   
 ### Responsiveness
 
-TBC
+The site has been built originally for desktop, but designed throghout to easily scale for mobile and with that in mind.  The exceptions in my mind are the order list and messages view pages, which had to display a lot of information in a tabular format  to be effective. Thiscaused difficulties in scaling them to mobile to the point where I had to remove the products ordered section from the orders list view on smaller screens.  Although I believe they are responsive in their current form, if I had time to re-design them then I would should the site go into live production.  Because the admin site is largely for employees and only ever likely to be used in desktop environments, I have not implemented features like auto-resizing of form textboxes to content with javascript, for example, but all admin site pages are still perfectly responsive and look good on mobile.
+
+I built the site's responsiveness using the following break-points
+
+max-width: 359px (for very very small phones)
+max width: 450px (the main break point for converting to smaller mobile format)
+max-width: 650px (the main break point for converting to a mobile format)
+max width: 940px (for large tablets or people viewing in smaller windows)
+max width: 1200px (to accommodate smaller laptop screens)
+max width: 1650px (to accommodate laptop screens)
 
 ## The MVP
 
 ### Specification Changes
 ([back to top](#contents))
 
-As Donald Rumsfeld memorably said:
+As Donald Rumsfeld (RIP) memorably said:
 
 "There are known knowns. These are things we know that we know. There are known unknowns. That is to say, there are things that we know we don't know. But there are also unknown unknowns. There are things we don't know we don't know."
+
+The final feature list for the MVP contains everything from the initial outline, with additional features documented here including the wishlist and contact form.  Focus has been on providing an enhanced experience for logged-in users.  Overall, whilst I only wireframed a handful of pages there are now 32 pages on the site.  However most of them follow one or other of the templates outlined at the outset; product search, product view, order/basket list and forms.
+
+USER SIGNUP
+
+Although I haven't added additional roles as I would like to in the future, I have set all logins and validation to be done via e-mail.  The Allauth login no longer requires a username, because I have built a signal to set the username to equal the user's e-mail address pre-save.  I have also disabled e-mail verification for signup. This makes for a far better user experience and a very slick sign-in process to ensure no potential customer is lost at checkout.
+
+SEARCH RESULTS
+
+I have not placed a limit on the number of search results - it really was a time factor that prevented me implementing pagination or infinite scrolling.  With the number of products available at present it doesn't make the site unweildy, although a solution would be required in a live production environment this is not a problem for the MVP.
+
+BASKET/CHECKOUT
+
+Gifting options have not made the final MVP cut.  This was largely because in order to implement it at checkout I realised it was no minor undertaking. I would have needed to added the option to either the existing payment intent or the existing basket, or created an entirely new session object. In the end I decided to focus on enhancing existing functionality, since I'm not even sure what the gifting option would have entailed beyond sending someone a box of cheese.
+
+ADDRESS OPTIONS
+
+I decided to dispense with billing address options because it was not required by Stripe to facilitate payments.  Indeed I discovered all Stripe needs for an extra layer of security is an e-mail address, so that is all I passed to the payment intent.  Instead I focussed on usability - users can now add a new shipping address or select from existing addresses directly in the checkout screen.  Instead of seeing a form they are hidden by Javascript and the existing default address is displayed. An additional feature is the 'selected address'.  Users can select a different shipping address for an order without changing their default address, which is stored as a session variable.
+
+USER ACCOUNT PAGE
+
+Additionally the user account page now has multiple additional options, adding wishlist and contact options to the existing manage address and order fields. The orders and view order pages now provide direct access to the contact form with pre-populated details.  In fact as the site designer I highly recommend logging in before you use it because it provides so much more functionality.
+
+WISHLIST
+
+Logged-in users can now add items to or remove them from their wishlist from any product page.  THey can also view their wishlist and purchase items from it via their account page or the menu.  This was a simple to implement custom model added at a fairly late stage, but I believe it enhances user experience and makes the site 'stickier'.
+
+CONTACT FORM
+
+I have created a contact form so that users can make queries regarding their orders.  If a user is logged in their data auto-populates, and if they click though from an order this carries over as well. The messages received are currently displayed in the admin site in a very basic view, but for a live payments site this could become a full-blown ticketing system without too much additional work.
+
+ADMIN SITE
+
+Although the Products is a single model I created two seperate forms to add either cheese or beer. This is all then processed in the same view. editing products is all accessed now via the admin site, and includes its own search facility.  Deleting a product is only available if none have been sold.
+
+LOGGED OUT USERS
+
+Even if a user is not registered they can still access their orders if they provide multiple exact details, and can still contact the customer services team (ie me).
 
 ### MVP Data Structure
 ([back to top](#contents))
 
-As anticipated, the final data structure is significantly more complex than the basic structure outlined at the outset of the project.  i have outlined significant changes below:
+As anticipated, the final data structure is significantly more complex than the basic structure outlined at the outset of the project.  I have outlined significant changes below:
 
 CHEESE AND BEER CATEGORY MODELS
 
-All custom fields were moved to the products model, and the many to many relationship is represented in a seperate table to reflect how it is handled by Django
+All custom fields were moved to the products model, and their many to many relationship is represented in a seperate table to reflect how it is handled by Django.
 
 PRODUCTS MODEL
 
-Many fields have been added as the project has progressed.  Most notably the model now tracks units sold, and has a 'displayed' option.  This is to reflect how you do not really want to wipe a product and its order history from a database even if it isn't sold any more; this button hides the product from search results. Although users can still view the product from their order history or bookmarks they can't purchase it and they have a clear indicator it is unavaliable.
-
-USERS MODEL
-
-Although I haven't added additional roles to the table as I would like to in the future, I have set all logins and validation to be done via e-mail.  The Allauth login no longer requires a username, because I have built a signal to set the username to equal the user's e-mail address pre-save.  I have also disabled e-mail verification for signup. This makes for a far better user experience and a very slick sign-in process to ensure no potential customer is lost at checkout.
+Many fields have been added as the project has progressed.  Most notably the model now tracks units sold, and all the custom cheese or beer fields that were originally in the category models have found a home in the product model.
 
 ORDERS MODEL
 
@@ -425,11 +499,11 @@ This now contains an estimated delivery date for every order.  This will reflect
 
 CONTACT FORM MODEL
 
-I have created a contact form model so that users can make queries regarding their orders.  If a use is logged in their data autopopulates, and if they click though from an order this carries over as well. The messages received are currently displayed in the admin site in a very basic view, but for a production site this could become a full-blown ticketing system without too much additional work.
+I have created a contact form model so that users can make queries regarding their orders.  this simply contains a message and an e-mail address at the bare minimum.  It also has order and user foreign keys, if a user is logged in or provides an order number.
 
 WISHLIST MODEL
 
-Logged-in users can now add items to or remove them from their wishlist from any product page.  THey can also view their wishlist and purchase items from it via their account page or the menu.  This was a simple to implement custom model which enhances user experience.
+This simply contains two foreign keys, one linking the user and one linking the product they added to their wishlist.
 
 #### Schema Diagram
 
@@ -439,9 +513,7 @@ Logged-in users can now add items to or remove them from their wishlist from any
 ### Feature List
 ([back to top](#contents))
 
-The final feature list for the MVP contains everything from the initial outline, with additional features documented here including the wishlist and contact form.  Focus has been on providing an enhanced experience for logged-in users.  This is notable on the checkout page where users are able to select and update addresses as well as a default address, and a very neat interface for doing so.  From landing on the homepage a logged in user is 3 clicks from making a purchase, and all they have to enter is their card number and CVV.  Additionally the user account page now provides multiple options, including the contact form and wishlist.  The orders and view order pages now provide direct access to the contact form with pre-populated details.  In fact as the site designer I highly recommend logging in before you use it!
-
-Beyond this though, even if a user is not registered they can still access their orders if they provide multiple exact details, and can still contact the customer services team (ie me).
+From landing on the homepage a logged in user is 3 clicks from making a purchase, and all they have to enter is their card number and CVV.  
 
 
 ## Testing Documentation
