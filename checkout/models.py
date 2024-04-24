@@ -29,11 +29,11 @@ class Order(models.Model):
     order_date = models.DateTimeField()
     delivery_date = models.DateTimeField()
     items_total = models.DecimalField(
-        max_digits=10, decimal_places=2, null=False, default=0)
+        max_digits=100, decimal_places=2, null=False, default=0)
     delivery_cost = models.DecimalField(
         max_digits=6, decimal_places=2, null=False, default=0)
     grand_total = models.DecimalField(
-        max_digits=10, decimal_places=2, null=False, default=0)
+        max_digits=100, decimal_places=2, null=False, default=0)
     stripe_pid = models.CharField(max_length=254, null=False, blank=False)
 
     def _generate_order_number(self):
@@ -80,7 +80,7 @@ class OrderItems(models.Model):
         max_digits=6, decimal_places=2, null=False, blank=False)
     quantity = models.IntegerField(null=False, blank=False, default=0)
     item_total = models.DecimalField(
-        max_digits=6, decimal_places=2, null=False, blank=False)
+        max_digits=100, decimal_places=2, null=False, blank=False)
 
     def save(self, *args, **kwargs):
         """

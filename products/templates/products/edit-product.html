@@ -53,7 +53,7 @@ Cheese and Beer - Edit Products
                 <span>Search here to filter by Product ID or name:</span>
                 <form method="GET" action="{% url 'edit_product' %}">
                     <div>
-                        <button type="submit"><i id="product-edit-icon" class="fa-solid fa-magnifying-glass"></i></button>
+                        <button class="clickable-element" type="submit"><i id="product-edit-icon" class="fa-solid fa-magnifying-glass"></i></button>
                         <input type="text" class="search-stuff product-search-stuff" name="q" placeholder="Search">                        
                     </div>
                 </form>

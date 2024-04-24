@@ -58,10 +58,8 @@ Cheese and Beer - Signin
             </div>
             {% endslot %}
             {% slot actions %}
-            <div class="form-large-button">
-                {% element button type="submit" tags="prominent,login" %}
-                    {% trans "Sign In" %}
-                {% endelement %}
+            <div id="form-button" class="form-large-button">
+                <button class="clickable-element" type="submit">Sign In</button>
             </div>
             {% endslot %}
             

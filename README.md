@@ -526,15 +526,36 @@ Preparing for Deployment:
 
 - For the site to function, I needed to add a Procfile to the repo containing the command to start the app (web: python app.py).
 - I already had an up-to-date requirements.txt file in my repository which I updated as I installed new dependencies.  This was a product of developing my project using a virtual environment in VS Code.
-- On initial deployment I received error messages related to my image handling code. This was on account of Heroku using a different version of Python which was actually ahead of the official version!  In order to make the app function as intended, I needed to add a runtime.txt file to the repo containing the Python version used for this project (python-3.10.12).
+- In order to serve my static files I decided to use WhiteNoise, in order to avoid dependence on AWS or incurring charges, for simplicity, and also because my media files are all stored in Cloudinary so nothing more was necessary.
+- I added a runtime.txt file to the repo containing the Python version used for this project (python-3.10.12). I upgraded this version on Heroku to 3.10.14 to implement a security upgrade.  Interestingly my Linux Distro (Mint) still serves 3.10.12 as the latest version as of when I began work on this project.
+
+Deploying with Whitenoise:
+
+In order to deploy with WhiteNoise I did the following:
+
+- Install WhiteNoise:
+    pip install whitenoise
+- Add WhiteNoise to the MIDDLEWARE list in settings.py, above everything except Django's SecurityMiddleware:
+  MIDDLEWARE = [
+    ---
+      "django.middleware.security.SecurityMiddleware",
+      "whitenoise.middleware.WhiteNoiseMiddleware",
+    ---
+  ]
+- Add STATICFILES_STORAGE value:
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+
+With STATICFILES_STORAGE this differes from the recommended setting in the WhiteNoise documentation, which broke the website.
+I also added the condition 'if DEVELOPMENT is False:' prior to this setting, to ensure my site still worked in my development environment.
+
 
 Creating the App and connecting to Github:
 
 - I logged into my Heroku account.
 - From my Dashboard, I selected 'new' then 'Create new app'.
-- I selected an available name appropriate to the website - in this case I chose hopes-and-dreams, before selecting my region (Europe) and clicking the 'create app' button.
+- I selected an available name appropriate to the website - in this case I chose cheese-and-beer, before selecting my region (Europe) and clicking the 'create app' button.
 - Heroku immediately took me to the 'Deploy' page.  From this page I went straight to 'Deployment Method' and clicked on Github.
-- Once my Github account was connected, I selected the hopes and dreams repository and clicked 'connect'.
+- Once my Github account was connected, I selected the Cheese and Beer repository and clicked 'connect'.
 - Once connected I enabled automatic deploys, which means the deployed site automatically updates when it detects a new commit to the linked repository.
 
 Setting up the deployment:
@@ -543,16 +564,16 @@ For the site to function I also needed to add the correct environment variables.
 
 - I first went to the settings tab and selected 'Reveal Config Vars' from the 'Config Vars' menu.  
 - I then proceeded to add all of my environment variables to this section and save them in turn.
-- The final step prior to submission was to ensure the 'DEBUG' environment variable was set to 'false'.
+- The final step prior to submission was to ensure the 'DEBUG' environment variable was set to 'False'.
 
 ### Deploying this Project
 
-If you wish to deploy this website yourself, here is how to go about it.
+If you wish to deploy a version of this website for yourself, here is how to go about it.
 
 #### Create a Version of the repository:
 
  - Log in to or create your own Github account [HERE](https://github.com/).
- - Go to the Hopes and Dreams repository [HERE](https://github.com/rowlandcoping/hopes-and-dreams) and select 'Fork' to create your own snapshot of the repository.
+ - Go to the Cheese and Beer repository [HERE](https://github.com/rowlandcoping/hopes-and-dreams) and select 'Fork' to create your own snapshot of the repository.
 
 #### Creating your own Heroku Account:
 
@@ -561,12 +582,13 @@ If you wish to deploy this website yourself, here is how to go about it.
 
 #### Creating the database:
 
-This project uses MongoDB to store all data, therefore you will need a copy of the database to deploy it for yourself.
+This project uses PostgreSQL to store all data, therefore you will need a copy of the database to deploy it for yourself.
 
- - Sign up to MongoDB Atlas [HERE](https://www.mongodb.com/cloud/atlas/register).
- - Create a database (call it what you like, but something indicative of the project is a good idea!).
- - Use the database structure outlined in this readme to re-create the database.  Keep in mind you only need to create the collections - the beauty of MongoDB is that everything else will be created on the fly.
- - Keep in mind if you want administrator access you will have to manually add the key/value pair user: "administrator" to the document for that user in Atlas.
+ - You can sign up to ElephantSQL here [HERE](https://www.elephantsql.com/), this is what I am currently using.  A caveat to this is ElephantSQL is at end of life and will be decommissioned in January of next year, so if you want to work on the project longer term I recommend a more permanent solution.
+ - Click 'Create New Instance' to create a new database. Mine is called cheese_beer.  If you click your newly-created database in ElephantSQL it provides all the settings you need to connect it to your Django project.
+ - Be sure to migrate the database models to your database before you attempt to run the site. This will set all your models up on your database, ready to go!
+    - python3 manage.py makemigrations
+    - python3 manage.py migrate
 
 #### Creating a Cloudinary Account:
 
@@ -574,21 +596,29 @@ This project hosts all images on Cloudinary.  In order to do the same you will n
 
  - Sign up to Cloudinary [HERE](https://cloudinary.com/).
 
- Creating an email for the password reset functionality:
+Creating an email for the password reset functionality and confirmation e-mails:
 
-For this project I used gmail to set up an account through which all password reset e-mails are sent.
+For this project you can use gmail to set up an account through which all password reset e-mails and notifications are sent.
 
  - Set up a gmail account [HERE](https://gmail.com)
- - Once in gmail I set up a specific app password so that the app can connect to it via SMTP.  Find details of this [HERE](https://support.google.com/mail/answer/185833?hl=en-GB).  Keep in mind this app password resets if you change the password of the gmail account!
+ - Once in gmail you can set up a specific app password so that the app can connect to it via SMTP.  Find details of this [HERE](https://support.google.com/mail/answer/185833?hl=en-GB).  Keep in mind this app password resets if you change the password of the gmail account!
+ - Keep in mind you can do similar for any email provider.  For this project I have been using Zoho mail (you can set up an account [HERE](https://www.zoho.com/)).  The advantage is they tend to provide fewer hoops for you to jump through than google!
+ - I set the non-secure e-mail settings in my settings.py file which you will be able to find in the repo. Keep in mind these settings may vary depending on the provider you are using.
+
+#### Creating a STRIPE Account:
+
+ - In order to process payments (even in a test environment) you will need to set up stripe. I will provide basic instructions here. For local testing you can also install the Stripe CLI which can be useful in tracking down errors in your webhook handlers.
+ - sign up to stripe [HERE](https://stripe.com)
+ - click 'developers' from the top menu, then select API keys.  You can find the environment variables you need here.
 
 #### Deploy to Heroku
 
  - Once all of this is set up, you are ready to deploy - first use the instructions I outlined in the [Initial Deployment](#initial-deployment) section.
- - When it comes to setting up the config vars, you will need to set them up according the details of your own database/cloudinary/gmail accounts.  I have included below a list of all the [environment variables](#hopes-and-dreams-environment-variables) that need to be set up on Heroku, and indeed in any local deployment via an env.py file.
+ - When it comes to setting up the config vars, you will need to set them up according the details of your own database/cloudinary/email accounts.  I have included below a list of all the [environment variables](#cheese-and-beer-environment-variables) that need to be set up on Heroku, and indeed in any local deployment via a .env file.
 
 ### Continuing the Project
 
-Once the deployment steps have been completed, as above, you will be in a great position to continue the project.  All you will need to do is set up the [environment variables](#hopes-and-dreams-environment-variables) in your chosen development environment.
+Once the deployment steps have been completed, as above, you will be in a great position to continue the project.  All you will need to do is set up the [environment variables](#cheese-and-beer-environment-variables) in your chosen development environment.
 
 Using VS Code on Linux:
 
@@ -607,62 +637,94 @@ Setting up:
 
 Making it work:
 
-- Create an env.py file and a .gitignore file.  Add env.py to your .gitignore file to ensure you don't upload sensitive data to the public repository!
+- Create an .env file and a .gitignore file.  Add .env to your .gitignore file to ensure you don't upload sensitive data to the public repository!
 - Ensure you have python3-venv installed ($sudo apt get update, then $sudo apt-get install python3-venv).
 - Press CTRL-shift-P again, then type in python: Create Environment.
-- Select Venv, then select the recommended settings to create a new virtual environment. It will install all the dependencies outlined in the requirements.txt file.  If it has worked you should see (.venv) in your terminal.  I found depending on the system I had to restart VS Code to make this work.
+- Select Venv, then select the recommended settings to create a new virtual environment. It will install all the dependencies outlined in the requirements.txt file.  Keep in mind that whilst this worked perfectly for me when I used the method with Flask, I haven't yet tried setting up a new development environment in this way for Django. There may be extra steps you need to take.
 
-// add a bunch on setting up .env here
-- Add the [environment variables](#hopes-and-dreams-environment-variables) to your env.py file. Be sure to update the Base_URL to reflect the port you are using locally as opposed to any deployment on Heroku.  Normally it's 127.0.0.1:5000/.
-- If you type python3 app.py in your new virtual environment in VS Code, you should see the site working in your if you open the port. You can now continue to develop the project.
+Setting up your local environment:
+
+With Django I've discovered that using .env is a lot more convenient than an env.py file.  The main advantage is that zero modification is required between development and production servers, aside from the environment variables themselves of course!
+
+- Add the [environment variables](#hopes-and-dreams-environment-variables) to your .env file. Be sure to update your HOST variable to reflect the port you are using locally as opposed to any deployment on Heroku.  For me the HOST is 127.0.0.1.
+- Be sure to migrate the database models to your database before you attempt to run the site. This will set all your models up on your database, ready to go!
+    - python3 manage.py makemigrations
+    - python3 manage.py migrate
+- If you type python3 manage.py runserver in your new virtual environment in VS Code, you should see the site working in your if you open the port. You can now continue to develop the project.
 
 ### Cheese and Beer Environment Variables
 
-TBC
-
-CLOUDINARY (also TBC but will be similar):
+CLOUDINARY:
 
 All the details for your Cloudinary account are provided on your Cloudinary Dashboard when you log in.
 
-os.environ.setdefault("CLOUD_NAME", "xxxxxxx")\
+CLOUD_NAME=xxxxxxxxxxxxxxx\
     _as found on your Cloudinary dashboard_\
-os.environ.setdefault("API_KEY", "xxxxxxxxxx")\
+API_KEY=xxxxxxxxxxxxxxx\
     _as found on your Cloudinary dashboard_\
-os.environ.setdefault("API_SECRET", "xxxxxxxxxxxxxxx")\
-    _as found on your Cloudinary dashboard_\
-os.environ.setdefault("CLOUDINARY_BASE", "https://res.cloudinary.com/xxxxxxxxxxxx/image/upload/yyyyyyyyyyyyy/")\
-    _this is the base URL for cloudinary images - please note the 'xxxxxxx' portion is the same as your cloud name.  If you view an image in the cloudinary explored and check the 'original url' you will be able to find the second part._
+API_SECRET=xxxxxxxxxxxxxxxxxx\
+    _as found on your Cloudinary dashboard_\    
 
-GMAIL (TBC but will be similar):
+EMAIL PROVIDER:
 
-os.environ.setdefault("MAIL_SERVER", "smtp.gmail.com")\
-os.environ.setdefault("MAIL_PORT", "465")\
-os.environ.setdefault("MAIL_USE_SSL", "True")\
-os.environ.setdefault("MAIL_USERNAME", "xxxxxxxxxxxxx")\
-    _the e-mail address you've set up with gmail_\
-os.environ.setdefault("MAIL_PASSWORD", "xxxxxxxxxxxxxxxx")\
-    _the app password you've set up with gmail_
+development:
+EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend  (this is for development, relays email to your console)
+production:
+EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+EMAIL_HOST_PASSWORD=xxxxxxxxxx
+EMAIL_HOST_USER=emailaddress@email.com
+    _the e-mail address you've set up_\
 
-CUSTOM (will be similar):
+DATABASE:
 
-os.environ.setdefault("BASE_URL", "xxxxxxxxxxxxx")\
-    _this is the base URL for your site deployment.  For example, for my deployment of Hopes and Dreams this is https://hopes-and-dreams-15b83f2d1383.herokuapp.com, for your localhost it will be something like http://127.0.0.1:5000/_
+DATABASE_URL=postgres://ehsgxqzh:xxxxxxxxxxxxxxxxxxxxxxxxx@flora.db.elephantsql.com/xxxxxx
+_the first set of xs is your password and database, and the last is the database.  All these settings are easily found in the ElephantSQL control panel_
+
+STRIPE SETTINGS:
+
+STRIPE_PUBLIC_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+STRIPE_SECRET_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+STRIPE_WH_SECRET=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+DJANGO settings:
+
+CLOUDINARY_BASE=https://res.cloudinary.com/xxxxxxx/image/upload/xxxxxxxxxx/cheese-and-beer/
+_this is the base URL for your media images - in this case we are using cloudinary. please note the first 'xxxxxxx' portion is the same as your cloud name.  If you view an image in the cloudinary explored and check the 'original url' you will be able to find the second part._
+SECRET_KEY=ngc*xnvts6x-2b2725b_&5&_3cfz=s(dhox+p@ud8b6-gox7nq
+DEBUG=True/False
+_this sets the site into debug or production mode. You should never deploy a live production site with debug set to True.  Keep in mind with debug set to false in the local environment this will cause problems collecting static files.  To run your site locally in this instance, type python3 manage.py runserver --insecure_
+DEVELOPMENT=True/False
+_this should always be set to True on your local host, or False on the live site, otherwise it won't work at all._
+HOST=cheese-and-beer-896aa5a35920.herokuapp.com
+_the host is the base for all urls.  On the deployed site this will be the base of the URL you have deployed to, in a local environment this will be your local host (in my case 127.0.0.1)._
 
 ## Credits
 ([back to top](#contents))
 
+### Layout and Inspiration
+
+AMAZON
+
+Amazon has been a constant reference point for me in terms of how they manage the customer journey and lay out their site.  They do a lot of things wrong, but they also get a lot right.
+
+PLYMOUTH ARGYLE
+
+As a fan and former season ticket holder, I can't help but thing my site design has been influenced by their magnificent [home strip](https://www.argylesuperstore.co.uk/kits/home-kit/adults/2507_2324-home-shirt-womens.html) for this season.  It's a real shame the players aren't of the same standard as the shirts.
+
 ### Fonts
 
-TBC
+[Fall Is Coming](https://www.fontspace.com/fall-is-coming-font-f30492)
+[Roboto Flex](https://fonts.google.com/specimen/Roboto+Flex)
 
 ### Images and Icons
 
 IMAGES:
 
-All avatar images were created using Bing Image Creator.\
-All other site assets were created myself using Inkscape.
+All product images (barring one or two) are sourced from wikimedia commons.
+The background page for forms and the homepage was found on Unsplash.
+The favicon was created using GIMP and a free icon I found on a google image search.
 
-As such all images belong to me.
+As such I am free to use them all for the purposes of this site.
 
 ICONS:
 
@@ -674,23 +736,43 @@ Icons are from Font Awesome.
 
 ### Code
 
+BOUTIQUE ADO
+
+The Code Institue project Boutique Ado is what I used to learn Django, and has been a constant reference point.  Notably there are some sections of code, mentioned in the project itself, where I have leaned heavily on it:
+
+- webhook and webhook handling
+- The basket app
+- Order and OrderItems models
+- Stripe payment confirmation
+- sort filter and search on product view page
+
+When it comes to passing the Javascript processing a stripe payment, I have used the Boutique Ado code as a base but made significant adjustments. I do not make a server request (this is covered in detail in the bugs section of [TESTING.md](TESTING.md)). and also all the JQuery is converted to Javascript.  I also make sure the form is validated with Javascript prior to processing the payment intent.
+
+HOPES AND DREAMS
+
+I have used some substantial chunks of code from my last project, including the image handling functionality and how Cloudinary is managed within the project. I have also used the JavaScript for the category selector in hopes and dreams in order to pair cheese with beers in my views for editing categories, which I felt was much easier than a series of drop-downs and actually easier to implement because the codebase already existed.
+
+THE INTERNET
+
+I have opened so many tabs I can't remember them all and found a lot of great solutions, however for my basket alert messages I borrowed substantially from geeksforgeeks.org in order to add the fade effect: https://www.geeksforgeeks.org/how-to-add-fade-out-effect-using-pure-javascript/
+
 
 ### Acknowledgments
 
 HELP AND ASSISTANCE:
 
-Enormous credit goes to my mentor Mitko Bachvarov for his patience and assistance throughout this build.  His feedback about the UI in particular resulted in major changes for the better to the sign-up and editing process and a significant re-build since Christmas - I'm not sure how I would have completed this project to any kind of standard without this.  I feel certain he must be one of the best mentors working with Code Institue and very fortunate to have had access to his insight.
+Thank you again to Mitko for your honest and constructive feedback and indeed thoughout this course.  You have made me a better developer. Enormous credit has to go to family, friends and co-workers who have had to put up with me in a highly distracted and stressed out state, waking up in the mornings with database models forming in my head.  In particular my girlfriend Ffion who has been patient and kind and supportive throughout in spite of me deserving much less.  Once again, in spite of my caution at the outset, this project has ended up being a lot more work than I anticipated!
 
 ## Technical Information
 ([back to top](#contents))
 
 Version Control: Git and Github.\
-JavaScript validation: jshint.\
+JavaScript validation: JSHint.\
 Python validation: CI Python Linter.\
 Framework: Django.\
 Image Hosting: Cloudinary.\
 DBMS: PostgreSQL via Django.\
-SMTP Mail Server: Gmail.\
+SMTP Mail Server: Zoho.\
 Languages: HTML, CSS, JavaScript, Python.\
 Development Environment: VS Code on Linux.\
 Wireframes: Balsamiq.\

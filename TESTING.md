@@ -527,6 +527,10 @@ SITE FLAGGED AS MALICIOUS:
 
 When testing on my mobile, I noticed that Cheese and Beer was flagged as malicious; on entering my password it was suggested I change it anywhere I use it. Obviously this is not the case and my password is safe, but it does make me wonder what aspect of either Allauth, Stripe, my own custom code or Django in general is causing this, since it has not occurred on any of my other projects.  I have already mentioned a number of concerns I have about the way the site is structured, in particularly how Stripe client secret keys are handled, and wonder if it could be related to this. It may be where I have removed the JQuery.post API - un-necessary as it was in the context of the site perhaps that buffer served to re-assure the browser. If this were to be a production site with live payments and customers I would definitely need to address these concerns in the manner I have already outlined in this section. As things stand it is only an 8 week project and in the context of its current purpose and that timescale I'm not able to prioritise this at all for now.
 
+QUANTITY BUG:
+
+In our final meeting my mentor pointed out that if he purchased 7 million units of cheese from the product view it broke the site.  I added javascript to disable the add or buy now buttons for numbers outside of reasonable parameters to stop this becoming a problem.  I also updated the database fields so that a user may spend several googols on cheese if they wish.
+
 
 
 

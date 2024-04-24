@@ -9,7 +9,8 @@ from datetime import datetime, timedelta
 def view_results(request):
     """
     Displays and filters a view allowing users to view and purchase
-    various types of cheese or beer.
+    various types of cheese or beer. Please note aspects of the search function
+    are adapted directly from Boutique Ado, albeit in a highly modified state.
     """
     product_list = Product.objects.all()
     search_term = "all products"

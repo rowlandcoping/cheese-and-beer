@@ -15,7 +15,7 @@ html, body {
 }
 button {
     outline: none;
-    border:none;    
+    border:none;
 }
 a, a:visited, a:link, a:active, a:hover, a:focus  {
     text-decoration: none;
@@ -1340,7 +1340,6 @@ input[type=number] {
     align-items:center;
     text-align:center;
 }
-
 .not-found-section {
     width:800px;
     margin-bottom:10px;

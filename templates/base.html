@@ -54,13 +54,12 @@
             </div>
             <div id="account-menu">
                 <div id="account-nav">
-                    <div id="account-mouseout" class="menu-header">
+                    
                         {% if authenticated %}
-                        <a href="{% url 'account_overview' %}"><i class="fa-solid fa-user"></i> <span>Account</span> <i class="fa-solid fa-caret-down"></i></a>
+                        <a href="{% url 'account_overview' %}"><div id="account-mouseout" class="menu-header"><i class="fa-solid fa-user"></i> Account <i class="fa-solid fa-caret-down"></i></div></a>
                         {% else %}
-                        <span><i class="fa-solid fa-user"></i> <span>Account</span> <i class="fa-solid fa-caret-down"></i></span>
+                        <div id="account-mouseout" class="menu-header"><i class="fa-solid fa-user"></i> <span>Account</span> <i class="fa-solid fa-caret-down"></i></div>
                         {% endif %}
-                    </div>
                     <div id="account-mouseover" class="not-displayed">                       
                         {% if superuser %}
                         <a href="{% url 'admin_console' %}" class="nav-menu-link"><span>administration</span></a>

@@ -225,7 +225,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (imageUpload) {
         imageUpload.addEventListener("change", previewPhoto);
     }
-    //cancel image update/add
+    // cancel image update/add
     document.addEventListener("click", function(e){
         const target = e.target.closest("#profile-pic-cancel"); 
         if(target){
@@ -284,7 +284,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 errorDiv.textContent = '';
             }
         });
-        //end section
+        // end section from Boutique Ado
 
         // this function prevents the form from submitting when the button is activated
         const form = document.getElementById('payment-form');
@@ -294,7 +294,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 e.preventDefault();
             }
         });    
-        //Validates form with Javascript to avoid errors or premature submission
+        // Validates form with Javascript to avoid errors or premature submission
         const paymentSubmitButtons = Array.from(document.getElementsByClassName('payment-button'));
         paymentSubmitButtons.forEach(item => {
             item.addEventListener('click', function handleClick(event) {
@@ -327,10 +327,10 @@ document.addEventListener("DOMContentLoaded", function() {
                         }
                     }
                 }
-                //submits payment intent if form validates                               
+                // submits payment intent if form validates                               
                 if (takePayment === true) {
                     document.getElementById('form-submit-button').click();
-                    //disables form input etc to prevent multiple submissions
+                    // disables form input etc to prevent multiple submissions
                     card.update({ 'disabled': true});
                     const formButtons = Array.from(document.getElementsByClassName('form-button'));
                     for (let i = 0; i < formButtons.length; i++) {
@@ -344,18 +344,18 @@ document.addEventListener("DOMContentLoaded", function() {
                         payment_method: {
                             card: card,
                             billing_details: {
-                                email: document.getElementById('order-email').value,
+                                email: document.getElementById('order-email').value.trim(),
                             }
                         },
                         shipping: {
                             name: form.full_name.value,
                             address: {
-                                line1: form.address_line_one.value,
-                                line2: form.address_line_two.value,
-                                city: form.town_or_city.value,
-                                state: form.county.value,
-                                postal_code: form.postcode.value,
-                                country: form.country.value,
+                                line1: form.address_line_one.value.trim(),
+                                line2: form.address_line_two.value.trim(),
+                                city: form.town_or_city.value.trim(),
+                                state: form.county.value.trim(),
+                                postal_code: form.postcode.value.trim(),
+                                country: form.country.value.trim(),
                             }
                         },
                     }).then(function(result) {
@@ -388,11 +388,19 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }  
 
-    //QUANTITY CONTROL IN PRODUCT VIEW.
+    // QUANTITY CONTROL IN PRODUCT VIEW.
     if (document.getElementById('decrement-amount')) {
         document.addEventListener("click", function(e){
             const target = e.target.closest("#decrement-amount");
             if(target){
+                if (document.getElementById('quantity').value > -1 && document.getElementById('quantity').value < 202) {
+                    const disabledSections = Array.from(document.getElementsByClassName('product-action-button'));
+                    for (let i = 0; i < disabledSections.length; i++) {
+                        disabledSections[i].style.pointerEvents = "auto";
+                        disabledSections[i].style.opacity = "1";
+                        document.getElementById('quantity-alert').style.display="none";
+                    }
+                }
                 if (document.getElementById('quantity').value > 1) {
                     let initial_price = document.getElementById('product-price').innerHTML;
                     initial_price = Number(initial_price);
@@ -407,6 +415,14 @@ document.addEventListener("DOMContentLoaded", function() {
         document.addEventListener("click", function(e){
             const target = e.target.closest("#increment-amount");
             if(target){
+                if (document.getElementById('quantity').value > -1 && document.getElementById('quantity').value < 202) {
+                    const disabledSections = Array.from(document.getElementsByClassName('product-action-button'));
+                    for (let i = 0; i < disabledSections.length; i++) {
+                        disabledSections[i].style.pointerEvents = "auto";
+                        disabledSections[i].style.opacity = "1";
+                        document.getElementById('quantity-alert').style.display="none";
+                    }
+                }
                 if (document.getElementById('quantity').value < 200) {
                     let initial_price = document.getElementById('product-price').innerHTML;
                     initial_price = Number(initial_price);
@@ -425,12 +441,37 @@ document.addEventListener("DOMContentLoaded", function() {
                 initial_price = Number(initial_price);
                 let initial_quantity = document.getElementById('quantity').value;
                 initial_quantity = Number(initial_quantity);
+                const enableSections = Array.from(document.getElementsByClassName('product-action-button'));
+                    for (let i = 0; i < enableSections.length; i++) {
+                        enableSections[i].style.pointerEvents = "auto";
+                        enableSections[i].style.opacity = "1";
+                    }
+                    document.getElementById('quantity-alert').style.display="none";
+                if (initial_quantity > 200 || initial_quantity < 0) {
+                    const disabledSections = Array.from(document.getElementsByClassName('product-action-button'));
+                    for (let i = 0; i < disabledSections.length; i++) {
+                        disabledSections[i].style.pointerEvents = "none";
+                        disabledSections[i].style.opacity = "0.5";
+                    }
+                    document.getElementById('quantity-alert').style.display="inline-block";
+                }
                 document.getElementById('product-view-total').innerHTML = (Math.round((initial_price * initial_quantity) * 100) / 100).toFixed(2);                
             }
         });
     }
+    // set initial status of buttons if outside boundaries on page refresh
+    if (document.getElementById('decrement-amount')) {
+        let quantity = document.getElementById('quantity').value;
+        if (quantity > 200) {
+            const disabledSections = Array.from(document.getElementsByClassName('product-action-button'));
+            for (let i = 0; i < disabledSections.length; i++) {
+                disabledSections[i].style.pointerEvents = "none";
+                disabledSections[i].style.opacity = "0.5";
+            }
+        }
+    }
 
-    //BUY IT NOW ALERTS
+    // BUY IT NOW ALERTS
     if (document.getElementById('buynow-alert')) {
         const buyNowButtons = Array.from(document.getElementsByClassName('buy-now'));
         buyNowButtons.forEach(item => {
@@ -475,7 +516,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    //ADDRESS REMOVAL ALERTS
+    // ADDRESS REMOVAL ALERTS
     if (document.getElementById('address-alert')) {
         const removeAddressButtons = Array.from(document.getElementsByClassName('remove-address'));
         removeAddressButtons.forEach(item => {
@@ -512,7 +553,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    //MESSAGE REMOVAL ALERTS
+    // MESSAGE REMOVAL ALERTS
     if (document.getElementById('message-alert')) {
         const removeAddressButtons = Array.from(document.getElementsByClassName('remove-message'));
         removeAddressButtons.forEach(item => {
@@ -571,7 +612,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    //ADD OR SELECT ADDRESSES FROM CHECKOUT FOR LOGGED IN USERS
+    // ADD OR SELECT ADDRESSES FROM CHECKOUT FOR LOGGED IN USERS
     if (document.getElementById('add-new-address')) {
         document.addEventListener("click", function(e){
             const target = e.target.closest("#add-new-address");
@@ -599,7 +640,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }
         });
-        /*styling for address selector*/
+        //styling for address selector
         document.addEventListener("click", function(e){
             const target = e.target.closest(".address-bar");
             if(target){
@@ -621,7 +662,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // SORT FILTER, PRODUCT VIEW PAGE
-    //NB this code is converted from the Boutique Ado project    
+    // NB this code is converted from the Boutique Ado project    
     document.addEventListener("change", function(e){
         const target = e.target.closest("#sort-selector");
         if(target){
@@ -644,6 +685,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     // FADE EFFECT FOR BASKET ADJUSTMENT MESSAGES
+    // Please note this code is adapded from a snipped found on the geeksforgeeks.org website as mentioned in README.md
     function hide(){
         let opacity=0; 
         let intervalID=0;
@@ -664,7 +706,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }, 500);
 
-    //ENSURES CORRECT RADIAL BUTTON CHECKED ON BEER EDIT FORM
+    // ENSURES CORRECT RADIAL BUTTON CHECKED ON BEER EDIT FORM
     if (document.getElementById("container-selected")) {
         const container = document.getElementById("container-selected").value;
         if (container ==="can") {
