@@ -146,6 +146,11 @@ URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/my-account/contact/ \
 Repaired Issues: duplicate stray ids in input elements. \
 Outstanding Issues: None.
 
+Page validated: Contact Us Confirmation Page\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/message-sent/xxxxxx \
+Repaired Issues: duplicate stray ids in input elements. \
+Outstanding Issues: None.
+
 ADMINISTRATOR ONLY PAGES
 
 Page validated: Admin Console\
@@ -207,8 +212,10 @@ Outstanding Issues: None.
 ### CSS Validation
 ([back to top](#testing-documentation))
 
-File Validated: style.css\
-URL: https://hopes-and-dreams-15b83f2d1383.herokuapp.com/ \
+All my css for this project is present in a single file, partly because many of the styles are re-used across multiple pages, and partly because this means with the low file size of my css file the site will run faster, loading fewer static resources.
+
+File Validated: base.css\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/ \
 Repaired Issues: 2 issues found - 1 incorrect use of relative and 1 legacy negative padding value which was removed.  I also had a few warnings about two elements with borders the same color as their backgrounds, and a further 3 warnings about the CSS used to hide the native html used to adjust for an integer field. I have not fixed these warnings, in the first case because it is intentional behaviour (the border is set like this so that the elememt size is constant and it stands out on hover).  In the second case the CSS is purely cosmetic, so if for example a 95 year old is still for some reason using Internet Explorer and the field adjuster is not hidden it won't affect the functionality or layout of the site at all.\
 Outstanding Issues: None.
 
@@ -217,9 +224,13 @@ Outstanding Issues: None.
 ### JavaScript Validation
 ([back to top](#testing-documentation))
 
-I have validated my JavaScript file using [JSHint](https://jshint.com/)
+I have decided to put all the Javascript in one file for this project. One reason for this is that a number of my Javascript functions work across multiple views.  Where this is not the case I have taken the measure to ensure functions or listeners aren't active unless the required element is present on the page.  Opinion is mixed as to whether this is best practice or not but on a small project like this one I see no need for multiple resources, especially with the small file size of my script.js file, coming in at around 700 lines of code.
 
-Repaired Issues: I had to refactor some code due to the way I had set up a function, and I added a large number of semicolons.  I also found some undeclared variables which also required some refactoring.  The one outstanding error refers to Stripe, which JSHint sees as an undefined variable.  I believe this is unavoidable due to the way Stripe functions and the context in which JSHint lints the code - even in my editor it is flagged as undefined, however the Stripe functionality works perfectly which means I do not believe it is a problem.\
+I have validated my JavaScript file (script.js) using [JSHint](https://jshint.com/)
+
+Repaired Issues: 
+
+I had to refactor some code due to the way I had set up a function, and I added a large number of semicolons.  I also found some undeclared variables which also required some refactoring.  The one outstanding error refers to Stripe, which JSHint sees as an undefined variable.  I believe this is unavoidable due to the way Stripe functions and the context in which JSHint lints the code - even in my editor it is flagged as undefined, however the Stripe functionality works perfectly which means I do not believe it is a problem.\
 Outstanding Issues: Stripe flagged as undefined.
 
 ![image](media/testing/jshint-linted.png)
@@ -413,8 +424,6 @@ VIEW PRODUCT
 | Product Buy notification ('yes') | returns user to checkout page adding the item to the basket in correct quantity, returns appropriate notification | Success |
 | Product Add to wishlist | successfully adds the product to the wishlist for that user, re-loads with remove from wishlist button | Success |
 | Product Remove from wishlist | successfully adds the product to the wishlist for that user, re-loads with add to wishlist button | Success |
-| Product Add to wishlist | successfully adds the product to the wishlist for that user, re-loads with remove from wishlist button | Success |
-| Product Remove from wishlist | successfully adds the product to the wishlist for that user, re-loads with add to wishlist button | Success |
 | Product Quantity Plus | Increments quantity counter by 1, updates total | Success |
 | Product Quantity Plus | Will not advance beyond 200 units | Success |
 | Product Quantity Minus | Decrements quantity counter by 1, updates total | Success |
@@ -547,6 +556,12 @@ MY ACCOUNT
 | ------------------------------------- | -------------------------------- | ------- |
 | DOM |	all page elements load as expected |	Success |
 | DOM |	all interactable elements change on hover and show pointer | Success |
+| Manage addresses link | returns manage addresses page | Success |
+| View orders link | returns view orders page | Success |
+| View wishlist link | returns view wishlist page | Success |
+| Change password link | returns reset password page | Success |
+| Contact Us link | returns contact form page page | Success |
+| Log out link | logs a user out | Success |
 
 MANAGE ADDRESSES
 
@@ -554,6 +569,14 @@ MANAGE ADDRESSES
 | ------------------------------------- | -------------------------------- | ------- |
 | DOM |	all page elements load as expected |	Success |
 | DOM |	all interactable elements change on hover and show pointer | Success |
+| Account page link | returns user to the account page | Success |
+| Add an address button | returns add address form | Success |
+| Edit link | returns edit address page pre-populated with the correct address | Success |
+| remove link | opens remove address confirmation alerd | Success |
+| alert no button | closes the alert and reverts the page to the original state | Success |
+| alert yes button | deletes the address.  If the address was default, the default address reverts to the first address added | Success |
+| set default link | sets the selected address to default, re-loads the page | Success |
+
 
 ADD AN ADDRESS
 
@@ -561,13 +584,23 @@ ADD AN ADDRESS
 | ------------------------------------- | -------------------------------- | ------- |
 | DOM |	all page elements load as expected |	Success |
 | DOM |	all interactable elements change on hover and show pointer | Success |
+| Manage addresses link | returns user to the manage addresses page | Success |
+| Input elements | display as expected on focus | Success |
+| Submit button | submits form only when correctly filled out, returns user to address page with success message| Success |
+| set default checkbox | sets the new address to default if checked | Success |
+| postcode | capitalized once it has been submitted if previously in lower case | success |
 
 EDIT AN ADDRESS
 
 | Feature Tested                        | Expected Outcome                 | Result  |
 | ------------------------------------- | -------------------------------- | ------- |
-| DOM |	all page elements load as expected |	Success |
+| DOM |	all page elements load as expected | Success |
 | DOM |	all interactable elements change on hover and show pointer | Success |
+| Manage addresses link | returns user to the manage addresses page | Success |
+| Input elements | display as expected on focus | Success |
+| Submit button | submits form only when correctly filled out, returns user to address page with success message | Success |
+| set default checkbox | sets the address to default if checked | Success |
+| postcode | capitalized once it has been submitted if previously in lower case | success |
 
 ORDERS PAGE
 
@@ -575,6 +608,15 @@ ORDERS PAGE
 | ------------------------------------- | -------------------------------- | ------- |
 | DOM |	all page elements load as expected |	Success |
 | DOM |	all interactable elements change on hover and show pointer | Success |
+| Order View | If no orders have been made appropriate message is displayed | Success |
+| Search input element | displays as expected on focus | Success |
+| Account page link | returns user to the account page | Success |
+| Order search button | returns page with error message if input not filled out | Success |
+| Order search button | returns appropriate results when filled out as instructed | Success |
+| Order search button | if no results found appropriate message displayed | Success |
+| View link | takes user to order items view for selected order | Success |
+| Contact link | opens contact form page, with form pre-populated according to the order and logged in user | Success |
+| Products list | clicking the product name takes user to the product view page | Success |
 
 VIEW ORDER INFO
 
@@ -582,6 +624,14 @@ VIEW ORDER INFO
 | ------------------------------------- | -------------------------------- | ------- |
 | DOM |	all page elements load as expected |	Success |
 | DOM |	all interactable elements change on hover and show pointer | Success |
+| Contact link | opens contact form page, with form pre-populated according to the order and logged in user | Success |
+| Product Image | clicking the product image returns the product detail view for that product | Success |
+| Product Name | clicking the product name returns the product detail view for that product | Success |
+| Product Buy Again button (no items in basket) | adds item to basket, returns user to checkout page, triggers appropriate notification | Success |
+| Product Buy Again button (items in basket) | successfully triggers a buy now notification for the product if items are in basket | Success |
+| Product Buy notification ('no') | returns user to checkout page with just that item in basket, returns appropriate notification | Success |
+| Product Buy notification ('yes') | returns user to checkout page adding the item to the basket, returns appropriate notification | Success |
+| View another order button| returns user to orders page | Success |
 
 VIEW WISHLIST
 
@@ -589,6 +639,17 @@ VIEW WISHLIST
 | ------------------------------------- | -------------------------------- | ------- |
 | DOM |	all page elements load as expected |	Success |
 | DOM |	all interactable elements change on hover and show pointer | Success |
+| Account page link | returns user to the account page | Success |
+| Product Image | clicking the product image returns the product detail view for that product | Success |
+| Product Name | clicking the product name returns the product detail view for that product | Success |
+| Product Add button | successfully adds product to basket, activates appropriate notification | Success |
+| Product Buy button (no items in basket) | adds item to basket, returns user to checkout page, triggers appropriate notification | Success |
+| Product Buy button (items in basket) | successfully triggers a buy now notification for the product if items are in basket | Success |
+| Product Buy notification ('no') | returns user to checkout page with just that item in basket, returns appropriate notification | Success |
+| Product Buy notification ('yes') | returns user to checkout page adding the item to the basket, returns appropriate notification | Success |
+| Product Add to wishlist | successfully adds the product to the wishlist for that user, re-loads with remove from wishlist button | Success |
+| Product Remove from wishlist | successfully adds the product to the wishlist for that user, re-loads with add to wishlist button | Success |
+
 
 CONTACT US
 
@@ -596,6 +657,24 @@ CONTACT US
 | ------------------------------------- | -------------------------------- | ------- |
 | DOM |	all page elements load as expected |	Success |
 | DOM |	all interactable elements change on hover and show pointer | Success |
+| DOM | contact form is correctly pre-populated based on point of origin and user | Success |
+| Account page link | returns user to the account page | Success |
+| Input elements | display as expected on focus | Success |
+| Submit button | submits form only when correctly filled out, returns user to contact confirmation page | Success |
+
+CONTACT US CONFIRMATION
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+| DOM | contact form is correctly pre-populated based on point of origin and user | Success |
+| Account page link | returns user to the account page | Success |
+| Input elements | display as expected on focus | Success |
+| Submit button | submits form only when correctly filled out, returns user to contact confirmation page | Success |
+
+
+
 
 ADMIN CONSOLE
 

@@ -39,9 +39,9 @@ You don't have to look far to find the best online retailers.  Amazon is the ben
 
 This website is for a specialist retailer though, so I have looked for examples in that area as well.  Paxton and Whitfield's website, for example, is exhaustive in content and slick in design, and provides a good benchmark for the sort of range a decent cheese retailer needs to be carrying.  I have also found guides on how to pair cheese with beer which I think will be very useful when making suggestions to the user.
 
-One thing that strikes me about Amazon in particular but also the cheese retailer is the sheer number of menus, sub-menus and options.  Paxton and Whitfields has no fewer than nine options in their main navigation bar, which open admittedly very nice sub-pages when you mouse-over.  Amazon... well Amazon is just ridiculous (it gets even more ridiculous when you try and navigate AWS but that's another matter).  I think Amazon assumes a certain familiarity from the user, and gets away with a lot of bad UI as a result.  Most people know where to find what they need on there.  I pretty much never click and of the navigation links though, aside from my account options.  What would a new user make of it?  When you search for products and scroll down the page you get a heading saying more products, then the same heading again with even more products... then you finally get pagination! I think for a specialist site aimed at more casual users, you just can't get away with most of this - people will get lost and give up.  The simpler the navigation the better.  Of course, there is a huge caveat to this.  For the exact same reason it would be foolish not to emulate Amazon's site layout to some degree, so that the majority of users will feel comfortable and instantly be able to find where everything is.
+One thing that strikes me about Amazon in particular but also the cheese retailer is the sheer number of menus, sub-menus and options.  Paxton and Whitfields has no fewer than nine options in their main navigation bar, which open admittedly very nice sub-pages when you mouse-over.  Amazon... well Amazon is just ridiculous (it gets even more ridiculous when you try and navigate AWS but that's another matter).  I think Amazon assumes a certain familiarity from the user, and gets away with a lot of bad UI as a result.  Most people know where to find what they need on there.  I pretty much never click on any of the navigation links though, aside from the 'my account' options.  What would a new user make of it?  When you search for products and scroll down the page you get a heading saying more products, then the same heading again with even more products... then you finally get pagination! I think for a specialist site aimed at more casual users, you just can't get away with most of this - people will get lost and give up.  The simpler the navigation the better.  Of course, there is a huge caveat to this.  For the exact same reason it would be foolish not to emulate Amazon's site layout to some degree, so that the majority of users will feel comfortable and instantly be able to find where everything is.
 
-When it comes to positioning and branding Paxton and Whitfield seems to be the upper end of the market. It assumes a certain level of knowledge about the products, as I'd imagine most visitors will have.  At the other end of the market is the supermarket, and whilst you can purchase a similar quantity of pretty decent cheese and get change from ten pounds, it does lack a certain sense of occasion.  There is room then, in the middle ground.  The cheese and beer branding should sit perfectly in this area - craft ales rather than fine wines, and enough sense of occasion to feel like you're doing something special without being unconfortable about the amount of money you're spending on it.  A site that isn't just for enthusiasts, but is for everyone.
+When it comes to positioning and branding Paxton and Whitfield seems to be at the upper end of the market. It assumes a certain level of knowledge about the products, as I'd imagine most visitors will have.  At the other end of the market is the supermarket, and whilst you can purchase a similar quantity of pretty decent cheese and get change from ten pounds, it does lack a certain sense of occasion.  There is room then, in the middle ground.  The cheese and beer branding should sit perfectly in this area - craft ales rather than fine wines, and enough sense of occasion to feel like you're doing something special without being unconfortable about the amount of money you're spending on it.  A site that isn't just for enthusiasts, but is for everyone.
 
 ### 2) Project Goal
 
@@ -85,7 +85,7 @@ I am lucky in that I have developed strong skills with vanilla Javascript and CS
 
 One issue in dispensing with Bootstrap is the integration of Bootstrap JQuery libraries into the course material, and some of the custom methods that were used in the checkout process which I'm not sure how to replicate as yet. Whilst I can see the benefit of the shorthand, going forward I would rather invest time in learning something like React and REST APIs.  With the time limitations involved in this project, it is much easier for me to use the vanilla JavaScript I'm already familiar with - hopefully it will be pretty straighforward to build the vanilla JS code to emulate these methods, using fetch().
 
-This all said, it is clear to me that some of the dependencies from the learning I have done (notably Stripe, Django, and AllAuth forms) benefit from using Crispy Forms and the templates that come with such libraries. I think there would be a very high development overhead in doing all this customisation myself (more so than building the forms from scratch). As such I have been looking at other CSS libraries that integrate with Crispy Forms, and have decided attempt to use Tailwind. It seems to be the most popular and easy to use framework out there, and from my research seems to come without a lot of the bloat associated with Bootstrap, relying as it does on a range of helper classes. Ideally, I want the best of both worlds - instantly formatted forms that are easy to customise where necessary. Speaking frankly it may even prove to be easier to style the whole website in the manner of the forms than the other way around!
+This all said, it is clear to me that some of the dependencies from the learning I have done (notably Stripe, Django, and AllAuth forms) benefit from using Crispy Forms and the templates that come with such libraries. I think there would be a very high development overhead in doing all this customisation myself (more so than building the forms from scratch). As such I have been looking at other CSS libraries that integrate with Crispy Forms, and have decided to attempt to use Tailwind. It seems to be the most popular and easy to use framework out there, and from my research seems to come without a lot of the bloat associated with Bootstrap, relying as it does on a range of helper classes. Ideally, I want the best of both worlds - instantly formatted forms that are easy to customise where necessary. Speaking frankly it may even prove to be easier to style the whole website in the manner of the forms than the other way around!
 
 ### Structure
 
@@ -245,7 +245,7 @@ BLUE SKY FEATURES:
 ## UX - Structure
 ([back to top](#contents))
 
-As with the Scope, it is important to make clear at that the below is the structure envisaged at the beginning of the project, and that there was always anticipated to be an evolutionary process in producing an MVP.  For a full overview of specification changes in the finished MVP, please click [HERE](#specification-changes).
+As with the Scope, it is important to make clear the structure outlined here is the one envisaged at the beginning of the project, and that there was always anticipated to be an evolutionary process in producing an MVP.  For a full overview of specification changes in the completed MVP, please click [HERE](#specification-changes).
 
 The data structure for the submitted MVP can be found [HERE](#mvp-data-structure).
 
@@ -253,7 +253,7 @@ The data structure for the submitted MVP can be found [HERE](#mvp-data-structure
 
 #### Main Template and Navigation
 
-The homepage navigation will emulate to a degree the way Amazon is arranges, with a small logo, prominent search and key navigation arranged horizontally across the top of the screen.  On mobile this stacks to arrange the navigation filters below the search and account links.  For logged in users the can access their account details at the top right of the page, as is convention.
+The homepage navigation will emulate to a degree the way Amazon is arranged, with a small logo, prominent search and key navigation arranged horizontally across the top of the screen.  On mobile this stacks to arrange the navigation filters below the search and account links.  For logged in users the can access their account details at the top right of the page, as is convention.
 
 Although I generally try to avoid drop-down menus, I believe they will be necessary to allow users to filter without multiple clicks, but I do not wish menus to go more than 1 deep.  Javascript will be effective on desktop, and allow users to filter all by category with one click whilst using mouseover to reveal other options.  For mobile this will require 2 taps but I think users will be used to this.
 
@@ -275,7 +275,7 @@ I intend to give users a choice of saved addresses, and the option to designate 
 
 #### Confirmation Page
 
-This will be straightforward so I haven't wireframed it, but I also want to provide unique order references so that users can track their order without logging in and provides a point of reference.  This is very important for unregistered users that are not logged in.
+This will be straightforward so I haven't wireframed it, but I also want to provide unique order references so that users can track their order without logging in.  This is very important for unregistered users.
 
 #### Add / Edit Product Page
 
@@ -367,7 +367,7 @@ rgb(63, 63, 63): grey-text
 SITE THEME
 
 rgb(1, 70, 1): background for top section of site containing navigation and search, also used for form buttons and links, and a border on focussed form elements.
-rgb(0, 51, 0): background for checkout buttons and the main site logo. generally used to accent the main green theme, also used for links.
+rgb(0, 51, 0): background for checkout buttons and the main site logo. Generally used to accent the main green theme, also used for links.
 rgb(0, 15, 0) : dark green border used in title banner, also used to accent form fields
 rgb(255, 255, 140): text color for titles and navigation, also inverted with the forest green for mouseover effect.  Also used on mousover for checkout and basket buttons.
 rgb(255, 255, 255): white is used as the immediate background for across the listing and purchases sections of the site.  It provides a contrast with the light yellow used for page backgrounds on these pages.
@@ -400,23 +400,23 @@ Content: RobotoFlex (google fonts)
 
 ### Images
 
-The only static image is the background used on form pages, which comes from usplash.
+The only static image is the background used on form pages, which comes from unsplash.
 
 ### Navigation
 
 The navigation is drop-down on desktop to limit the number of clicks between a user and their destination. The idea is that by simply having a drop-down category selector a user can immediately navigate to the content they want.  This is a two tap process on mobile but the principle remains the same.  The navigation is very much in keeping with the site theme, and to some degree actually sets the site theme.
 
-Buttons are clearly styled according to their purpose, so without even reading them a user can know what they are expected to do.  So the outise green buttons to make purchases clearly indicate a major action, whilst the buy now and add buttons are consistently styled and retain an icon to make their purpose clear.
+Buttons are clearly styled according to their purpose, so without even reading them a user can know what they are expected to do.  So the outsize green buttons to make purchases clearly indicate a major action, whilst the buy now and add buttons are consistently styled and retain an icon to make their purpose clear.
 
-Results from searches are clearly indicated, and in the search listings I have underlined key links either immediately or in the case of listing titles on hover to make the action which the user needs to take as clear as possible. When a user adds a product to their basket there is a clear message on the page, indicating the specific product, and the user is taken back to the view that they were in so they retain their search results.
+Results from searches are clearly indicated, and in the search listings I have underlined key links either immediately, or in the case of listing titles, on hover to make the action which the user needs to take as clear as possible. When a user adds a product to their basket there is a clear message on the page, indicating the specific product, and the user is taken back to the view that they were in so they retain their search results.
 
 Across the user account section, all pages have a link back to the user's most likely point of origin, which I think really helps the flow of the site.
 
-Of course user experience is key, but the focus of this site is driving people to make purchases.  As such most calls to action are focussed around pointing people in this direction, including buy now buttons on every product listing (even 'buy again' on the order view page) which take the user directly to checkout, and multiple purchase buttons on the checkout page itself, which on desktop are prominently located at the top right of the page.
+Of course user experience is key, but the focus of this site is driving people to make purchases.  As such most calls to action are focussed around pointing people in this direction, including buy now buttons on every product listing (even 'buy again' on the order view page) which take the user directly to checkout.  THere are multiple purchase buttons on the checkout page itself, which on desktop are prominently located at the top right of the page.
 
 ### Alerts
 
-The alert system on cheese and beer is key to the user experience.  So if a user adds or updates a product to their basket from any screen, they see an alert detailing the specific product next to the checkout button, which fades to avoid obscuring the navigation.  I learned from Amazon's Buy Now process which is confusing and inconsistent, by providing the user with a 'buy now' alert if they click buy now with products already in their basket.  In this case they are asked if they want to clear other products in their basket or retain them, before the new product is added and they are taken to the checkout screen.  This is aimed at making the process as clear and seamless as possible.  
+The alert system on Cheese and Beer is key to the user experience.  If a user adds or updates a product to their basket from any screen, they see an alert detailing the specific product next to the checkout button, which fades to avoid obscuring the navigation.  I have learned a lot from Amazon's Buy Now process, which is confusing and inconsistent. By providing the user with a 'buy now' alert if they click buy now with products already in their basket, it provides the user with a clear pathway to checkout. In this case they are asked if they want to clear other products in their basket or retain them, before the new product is added and they are taken to the checkout screen.  This is aimed at making the process as clear and seamless as possible.  
 
 Additionally users are warned if they are about to delete an address from their addresses page, although the same doesn't apply to items in the wishlist or basket as they can easily be re-added.
 
@@ -424,11 +424,11 @@ On the admin site the same alerts provide clear feedback for user actions.
   
 ### Responsiveness
 
-The site has been built originally for desktop, but designed throghout to easily scale for mobile and with that in mind.  The exceptions in my mind are the order list and messages view pages, which had to display a lot of information in a tabular format  to be effective. Thiscaused difficulties in scaling them to mobile to the point where I had to remove the products ordered section from the orders list view on smaller screens.  Although I believe they are responsive in their current form, if I had time to re-design them then I would should the site go into live production.  Because the admin site is largely for employees and only ever likely to be used in desktop environments, I have not implemented features like auto-resizing of form textboxes to content with javascript, for example, but all admin site pages are still perfectly responsive and look good on mobile.
+The site has been built for desktop, but designed throughout to easily scale for mobile and with that in mind.  The exceptions in my mind are the order list and messages view pages, which had to display a lot of information in a tabular format to be effective. This caused difficulties in scaling them to mobile to the point where I had to remove the 'products ordered' section from the orders list view for smaller screens.  Although I believe they are responsive in their current form, should the site go into live production I would like to re-design them.  Because the admin site is largely for employees and only ever likely to be used in desktop environments, I have not implemented features like auto-resizing of form textboxes to content, for example, but all admin site pages are still perfectly responsive and look good on mobile.
 
-I built the site's responsiveness using the following break-points
+I built the site's responsiveness using the following break-points:
 
-max-width: 359px (for very very small phones)
+max-width: 359px (for very very very small phones)
 max width: 450px (the main break point for converting to smaller mobile format)
 max-width: 650px (the main break point for converting to a mobile format)
 max width: 940px (for large tablets or people viewing in smaller windows)
@@ -448,7 +448,7 @@ The final feature list for the MVP contains everything from the initial outline,
 
 IMPLEMENTATION
 
-My intitial intention was to use crispy forms with templates from Tailwind, having had my fingers burned with Bootstrap on a previous project.  When I first installed Tailwind it immediately implemented it's own quite opinionated styling site-wide.  It also seemed a lot more complex than a simple CDN to deploy.  Given how unfamiliar I am with it, I opted to dispense with CSS libraries and style the site myself.  In the event, I found the forms in Django by far the easiest things to style.  In fact the challenge wasn't so much technical aspects as the volume of pages involved. I have definitely learned lessons on this project about improving the re-usability of my code, through thinking about my designs and how I will re-use them rather than just jumping in and attaching styles to elements - there is still room for improvement though. I also think these lessons will help me a lot when I do finally decide to use a CSS library again.
+My intitial intention was to use crispy forms with templates from Tailwind, having had my fingers burned with Bootstrap on a previous project.  When I first installed Tailwind it immediately implemented its own quite opinionated styling site-wide.  It also seemed a lot more complex than a simple CDN to deploy.  Given how unfamiliar I am with it, I opted to dispense with CSS libraries and style the site myself.  In the event, I found the forms in Django by far the easiest things to style.  In fact the challenge wasn't so much technical aspects as the volume of pages involved. I have definitely learned lessons on this project about improving the re-usability of my code, through thinking about my designs and how I will re-use them rather than just jumping in and attaching styles to elements. There is still room for improvement though. I also think these lessons will help me a lot when I do finally decide to use a CSS library again.
 
 USER SIGNUP
 
@@ -460,7 +460,7 @@ I decided to dispense with billing address options because it was not required b
 
 USER ACCOUNT PAGE
 
-Additionally the user account page now has multiple additional options, adding wishlist and contact options to the existing manage address and order fields. The orders and view order pages now provide direct access to the contact form with pre-populated details.  In fact as the site designer I highly recommend logging in before you use it because it provides so much more functionality.
+The user account page now has multiple additional options, adding wishlist and contact options to the existing manage address and order fields. The orders and view order pages now provide direct access to the contact form with pre-populated details.  In fact as the site designer I highly recommend logging in before you use it because it provides so much more functionality.
 
 WISHLIST
 
@@ -472,7 +472,7 @@ I have created a contact form so that users can make queries regarding their ord
 
 ADMIN SITE
 
-Although the Products is a single model I created two seperate forms to add either cheese or beer. This is all then processed in the same view. editing products is all accessed now via the admin site, and includes its own search facility.  Deleting a product is only available if none have been sold.
+Although Products is a single model I created two seperate forms to add either cheese or beer. This is all then processed in the same view. Editing products is all accessed now via the admin site, and includes its own search facility.  Deleting a product is only available if none have been sold.
 
 LOGGED OUT USERS
 
@@ -481,7 +481,7 @@ Even if a user is not registered they can still access their orders if they prov
 ### MVP Data Structure
 ([back to top](#contents))
 
-As anticipated, the final data structure is significantly more complex than the basic structure outlined at the outset of the project.  I have outlined significant changes below:
+As anticipated, the final data structure is significantly more complex than the basic structure outlined at the outset of the project.  I have detailed significant changes below:
 
 CHEESE AND BEER CATEGORY MODELS
 
@@ -530,10 +530,10 @@ Preparing for Deployment:
 
 - For the site to function, I needed to add a Procfile to the repo containing the command to start the app (web: python app.py).
 - I already had an up-to-date requirements.txt file in my repository which I updated as I installed new dependencies.  This was a product of developing my project using a virtual environment in VS Code.
-- In order to serve my static files I decided to use WhiteNoise, in order to avoid dependence on AWS or incurring charges, for simplicity, and also because my media files are all stored in Cloudinary so nothing more was necessary.
+- In order to serve my static files I decided to use WhiteNoise, in order to avoid dependence on AWS or incurring charges. Because my media files are all stored in Cloudinary simply serving static files as efficiently as possible is my priority.
 - I added a runtime.txt file to the repo containing the Python version used for this project (python-3.10.12). I upgraded this version on Heroku to 3.10.14 to implement a security upgrade.  Interestingly my Linux Distro (Mint) still serves 3.10.12 as the latest version as of when I began work on this project.
 
-Deploying with Whitenoise:
+Deploying with WhiteNoise:
 
 In order to deploy with WhiteNoise I did the following:
 
@@ -586,11 +586,11 @@ If you wish to deploy a version of this website for yourself, here is how to go 
 
 #### Creating the database:
 
-This project uses PostgreSQL to store all data, therefore you will need a copy of the database to deploy it for yourself.
+This project uses PostgreSQL to store all data, therefore you will need to create a version of the database to deploy it for yourself.
 
  - You can sign up to ElephantSQL here [HERE](https://www.elephantsql.com/), this is what I am currently using.  A caveat to this is ElephantSQL is at end of life and will be decommissioned in January of next year, so if you want to work on the project longer term I recommend a more permanent solution.
  - Click 'Create New Instance' to create a new database. Mine is called cheese_beer.  If you click your newly-created database in ElephantSQL it provides all the settings you need to connect it to your Django project.
- - Be sure to migrate the database models to your database before you attempt to run the site. This will set all your models up on your database, ready to go!
+ - Be sure to migrate the database models to your database from your development platform before you attempt to run the site. This will set all your models up on your database, ready to go!
     - python3 manage.py makemigrations
     - python3 manage.py migrate
 
@@ -715,6 +715,13 @@ PLYMOUTH ARGYLE
 
 As a fan and former season ticket holder, I can't help but thing my site design has been influenced by their magnificent [home strip](https://www.argylesuperstore.co.uk/kits/home-kit/adults/2507_2324-home-shirt-womens.html) for this season.  It's a real shame the players aren't of the same standard as the shirts.
 
+CHEESE AND BEER
+
+The following websites have been instumental in furnishing me the the in-depth knowledge I needed to create this website:
+
+https://www.cheesesexdeath.com/the-5-cheese-types
+https://www.pigbeer.com/post/top-5-popular-types-of-beer-found-in-the-uk-and-how-best-to-drink-them
+
 ### Fonts
 
 [Fall Is Coming](https://www.fontspace.com/fall-is-coming-font-f30492)
@@ -750,15 +757,17 @@ The Code Institue project Boutique Ado is what I used to learn Django, and has b
 - Stripe payment confirmation
 - sort filter and search on product view page
 
-When it comes to passing the Javascript processing a stripe payment, I have used the Boutique Ado code as a base but made significant adjustments. I do not make a server request (this is covered in detail in the bugs section of [TESTING.md](TESTING.md)). and also all the JQuery is converted to Javascript.  I also make sure the form is validated with Javascript prior to processing the payment intent.
+When it comes to passing the Javascript processing a stripe payment, I have used the Boutique Ado code as a base but made significant adjustments. I do not make a server request (this is covered in detail in the bugs section of [TESTING.md](TESTING.md)). Additionally all the JQuery is converted to Javascript. I also make sure the form is validated with Javascript prior to processing the payment intent.
 
 HOPES AND DREAMS
 
-I have used some substantial chunks of code from my last project, including the image handling functionality and how Cloudinary is managed within the project. I have also used the JavaScript for the category selector in hopes and dreams in order to pair cheese with beers in my views for editing categories, which I felt was much easier than a series of drop-downs and actually easier to implement because the codebase already existed.
+I have used some substantial chunks of code from my last project, including the image handling functionality and how Cloudinary is managed within the project. I have also used the JavaScript for the category selector in Hopes and Dreams in order to pair cheese with beers in my views for editing categories, which I felt was much easier than a series of drop-downs and actually easier to implement because the codebase already existed.
 
 THE INTERNET
 
-I have opened so many tabs I can't remember them all and found a lot of great solutions, however for my basket alert messages I borrowed substantially from geeksforgeeks.org in order to add the fade effect: https://www.geeksforgeeks.org/how-to-add-fade-out-effect-using-pure-javascript/
+I have opened so many tabs during the cours of the last 8 weeks and found a lot of great solutions, however for my basket alert messages I borrowed substantially from geeksforgeeks.org in order to add the fade effect:
+
+ https://www.geeksforgeeks.org/how-to-add-fade-out-effect-using-pure-javascript/
 
 
 ### Acknowledgments
@@ -782,7 +791,7 @@ Development Environment: VS Code on Linux.\
 Wireframes: Balsamiq.\
 Database Modelling: dbdiagram.io\
 Image Creation: Bing Image Creator & Inkscape.\
-Image Editing: GIMP.
+Image Editing: GIMP.\
 Screen Capture: Kazam.
 
 ([back to top](#contents))
