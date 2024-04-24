@@ -1279,6 +1279,9 @@ input[type=number] {
 .alert-main-title {
     margin-bottom:10px;
 }
+#alert-name {
+    font-weight:bold;
+}
 
 /* 404 page */
 
@@ -1460,7 +1463,10 @@ input[type=number] {
 .general-form select {
     padding:4px;
 }
-#form-large button, .add-address-button, .orders-search button {
+.admin-page-button {
+    display:inline-block;
+}
+#form-large button, .add-address-button, .orders-search button, .admin-page-button {
     font-family:main;
     margin:10px 0;
     padding:2px 7px;
@@ -1471,10 +1477,15 @@ input[type=number] {
     border-radius:4px;
     box-shadow: 4px 4px 5px rgb(107, 107, 107);
 }
-#form-large button:hover, .add-address-button:hover, .orders-search button:hover {
+#form-large button:hover, .admin-page-button:hover, .add-address-button:hover, .orders-search button:hover {
     background-color:rgb(129, 153, 124);
     color:rgb(0, 15, 0);
 }
+.admin-page-button-container {
+    margin-top:5px;
+    border-top: 2px dotted grey;
+}
+
 .form-large-button {
     margin-top:5px;
     border-top: 1px dotted grey;

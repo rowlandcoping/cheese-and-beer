@@ -123,7 +123,7 @@ Outstanding Issues: None.
 
 Page validated: Orders Page\
 URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/my-account/orders/ \
-Repaired Issues: Stray tags, nesting issues \
+Repaired Issues: Stray tags, nesting issues. \
 Outstanding Issues: None.
 
 Page validated: View Order Info\
@@ -133,15 +133,71 @@ Outstanding Issues: None.
 
 Page validated: View Wishlist\
 URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/my-account/wishlist/ \
-Repaired Issues: missing image alts, duplicate superfluous ids. Also duplicate ids which meant creating a container div \
+Repaired Issues: missing image alts, duplicate superfluous ids. Also duplicate ids which meant creating a container div. \
 Outstanding Issues: None.
 
 Page validated: Contact Us\
 URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/my-account/contact/ \
-Repaired Issues: duplicate stray ids in input elements \
+Repaired Issues: duplicate stray ids in input elements. \
 Outstanding Issues: None.
 
 ADMINISTRATOR ONLY PAGES
+
+Page validated: Admin Console\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/admin-console/ \
+Repaired Issues: nesting issue with button inside an anchor.  converted to and styled a span. \
+Outstanding Issues: None.
+
+Page validated: Add Cheese Category\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/products/add-cheese-category/ \
+Repaired Issues: issue with empty src element in hidden element used to preview images.  struggled to add holding image until I realised the load static tag doesn't carry over from base.html, and had to be loaded in the template.  \
+Outstanding Issues: None.
+
+Page validated: Add Beer Category\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/products/add-beer-category/ \
+Repaired Issues: empty src attribute. \
+Outstanding Issues: None.
+
+Page validated: Edit Categories\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/products/edit-catgories/ \
+Repaired Issues: None. \
+Outstanding Issues: None.
+
+Page validated: Edit Cheese Category\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/products/edit-cheese-category/<category_id>/ \
+Repaired Issues: Unclosed elements. \
+Outstanding Issues: None.
+
+Page validated: Edit Beer Category\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/products/edit-beer-category/<category_id>/ \
+Repaired Issues: None (fixed prior to validation). \
+Outstanding Issues: None.
+
+Page validated: Add Beer\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/products/add-beer/ \
+Repaired Issues: removed unnecessary label for django form radio input. \
+Outstanding Issues: None.
+
+Page validated: Add Cheese\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/products/add-cheese/ \
+Repaired Issues: None. \
+Outstanding Issues: None.
+
+Page validated: Edit Existing Product\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/products/edit-product/ \
+Repaired Issues: Stray tag, nesting issue. \
+Outstanding Issues: None.
+
+Page validated: Product Edit Page\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/products/product-edit/<product_id>/ \
+Repaired Issues: removed unnecessary label for django form radio input. \
+Outstanding Issues: None.
+
+Page validated: View Customer Messages\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/admin-console/view-messages/ \
+Repaired Issues: nesting issues, stray tags. 
+Outstanding Issues: None.
+
 
 
 

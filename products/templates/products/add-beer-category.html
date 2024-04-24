@@ -5,6 +5,7 @@ Cheese and Beer - Add Beer Category
 {% endblock %}
 
 {% block content %}
+{% load static %}
 <div id="background-container">
     {% if messages %}
     {% for message in messages %}
@@ -47,7 +48,7 @@ Cheese and Beer - Add Beer Category
             <span id="profile-pic-cancel" class="not-displayed clickable-element">Cancel Upload</span>
             
             <div>
-                <img id="image-preview" class="not-displayed" src=" " alt="This is a preview of the uploaded image">
+                <img id="image-preview" class="not-displayed" src="{% static 'images/no-image.svg' %}" alt="This is a preview of the uploaded image">
             </div>
             <div class="form-large-button">
                 <button type="submit">Add Category</button>

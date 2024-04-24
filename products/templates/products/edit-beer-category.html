@@ -59,9 +59,11 @@ Cheese and Beer - Edit Beer Category
                 {% for category in cheese_categories %}
                 <div class="category-selector" id ="{{ category.id }}">{{ category.name}}</div>
                 {% endfor %}
-            <div>
+            </div>
             <div class="form-large-button">
                 <button type="submit">Update Category</button>
             </div>
         </form>
+    </div>
+</div>
 {% endblock %}
