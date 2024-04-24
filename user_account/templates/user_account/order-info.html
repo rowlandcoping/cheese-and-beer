@@ -84,11 +84,11 @@ Cheese and Beer
                     </div>
                     <div> 
                         {% if basket_total %}                
-                        <span class="product-action-button buy-now buy-again-button" id="basket-{{ item.product.id }}">
+                        <span class="product-action-button buy-now buy-again-button clickable-element" id="basket-{{ item.product.id }}">
                             <i class="fa-solid fa-credit-card"></i> Buy Again
                         </span>
                         {% else %}
-                        <span class="product-action-button buy-now buy-again-button" id="single-{{ item.product.id }}">
+                        <span class="product-action-button buy-now buy-again-button clickable-element" id="single-{{ item.product.id }}">
                             <i class="fa-solid fa-credit-card"></i> Buy Again
                         </span>                          
                         {% endif %}

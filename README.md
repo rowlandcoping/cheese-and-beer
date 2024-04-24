@@ -247,7 +247,7 @@ BLUE SKY FEATURES:
 
 As with the Scope, it is important to make clear at that the below is the structure envisaged at the beginning of the project, and that there was always anticipated to be an evolutionary process in producing an MVP.  For a full overview of specification changes in the finished MVP, please click [HERE](#specification-changes).
 
-The data structure for the submitted MPV can be found [HERE](#mvp-data-structure).
+The data structure for the submitted MVP can be found [HERE](#mvp-data-structure).
 
 ### Site pages and elements
 
@@ -445,6 +445,10 @@ As Donald Rumsfeld (RIP) memorably said:
 "There are known knowns. These are things we know that we know. There are known unknowns. That is to say, there are things that we know we don't know. But there are also unknown unknowns. There are things we don't know we don't know."
 
 The final feature list for the MVP contains everything from the initial outline, with additional features documented here including the wishlist and contact form.  Focus has been on providing an enhanced experience for logged-in users.  Overall, whilst I only wireframed a handful of pages there are now 32 pages on the site.  However most of them follow one or other of the templates outlined at the outset; product search, product view, order/basket list and forms.
+
+IMPLEMENTATION
+
+My intitial intention was to use crispy forms with templates from Tailwind, having had my fingers burned with Bootstrap on a previous project.  When I first installed Tailwind it immediately implemented it's own quite opinionated styling site-wide.  It also seemed a lot more complex than a simple CDN to deploy.  Given how unfamiliar I am with it, I opted to dispense with CSS libraries and style the site myself.  In the event, I found the forms in Django by far the easiest things to style.  In fact the challenge wasn't so much technical aspects as the volume of pages involved. I have definitely learned lessons on this project about improving the re-usability of my code, through thinking about my designs and how I will re-use them rather than just jumping in and attaching styles to elements - there is still room for improvement though. I also think these lessons will help me a lot when I do finally decide to use a CSS library again.
 
 USER SIGNUP
 

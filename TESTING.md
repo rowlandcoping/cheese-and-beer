@@ -116,7 +116,7 @@ URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/addresses/xxxx/ \
 Repaired Issues: None. \
 Outstanding Issues: None.
 
-Page validated: Add an Address\
+Page validated: Edit an Address\
 URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/addresses/edit-address/xxxx/ \
 Repaired Issues: None. \
 Outstanding Issues: None.
@@ -291,60 +291,366 @@ Users may delete any comments on their own dreams they find unacceptable, or if 
 ### Automated Testing
 ([back to top](#testing-documentation))
 
+During the course of the Django module we were shown how to use the testing feature and assess testing coverage.  I would have loved to implement it for this project, however on account of the size of the project and the timescales involved applying automated testing across the site would have taken too much time and resource to do properly.
+
+With this in mind and the fact I have a well established manual testing process which I have applied successfully to my last two projects, I have decided to stick to manual testing on this occasion, and look into automated testing once the MVP has been completed.
 
 ### Manual Testing
 ([back to top](#testing-documentation))
 
 #### Manually Testing Page Functionality
 
-For me the most sensible way of approaching this is to systematically check the functionality on every page to ensure that everything appears as intended when an action is taken on the site and that the database is updated accoringly.  As such I've created a table for each of the pages on the site and tested all of the features therein.
+Although there are a total of 32 pages across the site, manual testing is still practical because many of them are very similar, and none of them are extremely complicated. As such my apporach will be to systematically check the functionality of every page against expected outcomes to ensure the site is working as intended, rather than go through every line of code, which will only be necessary if I find a major bug.
 
-DREAMSCAPE PAGE:
-
-| Feature Tested                        | Expected Outcome                 | Result  |
-| ------------------------------------- | -------------------------------- | ------- |
-
-PERSONAL PROFILE PAGE:
+BASE TEMPLATE NAVIGATION:
 
 | Feature Tested                        | Expected Outcome                 | Result  |
 | ------------------------------------- | -------------------------------- | ------- |
+| Cheese menu | on mousover or onclick (for mobile) returns drop-down list of cheese categories | Success |
+| Cheese menu | mouseover highlights menu options correctly  | Success |
+| Cheese menu | on clicking out of the menu the menu hides (mobile)  | Success |
+| Cheese menu | each category returns product view with products in that category | Success |
+| Beer menu | on mousover returns or onclick (for mobile)  drop-down list of beer categories | Success |
+| Beer menu | mouseover highlights menu options correctly  | Success |
+| Beer menu | on clicking out of the menu the menu hides (mobile)  | Success |
+| Beer menu | each category returns product view with products in that category | Success |
+| Account menu | on mousover returns appropriate drop-down list to user status | Success |
+| Account menu | mouseover highlights menu options correctly  | Success |
+| Account menu | on clicking out of the menu the menu hides (mobile)  | Success |
+| Account menu | all menu options return the correct page | Success |
+| Main Search | mouseover or on-click effects on search button work correctly | Success |
+| Main Search | on entering a search term the product view is returned with appropriate results | Success |
+| Main Search | if no search term is entered the product view is returned with all products dispayed | Success |
+| Logo banner | returns the user to the homepage | Success |
+| Checkout button | only visible if the user has something in their basket | Success |
+| Checkout button | mouseover/active effects work as intented | Success |
+| Checkout button | on click takes user directly to checkout page | Success |
+| Basket section | only visible if the user has something in their basket | Success |
+| Basket section | mouseover/active effects work as intented | Success |
+| Basket section | on click takes user directly their basket of goods | Success |
 
+HOME PAGE:
 
-MANAGE CATEGORIES
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+| Buy cheese button | returns product list view of all cheeses | Success |
+| Buy beer button | returns product list view of all beers | Success |
+
+FIND ORDER:
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+| Input fields | highlight correctly when focussed | Success |
+| Form element | form will not submit unless all fields correctly filled out | Success |
+| Form element | accurately filled out form returns specific order items | Success |
+
+404 PAGE
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+| DOM |	page loads correctly whenever an invalid url is entered | Success |
+| Life goals button | Returns product view with a list of all cheeses  | Success |
+
+PRODUCTS LIST PAGE AND SEARCH
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+| Initial Sorting |	Products initially sorted by most recently added |	Success |
+| Search Text |	Correctly displays the search results |	Success |
+| Sort by Price Filter (low-high) | Orders products from the cheapest by weight/volume to the most expensive |	Success |
+| Sort by Price Filter (high-low) | Orders products from the most expensive by weight/volume to the cheapest |	Success |
+| Sort by Most Popular | Orders products by the most units sold |	Success |
+| Category Link | returns product list page with all products in category |	Success |
+| Variety Link | link returns product list page with all products containing that variety |	Success |
+| Product Image | clicking the product image returns the product detail view for that product | Success |
+| Product Name | clicking the product name returns the product detail view for that product | Success |
+| More information | clicking returns the product detail view for that product | Success |
+| Add to wishlist | successfully adds the product to the wishlist for that user, re-loads with remove from wishlist button | Success |
+| Remove from wishlist | successfully adds the product to the wishlist for that user, re-loads with add to wishlist button | Success |
+| Add button | successfully adds product to basket, activates appropriate notification | Success |
+| Buy button (no items in basket) | adds item to basket, returns user to checkout page, triggers appropriate notification | Success |
+| Buy button (items in basket) | successfully triggers a buy now notification for the product if items are in basket | Success |
+| Buy notification ('no') | returns user to checkout page with just that item in basket, returns appropriate notification | Success |
+| Buy notification ('yes') | returns user to checkout page adding the item to the basket, returns appropriate notification | Success |
+| Buy notification ('yes') | returns user to checkout page adding the item to the basket, returns appropriate notification | Success |
+
+VIEW PRODUCT
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+| Pairings sorted by Most Popular | Orders paired products by the most units sold |	Success |
+| Pairing Category Link | returns product list page with all products in category |	Success |
+| Pairing Variety Link | link returns product list page with all products containing that variety |	Success |
+| Pairing Product Image | clicking the product image returns the product detail view for that product | Success |
+| Pairing Product Name | clicking the product name returns the product detail view for that product | Success |
+| Pairing More information | clicking returns the product detail view for that product | Success |
+| Pairing Add to wishlist | successfully adds the product to the wishlist for that user, re-loads with remove from wishlist button | Success |
+| Pairing Remove from wishlist | successfully adds the product to the wishlist for that user, re-loads with add to wishlist button | Success |
+| Pairing Add button | successfully adds product to basket, activates appropriate notification | Success |
+| Pairing Buy button (no items in basket) | adds item to basket, returns user to checkout page, triggers appropriate notification | Success |
+| Pairing Buy button (items in basket) | successfully triggers a buy now notification for the product if items are in basket | Success |
+| Pairing Buy notification ('no') | returns user to checkout page with just that item in basket, returns appropriate notification | Success |
+| Pairing Buy notification ('yes') | returns user to checkout page adding the item to the basket, returns appropriate notification | Success |
+| Product Add button | successfully adds product to basket with correct quantity, activates appropriate notification | Success |
+| Product Buy button (no items in basket) | adds item to basket with correct quantity, returns user to checkout page, triggers appropriate notification | Success |
+| Product Buy button (items in basket) | successfully triggers a buy now notification for the product if items are in basket | Success |
+| Product Buy notification ('no') | returns user to checkout page with just that item in basket in correct quantity, returns appropriate notification | Success |
+| Product Buy notification ('yes') | returns user to checkout page adding the item to the basket in correct quantity, returns appropriate notification | Success |
+| Product Add to wishlist | successfully adds the product to the wishlist for that user, re-loads with remove from wishlist button | Success |
+| Product Remove from wishlist | successfully adds the product to the wishlist for that user, re-loads with add to wishlist button | Success |
+| Product Add to wishlist | successfully adds the product to the wishlist for that user, re-loads with remove from wishlist button | Success |
+| Product Remove from wishlist | successfully adds the product to the wishlist for that user, re-loads with add to wishlist button | Success |
+| Product Quantity Plus | Increments quantity counter by 1, updates total | Success |
+| Product Quantity Plus | Will not advance beyond 200 units | Success |
+| Product Quantity Minus | Decrements quantity counter by 1, updates total | Success |
+| Product Quantity Minus | Will not decrease below 1 | Success |
+| Product Quantity Box manual entry | updates total with appropriate value to number typed | Success |
+| Product Remove from wishlist | successfully adds the product to the wishlist for that user, re-loads with add to wishlist button | Success |
+| Product Quantity Limited | If a number is entered below 1 or above 200 buttons disapled and notification displayed | Success |
+| Product Buttons re-enabled | If a number beyond the threshold is adjusted below it, buttons re-enabled | Success |
+
+CHECKOUT
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+| Address Form | displayed if user is not logged in along with sign-up / sign-in links | Success |
+| Address Form Validation | JavaScript validation prevents form submission unless address correctly filled out | Success |
+| Credit card validation | JavaScript validation prevents form submission unless stripe element correctly filled out | Success |
+| Sign in link | returns user to sign-in page | Success |
+| Sign up link | returns user to sign-up page | Success |
+| Quantity plus | adds another unit of item to basket, returns appropriate notification | Success |
+| Quantity minus | removes a unit item to basket unless there is only 1 unit remaining, returns appropriate notification | Success |
+| Quantity minus disable | disables minus button when quantity is 1 | Success |
+| Quantity minus re-enable | enables minus button when quantity climbs above | Success |
+| Purchase Now | Submits form when all fields correctly filled out and returns user to confirmation page | Success |
+| New user loggin in checkout | User with no addresses shown form to add new address | Success |
+| New user address form | will not submit unless correctly filled out | Success |
+| New user address form | on submission returns user to checkout with address listed in address section | Success |
+| New user address form | on submission first address automatically set to default | Success |
+| Address-prepopulation | the selected user address pre-populates the checkout address field | Success |
+| Address options | display the correct options depending on the address status | Success |
+| Use new address llink | displays address form for existing user to add a new address | Success |
+| Address add cancel button | returns user to checkout | Success |
+| Select another address link | opens address selector to select another address | Success |
+| Address selector | correctly highlights selected address and adjusts if clicked on | Success |
+| Address selector select button | selects current address for order, returns to checkout view with correct address populated | Success |
+| Address selector cancel button | returns to checkout view with no changes to previously selected address | Success |
+| Use Default link | changes selected address to default, re-loads checkout page | Success |
+| Form submission | on correctly entering card details, form submits with selected address correctly populating order form and returns user to conformation page | Success |
+
+CHECKOUT CONFIRMATION
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+| Order Link | link redirects user to the order they have just submitted | Success |
+| Order e-mail | the checkout page displays the correct e-mail address  | Success |
+| e-mail confirmation | the user receives e-mail confirmation of their order  | Success |
+
+BASKET REVIEW
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+| Product Image | clicking the product image returns the product detail view for that product | Success |
+| Product Name | clicking the product name returns the product detail view for that product | Success |
+| Quantity plus | adds another unit of item to basket, returns appropriate notification | Success |
+| Quantity minus | removes a unit item to basket unless there is only 1 unit remaining, returns appropriate notification | Success |
+| Quantity minus disable | disables minus button when quantity is 1 | Success |
+| Quantity minus re-enable | enables minus button when quantity climbs above | Success |
+| remove link | removes item from basket, returning basket notification on same page if there are still produts remaining, or returning to homepage with message if the action empties the basket | Success |
+| Go to Checkout buttons | both return user to checkout page | Success |
+
+LOGIN
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+
+SIGNUP
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+
+PASSWORD RESET
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+
+PASSWORD RESET DONE
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+
+PASSWORD RESET FROM KEY
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+
+MY ACCOUNT
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+
+MANAGE ADDRESSES
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+
+ADD AN ADDRESS
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+
+EDIT AN ADDRESS
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+
+ORDERS PAGE
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+
+VIEW ORDER INFO
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+
+VIEW WISHLIST
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+
+CONTACT US
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+
+ADMIN CONSOLE
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+
+ADD CHEESE CATEGORY
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+
+ADD BEER CATEGORY
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+
+EDIT CATEGORIES
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+
+EDIT CHEESE CATEGORY
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+
+EDIT BEER CATEGORY
 
 
 | Feature Tested                        | Expected Outcome                 | Result  |
 | ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
 
-
-MANAGE USERS
-
-
-| Feature Tested                        | Expected Outcome                 | Result  |
-| ------------------------------------- | -------------------------------- | ------- |
-
-
-MANAGE DREAMS
-
-On deleting a dream:
+ADD BEER
 
 | Feature Tested                        | Expected Outcome                 | Result  |
 | ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
 
+ADD CHEESE
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+
+EDIT EXISTING PRODUCT
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+
+PRODUCT EDIT PAGE
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+
+VIEW CUSTOMER MESSAGES
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
 
 #### Issues found during manual testing
 
-The manual testing process uncovered a number of issues.  The issues around dream cretion and editing in particular required significant remedial work.
+The manual testing process uncovered a few issues, none of which were serious and all of which were easily fixed.
 
- - The sign up section in the 404 page did not work correctly.
- - The dream string used to create the slug was not being created as intended, which I fixed by reversing the order or the string creation logic.  I'm not sure at which point this stopped working!
- - On editing a dream the code did not check if the dream name already existed for the user.  I created the appropriate logic and a re-direct to stop the code executing further.
- - On editing a dream if the name and dream slug was updated the page would not return the new url for the dream.  This was achieved via a redirect with the updated data on update.
- - On submitting a duplicate comment on the view dream page the page was not redirected back to the same dream.
- - edit comment code on view dream page did not check for duplicate comments.  It now does!
- - view dream page was not refocussing on comments after likes/dislikes, but now is.  Also the logged in version of the page was not properly validated (I had previously validated the logged out version!)
-- edit comment code on dreamscape page did not check for duplicate comments.  It now does!
-- editing categories did not update the category in user and dream category arrays, which needed a fix.
+ - The majority of buttons site-wide did not display the pointer on mouse element, so I needed to add the appropriate helper class to them all.
+ - The Account menu header was nested in a span rather than a div which meant it wasn't takig up all the space it was supposed to and proved hard to click on.  This was rectified by updating how the elements were nested.
+ - found issue in checkout and basket pages where decremening the amount when it was on 1 unit still triggered a notification.  Wrote some javascript to disable the button on that amount.
 
 #### Responsiveness Testing
 

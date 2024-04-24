@@ -72,9 +72,9 @@ Cheese and Beer
                             </p>
                         </div>
                         <div class="orders-shipped-address">
-                            <p>From: {{ contact.email }}</p>
-                            <br>
-                            <p>{{ contact.message|linebreaksbr }}</p>
+                            <p class="bottom-border-thin">From: {{ contact.email }}</p>
+                            
+                            <p class="messages-paragraph">{{ contact.message|linebreaksbr }}</p>
                         </div>
                     </div>  
                     {% endfor %}

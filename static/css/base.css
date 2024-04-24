@@ -1356,6 +1356,9 @@ input[type=number] {
     color: rgb(1, 70, 1);
     text-decoration: underline;
 }
+.messages-paragraph {
+    margin-top:10px;
+}
 
 /*EDIT CATEGORIES*/
 #edit-category-section p, #edit-category-section i {

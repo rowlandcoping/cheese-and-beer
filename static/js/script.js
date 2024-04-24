@@ -386,7 +386,23 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
         });
-    }  
+    }
+
+    //QUANTITY CONTROL BASKET/CHECKOUT
+    // Prevents activation of decrement button if product quantity is 1
+    const decrementButtons = Array.from(document.getElementsByClassName('zero-prevent'));
+    decrementButtons.forEach(item => {
+        const itemId = item.getAttribute('id');
+        const id = itemId.split('-')[1];
+        let quantity = document.getElementById('quantity-' + id).innerHTML;
+        if (quantity == 1) {
+            document.getElementById(itemId).style.pointerEvents = "none";
+            document.getElementById(itemId).style.opacity = "0.5";
+        } else {
+            document.getElementById(itemId).style.pointerEvents = "auto";
+            document.getElementById(itemId).style.opacity = "1";
+        }
+    });
 
     // QUANTITY CONTROL IN PRODUCT VIEW.
     if (document.getElementById('decrement-amount')) {
