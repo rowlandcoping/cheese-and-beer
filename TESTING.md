@@ -199,30 +199,25 @@ Repaired Issues: nesting issues, stray tags.
 Outstanding Issues: None.
 
 
-
-
-
-
-
 ### CSS Validation
 ([back to top](#testing-documentation))
 
 File Validated: style.css\
 URL: https://hopes-and-dreams-15b83f2d1383.herokuapp.com/ \
-Repaired Issues: 4 errors total - invalid font-style and ineligable margin values (due to typo).\
+Repaired Issues: 2 issues found - 1 incorrect use of relative and 1 legacy negative padding value which was removed.  I also had a few warnings about two elements with borders the same color as their backgrounds, and a further 3 warnings about the CSS used to hide the native html used to adjust for an integer field. I have not fixed these warnings, in the first case because it is intentional behaviour (the border is set like this so that the elememt size is constant and it stands out on hover).  In the second case the CSS is purely cosmetic, so if for example a 95 year old is still for some reason using Internet Explorer and the field adjuster is not hidden it won't affect the functionality or layout of the site at all.\
 Outstanding Issues: None.
 
-![image](static/images/testing/css-validation.png)
+![image](media/testing/css-validation.png)
 
 ### JavaScript Validation
 ([back to top](#testing-documentation))
 
 I have validated my JavaScript file using [JSHint](https://jshint.com/)
 
-Repaired Issues: There were a number of missing semicolons and some undeclared variables, but no major issues.\
-Outstanding Issues: None.
+Repaired Issues: I had to refactor some code due to the way I had set up a function, and I added a large number of semicolons.  I also found some undeclared variables which also required some refactoring.  The one outstanding error refers to Stripe, which JSHint sees as an undefined variable.  I believe this is unavoidable due to the way Stripe functions and the context in which JSHint lints the code - even in my editor it is flagged as undefined, however the Stripe functionality works perfectly which means I do not believe it is a problem.\
+Outstanding Issues: Stripe flagged as undefined.
 
-![image](static/images/testing/jshint-validation.png)
+![image](media/testing/jshint-linted.png)
 
 ### Python Validation
 ([back to top](#testing-documentation))

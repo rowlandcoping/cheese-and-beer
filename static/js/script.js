@@ -244,9 +244,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-
-
-
     // STRIPE PAYMENT CHECKOUT
     // Adds Card element to checkout page(if element exists).  Also adds event listeners and actions to be taken on card submit.
     // NB this section comes directly from Boutique Ado (converted from JQuery)   
@@ -296,34 +293,35 @@ document.addEventListener("DOMContentLoaded", function() {
             if(target){
                 e.preventDefault();
             }
-        })      
+        });    
         //Validates form with Javascript to avoid errors or premature submission
         const paymentSubmitButtons = Array.from(document.getElementsByClassName('payment-button'));
         paymentSubmitButtons.forEach(item => {
             item.addEventListener('click', function handleClick(event) {
+                let takePayment = false;
                 const addressFields = Array.from(document.getElementsByClassName('address-field'));
                 for (let i = 0; i < addressFields.length; i++) {                  
                     if (addressFields[i].required) {
                         if (addressFields[i].value) {   
                             if (addressFields[i].name === "order_email") {
-                                email = addressFields[i].value
-                                emailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+                                const email = addressFields[i].value;
+                                const emailFormat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
                                 if (email.match(emailFormat)) {
                                     takePayment=true;
-                                    document.getElementById('error-container').style.display="none"
+                                    document.getElementById('error-container').style.display="none";
                                 } else {
-                                    document.getElementById('error-container').style.display="block"
-                                    document.getElementById('form-error-message').textContent = "email address is not in the correct format"
+                                    document.getElementById('error-container').style.display="block";
+                                    document.getElementById('form-error-message').textContent = "email address is not in the correct format";
                                     takePayment=false;
                                     break;
                                 }
                             } else {
                                 takePayment=true;
-                                document.getElementById('error-container').style.display="none"
+                                document.getElementById('error-container').style.display="none";
                             }                     
                         } else {
                             document.getElementById('error-container').style.display="block";
-                            document.getElementById('form-error-message').textContent = addressFields[i].placeholder + " has not been filled out"
+                            document.getElementById('form-error-message').textContent = addressFields[i].placeholder + " has not been filled out";
                             takePayment=false;
                             break;
                         }
@@ -384,10 +382,10 @@ document.addEventListener("DOMContentLoaded", function() {
                                 form.submit();
                             }
                         }
-                    })
+                    });
                 }
-            }) 
-        })
+            });
+        });
     }  
 
     //QUANTITY CONTROL IN PRODUCT VIEW.
@@ -396,12 +394,12 @@ document.addEventListener("DOMContentLoaded", function() {
             const target = e.target.closest("#decrement-amount");
             if(target){
                 if (document.getElementById('quantity').value > 1) {
-                    initial_price = document.getElementById('product-price').innerHTML;
-                    initial_price = Number(initial_price)
-                    quantity = document.getElementById('quantity').value;
+                    let initial_price = document.getElementById('product-price').innerHTML;
+                    initial_price = Number(initial_price);
+                    let quantity = document.getElementById('quantity').value;
                     quantity = Number(quantity);
                     quantity -= 1;
-                    document.getElementById('quantity').value = quantity
+                    document.getElementById('quantity').value = quantity;
                     document.getElementById('product-view-total').innerHTML = (Math.round((initial_price * quantity) * 100) / 100).toFixed(2); 
                 }
             }
@@ -409,9 +407,9 @@ document.addEventListener("DOMContentLoaded", function() {
         document.addEventListener("click", function(e){
             const target = e.target.closest("#increment-amount");
             if(target){
-                initial_price = document.getElementById('product-price').innerHTML;
-                initial_price = Number(initial_price)
-                quantity = document.getElementById('quantity').value;
+                let initial_price = document.getElementById('product-price').innerHTML;
+                initial_price = Number(initial_price);
+                let quantity = document.getElementById('quantity').value;
                 quantity = Number(quantity);
                 quantity += 1;
                 document.getElementById('quantity').value = quantity;
@@ -421,10 +419,10 @@ document.addEventListener("DOMContentLoaded", function() {
         document.addEventListener("input", function(e){
             const target = e.target.closest("#quantity");
             if(target){
-                initial_price = document.getElementById('product-price').innerHTML;
-                initial_price = Number(initial_price)
-                initial_quantity = document.getElementById('quantity').value;
-                initial_quantity = Number(initial_quantity)
+                let initial_price = document.getElementById('product-price').innerHTML;
+                initial_price = Number(initial_price);
+                let initial_quantity = document.getElementById('quantity').value;
+                initial_quantity = Number(initial_quantity);
                 document.getElementById('product-view-total').innerHTML = (Math.round((initial_price * initial_quantity) * 100) / 100).toFixed(2);                
             }
         });
@@ -436,19 +434,18 @@ document.addEventListener("DOMContentLoaded", function() {
         buyNowButtons.forEach(item => {
             item.addEventListener('click', function handleClick(event) {
                 const itemId = item.getAttribute('id'); 
-                productId = itemId.split("-")[1];
-                productScenario = itemId.split("-")[0];
-                document.getElementById('buy-now-name').textContent = document.getElementById('buyname-' + productId).textContent
+                const productId = itemId.split("-")[1];
+                const productScenario = itemId.split("-")[0];
+                document.getElementById('buy-now-name').textContent = document.getElementById('buyname-' + productId).textContent;
+                let quantity = 1;
                 if (document.getElementById('product-page')) {
                     quantity = document.getElementById('quantity').value;
                     quantity = Number(quantity);
-                } else {
-                    quantity = 1;
                 }
                 // adds url for correct quantity, view-product view only where basket is empty
                 if (productScenario === "single") {
-                    url = "/basket/buy-now/?single=" + productId + "," + quantity;
-                    window.location.href = url
+                    const url = "/basket/buy-now/?single=" + productId + "," + quantity;
+                    window.location.href = url;
                 }
                 // triggers buy-now alert if items in basket
                 if (productScenario === "basket") {
@@ -482,15 +479,15 @@ document.addEventListener("DOMContentLoaded", function() {
         removeAddressButtons.forEach(item => {
             item.addEventListener('click', function handleClick(event) {
                 const itemId = item.getAttribute('id');
-                id=itemId.split("-")[1];
-                document.getElementById('alert-full-name').textContent = document.getElementById('name-' + id).textContent
-                document.getElementById('alert-line-one').textContent = document.getElementById('one-' + id).textContent
+                const id=itemId.split("-")[1];
+                document.getElementById('alert-full-name').textContent = document.getElementById('name-' + id).textContent;
+                document.getElementById('alert-line-one').textContent = document.getElementById('one-' + id).textContent;
                 if (document.getElementById('two-' + id)) {
-                    document.getElementById('alert-line-two').textContent = document.getElementById('two-' + id).textContent
+                    document.getElementById('alert-line-two').textContent = document.getElementById('two-' + id).textContent;
                 }
-                document.getElementById('alert-city').textContent = document.getElementById('city-' + id).textContent
-                document.getElementById('alert-county').textContent = document.getElementById('county-' + id).textContent
-                document.getElementById('alert-postcode').textContent = document.getElementById('postcode-' + id).textContent
+                document.getElementById('alert-city').textContent = document.getElementById('city-' + id).textContent;
+                document.getElementById('alert-county').textContent = document.getElementById('county-' + id).textContent;
+                document.getElementById('alert-postcode').textContent = document.getElementById('postcode-' + id).textContent;
                 document.getElementById('remove-address').href = "/addresses/remove-address/" + id + "/";
                 const disabledSections = Array.from(document.getElementsByClassName('alert-disable'));
                     for (let i = 0; i < disabledSections.length; i++) {
@@ -519,8 +516,7 @@ document.addEventListener("DOMContentLoaded", function() {
         removeAddressButtons.forEach(item => {
             item.addEventListener('click', function handleClick(event) {
                 const itemId = item.getAttribute('id');
-                id=itemId.split("-")[1];
-                console.log(id)
+                const id = itemId.split("-")[1];
                 document.getElementById('remove-message').href = "/admin-console/remove-message/" + id + "/";
                 const disabledSections = Array.from(document.getElementsByClassName('alert-disable'));
                     for (let i = 0; i < disabledSections.length; i++) {
@@ -549,8 +545,8 @@ document.addEventListener("DOMContentLoaded", function() {
         removeAddressButtons.forEach(item => {
             item.addEventListener('click', function handleClick(event) {
                 const itemId = item.getAttribute('id');
-                id=itemId.split("-")[1];
-                document.getElementById('alert-name').textContent = document.getElementById('name-' + id).textContent
+                const id=itemId.split("-")[1];
+                document.getElementById('alert-name').textContent = document.getElementById('name-' + id).textContent;
                 document.getElementById('remove-product').href = "/products/delete-product/" + id + "/";
                 const disabledSections = Array.from(document.getElementsByClassName('alert-disable'));
                     for (let i = 0; i < disabledSections.length; i++) {
@@ -606,7 +602,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const target = e.target.closest(".address-bar");
             if(target){
                 const itemId = target.getAttribute('id');
-                selectorId = itemId.split('-')[1];
+                const selectorId = itemId.split('-')[1];
                 const allAddresses = Array.from(document.getElementsByClassName('address-bar'));
                 for (let i = 0; i < allAddresses.length; i++) {
                     allAddresses[i].style.backgroundColor = "white";
@@ -642,34 +638,33 @@ document.addEventListener("DOMContentLoaded", function() {
                 window.location.replace(currentUrl);
             }
         }
-    })
+    });
 
 
     // FADE EFFECT FOR BASKET ADJUSTMENT MESSAGES
+    function hide(){
+        let opacity=0; 
+        let intervalID=0;
+        let bmessage=document.getElementById("basket-message"); 
+        opacity = Number(window.getComputedStyle(bmessage).getPropertyValue("opacity"));
+        if(opacity>0){ 
+            opacity=opacity-0.01; 
+            bmessage.style.opacity=opacity;
+        } 
+        else{ 
+            clearInterval(intervalID);
+            document.getElementById("basket-message").style.display="none";
+        } 
+    }
     window.onload=setTimeout(function(){
         if (document.getElementById("basket-message")) {
-            let opacity=0; 
-            let intervalID=0;
             setInterval(hide, 40); 
-            function hide(){ 
-                let bmessage=document.getElementById("basket-message"); 
-                opacity = Number(window.getComputedStyle(bmessage).getPropertyValue("opacity"))        
-                if(opacity>0){ 
-                    opacity=opacity-0.01; 
-                    bmessage.style.opacity=opacity 
-                } 
-                else{ 
-                    clearInterval(intervalID);
-                    document.getElementById("basket-message").style.display="none";
-                } 
-            }
         }
     }, 500);
 
     //ENSURES CORRECT RADIAL BUTTON CHECKED ON BEER EDIT FORM
     if (document.getElementById("container-selected")) {
-        container = document.getElementById("container-selected").value;
-        console.log(container);
+        const container = document.getElementById("container-selected").value;
         if (container ==="can") {
             document.getElementById("id_container_1").checked = true;
         } else {
