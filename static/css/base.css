@@ -990,9 +990,7 @@ input[type=number] {
 .top-section-address {
     border-bottom:1px rgb(173, 173, 173) dashed;
 }
-.layout-correction {
-    padding-top:-100px;
-}
+
 #address-view .address-para {
     margin-left: 30px;
 }
