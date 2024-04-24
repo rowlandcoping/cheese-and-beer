@@ -95,6 +95,11 @@ Repaired Issues: Unclosed elements. \
 Outstanding Issues: None.
 
 Page validated: Password Reset From Key\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/accounts/password/reset/key/ \
+Repaired Issues: Unclosed Elements. \
+Outstanding Issues: None.
+
+Page validated: Password Reset From Done\
 URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/accounts/password/reset/key/done/ \
 Repaired Issues: Unclosed Elements. \
 Outstanding Issues: None.
@@ -481,6 +486,10 @@ LOGIN
 | ------------------------------------- | -------------------------------- | ------- |
 | DOM |	all page elements load as expected |	Success |
 | DOM |	all interactable elements change on hover and show pointer | Success |
+| Input elements | display as expected on focus | Success |
+| Sign up link | retuns user to sign-up page | Success |
+| Reset password link | retuns user to reset password page | Success |
+| Submit button | submits form when correctly filled out, logs user in and returns to homepage if successful| Success |
 
 SIGNUP
 
@@ -488,6 +497,10 @@ SIGNUP
 | ------------------------------------- | -------------------------------- | ------- |
 | DOM |	all page elements load as expected |	Success |
 | DOM |	all interactable elements change on hover and show pointer | Success |
+| Input elements | display as expected on focus | Success |
+| Sign in link | retuns user to sign-in page | Success |
+| Reset password link | retuns user to reset password page | Success |
+| Submit button | submits form when correctly filled out, logs user in and returns to homepage if successful | Success |
 
 PASSWORD RESET
 
@@ -495,13 +508,19 @@ PASSWORD RESET
 | ------------------------------------- | -------------------------------- | ------- |
 | DOM |	all page elements load as expected |	Success |
 | DOM |	all interactable elements change on hover and show pointer | Success |
+| Input element | displays as expected on focus | Success |
+| Submit button | submits form when correctly filled out, returns user to password reset done page | Success |
 
-PASSWORD RESET DONE
+PASSWORD RESET EMAIL DONE
 
 | Feature Tested                        | Expected Outcome                 | Result  |
 | ------------------------------------- | -------------------------------- | ------- |
 | DOM |	all page elements load as expected |	Success |
 | DOM |	all interactable elements change on hover and show pointer | Success |
+| Reset password link | retuns user to reset password page | Success |
+| Buy cheese link | returns product list view of all cheeses | Success |
+| Buy beer link | returns product list view of all beers | Success |
+| reset e-mail | reset e-mail is successfull sent to the provided e-mail if it exists | Success |
 
 PASSWORD RESET FROM KEY
 
@@ -509,6 +528,18 @@ PASSWORD RESET FROM KEY
 | ------------------------------------- | -------------------------------- | ------- |
 | DOM |	all page elements load as expected |	Success |
 | DOM |	all interactable elements change on hover and show pointer | Success |
+| Input elements | display as expected on focus | Success ||
+| Submit button | submits form when passwords correctly filled out and match, returns user to reset done page | Success |
+
+PASSWORD RESET FROM KEY DONE
+
+| Feature Tested                        | Expected Outcome                 | Result  |
+| ------------------------------------- | -------------------------------- | ------- |
+| DOM |	all page elements load as expected |	Success |
+| DOM |	all interactable elements change on hover and show pointer | Success |
+| Buy cheese link | returns product list view of all cheeses | Success |
+| Buy beer link | returns product list view of all beers | Success |
+
 
 MY ACCOUNT
 
