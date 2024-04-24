@@ -1,5 +1,7 @@
 # Cheese and Beer
 
+![image](media/images/general/cheese-quote.jpg)
+
 Cheese and Beer is intended to become the UK's premier marketplace for purchasing cheese on the internet.  It will be reasonably priced (unlike the majority of other similar providers), and the website itself focussed on brilliant UI which not only makes it easy for users to find what they want, but that helps them find something they perhaps didn't even know they wanted in the first place. It's the Apple approach to cheese. The brand plays on the unheralded but actually excellent combination of beer and cheese, and the platform itself will not only reward the true cheese enthusiasts but actively encourages gifting from casual cheese purchasers - as such the platform will be accessible to all and free from any impenetrable cheese terminology or jargon.
 
 ## Contents:
@@ -526,7 +528,7 @@ Please find all testing documentation [HERE](TESTING.md).
 
 ### Initial Deployment
 
-Hopes and Dreams has been deployed [HERE](https://hopes-and-dreams-15b83f2d1383.herokuapp.com/) via Heroku, taking the following steps:
+Cheese and Beer has been deployed [HERE](https://cheese-and-beer-896aa5a35920.herokuapp.com/) via Heroku, taking the following steps:
 
 Preparing for Deployment:
 
