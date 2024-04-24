@@ -72,11 +72,6 @@ URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/basket/ \
 Repaired Issues: missing image alts, some superflous duplicate ids, one for styling reasons solved using specificity instead
 Outstanding Issues: None.
 
-
-
-
-
-
 ALLAUTH PAGES
 
 Page validated: Login Page\
@@ -145,6 +140,10 @@ Page validated: Contact Us\
 URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/my-account/contact/ \
 Repaired Issues: duplicate stray ids in input elements \
 Outstanding Issues: None.
+
+ADMINISTRATOR ONLY PAGES
+
+
 
 
 

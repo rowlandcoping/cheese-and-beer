@@ -86,15 +86,12 @@ class StripeWH_Handler:
             for check in user_check:
                 if check.email == email:
                     user_id = check
-                    print(user_id)
-                    print(user_id.id)
                     # then check if the address matches any of their saved ones
                     address_check = Addresses.objects.all()
                     for check in address_check:
-                        print(check.user_id.id)
                         if user_id.id == check.user_id.id:
                             ad = shipping_details.address.line1
-                            po = shipping_details.address.postal_code
+                            po = shipping_details.address.postal_code.upper()
                             na = shipping_details.name
                             cpo = check.postcode
                             cna = check.full_name
@@ -121,7 +118,7 @@ class StripeWH_Handler:
                     address_line_two=shipping_details.address.line2,
                     town_or_city=shipping_details.address.city,
                     county=shipping_details.address.state,
-                    postcode=shipping_details.address.postal_code,
+                    postcode=shipping_details.address.postal_code.upper(),
                     order_date=time_created,
                     delivery_date=delivery_date,
                     items_total=items_total,

@@ -32,8 +32,10 @@ def add_address(request):
         else:
             return_url = "manage_addresses"
         if form.is_valid():
+            postcode = request.POST.get('postcode').upper()
             final_form = form.save(commit=False)
             final_form.user_id = request.user
+            final_form.postcode = postcode
             addresses = Addresses.objects.filter(user_id=request.user.id)
             if addresses:
                 if request.POST.get('default'):
@@ -82,8 +84,10 @@ def edit_address(request, address_id):
     if request.method == 'POST':
         form = AddressForm(request.POST)
         if form.is_valid():
+            postcode = request.POST.get('postcode').upper()
             final_form = form.save(commit=False)
             final_form.user_id = request.user
+            final_form.postcode = postcode
             final_form.id = address_id
             if request.POST.get('default'):
                 addresses = Addresses.objects.filter(user_id=request.user.id)

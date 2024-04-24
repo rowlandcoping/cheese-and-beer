@@ -52,7 +52,7 @@ def checkout(request):
                 address_line_two=request.POST.get('address_line_two'),
                 town_or_city=request.POST.get('town_or_city'),
                 county=request.POST.get('county'),
-                postcode=request.POST.get('postcode'),
+                postcode=request.POST.get('postcode').upper(),
                 order_date=time_created,
                 delivery_date=delivery_date,
                 items_total=current_basket['basket_total'],
