@@ -28,11 +28,11 @@ def view_results(request):
                 search_term = None
                 if type == "cheese":
                     category = get_object_or_404(
-                        CheeseCategory, name=category)
+                        CheeseCategory, pk=category)
                     product_list = Product.objects.filter(
                         cheese_category=category.id)
                 else:
-                    category = get_object_or_404(BeerCategory, name=category)
+                    category = get_object_or_404(BeerCategory, pk=category)
                     product_list = Product.objects.filter(
                         beer_category=category.id)
             else:
@@ -58,6 +58,16 @@ def view_results(request):
                 product_list = Product.objects.filter(product_type=type)
                 category = None
                 search_term = type
+        if 'variety' in request.GET:
+            products = Product.objects.all()
+            view = "variety=" + request.GET['variety']
+            variety = request.GET['variety'].replace("+", " ")
+            search_term = variety
+            query = variety.strip()
+            queries = Q(
+                        variety__icontains=query
+                        )
+            product_list = products.filter(queries)
         if 'query' in request.GET:
             products = Product.objects.all()
             view = "query=" + request.GET['query']

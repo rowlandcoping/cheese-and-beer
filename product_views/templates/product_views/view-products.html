@@ -84,7 +84,7 @@ Cheese and Beer
             <div class="product-detail">          
                 <div class="product-image">
                     <a href="{% url 'product_detail' product.id %}">
-                        <img src="{{ MEDIA_URL }}products/{{ product.image_url }}">
+                        <img src="{{ MEDIA_URL }}products/{{ product.image_url }}" alt="{{ product.image_alt }}">
                     </a>
                 </div>
                 <div class="product-name">
@@ -97,12 +97,12 @@ Cheese and Beer
                         <p>
                             {% if product.cheese_category  %}                            
                             Category: 
-                            <a href="{% url 'view_results' %}?view_category=cheese,{{ product.cheese_category }}">
+                            <a href="{% url 'view_results' %}?view_category=cheese,{{ product.cheese_category.id }}">
                                 <span class="forest-green-text listing-link">{{ product.cheese_category }}</span>
                             </a>
                             {% else %}                            
                             Category:
-                            <a href="{% url 'view_results' %}?view_category=beer,{{ product.beer_category }}">
+                            <a href="{% url 'view_results' %}?view_category=beer,{{ product.beer_category.id }}">
                                 <span class="forest-green-text listing-link">{{ product.beer_category }}</span>
                             </a>
                             {% endif %}
@@ -110,7 +110,7 @@ Cheese and Beer
                     
                         <p>
                         Variety: 
-                        <a href="{% url 'view_results' %}?query={{ product.variety }}">
+                        <a href="{% url 'view_results' %}?variety={{ product.variety_slug }}">
                             <span class="forest-green-text listing-link">{{ product.variety | lower }}</span>
                         </a>
                         </p>
@@ -138,8 +138,8 @@ Cheese and Beer
                     {% if product.id in wishlist %}
                     <form method="POST" action="{% url 'remove_from_wishlist' %}" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <input type="hidden" name="view" id="view" value="{{ request.path }}?{{ current_view }}">
-                        <input type="hidden" name="product" id="product" value="{{ product.id }}">                           
+                        <input type="hidden" name="view" value="{{ request.path }}?{{ current_view }}">
+                        <input type="hidden" name="product" value="{{ product.id }}">                           
                         <button class="clickable-element wishlist-add-hide">
                             <i class="fas fa-cloud"></i>remove from wishlist
                         </button>                     
@@ -147,8 +147,8 @@ Cheese and Beer
                     {% else %}
                     <form method="POST" action="{% url 'add_to_wishlist' %}" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <input type="hidden" name="view" id="view" value="{{ request.path }}?{{ current_view }}">
-                        <input type="hidden" name="product" id="product" value="{{ product.id }}">                
+                        <input type="hidden" name="view" value="{{ request.path }}?{{ current_view }}">
+                        <input type="hidden" name="product" value="{{ product.id }}">                
                         <button class="clickable-element wishlist-add-hide">
                             <i class="fas fa-cloud"></i>add to wishlist
                         </button>                     
@@ -158,16 +158,16 @@ Cheese and Beer
                 {% endif %}
                 <div class="action-section">
                     <a href="{% url 'product_detail' product.id %}">
-                        <span class="forest-green-text listing-link"><p><small><em><u>more information</u></em></small></p></span>
+                        <p><span class="forest-green-text listing-link"><small><em><u>more information</u></em></small></span></p>
                     </a>                    
                 </div>
                 <div class="view-action-buttons">
                     <div class="add-from-view">
                         <form method="POST" action="{% url 'add_to_basket' %}" enctype="multipart/form-data">
                             {% csrf_token %}
-                            <input type="hidden" name="view" id="view" value="{{ request.path }}?{{ current_view }}">
-                            <input type="hidden" name="quantity" id="quantity" value="1">
-                            <input type="hidden" name="product" id="product" value="{{ product.id }}">                     
+                            <input type="hidden" name="view" value="{{ request.path }}?{{ current_view }}">
+                            <input type="hidden" name="quantity" value="1">
+                            <input type="hidden" name="product" value="{{ product.id }}">                     
                             <button class="action-button add-basket add-basket-list clickable-element">
                                 <i class="fas fa-shopping-basket"></i> Add
                             </button>

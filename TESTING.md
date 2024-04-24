@@ -47,6 +47,34 @@ URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/typeanthinghere/ \
 Repaired Issues: missing image alt\
 Outstanding Issues: None.
 
+Page validated: Products list page and search\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/view-products/?query= \
+Repaired Issues: missing image alt, illegal query from where I was using category name, changed to id, some nesting issues. superfluous duplicate ids.\
+Outstanding Issues: None.
+
+Page validated: View Product Page\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/view-products/product-detail/<product_id>/ \
+Repaired Issues: missing image alts, illegal query from spaces in variety names (Added variety_slug field, populated database, added variety GET query). Some nesting issues. superfluous duplicate ids.\
+Outstanding Issues: None.
+
+Page validated: Checkout Page\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/checkout/ \
+Repaired Issues: missing image alts, stray tags, placeholders in hidden fields. Issue where there are two address forms on page populated from the same django model. Solved by removing id attributes from the form that isn't submitted via checkout.\
+Outstanding Issues: None.
+
+Page validated: Checkout Confirmation Page\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/checkout/confirmation/<order_number> \
+Repaired Issues: missing closing tags\
+Outstanding Issues: None.
+
+Page validated: Basket Review Page\
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/basket/ \
+Repaired Issues: missing image alts, some superflous duplicate ids, one for styling reasons solved using specificity instead
+Outstanding Issues: None.
+
+
+
+
 
 
 ALLAUTH PAGES

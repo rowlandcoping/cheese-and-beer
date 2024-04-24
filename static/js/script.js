@@ -2,9 +2,6 @@
 
 document.addEventListener("DOMContentLoaded", function() {
 
-    
-
-
     //MANY TO MANY FIELD SELECTOR
     //attach event listners to category buttons    
     const attachCategoryListners= Array.from(document.getElementsByClassName('category-selector'));
@@ -51,7 +48,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
     //mouseover effects for categories
-    //NOT YET IMPLEMENTED
     const attachMouseoverListners= Array.from(document.getElementsByClassName('category-selector'));
     attachMouseoverListners.forEach(item => {
         item.addEventListener('mouseover', function handleClick(event) {
@@ -67,7 +63,6 @@ document.addEventListener("DOMContentLoaded", function() {
             categoryMouseout(itemId);
         });
     });
-
     function categoryMouseover(itemId) {        
         if (document.getElementById(itemId).style.backgroundColor === "rgb(255, 255, 140)") {
             document.getElementById(itemId).style.backgroundColor = "rgb(134, 134, 53)";
@@ -91,117 +86,110 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    //NAV MENU FOR DESKTOP SCREEN SIZES
+    document.addEventListener("mouseout", function(e){
+        const target = e.target.closest(".menu-header");
+        if(target){
+            target.style.backgroundColor = "rgb(1, 70, 1)";
+            target.style.color = "rgb(255, 255, 140)";
+        }
+    });
+    document.addEventListener("mouseover", function(e){
+        const target = e.target.closest(".menu-header");
+        if(target){
+            target.style.backgroundColor = "rgb(255, 255, 140)";
+            target.style.color = "rgb(1, 70, 1)";
+        }
+    });
+    document.addEventListener("mouseover", function(e){
+        const target = e.target.closest("#beer-nav");
+        if(target){
+            document.getElementById('beer-desktop-mouseover').style.display = "block";
+        }
+    });
+    document.addEventListener("mouseout", function(e){
+        const target = e.target.closest("#beer-nav");
+        if(target){
+            document.getElementById('beer-desktop-mouseover').style.display = "none";
+        }
+    });
+    document.addEventListener("mouseover", function(e){
+        const target = e.target.closest("#cheese-nav");
+        if(target){
+            document.getElementById('cheese-desktop-mouseover').style.display = "block";
+        }
+    });
+    document.addEventListener("mouseout", function(e){
+        const target = e.target.closest("#cheese-nav");
+        if(target){
+            document.getElementById('cheese-desktop-mouseover').style.display = "none";
+        }
+    });
+    document.addEventListener("mouseover", function(e){
+        const target = e.target.closest("#account-nav");
+        if(target){
+            document.getElementById('account-mouseover').style.display = "block";
+        }
+    });
+    document.addEventListener("mouseout", function(e){
+        const target = e.target.closest("#account-nav");
+        if(target){
+            document.getElementById('account-mouseover').style.display = "none";
+        }
+    });
+    document.addEventListener("mouseover", function(e){
+        const target = e.target.closest(".nav-menu-link");
+        if(target){
+            target.style.backgroundColor = "rgb(255, 255, 140)";
+            target.style.color = "rgb(1, 70, 1)";
+        }
+    });
+    document.addEventListener("mouseout", function(e){
+        const target = e.target.closest(".nav-menu-link");
+        if(target){
+            target.style.backgroundColor = "rgb(1, 70, 1)";
+            target.style.color = "rgb(255, 255, 140)";
+        }
+    });
 
-    //NAV MENU
+    //NAV MENU FOR MOBILE SCREEN SIZES
+    window.addEventListener('click', function(e){   
+        if (document.getElementById('cheese-click').contains(e.target)){
+            document.getElementById('cheese-clickout').style.display = "block";
+            document.getElementById('cheese-click').style.backgroundColor = "rgb(255, 255, 140)";
+            document.getElementById('cheese-click').style.color = "rgb(1, 70, 1)";
+            document.getElementById('cheese-clickout').style.color = "rgb(255, 255, 140)";
+        } else{
+            document.getElementById('cheese-clickout').style.display = "none";
+            document.getElementById('cheese-click').style.backgroundColor = "rgb(1, 70, 1)";
+            document.getElementById('cheese-click').style.color = "rgb(255, 255, 140)";
+        }
+    });
+    window.addEventListener('click', function(e){   
+        if (document.getElementById('beer-click').contains(e.target)){
+            document.getElementById('beer-clickout').style.display = "block";
+            document.getElementById('beer-click').style.backgroundColor = "rgb(255, 255, 140)";
+            document.getElementById('beer-click').style.color = "rgb(1, 70, 1)";
+            document.getElementById('beer-clickout').style.color = "rgb(255, 255, 140)";
+        } else{
+            document.getElementById('beer-clickout').style.display = "none";
+            document.getElementById('beer-click').style.backgroundColor = "rgb(1, 70, 1)";
+            document.getElementById('beer-click').style.color = "rgb(255, 255, 140)";
+        }
+    });
+    window.addEventListener('click', function(e){   
+        if (document.getElementById('account-click').contains(e.target)){
+            document.getElementById('account-clickout').style.display = "block";
+            document.getElementById('account-click').style.backgroundColor = "rgb(255, 255, 140)";
+            document.getElementById('account-click').style.color = "rgb(1, 70, 1)";
+            document.getElementById('account-clickout').style.color = "rgb(255, 255, 140)";
+        } else{
+            document.getElementById('account-clickout').style.display = "none";
+            document.getElementById('account-click').style.backgroundColor = "rgb(1, 70, 1)";
+            document.getElementById('account-click').style.color = "rgb(255, 255, 140)";
+        }
+    });
     
-        document.addEventListener("mouseout", function(e){
-            const target = e.target.closest(".menu-header");
-            if(target){
-                target.style.backgroundColor = "rgb(1, 70, 1)";
-                target.style.color = "rgb(255, 255, 140)";
-            }
-        });
-        document.addEventListener("mouseover", function(e){
-            const target = e.target.closest(".menu-header");
-            if(target){
-                target.style.backgroundColor = "rgb(255, 255, 140)";
-                target.style.color = "rgb(1, 70, 1)";
-            }
-        });
-        document.addEventListener("mouseover", function(e){
-            const target = e.target.closest("#beer-nav");
-            if(target){
-                document.getElementById('beer-desktop-mouseover').style.display = "block";
-            }
-        });
-        document.addEventListener("mouseout", function(e){
-            const target = e.target.closest("#beer-nav");
-            if(target){
-                document.getElementById('beer-desktop-mouseover').style.display = "none";
-            }
-        });
-        document.addEventListener("mouseover", function(e){
-            const target = e.target.closest("#cheese-nav");
-            if(target){
-                document.getElementById('cheese-desktop-mouseover').style.display = "block";
-            }
-        });
-        document.addEventListener("mouseout", function(e){
-            const target = e.target.closest("#cheese-nav");
-            if(target){
-                document.getElementById('cheese-desktop-mouseover').style.display = "none";
-            }
-        });
-        document.addEventListener("mouseover", function(e){
-            const target = e.target.closest("#account-nav");
-            if(target){
-                document.getElementById('account-mouseover').style.display = "block";
-            }
-        });
-        document.addEventListener("mouseout", function(e){
-            const target = e.target.closest("#account-nav");
-            if(target){
-                document.getElementById('account-mouseover').style.display = "none";
-            }
-        });
-        document.addEventListener("mouseover", function(e){
-            const target = e.target.closest(".nav-menu-link");
-            if(target){
-                target.style.backgroundColor = "rgb(255, 255, 140)";
-                target.style.color = "rgb(1, 70, 1)";
-            }
-        });
-        document.addEventListener("mouseout", function(e){
-            const target = e.target.closest(".nav-menu-link");
-            if(target){
-                target.style.backgroundColor = "rgb(1, 70, 1)";
-                target.style.color = "rgb(255, 255, 140)";
-            }
-        });
-    
-
-    //MOBILE NAV MENU
-    
-        window.addEventListener('click', function(e){   
-            if (document.getElementById('cheese-click').contains(e.target)){
-                document.getElementById('cheese-clickout').style.display = "block";
-                document.getElementById('cheese-click').style.backgroundColor = "rgb(255, 255, 140)";
-                document.getElementById('cheese-click').style.color = "rgb(1, 70, 1)";
-                document.getElementById('cheese-clickout').style.color = "rgb(255, 255, 140)";
-            } else{
-                document.getElementById('cheese-clickout').style.display = "none";
-                document.getElementById('cheese-click').style.backgroundColor = "rgb(1, 70, 1)";
-                document.getElementById('cheese-click').style.color = "rgb(255, 255, 140)";
-            }
-        });
-        window.addEventListener('click', function(e){   
-            if (document.getElementById('beer-click').contains(e.target)){
-                document.getElementById('beer-clickout').style.display = "block";
-                document.getElementById('beer-click').style.backgroundColor = "rgb(255, 255, 140)";
-                document.getElementById('beer-click').style.color = "rgb(1, 70, 1)";
-                document.getElementById('beer-clickout').style.color = "rgb(255, 255, 140)";
-            } else{
-                document.getElementById('beer-clickout').style.display = "none";
-                document.getElementById('beer-click').style.backgroundColor = "rgb(1, 70, 1)";
-                document.getElementById('beer-click').style.color = "rgb(255, 255, 140)";
-            }
-        });
-        window.addEventListener('click', function(e){   
-            if (document.getElementById('account-click').contains(e.target)){
-                document.getElementById('account-clickout').style.display = "block";
-                document.getElementById('account-click').style.backgroundColor = "rgb(255, 255, 140)";
-                document.getElementById('account-click').style.color = "rgb(1, 70, 1)";
-                document.getElementById('account-clickout').style.color = "rgb(255, 255, 140)";
-            } else{
-                document.getElementById('account-clickout').style.display = "none";
-                document.getElementById('account-click').style.backgroundColor = "rgb(1, 70, 1)";
-                document.getElementById('account-click').style.color = "rgb(255, 255, 140)";
-            }
-        });
-
-    
-    
-
     //IMAGE HANDLING
     //clears files on page reload
     if (document.getElementById('id_image')) {
@@ -259,10 +247,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-    // STRIPE JS (needs converting from jQuery and whatever other stuff it uses)
-
+    // STRIPE PAYMENT CHECKOUT
     // Adds Card element to checkout page(if element exists).  Also adds event listeners and actions to be taken on card submit.
-    
+    // NB this section comes directly from Boutique Ado (converted from JQuery)   
     if (document.getElementById('id_stripe_public_key')) {
         const stripePublicKey = document.getElementById('id_stripe_public_key').textContent.slice(1, -1);
         const clientSecret = document.getElementById('id_client_secret').textContent.slice(1, -1);
@@ -300,9 +287,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 errorDiv.textContent = '';
             }
         });
-        // Javascript form validation to prevent submission without an address:
+        //end section
 
-        // HANDLE FORM SUBMISSION
+        // this function prevents the form from submitting when the button is activated
         const form = document.getElementById('payment-form');
         document.addEventListener("submit", function(e){
             const target = e.target.closest("#payment-form");
@@ -335,14 +322,14 @@ document.addEventListener("DOMContentLoaded", function() {
                                 document.getElementById('error-container').style.display="none"
                             }                     
                         } else {
-                            //console.log(addressFields[i].name)
                             document.getElementById('error-container').style.display="block";
                             document.getElementById('form-error-message').textContent = addressFields[i].placeholder + " has not been filled out"
                             takePayment=false;
                             break;
                         }
                     }
-                }                                   
+                }
+                //submits payment intent if form validates                               
                 if (takePayment === true) {
                     document.getElementById('form-submit-button').click();
                     //disables form input etc to prevent multiple submissions
@@ -361,7 +348,6 @@ document.addEventListener("DOMContentLoaded", function() {
                             billing_details: {
                                 email: document.getElementById('order-email').value,
                             }
-                            //may well be worth adding billing data to this section later on, along with billing e-mail.  Not essential functionality though.
                         },
                         shipping: {
                             name: form.full_name.value,
@@ -402,8 +388,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }) 
         })
-    }      
-    //Quantity form control icons.
+    }  
+
+    //QUANTITY CONTROL IN PRODUCT VIEW.
     if (document.getElementById('decrement-amount')) {
         document.addEventListener("click", function(e){
             const target = e.target.closest("#decrement-amount");
@@ -443,7 +430,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    //buy it now alert to manage existing basket items.  This is better than Amazon.
+    //BUY IT NOW ALERTS
     if (document.getElementById('buynow-alert')) {
         const buyNowButtons = Array.from(document.getElementsByClassName('buy-now'));
         buyNowButtons.forEach(item => {
@@ -488,7 +475,8 @@ document.addEventListener("DOMContentLoaded", function() {
             });    
         });
     }
-    //address removal alerts
+
+    //ADDRESS REMOVAL ALERTS
     if (document.getElementById('address-alert')) {
         const removeAddressButtons = Array.from(document.getElementsByClassName('remove-address'));
         removeAddressButtons.forEach(item => {
@@ -524,7 +512,8 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         });
     }
-    // message removal alerts
+
+    //MESSAGE REMOVAL ALERTS
     if (document.getElementById('message-alert')) {
         const removeAddressButtons = Array.from(document.getElementsByClassName('remove-message'));
         removeAddressButtons.forEach(item => {
@@ -554,8 +543,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
     
-    // Product Deletion Alerts
-
+    // PRODUCT DELETION ALERTS
     if (document.getElementById('product-alert')) {
         const removeAddressButtons = Array.from(document.getElementsByClassName('delete-product'));
         removeAddressButtons.forEach(item => {
@@ -585,10 +573,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-
-
-
-    //Add or select addresses from checkout
+    //ADD OR SELECT ADDRESSES FROM CHECKOUT FOR LOGGED IN USERS
     if (document.getElementById('add-new-address')) {
         document.addEventListener("click", function(e){
             const target = e.target.closest("#add-new-address");
@@ -637,9 +622,8 @@ document.addEventListener("DOMContentLoaded", function() {
         });        
     }
 
-
     // SORT FILTER, PRODUCT VIEW PAGE
-    
+    //NB this code is converted from the Boutique Ado project    
     document.addEventListener("change", function(e){
         const target = e.target.closest("#sort-selector");
         if(target){
@@ -661,8 +645,7 @@ document.addEventListener("DOMContentLoaded", function() {
     })
 
 
-    // Basket message fade
-
+    // FADE EFFECT FOR BASKET ADJUSTMENT MESSAGES
     window.onload=setTimeout(function(){
         if (document.getElementById("basket-message")) {
             let opacity=0; 
@@ -682,7 +665,8 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
     }, 500);
-    //ensure correct container checked editing beer product form
+
+    //ENSURES CORRECT RADIAL BUTTON CHECKED ON BEER EDIT FORM
     if (document.getElementById("container-selected")) {
         container = document.getElementById("container-selected").value;
         console.log(container);
@@ -692,6 +676,7 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("id_container_0").checked = true;
         }
     }
+
 });
 
 

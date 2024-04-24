@@ -920,11 +920,11 @@ input[type=number] {
     margin-bottom:2px;
 }
 
-#remove-item {
+.basket-adjustment .basket-remove .remove-item {
     color:rgb(49, 0, 0);
     text-decoration: underline;
 }
-#remove-item:hover {
+.basket-adjustment .basket-remove .remove-item:hover {
     color:rgb(114, 36, 36);
     text-decoration: underline;
 }

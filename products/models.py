@@ -45,7 +45,8 @@ class Product(models.Model):
     name = models.CharField(max_length=254)
     product_type = models.CharField(max_length=254)
     description = models.TextField(null=True, blank=True)
-    variety = models.CharField(max_length=254)
+    variety = models.CharField(max_length=52)
+    variety_slug = models.CharField(max_length=52, null=True, blank=True)
     amount = models.CharField(max_length=6)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     price_per_amount = models.DecimalField(

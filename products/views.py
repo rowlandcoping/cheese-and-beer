@@ -463,6 +463,11 @@ def add_product(request):
                         BeerCategory, pk=beer_category)
                 description = category.description
             # adds a price per kilo or price per litre
+            variety_slug = re.sub(
+                        "[.!# $%;@&'*-/=?^_` {|}~]",
+                        "+",
+                        request.POST.get('variety')
+                        )
             amount = decimal.Decimal(form['amount'].value())
             price = decimal.Decimal(request.POST.get('price'))
             new_price = (1000/amount)*price
@@ -500,6 +505,7 @@ def add_product(request):
             final_form.description = description
             final_form.image_url = image_url
             final_form.image_alt = image_alt
+            final_form.variety_slug = variety_slug
             final_form.price_per_amount = price_per_amount
             final_form.save()
             if product_type == "cheese":
@@ -529,7 +535,7 @@ def edit_product(request):
     or perform a basic search.
     """
     if request.user.is_superuser:
-        products = Product.objects.all()
+        products = Product.objects.all().order_by('-id')
         query = None
         if request.GET:
             if 'q' in request.GET:
@@ -617,6 +623,11 @@ def product_edit(request, product_id):
                 description = category.description
                 print(description)
             # adds a price per kilo or price per litre
+            variety_slug = re.sub(
+                        "[.!# $%;@&'*-/=?^_` {|}~]",
+                        "+",
+                        request.POST.get('variety')
+                        )
             amount = decimal.Decimal(form['amount'].value())
             price = decimal.Decimal(request.POST.get('price'))
             new_price = (1000/amount)*price
@@ -646,6 +657,7 @@ def product_edit(request, product_id):
             final_form = form.save(commit=False)
             final_form.product_type = product.product_type
             final_form.description = description
+            final_form.variety_slug = variety_slug
             final_form.image_url = image_url
             final_form.image_alt = image_alt
             final_form.price_per_amount = price_per_amount
