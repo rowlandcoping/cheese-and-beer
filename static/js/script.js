@@ -407,13 +407,15 @@ document.addEventListener("DOMContentLoaded", function() {
         document.addEventListener("click", function(e){
             const target = e.target.closest("#increment-amount");
             if(target){
-                let initial_price = document.getElementById('product-price').innerHTML;
-                initial_price = Number(initial_price);
-                let quantity = document.getElementById('quantity').value;
-                quantity = Number(quantity);
-                quantity += 1;
-                document.getElementById('quantity').value = quantity;
-                document.getElementById('product-view-total').innerHTML = (Math.round((initial_price * quantity) * 100) / 100).toFixed(2);                 
+                if (document.getElementById('quantity').value < 200) {
+                    let initial_price = document.getElementById('product-price').innerHTML;
+                    initial_price = Number(initial_price);
+                    let quantity = document.getElementById('quantity').value;
+                    quantity = Number(quantity);
+                    quantity += 1;
+                    document.getElementById('quantity').value = quantity;
+                    document.getElementById('product-view-total').innerHTML = (Math.round((initial_price * quantity) * 100) / 100).toFixed(2);
+                }               
             }
         });
         document.addEventListener("input", function(e){

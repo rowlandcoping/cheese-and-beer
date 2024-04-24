@@ -259,7 +259,7 @@ Cheese and Beer
                         <form method="POST" action="{% url 'add_to_basket' %}" enctype="multipart/form-data">
                             {% csrf_token %}
                             <input type="hidden" name="view" value="{{ request.path }}?{{ current_view }}">
-                            <input type="hidden" name="quantity" value="1">
+                            <input type="hidden" name="quantity" value="1" max="200" min="1">
                             <input type="hidden" name="product" value="{{ pairing.id }}">                     
                             <button class="action-button add-basket add-basket-list clickable-element">
                                 <i class="fas fa-shopping-basket"></i> Add

@@ -450,14 +450,6 @@ USER SIGNUP
 
 Although I haven't added additional roles as I would like to in the future, I have set all logins and validation to be done via e-mail.  The Allauth login no longer requires a username, because I have built a signal to set the username to equal the user's e-mail address pre-save.  I have also disabled e-mail verification for signup. This makes for a far better user experience and a very slick sign-in process to ensure no potential customer is lost at checkout.
 
-SEARCH RESULTS
-
-I have not placed a limit on the number of search results - it really was a time factor that prevented me implementing pagination or infinite scrolling.  With the number of products available at present it doesn't make the site unweildy, although a solution would be required in a live production environment this is not a problem for the MVP.
-
-BASKET/CHECKOUT
-
-Gifting options have not made the final MVP cut.  This was largely because in order to implement it at checkout I realised it was no minor undertaking. I would have needed to added the option to either the existing payment intent or the existing basket, or created an entirely new session object. In the end I decided to focus on enhancing existing functionality, since I'm not even sure what the gifting option would have entailed beyond sending someone a box of cheese.
-
 ADDRESS OPTIONS
 
 I decided to dispense with billing address options because it was not required by Stripe to facilitate payments.  Indeed I discovered all Stripe needs for an extra layer of security is an e-mail address, so that is all I passed to the payment intent.  Instead I focussed on usability - users can now add a new shipping address or select from existing addresses directly in the checkout screen.  Instead of seeing a form they are hidden by Javascript and the existing default address is displayed. An additional feature is the 'selected address'.  Users can select a different shipping address for an order without changing their default address, which is stored as a session variable.
