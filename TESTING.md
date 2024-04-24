@@ -53,7 +53,7 @@ Repaired Issues: missing image alt, illegal query from where I was using categor
 Outstanding Issues: None.
 
 Page validated: View Product Page\
-URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/view-products/product-detail/<product_id>/ \
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/view-products/product-detail/xxxx/ \
 Repaired Issues: missing image alts, illegal query from spaces in variety names (Added variety_slug field, populated database, added variety GET query). Some nesting issues. superfluous duplicate ids.\
 Outstanding Issues: None.
 
@@ -63,7 +63,7 @@ Repaired Issues: missing image alts, stray tags, placeholders in hidden fields. 
 Outstanding Issues: None.
 
 Page validated: Checkout Confirmation Page\
-URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/checkout/confirmation/<order_number> \
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/checkout/confirmation/xxxx \
 Repaired Issues: missing closing tags\
 Outstanding Issues: None.
 
@@ -112,12 +112,12 @@ Repaired Issues: None. \
 Outstanding Issues: None.
 
 Page validated: Add an Address\
-URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/addresses/add-address/ \
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/addresses/xxxx/ \
 Repaired Issues: None. \
 Outstanding Issues: None.
 
 Page validated: Add an Address\
-URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/addresses/edit-address/<address_id>/ \
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/addresses/edit-address/xxxx/ \
 Repaired Issues: None. \
 Outstanding Issues: None.
 
@@ -127,7 +127,7 @@ Repaired Issues: Stray tags, nesting issues. \
 Outstanding Issues: None.
 
 Page validated: View Order Info\
-URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/my-account/order-info/<order_id>/ \
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/my-account/order-info/xxxx/ \
 Repaired Issues: missing image alts, duplicate id in undisplayed element. Solved this by removing id as it was superfluous. \
 Outstanding Issues: None.
 
@@ -164,12 +164,12 @@ Repaired Issues: None. \
 Outstanding Issues: None.
 
 Page validated: Edit Cheese Category\
-URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/products/edit-cheese-category/<category_id>/ \
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/products/edit-cheese-category/xxxx/ \
 Repaired Issues: Unclosed elements. \
 Outstanding Issues: None.
 
 Page validated: Edit Beer Category\
-URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/products/edit-beer-category/<category_id>/ \
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/products/edit-beer-category/xxxx/ \
 Repaired Issues: None (fixed prior to validation). \
 Outstanding Issues: None.
 
@@ -189,7 +189,7 @@ Repaired Issues: Stray tag, nesting issue. \
 Outstanding Issues: None.
 
 Page validated: Product Edit Page\
-URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/products/product-edit/<product_id>/ \
+URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/products/product-edit/xxxx/ \
 Repaired Issues: removed unnecessary label for django form radio input. \
 Outstanding Issues: None.
 
@@ -227,48 +227,48 @@ I have used the [CI Python Linter](https://pep8ci.herokuapp.com/#) to ensure my 
 App: addresses\
 Files Linted: forms.py, models.py, urls.py, views.py\
 Repaired Issues: whitespace, spaces around operators and line length\
-Outstanding Issues: None.\
+Outstanding Issues: None.
 
 App: admin_console\
 Files Linted: urls.py, views.py\
 Repaired Issues: whitespace, spaces around operators and line length\
-Outstanding Issues: None.\
+Outstanding Issues: None.
 
 App: basket\
 Files Linted: contexts.py, urls.py, views.py, order_calculator.py\
 Repaired Issues: whitespace, spaces around operators and line length\
-Outstanding Issues: None.\
+Outstanding Issues: None.
 
 App: checkout\
 Files Linted: forms.py, models.py, urls.py, views.py, webhook_handler.py, webhooks.py\
-Repaired Issues: whitespace, spaces around operators and line length.  Line length issues meant I had to refactor code with variables and functions assigned shorted names and swap some fstrings for regularly constructed ones.
-Outstanding Issues: None.\
+Repaired Issues: whitespace, spaces around operators and line length.  Line length issues meant I had to refactor code with variables and functions assigned shorted names and swap some fstrings for regularly constructed ones.\
+Outstanding Issues: None.
 
 App: cheese_beer\
 Files Linted: settings.py, urls.py\
 Repaired Issues: whitespace, spaces around operators, issue using '==' operator to test for boolean False (changed to 'is')
-Outstanding Issues: None.\
+Outstanding Issues: None.
 
 App: home\
 Files Linted: urls.py, views.py\
-Repaired Issues: whitespace
-Outstanding Issues: None.\
+Repaired Issues: whitespace.\
+Outstanding Issues: None.
 
 App: product_views\
 Files Linted: urls.py, views.py\
 Repaired Issues: whitespace, spaces around operators and line length, also cannot use bare except so i had to look up the error
-I was testing for and add it to the code.
-Outstanding Issues: None.\
+I was testing for and add it to the code.\
+Outstanding Issues: None.
 
 App: products\
 Files Linted: contexts.py, signals.py, forms.py, models.py, urls.py, views.py\
 Repaired Issues: whitespace, spaces around operators and line length\
-Outstanding Issues: None.\
+Outstanding Issues: None.
 
 App: user_account\
 Files Linted: forms.py, models.py, urls.py, views.py\
 Repaired Issues: whitespace, spaces around operators and line length\
-Outstanding Issues: None.\
+Outstanding Issues: None.
 
 ## User Stories
 ([back to top](#testing-documentation))
@@ -517,6 +517,15 @@ Whilst allauth does great things, it also insists on users providing a username.
 UNUPLOADED FILES PERSIST ON PAGE REFRESH
 
 When uploading an image with Django, I have been able to use javascrip to preview files in the form and a cancel button to remove any such files and prevent the image uploading. However, if the page is refreshed the file previously selected seems to persist in the cache (this was also a problem with Boutique Ado).  It could lead to a user unwittingly updating a file. I have searched a lot for answers of doing this in the view - in the end I simply set Javascript to clear the field on page reload.
+
+
+CONSOLE WARNINGS:
+
+The presence of Stripe leads to multiple warnings in the console.  Further reading revealed this was on account of how browsers are becoming stricter in terms of how they handle third party cookies. Reading the Stripe documentation this was acknowledged, however it was also made clear that none of these warnings affect the functionality of the API.  In terms of removing them, there is not much I can do for now other than to remove Stripe, which is obviously not a good idea since it is a compulsary component of this project.
+
+SITE FLAGGED AS MALICIOUS:
+
+When testing on my mobile, I noticed that Cheese and Beer was flagged as malicious; on entering my password it was suggested I change it anywhere I use it. Obviously this is not the case and my password is safe, but it does make me wonder what aspect of either Allauth, Stripe, my own custom code or Django in general is causing this, since it has not occurred on any of my other projects.  I have already mentioned a number of concerns I have about the way the site is structured, in particularly how Stripe client secret keys are handled, and wonder if it could be related to this. It may be where I have removed the JQuery.post API - un-necessary as it was in the context of the site perhaps that buffer served to re-assure the browser. If this were to be a production site with live payments and customers I would definitely need to address these concerns in the manner I have already outlined in this section. As things stand it is only an 8 week project and in the context of its current purpose and that timescale I'm not able to prioritise this at all for now.
 
 
 

@@ -405,9 +405,43 @@ As Donald Rumsfeld memorably said:
 ### MVP Data Structure
 ([back to top](#contents))
 
+As anticipated, the final data structure is significantly more complex than the basic structure outlined at the outset of the project.  i have outlined significant changes below:
+
+CHEESE AND BEER CATEGORY MODELS
+
+All custom fields were moved to the products model, and the many to many relationship is represented in a seperate table to reflect how it is handled by Django
+
+PRODUCTS MODEL
+
+Many fields have been added as the project has progressed.  Most notably the model now tracks units sold, and has a 'displayed' option.  This is to reflect how you do not really want to wipe a product and its order history from a database even if it isn't sold any more; this button hides the product from search results. Although users can still view the product from their order history or bookmarks they can't purchase it and they have a clear indicator it is unavaliable.
+
+USERS MODEL
+
+Although I haven't added additional roles to the table as I would like to in the future, I have set all logins and validation to be done via e-mail.  The Allauth login no longer requires a username, because I have built a signal to set the username to equal the user's e-mail address pre-save.  I have also disabled e-mail verification for signup. This makes for a far better user experience and a very slick sign-in process to ensure no potential customer is lost at checkout.
+
+ORDERS MODEL
+
+This now contains an estimated delivery date for every order.  This will reflect the date that is passed to the view when users are making their purchases.
+
+CONTACT FORM MODEL
+
+I have created a contact form model so that users can make queries regarding their orders.  If a use is logged in their data autopopulates, and if they click though from an order this carries over as well. The messages received are currently displayed in the admin site in a very basic view, but for a production site this could become a full-blown ticketing system without too much additional work.
+
+WISHLIST MODEL
+
+Logged-in users can now add items to or remove them from their wishlist from any product page.  THey can also view their wishlist and purchase items from it via their account page or the menu.  This was a simple to implement custom model which enhances user experience.
+
+#### Schema Diagram
+
+![image](media/data-model/schemaupdated.svg)
+
 
 ### Feature List
 ([back to top](#contents))
+
+The final feature list for the MVP contains everything from the initial outline, with additional features documented here including the wishlist and contact form.  Focus has been on providing an enhanced experience for logged-in users.  This is notable on the checkout page where users are able to select and update addresses as well as a default address, and a very neat interface for doing so.  From landing on the homepage a logged in user is 3 clicks from making a purchase, and all they have to enter is their card number and CVV.  Additionally the user account page now provides multiple options, including the contact form and wishlist.  The orders and view order pages now provide direct access to the contact form with pre-populated details.  In fact as the site designer I highly recommend logging in before you use it!
+
+Beyond this though, even if a user is not registered they can still access their orders if they provide multiple exact details, and can still contact the customer services team (ie me).
 
 
 ## Testing Documentation
