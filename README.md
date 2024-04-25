@@ -687,7 +687,7 @@ NB: not a ticket as such but the model has a lot of room for expansion
 
 #### Admin Features
 
-_"Admin user can access 'add products' page"_
+_"Admin user can access 'add products' page."_\
 NB: admin users don't exist as such, the only option at present is superuser.  Updating the user model was not part of the scope for this MVP.  Presumably this feature means the admin console, hence the screengrab.
 
 ![image](media/testing/feature-list/admin/admin-console.png)
@@ -727,21 +727,11 @@ Deploying with WhiteNoise:
 
 In order to deploy with WhiteNoise I did the following:
 
-- Install WhiteNoise:
-    pip install whitenoise
-- Add WhiteNoise to the MIDDLEWARE list in settings.py, above everything except Django's SecurityMiddleware:
-  MIDDLEWARE = [
-    ---
-      "django.middleware.security.SecurityMiddleware",
-      "whitenoise.middleware.WhiteNoiseMiddleware",
-    ---
-  ]
-- Add STATICFILES_STORAGE value:
-    STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+- Install WhiteNoise
+- Add WhiteNoise to the MIDDLEWARE list in settings.py
+- Add 'STATICFILES_STORAGE' value: STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 With STATICFILES_STORAGE this differes from the recommended setting in the WhiteNoise documentation, which broke the website.
-I also added the condition 'if DEVELOPMENT is False:' prior to this setting, to ensure my site still worked in my development environment.
-
 
 Creating the App and connecting to Github:
 
@@ -861,35 +851,35 @@ API_SECRET=xxxxxxxxxxxxxxxxxx\
 
 EMAIL PROVIDER:
 
-development:
-EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend  (this is for development, relays email to your console)
+development:\
+EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend  (this is for development, relays email to your console)\
 production:
-EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
-EMAIL_HOST_PASSWORD=xxxxxxxxxx
-EMAIL_HOST_USER=emailaddress@email.com
-    _the e-mail address you've set up_\
+EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend\
+EMAIL_HOST_PASSWORD=xxxxxxxxxx\
+EMAIL_HOST_USER=emailaddress@email.com\
+    _the e-mail address you've set up_
 
 DATABASE:
 
-DATABASE_URL=postgres://ehsgxqzh:xxxxxxxxxxxxxxxxxxxxxxxxx@flora.db.elephantsql.com/xxxxxx
+DATABASE_URL=postgres://ehsgxqzh:xxxxxxxxxxxxxxxxxxxxxxxxx@flora.db.elephantsql.com/xxxxxx\
 _the first set of xs is your password and database, and the last is the database.  All these settings are easily found in the ElephantSQL control panel_
 
 STRIPE SETTINGS:
 
-STRIPE_PUBLIC_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-STRIPE_SECRET_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-STRIPE_WH_SECRET=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+STRIPE_PUBLIC_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\
+STRIPE_SECRET_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\
+STRIPE_WH_SECRET=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\
 
 DJANGO settings:
 
-CLOUDINARY_BASE=https://res.cloudinary.com/xxxxxxx/image/upload/xxxxxxxxxx/cheese-and-beer/
-_this is the base URL for your media images - in this case we are using cloudinary. please note the first 'xxxxxxx' portion is the same as your cloud name.  If you view an image in the cloudinary explored and check the 'original url' you will be able to find the second part._
-SECRET_KEY=ngc*xnvts6x-2b2725b_&5&_3cfz=s(dhox+p@ud8b6-gox7nq
-DEBUG=True/False
-_this sets the site into debug or production mode. You should never deploy a live production site with debug set to True.  Keep in mind with debug set to false in the local environment this will cause problems collecting static files.  To run your site locally in this instance, type python3 manage.py runserver --insecure_
-DEVELOPMENT=True/False
-_this should always be set to True on your local host, or False on the live site, otherwise it won't work at all._
-HOST=cheese-and-beer-896aa5a35920.herokuapp.com
+CLOUDINARY_BASE=https://res.cloudinary.com/xxxxxxx/image/upload/xxxxxxxxxx/cheese-and-beer/\
+_this is the base URL for your media images - in this case we are using cloudinary. please note the first 'xxxxxxx' portion is the same as your cloud name.  If you view an image in the cloudinary explored and check the 'original url' you will be able to find the second part._\
+SECRET_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\
+DEBUG=True/False\
+_this sets the site into debug or production mode. You should never deploy a live production site with debug set to True.  Keep in mind with debug set to false in the local environment this will cause problems collecting static files.  To run your site locally in this instance, type python3 manage.py runserver --insecure_\
+DEVELOPMENT=True/False\
+_this should always be set to True on your local host, or False on the live site, otherwise it won't work at all._\
+HOST=cheese-and-beer-896aa5a35920.herokuapp.com\
 _the host is the base for all urls.  On the deployed site this will be the base of the URL you have deployed to, in a local environment this will be your local host (in my case 127.0.0.1)._
 
 ## Credits
