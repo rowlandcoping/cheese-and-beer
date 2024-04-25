@@ -853,7 +853,7 @@ EMAIL PROVIDER:
 
 development:\
 EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend  (this is for development, relays email to your console)\
-production:
+production:\
 EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend\
 EMAIL_HOST_PASSWORD=xxxxxxxxxx\
 EMAIL_HOST_USER=emailaddress@email.com\
@@ -870,7 +870,7 @@ STRIPE_PUBLIC_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\
 STRIPE_SECRET_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\
 STRIPE_WH_SECRET=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\
 
-DJANGO settings:
+DJANGO SETTINGS:
 
 CLOUDINARY_BASE=https://res.cloudinary.com/xxxxxxx/image/upload/xxxxxxxxxx/cheese-and-beer/\
 _this is the base URL for your media images - in this case we are using cloudinary. please note the first 'xxxxxxx' portion is the same as your cloud name.  If you view an image in the cloudinary explored and check the 'original url' you will be able to find the second part._\
@@ -887,24 +887,24 @@ _the host is the base for all urls.  On the deployed site this will be the base 
 
 ### Layout and Inspiration
 
-AMAZON
+AMAZON:
 
 Amazon has been a constant reference point for me in terms of how they manage the customer journey and lay out their site.  They do a lot of things wrong, but they also get a lot right.
 
-PLYMOUTH ARGYLE
+PLYMOUTH ARGYLE:
 
 As a fan and former season ticket holder, I can't help but thing my site design has been influenced by their magnificent [home strip](https://www.argylesuperstore.co.uk/kits/home-kit/adults/2507_2324-home-shirt-womens.html) for this season.  It's a real shame the players aren't of the same standard as the shirts.
 
-CHEESE AND BEER
+CHEESE AND BEER:
 
 The following websites have been instumental in furnishing me the the in-depth knowledge I needed to create this website:
 
-https://www.cheesesexdeath.com/the-5-cheese-types
+https://www.cheesesexdeath.com/the-5-cheese-types\
 https://www.pigbeer.com/post/top-5-popular-types-of-beer-found-in-the-uk-and-how-best-to-drink-them
 
 ### Fonts
 
-[Fall Is Coming](https://www.fontspace.com/fall-is-coming-font-f30492)
+[Fall Is Coming](https://www.fontspace.com/fall-is-coming-font-f30492)\
 [Roboto Flex](https://fonts.google.com/specimen/Roboto+Flex)
 
 ### Images and Icons
@@ -928,7 +928,7 @@ Icons are from Font Awesome.
 
 ### Code
 
-BOUTIQUE ADO
+BOUTIQUE ADO:
 
 The Code Institue project Boutique Ado is what I used to learn Django, and has been a constant reference point.  Notably there are some sections of code, mentioned in the project itself, where I have leaned heavily on it:
 
@@ -938,13 +938,13 @@ The Code Institue project Boutique Ado is what I used to learn Django, and has b
 - Stripe payment confirmation
 - sort filter and search on product view page
 
-When it comes to passing the Javascript processing a stripe payment, I have used the Boutique Ado code as a base but made significant adjustments. I do not make a server request (this is covered in detail in the bugs section of [TESTING.md](TESTING.md)). Additionally all the JQuery is converted to Javascript. I also make sure the form is validated with Javascript prior to processing the payment intent.
+When it comes to the Javascript processing a stripe payment, I have used the Boutique Ado code as a base but made significant adjustments. I do not make a server request (this is covered in detail in the bugs section of [TESTING.md](TESTING.md)). Additionally all the JQuery is converted to JavaScript. I also make sure the form is validated with Javascript prior to processing the payment intent.
 
-HOPES AND DREAMS
+HOPES AND DREAMS:
 
 I have used some substantial chunks of code from my last project, including the image handling functionality and how Cloudinary is managed within the project. I have also used the JavaScript for the category selector in Hopes and Dreams in order to pair cheese with beers in my views for editing categories, which I felt was much easier than a series of drop-downs and actually easier to implement because the codebase already existed.
 
-THE INTERNET
+THE INTERNET:
 
 I have opened so many tabs during the cours of the last 8 weeks and found a lot of great solutions, however for my basket alert messages I borrowed substantially from geeksforgeeks.org in order to add the fade effect:
 
