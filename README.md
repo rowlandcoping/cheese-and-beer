@@ -96,7 +96,7 @@ This all said, it is clear to me that some of the dependencies from the learning
  - Checkout page:  Here the user selects/inputs their billing and delivery address, specifies whether the item is a gift (and if they want it wrapped) and enters their payment details, and which details they wish to retain (ie register as a user)
  - Confirmation page: This is where users will be provided with confirmation of their purchase.
  - Product update page:  The site is not envisaged as an amazon style marketplace, so the only users who will have access to this are designated administrators of the platform.  Here new products can be added and removed.
- - Order history (with varying permissions):  Users can view their own order history, customer services can view any of them, and managers/admins have update tools.  Not all of this will be in the lean MVP as it's not clear on the levels of permissions built into allauth, but obviously superuser isn't suitable in all (most??) cases.
+ - Order history (with varying permissions):  Users can view their own order history, customer services can view any of them, and managers/admins have update tools.  Not all of this will be in the lean MVP as it's not clear on the levels of permissions built into allauth, but obviously superuser isn't suitable in all cases.
  - Manage account:  User can change billing/delivery addresses, other personal details, or payment options (if included).  They can access their order history from here. Users which are not signed in will have the option to search for their order by order number to track it.
 
 ### Features
@@ -357,45 +357,45 @@ The main site inspiration when it comes to much of the layout is Amazon, mainly 
 
 HELPER CLASSES
 
-rgb(3, 126, 3): green-text
-rgb(255, 0, 0): red-text
-rgb(95, 0, 0): dark-red-text
-rgb(1, 70, 1): forest-green-text
-rgb(0, 51, 0): dark-green-text
-rgb(63, 63, 63): grey-text
+rgb(3, 126, 3): green-text\
+rgb(255, 0, 0): red-text\
+rgb(95, 0, 0): dark-red-text\
+rgb(1, 70, 1): forest-green-text\
+rgb(0, 51, 0): dark-green-text\
+rgb(63, 63, 63): grey-text\
 
 SITE THEME
 
-rgb(1, 70, 1): background for top section of site containing navigation and search, also used for form buttons and links, and a border on focussed form elements.
-rgb(0, 51, 0): background for checkout buttons and the main site logo. Generally used to accent the main green theme, also used for links.
-rgb(0, 15, 0) : dark green border used in title banner, also used to accent form fields
-rgb(255, 255, 140): text color for titles and navigation, also inverted with the forest green for mouseover effect.  Also used on mousover for checkout and basket buttons.
-rgb(255, 255, 255): white is used as the immediate background for across the listing and purchases sections of the site.  It provides a contrast with the light yellow used for page backgrounds on these pages.
-rgb(247, 241, 213): the off-yellow base background for the listing and product pages.  also forms the text background on form pages, the header and footer background on alerts, and the background for basket alerts.
+rgb(1, 70, 1): background for top section of site containing navigation and search, also used for form buttons and links, and a border on focussed form elements.\
+rgb(0, 51, 0): background for checkout buttons and the main site logo. Generally used to accent the main green theme, also used for links.\
+rgb(0, 15, 0) : dark green border used in title banner, also used to accent form fields.\
+rgb(255, 255, 140): text color for titles and navigation, also inverted with the forest green for mouseover effect. Also used on mousover for checkout and basket buttons.\
+rgb(255, 255, 255): white is used as the immediate background for across the listing and purchases sections of the site.  It provides a contrast with the light yellow used for page backgrounds on these pages.\
+rgb(247, 241, 213): the off-yellow base background for the listing and product pages.  Also forms the text background on form pages, the header and footer background on alerts, and the background for basket alerts.\
 grey (50 shades of): used for border helper classes, and generally any borders or boundaries anywhere across the site.
-rgb(107, 107, 107): the grey used for the box shadow effect site-wide.
-rgb(129, 153, 124): used for the hover state for most form buttons.
+rgb(107, 107, 107): the grey used for the box shadow effect site-wide.\
+rgb(129, 153, 124): used for the hover state for most form buttons.\
 
 PURCHASE BUTTONS
 
-rgb(139, 67, 0): the color for the add to basket button, universally
-(245, 183, 126): hover state for add to basket button
-rgb(16, 95, 0): the color for the buy now button, site-wide.
-rgb(129, 153, 124): hover state for the buy now button.
+rgb(139, 67, 0): the color for the add to basket button, universally.\
+(245, 183, 126): hover state for add to basket button.\
+rgb(16, 95, 0): the color for the buy now button, site-wide.\
+rgb(129, 153, 124): hover state for the buy now button.\
 
 MESSAGES AND ALERTS
 
-rgb(245, 26, 26) - used as border for error messages
-rgb(16, 95, 0) - used as border for success messages
-rgb(245, 150, 26) - used as border for warning messages
-rgb(0, 32, 0) - background for the yes button
-rgb(50, 90, 50) - hover background for yes button
-rgb(49, 0, 0) - background for no button
-rgb(94, 42, 42) - hover background for no button
+rgb(245, 26, 26) - used as border for error messages.\
+rgb(16, 95, 0) - used as border for success messages.\
+rgb(245, 150, 26) - used as border for warning messages.\
+rgb(0, 32, 0) - background for the yes button.\
+rgb(50, 90, 50) - hover background for yes button.\
+rgb(49, 0, 0) - background for no button.\
+rgb(94, 42, 42) - hover background for no button.
 
 ### Fonts
 
-Title: FallIsComingRegular-Mx9B (Fontspace)
+Title: FallIsComingRegular-Mx9B (Fontspace)\
 Content: RobotoFlex (google fonts)
 
 ### Images
@@ -428,11 +428,11 @@ The site has been built for desktop, but designed throughout to easily scale for
 
 I built the site's responsiveness using the following break-points:
 
-max-width: 359px (for very very very small phones)
-max width: 450px (the main break point for converting to smaller mobile format)
-max-width: 650px (the main break point for converting to a mobile format)
-max width: 940px (for large tablets or people viewing in smaller windows)
-max width: 1200px (to accommodate smaller laptop screens)
+max-width: 359px (for very very very small phones)\
+max width: 450px (the main break point for converting to smaller mobile format)\
+max-width: 650px (the main break point for converting to a mobile format)\
+max width: 940px (for large tablets or people viewing in smaller windows)\
+max width: 1200px (to accommodate smaller laptop screens)\
 max width: 1650px (to accommodate laptop screens)
 
 ## The MVP

@@ -3,19 +3,16 @@ We really hope your order is everything you dreamed of.
 
 Your estimated delivery date is {{ order.delivery_date | date:"l jS F, Y" }}.
 
-Order details:
+Order Details:
 
 Order Date: {{ order.order_date }}
 Order Number: {{ order.order_number }}
 Billed Amount: {{ order.grand_total }}
 
-Delivery Address:
+Delivery Details:
 
 {{ order.full_name }},
 {{ order.address_line_one }},
-{{ order.address_line_two }},
-{{ order.town_or_city }},
-{{ order.county }},
 {{ order.postcode }}
 
 
