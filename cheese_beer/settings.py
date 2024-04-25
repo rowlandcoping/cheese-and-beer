@@ -214,7 +214,7 @@ if DEVELOPMENT is False:
     EMAIL_USE_TLS = False
     EMAIL_USE_SSL = True
     EMAIL_PORT = 465
-    EMAIL_HOST = 'smtp.zoho.eu'
+    EMAIL_HOST = 'smtp.gmail.com'
 
 # whitenoise
 
