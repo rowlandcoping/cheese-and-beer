@@ -203,7 +203,7 @@ def contact_form(request):
                 {})
             message = render_to_string(
                 'user_account/confirmation_emails/body.txt',
-                {'order_number': order_number, 'message': message})
+                {'order_number': order_number,})
             send_mail(
                 subject,
                 message,

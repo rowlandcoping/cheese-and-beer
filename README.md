@@ -56,9 +56,9 @@ Cheese and Beer is about the democratisation of cheese. To enjoy the product you
 ### 4) Site Owner - User Stories
 
 - Site Identity: The landing page needs to make people feel at home and get across the core values of the site.
-- Clear Pathway:  As soon as the user lands on the site their pathway should be clear and the options they are presented with need to make them stick.
 - Simple, familiar design:  There is no need to re-invent the wheel with this site, in terms of how products are presented, and there are plenty of excellent benchmarks out there.
 - Uncluttered UI: I think it's important that users aren't overwhelmed with menu options, especially on mobile.  There is no need to overcomplicte a website about cheese (and beer).
+- Clear Pathway:  As soon as the user lands on the site their pathway should be clear and the options they are presented with need to take them towards the site goal (ie sales) as quickly as possible.
 - Engaging sales pathways: Although many features in this area may not form part of the MVP (see developed goals concerning keeping it simple) having novel and simple to use means of engagement, such as (for example) a cheeseboard generator, is key.
 - Regulatory Compliance and Security: As I want this to be a real world application, no features will be implemented that are not compliant with best practice, such as PCI DSS regulations.  If implemented, things like storing user payment details should be done through Stripe (which presumably takes care of most of this).
 
@@ -511,8 +511,7 @@ This simply contains two foreign keys, one linking the user and one linking the 
 ### Feature List
 ([back to top](#contents))
 
-From landing on the homepage a logged in user is 3 clicks from making a purchase, and all they have to enter is their card number and CVV.  
-
+I have outlined here how the site meets the requirements of the MVP feature list, and also demonstrated some of the additional features I have been able to implement to improve user engagement.
 
 ## Testing Documentation
 ([back to top](#contents))
@@ -734,6 +733,7 @@ IMAGES:
 All product images (barring one or two) are sourced from wikimedia commons.
 The background page for forms and the homepage was found on Unsplash.
 The favicon was created using GIMP and a free icon I found on a google image search.
+The homepage cheese and beer banners were created using Bing image creator.
 
 As such I am free to use them all for the purposes of this site.
 

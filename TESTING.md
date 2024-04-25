@@ -289,17 +289,83 @@ Outstanding Issues: None.
 ## User Stories
 ([back to top](#testing-documentation))
 
+This section tests the original user stories against the MVP site specification and demonstrates how the requirements have been met.
+
 ### Site Owner User Stories
 
 ([back to top](#testing-documentation))
 
+_"The landing page needs to make people feel at home and get across the core values of the site."_\
+The site immediately establishes a clear brand identity which is carried across the site, which is that of a premium, well put-together online store that doesn't take itself too seriously.
+
+![image](media/testing/user-stories/brand.png)
+
+_" As soon as the user lands on the site their pathway should be clear and the options they are presented with need to make them stick"_\
+From landing on the homepage a logged in user is 3 clicks from making a purchase. Every product listing on every page contains immediate options to purchase which lands them on the checkout page and most pages contain links back to where a user has come from so they will never be lost.  
+
+![image](media/testing/user-stories/buy-now.png)
+
+_"There is no need to re-invent the wheel with this site, in terms of how products are presented..."_\
+The site takes strong influence from market leaders such as Amazon, and presents product listings in a clean and efficient way with no superfluous options or information.
+
+![image](media/testing/user-stories/product-listing.png)
+
+_"I think it's important that users aren't overwhelmed with menu options, especially on mobile..."_\
+The menu layout is simple and obvious, and the search-bar is very prominent. All these options link directly into product listings so that users can get to what they want to see as quickly as possible.
+
+![image](media/testing/user-stories/menu.png)
+
+_"having novel and simple to use means of engagement... is key._\
+The wishlist functionality is a really simple way for users to navigate the options available to them and save things to come back to later if they are short on time, helping to drive more purchases and reduce user frustration.
+
+![image](media/testing/user-stories/wishlist.png)
+
+_" no features will be implemented that are not compliant with best practice, such as PCI DSS regulations..._\
+Using Stripe instantly ensures that the site is compliant with best practice in handling sensitive user data.
+
+![image](media/testing/user-stories/secure-checkout.png)
+
 ### Site Visitor User Stories
 ([back to top](#testing-documentation))
 
-_"Users need to feel ... that they have control over comments and content they see."_\
-Users may delete any comments on their own dreams they find unacceptable, or if they prefer disable comments entirely.
+_"Users need to feel comfortable when they land on the site. Not like they are being overly sold to..."_\
+The homepage introduction is more welcoming than sales oriented and establishes a tone for the site, and the homepage banners focus on providing an immediate pathway to browsing products rather than pushing particular items.
 
-![image](static/images/user-stories/disabled.png)
+
+![image](media/testing/user-stories/homepage-banner.png)
+
+_"Once the user has landed on the homepage, they need a clear and obvious path to locate what it is they visited the site for in the first place."_\
+It is immediately obvious to a user what they can expect to find within each of the menus, and the search bar provides instant, prominent access to finding exactly what they are looking for.  All of the menu options on landing deliver the user to product listings where they can view cheese and beer products.
+
+![image](media/testing/user-stories/menu-open.png)
+
+_"For users uninitiated in the world of cheese, it is important to have recommendations and suggestions, especially when it comes to pairing."_\
+A key feature of the site is how categories of cheese and beer pair with each other to provide useful suggestions on the view product page, taking the user on a journey of discovery.
+
+![image](media/testing/user-stories/pairings.png)
+
+_"The user doesn't want to have to jump through a lot of hoops to do anything online, especially on mobile."_\
+The checkout screen is instantly accessible via the buy now button, and the options for registered users to save and select addresses mean that all they need to do input is a card number.  Purchase buttons are in multiple locations and clearly sited so the user can easily perform the actions they want to.
+
+![image](media/testing/user-stories/easy-checkout.png)
+
+_"If a user is purchasing a gift it should be easy to add, select and save multiple delivery addresses."_\
+Users are able to add new addresses or select existing ones directly from checkout, or choose to update them via the address management page.
+
+![image](media/testing/user-stories/address-selector.png)
+
+![image](media/testing/user-stories/manage-addresses.png)
+
+_"People are used to once click shopping with Amazon's buy it now, for example. Equally they also want to feel their data is protected..."_\
+Users have access to buy now alerts wherever a product is listed, which makes for a slick and convenient checkout process. Unlike Amazon, where the buy now process can be confusing and disorientating and isn't available everywhere, Cheese and Beer provides concise alerts with clear options leading to a single checkout page, so the user always feels like they are in control of what is going on.
+
+![image](media/testing/user-stories/buy-now-alerts.png)
+
+ _"Customers would like to be able to review and track their orders, especially if everything doesn't go to plan."_\
+Users who are signed in can review all of their orders, and even unregisterd users can view an order if they have concise enough data, all of which is provided in the confirmation e-mails. Order views all link directly to a contact form which is pre-populated with customer details and that of the order they were viewing, and mail receipt confirmations assure them that their request has been recieved, and indeed can be viewed by a superuser via the admin console.
+
+![image](media/testing/user-stories/order-history.png)
+
 
 ## Testing
 ([back to top](#testing-documentation))
