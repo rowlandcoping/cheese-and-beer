@@ -862,36 +862,92 @@ The manual testing process uncovered a few issues, none of which were serious an
 
 #### Responsiveness Testing
 
-I have tested at (in descending order) 3072px, 1920px (default), 1200px, 920px, 650px, 450px, 360px, 320px.  This is reflective of the major break points.
+I have tested at (in descending order) 3072px, 1920px (default), 1200px, 920px, 650px, 450px, 360px, 320px.  This is reflective of the major break points.  Keep in mind my testing of the larger screen size is unreliable on account of the fact I have a standard HD monitor and changing the zoom doesn't reflect what a user sees in reality on a 4k monitor, unless it is enormous.  For example, although the Samsung Galaxy S8 is rated as a 360px display due to its size, its screen resolution is actually a lot higher, at 1440px.  Obviously you wouldn't test an S8 on that screen size!
 
-As well as using google developer tools in responsive mode, this has been tested in the real world on Chrome and Firefox in Windows on a 1920 x 1080 HD monitor, and on a Samsung Galaxy S8 (at c.360px width).
+As well as using google developer tools in responsive mode, this project has been tested in the real world on Chrome and Firefox in Windows on a 1920 x 1080 HD monitor, and on a Samsung Galaxy S8 (at c.360px width).
 
 | Page tested | Screen width tested | Result |
 | ------------- | ------------------|-------------- |
-| landing page | 3072px | Success |
-| landing page | 1920px | Success |
-| landing page | 1200px | Success |
-| landing page | 920px | Success |
-| landing page | 650px | Success |
-| landing page | 450px | Success |
-| landing page | 360px | Success |
-| landing page | 320px | Success |
-| sign-up page | 3072px | Success |
-| sign-up page | 1920px | Success |
-| sign-up page | 1200px | Success |
-| sign-up page | 920px | Success |
-| sign-up page | 650px | Success |
-| sign-up page | 450px | Success |
-| sign-up page | 360px | Success |
-| sign-up page | 320px | Success |
-| welcome page | 3072px | Success |
-| welcome page | 1920px | Success |
-| welcome page | 1200px | Success |
-| welcome page | 920px | Success |
-| welcome page | 650px | Success |
-| welcome page | 450px | Success |
-| welcome page | 360px | Success |
-| welcome page | 320px | Success |
+| home page | 3072px | Success |
+| home page | 1920px | Success |
+| home page | 1200px | Success |
+| home page | 920px | Success |
+| home page | 650px | Success |
+| home page | 450px | Success |
+| home page | 360px | Success |
+| home page | 320px | Success |
+| find order page | 3072px | Success |
+| find order page | 1920px | Success |
+| find order page | 1200px | Success |
+| find order page | 920px | Success |
+| find order page | 650px | Success |
+| find order page | 450px | Success |
+| find order page | 360px | Success |
+| find order page | 320px | Success |
+| 404 page | 3072px | Success |
+| 404 page | 1920px | Success |
+| 404 page | 1200px | Success |
+| 404 page | 920px | Success |
+| 404 page | 650px | Success |
+| 404 page | 450px | Success |
+| 404 page | 360px | Success |
+| 404 page | 320px | Success |
+| products list page | 3072px | Success |
+| products list page | 1920px | Success |
+| products list page | 1200px | Success |
+| products list page | 920px | Success |
+| products list page | 650px | Success |
+| products list page | 450px | Success |
+| products list page | 360px | Success |
+| products list page | 320px | Success |
+| view product page | 3072px | Success |
+| view product page | 1920px | Success |
+| view product page | 1200px | Success |
+| view product page | 920px | Success |
+| view product page | 650px | Success |
+| view product page | 450px | Success |
+| view product page | 360px | Success |
+| view product page | 320px | Success |
+| checkout page | 3072px | Success |
+| checkout page | 1920px | Success |
+| checkout page | 1200px | Success |
+| checkout page | 920px | Success |
+| checkout page | 650px | Success |
+| checkout page | 450px | Success |
+| checkout page | 360px | Success |
+| checkout page | 320px | Success |
+| checkout confirmation page | 3072px | Success |
+| checkout confirmation page | 1920px | Success |
+| checkout confirmation page | 1200px | Success |
+| checkout confirmation page | 920px | Success |
+| checkout confirmation page | 650px | Success |
+| checkout confirmation page | 450px | Success |
+| checkout confirmation page | 360px | Success |
+| checkout confirmation page | 320px | Success |
+| basket review page | 3072px | Success |
+| basket review page | 1920px | Success |
+| basket review page | 1200px | Success |
+| basket review page | 920px | Success |
+| basket review page | 650px | Success |
+| basket review page | 450px | Success |
+| basket review page | 360px | Success |
+| basket review page | 320px | Success |
+| login page | 3072px | Success |
+| login page | 1920px | Success |
+| login page | 1200px | Success |
+| login page | 920px | Success |
+| login page | 650px | Success |
+| login page | 450px | Success |
+| login page | 360px | Success |
+| login page | 320px | Success |
+| signup page | 3072px | Success |
+| signup page | 1920px | Success |
+| signup page | 1200px | Success |
+| signup page | 920px | Success |
+| signup page | 650px | Success |
+| signup page | 450px | Success |
+| signup page | 360px | Success |
+| signup page | 320px | Success |
 | password reset page | 3072px | Success |
 | password reset page | 1920px | Success |
 | password reset page | 1200px | Success |
@@ -899,93 +955,194 @@ As well as using google developer tools in responsive mode, this has been tested
 | password reset page | 650px | Success |
 | password reset page | 450px | Success |
 | password reset page | 360px | Success |
-| password reset page | 320px | Success ||
-| password reset page (dream) | 3072px | Success |
-| password reset page (dream) | 1920px | Success |
-| password reset page (dream) | 1200px | Success |
-| password reset page (dream) | 920px | Success |
-| password reset page (dream) | 650px | Success |
-| password reset page (dream) | 450px | Success |
-| password reset page (dream) | 360px | Success |
-| password reset page (dream) | 320px | Success |
-| reset password | 3072px | Success |
-| reset password | 1920px | Success |
-| reset password | 1200px | Success |
-| reset password | 920px | Success |
-| reset password | 650px | Success |
-| reset password | 450px | Success |
-| reset password | 360px | Success |
-| reset password | 320px | Success |
-| lost bunnies (404 page) | 3072px | Success |
-| lost bunnies (404 page) | 1920px | Success |
-| lost bunnies (404 page) | 1200px | Success |
-| lost bunnies (404 page) | 920px | Success |
-| lost bunnies (404 page) | 650px | Success |
-| lost bunnies (404 page) | 450px | Success |
-| lost bunnies (404 page) | 360px | Success |
-| lost bunnies (404 page) | 320px | Success |
-| dreams page | 3072px | Success |
-| dreams page | 1920px | Success |
-| dreams page | 1200px | Success |
-| dreams page | 920px | Success |
-| dreams page | 650px | Success |
-| dreams page | 450px | Success |
-| dreams page | 360px | Success |
-| dreams page | 320px | Success |
-| create dream page | 3072px | Success |
-| create dream page | 1920px | Success |
-| create dream page | 1200px | Success |
-| create dream page | 920px | Success |
-| create dream page | 650px | Success |
-| create dream page | 450px | Success |
-| create dream page | 360px | Success |
-| create dream page | 320px | Success |
-| image upload page | 3072px | Success |
-| image upload page | 1920px | Success |
-| image upload page | 1200px | Success |
-| image upload page | 920px | Success |
-| image upload page | 650px | Success |
-| image upload page | 450px | Success |
-| image upload page | 360px | Success |
-| image upload page | 320px | Success |
-| edit dream page | 3072px | Success |
-| edit dream page | 1920px | Success |
-| edit dream page | 1200px | Success |
-| edit dream page | 920px | Success |
-| edit dream page | 650px | Success |
-| edit dream page | 450px | Success |
-| edit dream page | 360px | Success |
-| edit dream page | 320px | Success |
-| view dream page | 3072px | Success |
-| view dream page | 1920px | Success |
-| view dream page | 1200px | Success |
-| view dream page | 920px | Success |
-| view dream page | 650px | Success |
-| view dream page | 450px | Success |
-| view dream page | 360px | Success |
-| view dream page | 320px | Success |
-| dreamscape page | 3072px | Success |
-| dreamscape page | 1920px | Success |
-| dreamscape page | 1200px | Success |
-| dreamscape page | 920px | Success |
-| dreamscape page | 650px | Success |
-| dreamscape page | 450px | Success |
-| dreamscape page | 360px | Success |
-| dreamscape page | 320px | Success |
-| profile page | 3072px | Success |
-| profile page | 1920px | Success |
-| profile page | 1200px | Success |
-| profile page | 920px | Success |
-| profile page | 650px | Success |
-| profile page | 450px | Success |
-| profile page | 360px | Success |
-| profile page | 320px | Success |
+| password reset page | 320px | Success |
+| password reset email done page | 3072px | Success |
+| password reset email done page | 1920px | Success |
+| password reset email done page | 1200px | Success |
+| password reset email done page | 920px | Success |
+| password reset email done page | 650px | Success |
+| password reset email done page | 450px | Success |
+| password reset email done page | 360px | Success |
+| password reset email done page | 320px | Success |
+| password reset from key page | 3072px | Success |
+| password reset from key page | 1920px | Success |
+| password reset from key page | 1200px | Success |
+| password reset from key page | 920px | Success |
+| password reset from key page | 650px | Success |
+| password reset from key page | 450px | Success |
+| password reset from key page | 360px | Success |
+| password reset from key page | 320px | Success |
+| password reset from key done page | 3072px | Success |
+| password reset from key done page | 1920px | Success |
+| password reset from key done page | 1200px | Success |
+| password reset from key done page | 920px | Success |
+| password reset from key done page | 650px | Success |
+| password reset from key done page | 450px | Success |
+| password reset from key done page | 360px | Success |
+| password reset from key done page | 320px | Success |
+| my account page | 3072px | Success |
+| my account page | 1920px | Success |
+| my account page | 1200px | Success |
+| my account page | 920px | Success |
+| my account page | 650px | Success |
+| my account page | 450px | Success |
+| my account page | 360px | Success |
+| my account page | 320px | Success |
+| manage addresses page | 3072px | Success |
+| manage addresses page | 1920px | Success |
+| manage addresses page | 1200px | Success |
+| manage addresses page | 920px | Success |
+| manage addresses page | 650px | Success |
+| manage addresses page | 450px | Success |
+| manage addresses page | 360px | Success |
+| manage addresses page | 320px | Success |
+| add address page | 3072px | Success |
+| add address page | 1920px | Success |
+| add address page | 1200px | Success |
+| add address page | 920px | Success |
+| add address page | 650px | Success |
+| add address page | 450px | Success |
+| add address page | 360px | Success |
+| add address page | 320px | Success |
+| edit address page | 3072px | Success |
+| edit address page | 1920px | Success |
+| edit address page | 1200px | Success |
+| edit address page | 920px | Success |
+| edit address page | 650px | Success |
+| edit address page | 450px | Success |
+| edit address page | 360px | Success |
+| edit address page | 320px | Success |
+| orders page | 3072px | Success |
+| orders page | 1920px | Success |
+| orders page | 1200px | Success |
+| orders page | 920px | Success |
+| orders page | 650px | Success |
+| orders page | 450px | Success |
+| orders page | 360px | Success |
+| orders page | 320px | Success |
+| view order info page | 3072px | Success |
+| view order info page | 1920px | Success |
+| view order info page | 1200px | Success |
+| view order info page | 920px | Success |
+| view order info page | 650px | Success |
+| view order info page | 450px | Success |
+| view order info page | 360px | Success |
+| view order info page | 320px | Success |
+| view wishlist page | 3072px | Success |
+| view wishlist page | 1920px | Success |
+| view wishlist page | 1200px | Success |
+| view wishlist page | 920px | Success |
+| view wishlist page | 650px | Success |
+| view wishlist page | 450px | Success |
+| view wishlist page | 360px | Success |
+| view wishlist page | 320px | Success |
+| contact us page | 3072px | Success |
+| contact us page | 1920px | Success |
+| contact us page | 1200px | Success |
+| contact us page | 920px | Success |
+| contact us page | 650px | Success |
+| contact us page | 450px | Success |
+| contact us page | 360px | Success |
+| contact us page | 320px | Success |
+| contact us confirmation page | 3072px | Success |
+| contact us confirmation page | 1920px | Success |
+| contact us confirmation page | 1200px | Success |
+| contact us confirmation page | 920px | Success |
+| contact us confirmation page | 650px | Success |
+| contact us confirmation page | 450px | Success |
+| contact us confirmation page | 360px | Success |
+| contact us confirmation page | 320px | Success |
+| admin console page | 3072px | Success |
+| admin console page | 1920px | Success |
+| admin console page | 1200px | Success |
+| admin console page | 920px | Success |
+| admin console page | 650px | Success |
+| admin console page | 450px | Success |
+| admin console page | 360px | Success |
+| admin console page | 320px | Success |
+| add cheese category page | 3072px | Success |
+| add cheese category page | 1920px | Success |
+| add cheese category page | 1200px | Success |
+| add cheese category page | 920px | Success |
+| add cheese category page | 650px | Success |
+| add cheese category page | 450px | Success |
+| add cheese category page | 360px | Success |
+| add cheese category page | 320px | Success |
+| add beer category page | 3072px | Success |
+| add beer category page | 1920px | Success |
+| add beer category page | 1200px | Success |
+| add beer category page | 920px | Success |
+| add beer category page | 650px | Success |
+| add beer category page | 450px | Success |
+| add beer category page | 360px | Success |
+| add beer category page | 320px | Success |
+| edit categories page | 3072px | Success |
+| edit categories page | 1920px | Success |
+| edit categories page | 1200px | Success |
+| edit categories page | 920px | Success |
+| edit categories page | 650px | Success |
+| edit categories page | 450px | Success |
+| edit categories page | 360px | Success |
+| edit categories page | 320px | Success |
+| edit cheese category page | 3072px | Success |
+| edit cheese category page | 1920px | Success |
+| edit cheese category page | 1200px | Success |
+| edit cheese category page | 920px | Success |
+| edit cheese category page | 650px | Success |
+| edit cheese category page | 450px | Success |
+| edit cheese category page | 360px | Success |
+| edit cheese category page | 320px | Success |
+| edit beer category page | 3072px | Success |
+| edit beer category page | 1920px | Success |
+| edit beer category page | 1200px | Success |
+| edit beer category page | 920px | Success |
+| edit beer category page | 650px | Success |
+| edit beer category page | 450px | Success |
+| edit beer category page | 360px | Success |
+| edit beer category page | 320px | Success |
+| add beer page | 3072px | Success |
+| add beer page | 1920px | Success |
+| add beer page | 1200px | Success |
+| add beer page | 920px | Success |
+| add beer page | 650px | Success |
+| add beer page | 450px | Success |
+| add beer page | 360px | Success |
+| add beer page | 320px | Success |
+| add cheese page | 3072px | Success |
+| add cheese page | 1920px | Success |
+| add cheese page | 1200px | Success |
+| add cheese page | 920px | Success |
+| add cheese page | 650px | Success |
+| add cheese page | 450px | Success |
+| add cheese page | 360px | Success |
+| add cheese page | 320px | Success |
+| edit existing product page | 3072px | Success |
+| edit existing product page | 1920px | Success |
+| edit existing product page | 1200px | Success |
+| edit existing product page | 920px | Success |
+| edit existing product page | 650px | Success |
+| edit existing product page | 450px | Success |
+| edit existing product page | 360px | Success |
+| edit existing product page | 320px | Success |
+| product edit page | 3072px | Success |
+| product edit page | 1920px | Success |
+| product edit page | 1200px | Success |
+| product edit page | 920px | Success |
+| product edit page | 650px | Success |
+| product edit page | 450px | Success |
+| product edit page | 360px | Success |
+| product edit page | 320px | Success |
+| view customer messages page | 3072px | Success |
+| view customer messages page | 1920px | Success |
+| view customer messages page | 1200px | Success |
+| view customer messages page | 920px | Success |
+| view customer messages page | 650px | Success |
+| view customer messages page | 450px | Success |
+| view customer messages page | 360px | Success |
+| view customer messages page | 320px | Success |
 
 ### Bugs and Issues
 ([back to top](#testing-documentation))
-
-FRONT-END ISSUES
-
 
 DEFAULT ADDRESS FORMATTING ISSUES:
 
