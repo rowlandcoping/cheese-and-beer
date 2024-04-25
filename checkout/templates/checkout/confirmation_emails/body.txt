@@ -13,9 +13,7 @@ Delivery Address:
 
 {{ order.full_name }},
 {{ order.address_line_one }},
-{% if order.address_line_two %}
 {{ order.address_line_two }},
-{% endif %}
 {{ order.town_or_city }},
 {{ order.county }},
 {{ order.postcode }}
