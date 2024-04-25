@@ -148,7 +148,7 @@ Outstanding Issues: None.
 
 Page validated: Contact Us Confirmation Page\
 URL: https://cheese-and-beer-896aa5a35920.herokuapp.com/message-sent/xxxxxx \
-Repaired Issues: duplicate stray ids in input elements. \
+Repaired Issues: stray tags, unclosed tags. \
 Outstanding Issues: None.
 
 ADMINISTRATOR ONLY PAGES
@@ -463,6 +463,11 @@ CHECKOUT
 | Address selector cancel button | returns to checkout view with no changes to previously selected address | Success |
 | Use Default link | changes selected address to default, re-loads checkout page | Success |
 | Form submission | on correctly entering card details, form submits with selected address correctly populating order form and returns user to conformation page | Success |
+| On submission | order table populated appropriately | Success |
+| On submission | orderItems table populated appropriately | Success |
+| On submission (if order not created) | webhook handler creates order appropriately | Success |
+| On submission (if order not created) | re-visiting checkout page clears order session objects and returns user to homepage with appropriate message | Success |
+| On submission | webhook handler sends confirmation e-mail to user | Success |
 
 CHECKOUT CONFIRMATION
 
@@ -510,6 +515,7 @@ SIGNUP
 | Sign in link | retuns user to sign-in page | Success |
 | Reset password link | retuns user to reset password page | Success |
 | Submit button | submits form when correctly filled out, logs user in and returns to homepage if successful | Success |
+| On submission | user table populated appropriately and username populated with e-mail address | Success |
 
 PASSWORD RESET
 
@@ -589,6 +595,7 @@ ADD AN ADDRESS
 | Submit button | submits form only when correctly filled out, returns user to address page with success message| Success |
 | set default checkbox | sets the new address to default if checked | Success |
 | postcode | capitalized once it has been submitted if previously in lower case | success |
+| On submission | addresses table populated appropriately | Success |
 
 EDIT AN ADDRESS
 
@@ -601,6 +608,7 @@ EDIT AN ADDRESS
 | Submit button | submits form only when correctly filled out, returns user to address page with success message | Success |
 | set default checkbox | sets the address to default if checked | Success |
 | postcode | capitalized once it has been submitted if previously in lower case | success |
+| On submission | addresses table populated appropriately | Success |
 
 ORDERS PAGE
 
@@ -661,6 +669,7 @@ CONTACT US
 | Account page link | returns user to the account page | Success |
 | Input elements | display as expected on focus | Success |
 | Submit button | submits form only when correctly filled out, returns user to contact confirmation page | Success |
+| On submission | ContactForm table populated appropriately | Success |
 
 CONTACT US CONFIRMATION
 
@@ -670,11 +679,7 @@ CONTACT US CONFIRMATION
 | DOM |	all interactable elements change on hover and show pointer | Success |
 | DOM | contact form is correctly pre-populated based on point of origin and user | Success |
 | Account page link | returns user to the account page | Success |
-| Input elements | display as expected on focus | Success |
-| Submit button | submits form only when correctly filled out, returns user to contact confirmation page | Success |
-
-
-
+| Confirmation e-mail | confirmation e-mail received | Success |
 
 ADMIN CONSOLE
 
@@ -682,6 +687,14 @@ ADMIN CONSOLE
 | ------------------------------------- | -------------------------------- | ------- |
 | DOM |	all page elements load as expected |	Success |
 | DOM |	all interactable elements change on hover and show pointer | Success |
+| Add cheese category link | takes user to the add cheese category page | Success |
+| Add beer category link | takes user to the add beer category page | Success |
+| Edit categories link | takes user to the edit categories page | Success |
+| Add cheese link | takes user to the add cheese page | Success |
+| Add beer link | takes user to the add beer page | Success |
+| Edit products link | takes user to the edit products page | Success |
+| View request link | takes user to the view messages page | Success |
+| Back to Homepage | returns user to the homepage | Success |
 
 ADD CHEESE CATEGORY
 
@@ -689,6 +702,13 @@ ADD CHEESE CATEGORY
 | ------------------------------------- | -------------------------------- | ------- |
 | DOM |	all page elements load as expected |	Success |
 | DOM |	all interactable elements change on hover and show pointer | Success |
+| Back to product admin link | returns user to the admin console page | Success |
+| Input elements | display as expected on focus | Success |
+| Add image field | displays preview of image when image uploaded | Success |
+| Cancel upload field | removes uploaded image and preview | Success |
+| page refresh | any uploaded images cleared | Success |
+| Submit button | submits form when correctly filled out, returns user to admin console with success message | Success |
+| On submission | cheese category table populated successfully | Success |
 
 ADD BEER CATEGORY
 
@@ -696,6 +716,13 @@ ADD BEER CATEGORY
 | ------------------------------------- | -------------------------------- | ------- |
 | DOM |	all page elements load as expected |	Success |
 | DOM |	all interactable elements change on hover and show pointer | Success |
+| Back to product admin link | returns user to the admin console page | Success |
+| Input elements | display as expected on focus | Success |
+| Add image field | displays preview of image when image uploaded | Success |
+| Cancel upload field | removes uploaded image and preview | Success |
+| Page refresh | any uploaded images cleared | Success |
+| Submit button | submits form when correctly filled out, returns user to admin console with success message | Success |
+| On submission | beer category table populated successfully | Success |
 
 EDIT CATEGORIES
 
@@ -703,6 +730,9 @@ EDIT CATEGORIES
 | ------------------------------------- | -------------------------------- | ------- |
 | DOM |	all page elements load as expected |	Success |
 | DOM |	all interactable elements change on hover and show pointer | Success |
+| Back to product admin link | returns user to the admin console page | Success |
+| Edit Cheese category icons | Opens form to edit the correct cheese category | Success |
+| Edit Beer category icons | Opens form to edit the correct beer category | Success |
 
 EDIT CHEESE CATEGORY
 
@@ -710,6 +740,16 @@ EDIT CHEESE CATEGORY
 | ------------------------------------- | -------------------------------- | ------- |
 | DOM |	all page elements load as expected |	Success |
 | DOM |	all interactable elements change on hover and show pointer | Success |
+| DOM | form fields populated correctly | Success |
+| Back to product admin link | returns user to the admin console page | Success |
+| Back to edit category link | returns user to the edit category page | Success |
+| Input elements | display as expected on focus | Success |
+| Add image field | replaces current image with preview of new image when image uploaded | Success |
+| Cancel upload field | removes uploaded image and preview and displays the existing image | Success |
+| Pairing selector buttons | selecting or deselecting the buttons appropriately populates the relevant form field | Success |
+| Page refresh | any uploaded images cleared and existing image displayed | Success |
+| Submit button | submits form when correctly filled out, returns user to admin console with success message | Success |
+| On submission | cheese category table and related many-to-many table updated successfully | Success |
 
 EDIT BEER CATEGORY
 
@@ -718,6 +758,16 @@ EDIT BEER CATEGORY
 | ------------------------------------- | -------------------------------- | ------- |
 | DOM |	all page elements load as expected |	Success |
 | DOM |	all interactable elements change on hover and show pointer | Success |
+| DOM | form fields populated correctly | Success |
+| Back to product admin link | returns user to the admin console page | Success |
+| Back to edit category link | returns user to the edit category page | Success |
+| Input elements | display as expected on focus | Success |
+| Add image field | replaces current image with preview of new image when image uploaded | Success |
+| Cancel upload field | removes uploaded image and preview and displays the existing image | Success |
+| Pairing selector buttons | selecting or deselecting the buttons appropriately populates the relevant form field | Success |
+| Page refresh | any uploaded images cleared and existing image displayed | Success |
+| Submit button | submits form when correctly filled out, returns user to admin console with success message | Success |
+| On submission | beer category table and related many-to-many table updated successfully | Success |
 
 ADD BEER
 
@@ -725,6 +775,15 @@ ADD BEER
 | ------------------------------------- | -------------------------------- | ------- |
 | DOM |	all page elements load as expected |	Success |
 | DOM |	all interactable elements change on hover and show pointer | Success |
+| Back to product admin link | returns user to the admin console page | Success |
+| Input elements | display as expected on focus | Success |
+| Add image field | displays preview of image when image uploaded | Success |
+| Cancel upload field | removes uploaded image and preview | Success |
+| Page refresh | any uploaded images cleared | Success |
+| Submit button | submits form when correctly filled out, returns user to admin console with success message | Success |
+| On submission | product table updated successfully | Success |
+| On submission | description populated with the description of the selected category if field left blank | Success |
+| On submission | image_url populated with the description of the selected category if field left blank | Success |
 
 ADD CHEESE
 
@@ -732,6 +791,15 @@ ADD CHEESE
 | ------------------------------------- | -------------------------------- | ------- |
 | DOM |	all page elements load as expected |	Success |
 | DOM |	all interactable elements change on hover and show pointer | Success |
+| Back to product admin link | returns user to the admin console page | Success |
+| Input elements | display as expected on focus | Success |
+| Add image field | displays preview of image when image uploaded | Success |
+| Cancel upload field | removes uploaded image and preview | Success |
+| Page refresh | any uploaded images cleared | Success |
+| Submit button | submits form when correctly filled out, returns user to admin console with success message | Success |
+| On submission | product table updated successfully | Success |
+| On submission | description populated with the description of the selected category if field left blank | Success |
+| On submission | image_url populated with the description of the selected category if field left blank | Success |
 
 EDIT EXISTING PRODUCT
 
@@ -739,6 +807,17 @@ EDIT EXISTING PRODUCT
 | ------------------------------------- | -------------------------------- | ------- |
 | DOM |	all page elements load as expected |	Success |
 | DOM |	all interactable elements change on hover and show pointer | Success |
+| Back to product admin link | returns user to the admin console page | Success |
+| Search input element | display as expected on focus | Success |
+| Product search button | returns all products if search field left blank | Success |
+| Product search button | returns appropriate results when filled out as instructed | Success |
+| Product search button | if no results found appropriate message displayed | Success |
+| Edit icon link | takes user to the correct product edit page | Success |
+| Delete icon link | only displays if a product has sold zero units | Success |
+| Delete icon link | opens delete alert to confirm product deletion | Success |
+| Delete alert 'no' | closes alert and reverts page to original state | Success |
+| Delete alert 'yes' | deletes product and cascades to other relevant models | Success |
+
 
 PRODUCT EDIT PAGE
 
@@ -746,6 +825,19 @@ PRODUCT EDIT PAGE
 | ------------------------------------- | -------------------------------- | ------- |
 | DOM |	all page elements load as expected |	Success |
 | DOM |	all interactable elements change on hover and show pointer | Success |
+| DOM | correct form fields are loaded for the product type and the right product populates the page | Success |
+| Back to product admin link | returns user to the admin console page | Success |
+| back to edit products page | returns user to edit products page | Success |
+| Product availability button (on) | When clicked sets product availability to False, reloads the page and displays off button state | Success |
+| Product availability button (off) | When clicked sets product availability to True, reloads the page and displays on button state | Success |
+| Input elements | display as expected on focus | Success |
+| Add image field | displays preview of image when image uploaded | Success |
+| Cancel upload field | removes uploaded image and preview | Success |
+| Page refresh | any uploaded images cleared | Success |
+| Submit button | submits form when correctly filled out, returns user to admin console with success message | Success |
+| On submission | product table updated successfully | Success |
+| On submission | description populated with the description of the selected category if field left blank | Success |
+| On submission | image_url populated with the description of the selected category if field left blank | Success |
 
 VIEW CUSTOMER MESSAGES
 
@@ -760,7 +852,8 @@ The manual testing process uncovered a few issues, none of which were serious an
 
  - The majority of buttons site-wide did not display the pointer on mouse element, so I needed to add the appropriate helper class to them all.
  - The Account menu header was nested in a span rather than a div which meant it wasn't takig up all the space it was supposed to and proved hard to click on.  This was rectified by updating how the elements were nested.
- - found issue in checkout and basket pages where decremening the amount when it was on 1 unit still triggered a notification.  Wrote some javascript to disable the button on that amount.
+ - Found issue in checkout and basket pages where decremening the amount when it was on 1 unit still triggered a notification.  Wrote some javascript to disable the button on that amount.
+ - The contact confirmation page had not been validated, and showed a few errors which I swifly resolved.
 
 #### Responsiveness Testing
 
@@ -910,30 +1003,30 @@ Given all this was the case, I was able to remove the fetch request entirely wit
 Although I have been assured that for assessment purposes the current method will be adequate, given more time to complete this project I would definitely want to remove the hidden form field in the template which provides the client_secret to STRIPE and replace it with a proper fetch() request.  Indeed in a live production environment this would be a must. Although I would like to attempt it if I can I don't belive I will have time at this stage, which is why I have documented it here.
 
 
-Form submission without server-side validation
+CHECKOUT FORM VALIDATION / STRIPE PAYMENTS SUBMIT PRIOR TO SERVER SITE VALIDATION
 
 The way I chose to submit the checkout form initially proved problematic.  In order to have multile checkout buttons on the page, rather than include a button (even a fake one) within the form, I chose to include elements outside of the form that were entirely dependent on JavaScript to function.  I soon discovered that if a user without a saved address submitted their card details, the payment would process without any of their delivery or personal details being saved - because the button was not within the form the validation wasn't taking any effect. 
 
 I decided to resolve this by adding a hidden button withing the form which was triggered by the javascript buttons outside the form.  This worked, however if the default effects of the button were disabled this also disabled form validation - it meant either the form was submitted without the payment, or again it wasn't validated.  I solved the first part of this by adding a further event listener on the form itself to prevent it from submitting, yet still enable the button was to trigger field validation.  However even thoguh the html was now showing the correct messages to the user, the form was still submitting regardless of whether or not it was filled out if the card payment details were valid.
 
 In the end I wrote a javascript loop to ensure the required fields are filled out, returning true if they were and triggering the STRIPE payment.  I'm still not 100% clear on why this was happening, but I suspect it is linked to the choice of JavaScript event that I used.  However with the code now working in a jury-rigged type of way, my thoughts turned to what this should look like in a production environment.
-I subsequently needed to eliminate HTML validation altogether as on testing (actually when I was writing the CSS) I noticed that the javascript was throwing errors in the console due to empty required fields existing on form submit button click, so I have validated the form using Javascript instead.  I also moved the loop immediately prior to form submission and stripe payment validation to make it clearer.
 
-In fact this bug raised another issue with the code in general - that the STRIPE payment is submitted prior to the order being processed on the server side.  This means that for unregistered users form validation on the client side is practically impossible, which is quite a big security risk.  Although this problem stems from the course material, there is a relatively simple solution which is very similar to what I have already implemented for users with saved addresses.  In these cases the saved or selected address and e-mail (which has already been validated client side) pre-populates the form that is passed to the order model for processing.  The solution for either logged-in users without a saved address or for unregistered users is to add an additonal screen which either saves or validates the contact details in the database or caches them in a session cookie.  They can then be used to pre-populate the order form in the checkout view.  This way I could ensure all data is properly validated on the server side prior to submitting the stripe payment confirmation. Whilst this change would be essential for a live production environment (indeed it is clear that this is the process for the majority of online retailers for unregistered members) it is unlikely I will be able to implement it prior to submission of the MVP due to time constraints.
+I subsequently needed to eliminate HTML validation altogether as on testing (actually when I was writing the CSS) - I noticed that the javascript was throwing errors in the console due to empty required fields existing on the form submit button click, so I have validated the form using Javascript instead.  I also moved the loop immediately prior to form submission and stripe payment validation to make it clearer.
+
+In fact this bug raised another issue with the code in general - that the STRIPE payment is submitted prior to the order being processed on the server side.  This means that for unregistered users form validation on the server side is practically impossible, which is quite a big security risk.  Although this problem stems from the example code in the course material, there is a relatively simple solution which is very similar to what I have already implemented for users with saved addresses.  In these cases the saved or selected address and e-mail (which has already been validated client side) pre-populates the form that is passed to the order model for processing.  The solution for either logged-in users without a saved address or for unregistered users is to add an additonal screen which either saves or validates the contact details in the database or caches them in a session cookie.  They can then be used to pre-populate the order form in the checkout view.  This way I could ensure all data is properly validated on the server side prior to submitting the stripe payment confirmation. The other solution would be to to validate all the form data via a fetch() request in the JavaScript code. Whilst this change would be essential for a live production environment it is unlikely I will be able to implement it prior to submission of the MVP due to time constraints.
 
 
 CALCULATING ORDER TOTALS IN THE MODEL
 
-I decided to calculate order totals in the view rather than in the model on checkout, to ensure consistency between the amounts being submitted by the view to the order model and those submitted by to STRIPE via the STRIPE payment intent.   It means a common source for the number, ie the cached basket of goods which is passed to the payment intent when the checkout page is loaded.  Although there are no guarantees of issues if the amount was calculated in the view, I wanted to avoid any inconsistencies.
+I decided to calculate order totals in the view rather than in the model on checkout, to ensure consistency between the amounts being submitted by the view to the order model and those submitted by to STRIPE via the STRIPE payment intent.   It means a common source for the number, ie the cached basket of goods which is passed to the payment intent when the checkout page is loaded.  Although there are no guarantees of issues if the amount was calculated in the view, I wanted to avoid any inconsistencies. On reflection this approach probably isn't best practice with Django, but with time prior to submission very tight and the existing code posing no overt risk and functioning well I see no reason to devote time to it for the MVP.
 
 ALLAUTH USERNAME ISSUE
 
-Whilst allauth does great things, it also insists on users providing a username.  Whilst this used to be good pratice in reality few sites these days require this, and most signin activity requires a username.  I was able to set up Django so that allauth used the e-mail address to login, but when I tested the signup process without a required username it started throwing errors.  I tried various combinations of settings before I realised I would have no choice but to customise the user model.  The solution I found, alongside various settings, was to set up a reciever in my user account model which, presave, would set the username to the same value as the e-mail address. That way the field would easily be populated with a unique value.  I feel sure a neater solution must exist (although this is about the neatest solution I've seen so far) but nothing that makes for such a seamless user experience.
+Whilst allauth does great things, it also insists on users providing a username.  Whilst this used to be good pratice in reality few sites these days require this, and most signin activity requires a username.  I was able to set up Django so that allauth used the e-mail address to login, but when I tested the signup process without a required username it started throwing errors.  I tried various combinations of settings before I realised I would have no choice but to customise the user model.  The solution I found, alongside various settings, was to set up a reciever in my user account model which, presave, would set the username to the same value as the e-mail address. That way the field would easily be populated with a unique value.  I feel sure a neater solution must exist (although this is about the neatest solution I've seen so far).
 
 UNUPLOADED FILES PERSIST ON PAGE REFRESH
 
-When uploading an image with Django, I have been able to use javascrip to preview files in the form and a cancel button to remove any such files and prevent the image uploading. However, if the page is refreshed the file previously selected seems to persist in the cache (this was also a problem with Boutique Ado).  It could lead to a user unwittingly updating a file. I have searched a lot for answers of doing this in the view - in the end I simply set Javascript to clear the field on page reload.
-
+When uploading an image with Django, I have been using JavaScript to preview files in the form and a cancel button to remove any such files and prevent the image uploading. However, if the page is refreshed the file previously selected seems to persist in the cache (this was also a problem with Boutique Ado).  It could lead to a user unwittingly deleting an existing image or uploading one they do not want. I have searched a lot for answers of how to resolve this in the view - in the end I simply used Javascript to clear the field on page reload.
 
 CONSOLE WARNINGS:
 
@@ -945,11 +1038,6 @@ When testing on my mobile, I noticed that Cheese and Beer was flagged as malicio
 
 QUANTITY BUG:
 
-In our final meeting my mentor pointed out that if he purchased 7 million units of cheese from the product view it broke the site.  I added javascript to disable the add or buy now buttons for numbers outside of reasonable parameters to stop this becoming a problem.  I also updated the database fields so that a user may spend several googols on cheese if they wish.
-
-
-
-
-
+In our final meeting my mentor pointed out that if he purchased 7 million units of cheese from the product view it broke the site.  I subsequently added JavaScript to disable the add or buy now buttons for numbers outside of reasonable parameters to stop this becoming a problem.  I also updated the database fields so that a user may spend several googols of British currency on cheese if they so desire. I have already identified a future feature as a stock control module with non-arbitrary limits on the amount of a product that can be purchased, which would need to be propogated throughout the code. For the purposes of this MVP the current solution will suffice.
 
 ([back to top](#contents))
