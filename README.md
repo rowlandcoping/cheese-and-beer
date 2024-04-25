@@ -71,7 +71,7 @@ The site is positioned, for want of a better description, to appeal to the chees
 - Recommendations: For users uninitiated in the world of cheese, it is important to have recommendations and suggestions, especially when it comes to pairing.
 - Easy checkout: The user doesn't want to have to jump through a lot of hoops to do anything online, especially on mobile. They want to buy what they want and get gone.
 - Seperate billing and delivery addresses: If a user is purchasing a gift it should be easy to add, select and save multiple delivery addresses.
-- Retain key details:  People are used to once click shopping with Amazon's buy it now, for example.  Equally they also want to feel their data is protected.  This is a fine line.
+- Retain key details:  People are used to one click shopping with Amazon's buy it now, for example.  Equally they also want to feel their data is protected.  This is a fine line.
 - Review order history:  Customers would like to be able to review and track their orders, especially if everything doesn't go to plan. They want this re-assurance.
 
 ## UX - Scope
@@ -138,7 +138,7 @@ STRETCH FEATURES:
 
 MVP FEATURES:
 
- - Users can browse a a list of products
+ - Users can browse a list of products
  - Users can click to view individual products
  - Users can filter results by category by clicking on a product's category
 
@@ -204,9 +204,9 @@ BLUE SKY FEATURES:
 
 MVP FEATURES:
 
- - users see an order summary.
- - users are provided with an order number referencing their order.
- - users are provided a route back to the site.
+ - Users see an order summary.
+ - Users are provided with an order number referencing their order.
+ - Users are provided a route back to the site.
 
 BLUE SKY FEATURES:
 
@@ -472,7 +472,7 @@ I have created a contact form so that users can make queries regarding their ord
 
 ADMIN SITE
 
-Although Products is a single model I created two seperate forms to add either cheese or beer. This is all then processed in the same view. Editing products is all accessed now via the admin site, and includes its own search facility.  Deleting a product is only available if none have been sold.
+Although Products is a single model I created two seperate forms to add either cheese or beer. This is all then processed in the same view. Editing products is all accessed now via the admin site, and includes its own search facility.  Deleting a product is only available if none have been sold. Note that when it comes to categories in the context of this site I consider them close to immutable objects so I haven't included any means to delete them from the front end at all.  This is at least partly because I was worried I might do it by accident!
 
 LOGGED OUT USERS
 
@@ -512,6 +512,197 @@ This simply contains two foreign keys, one linking the user and one linking the 
 ([back to top](#contents))
 
 I have outlined here how the site meets the requirements of the MVP feature list, and also demonstrated some of the additional features I have been able to implement to improve user engagement.
+
+#### Site Template
+
+_"Users can search the products on the site."_
+
+![image](media/testing/feature-list/site-template/search.png)
+
+![image](media/testing/feature-list/site-template/filter.png)
+
+_"Users can access their account information (including order history)."_
+
+![image](media/testing/feature-list/site-template/account.png)
+
+_"Users can access their shopping cart."_
+
+![image](media/testing/feature-list/site-template/basket.png)
+
+_"Users can process direct to checkout for anything in their cart."_
+
+![image](media/testing/feature-list/site-template/checkout.png)
+
+_"Users can browse cheese products"_
+
+![image](media/testing/feature-list/site-template/cheese.png)
+
+_"Users can browse beer products."_
+
+![image](media/testing/feature-list/site-template/beer.png)
+
+#### Landing Page
+
+_"Site description (clarity)."_
+
+![image](media/testing/feature-list/landing-page/description.png)
+
+_"Site Logo (branding)."_
+
+![image](media/testing/feature-list/landing-page/logo.png)
+
+_"Site callout for specific products (immediate call to action)"_
+
+![image](media/testing/feature-list/landing-page/products.png)
+
+#### Search results page
+
+_"Users can browse a list of products."_
+
+![image](media/testing/feature-list/results-page/click-to-view.png)
+
+_"Users can click to view individual products."_
+
+![image](media/testing/feature-list/results-page/browse-list.png)
+
+_"Users can filter results by category by clicking on a product's category."_
+
+![image](media/testing/feature-list/results-page/filter-category.png)
+
+_"Users can add x amount of the item to cart or checkout an item directly from search results."_ (Stretch Feature)
+
+![image](media/testing/feature-list/results-page/add-buy.png)
+
+#### View Product Page
+
+_"Users can view full product info."_
+
+![image](media/testing/feature-list/view-product/full-ingo.png)
+
+_"Users can click any product category to open another filtered list of results."_\
+NB: whilst this is available for pairings I chose not to make it available for the product itself.  In line with other sites, once a user has drilled down into a product they want you really want them purchasing it rather than navigating away.
+
+![image](media/testing/feature-list/view-product/click-category.png)
+
+_"Users are presented recommendations for pairings with the product on this page(beer or cheese)."_
+
+![image](media/testing/feature-list/view-product/pairings.png)
+
+_"Users can add x amount of the item to the cart or checkout an item directly."_
+
+![image](media/testing/feature-list/view-product/buy-now.png)
+
+_"Users can add product to a wishlist."_ (Blue Sky Feature)
+
+![image](media/testing/feature-list/view-product/wishlist.png)
+
+
+#### Shopping Cart Page (Basket)
+
+_"Users can add or remove items from the cart."_\
+NB: I'm not sure how they'd add them from this view, presumably this means increment.
+
+![image](media/testing/feature-list/shopping-cart/add-remove.png)
+
+_"Users can increment or decrement the amount/quantity of an item they wish to purchase."_
+
+![image](media/testing/feature-list/shopping-cart/inc-dec.png)
+
+_"Users can proceed to checkout."_
+
+![image](media/testing/feature-list/shopping-cart/go-checkout.png)
+
+_"Users can easily return to what they were doing / the homepage."_\
+NB: there is no other exit link other than site navigation or checkout on this page by design. Once a user is at their basket you really don't want them going anywhere else until they've bought something!
+
+![image](media/testing/feature-list/shopping-cart/navigation.png)
+
+#### Checkout
+
+_"Registered users can access saved addresses."_
+
+![image](media/testing/feature-list/checkout/saved-addresses.png)
+
+_"Unregistered users can checkout."_
+
+![image](media/testing/feature-list/checkout/unregistered.png)
+
+_"Unregistered users offered option to register prior to checkout."_
+
+![image](media/testing/feature-list/checkout/reg-option.png)
+
+_"Users enter card details into secure checkout process."_
+
+![image](media/testing/feature-list/checkout/stripe.png)
+
+_"Registered users can opt to store addresses."_
+
+![image](media/testing/feature-list/checkout/add-address.png)
+
+_"Users can see order summary."_
+
+![image](media/testing/feature-list/checkout/summary.png)
+
+#### Order Confirmation Page
+
+_"Users see an order summary."_\
+NB:Rather than showing a complete order summary on checkout, I kept the page simple opting to share the order number and a link to a summary of the order instead.
+
+![image](media/testing/feature-list/confirmation/summary-link.png)
+
+_"users are provided with an order number referencing their order."_
+
+![image](media/testing/feature-list/confirmation/order-number.png)
+
+_"users are provided a route back to the site."_\
+NB: apart from viewing their order, there is always the site navigation.
+
+![image](media/testing/feature-list/confirmation/nav.png)
+
+#### Account Page
+
+
+_"Users can edit and update addresses."_
+
+![image](media/testing/feature-list/account/addresses-link.png)
+
+![image](media/testing/feature-list/account/addresses.png)
+
+_"Users can view order history."_
+
+![image](media/testing/feature-list/account/orders-link.png)
+
+![image](media/testing/feature-list/account/orders.png)
+
+_"Order history page allows drilling down into individual orders."_
+
+![image](media/testing/feature-list/account/link-order.png)
+
+![image](media/testing/feature-list/account/order-link.png)
+
+_"When viewing past orders users can raise a ticket."_(Blue Sky Feature)
+NB: not a ticket as such but the model has a lot of room for expansion
+
+![image](media/testing/feature-list/account/contact.png)
+
+#### Admin Features
+
+_"Admin user can access 'add products' page"_
+NB: admin users don't exist as such, the only option at present is superuser.  Updating the user model was not part of the scope for this MVP.  Presumably this feature means the admin console, hence the screengrab.
+
+![image](media/testing/feature-list/admin/admin-console.png)
+
+_"Admin user can add products"_
+
+![image](media/testing/feature-list/admin/add.png)
+
+_"Admin user can delete products"_
+
+![image](media/testing/feature-list/admin/delete.png)
+
+_"Admin user can edit products"_
+
+![image](media/testing/feature-list/admin/edit.png)
 
 ## Testing Documentation
 ([back to top](#contents))

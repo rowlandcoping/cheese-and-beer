@@ -356,7 +356,7 @@ Users are able to add new addresses or select existing ones directly from checko
 
 ![image](media/testing/user-stories/manage-addresses.png)
 
-_"People are used to once click shopping with Amazon's buy it now, for example. Equally they also want to feel their data is protected..."_\
+_"People are used to one click shopping with Amazon's buy it now, for example. Equally they also want to feel their data is protected..."_\
 Users have access to buy now alerts wherever a product is listed, which makes for a slick and convenient checkout process. Unlike Amazon, where the buy now process can be confusing and disorientating and isn't available everywhere, Cheese and Beer provides concise alerts with clear options leading to a single checkout page, so the user always feels like they are in control of what is going on.
 
 ![image](media/testing/user-stories/buy-now-alerts.png)
