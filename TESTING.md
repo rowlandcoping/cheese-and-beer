@@ -845,6 +845,11 @@ VIEW CUSTOMER MESSAGES
 | ------------------------------------- | -------------------------------- | ------- |
 | DOM |	all page elements load as expected |	Success |
 | DOM |	all interactable elements change on hover and show pointer | Success |
+| Back to product admin link | returns user to the admin console page | Success |
+| Delete icon link | opens delete alert to confirm message deletion | Success |
+| Delete alert 'no' | closes alert and reverts page to original state | Success |
+| Delete alert 'yes' | deletes message from database and returns user to view messages page with success message | Success |
+| View icon link | opens order view page for the order number linked to the message | Success |
 
 #### Issues found during manual testing
 
