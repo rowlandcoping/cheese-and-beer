@@ -25,6 +25,7 @@ def checkout(request):
     basket = request.session.get('basket', {})
     current_basket = basket_total(request)
     selected_address = request.session.get('selected_address', {})
+    print(selected_address)
     if request.method == 'POST':
         address_form = AddressForm(request.POST)
         if address_form.is_valid():
@@ -97,11 +98,13 @@ def checkout(request):
     if request.user.is_authenticated:
         addresses = Addresses.objects.filter(
             user_id=request.user.id).order_by('-default', 'id')
+        print(addresses)
         if addresses:
             if selected_address:
                 address = get_object_or_404(
-                    addresses, postcode=selected_address['postcode'],
+                    addresses, postcode=selected_address['postcode'].upper(),
                     address_line_one=selected_address['address_line_one'])
+                
                 email = request.user.email
             else:
                 address = get_object_or_404(addresses, default=True)
