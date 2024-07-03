@@ -54,7 +54,7 @@ Cheese and Beer
                 <div>
                     <div class="product-view-title-section bottom-border">
                         <h3>
-                            <span id="buyname-{{ product.id }}">{{ product.name }}</span> ({{product.amount }}g{% if product.container %} {{ product.container }}{% endif %})
+                            <span id="buyname-{{ product.id }}">{{ product.name }}</span> ({{product.amount }}{% if product.container %}ml {{ product.container }}{% else %}g{% endif %})
                         </h3>
                         {% load countries %}
                         {% get_country product.country_origin as country %}
