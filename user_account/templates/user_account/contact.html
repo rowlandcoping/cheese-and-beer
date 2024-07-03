@@ -8,7 +8,11 @@ Cheese and Beer
 <div id="background-container">
     <div id="form-large">
         <h2>Contact Us</h2>
+        {% if email %}
         <p>Click <a class="sign-up-link" href="{% url 'account_overview' %}">here</a> to return to your account page.</p>
+        {% else %}
+        <p>Click <a class="sign-up-link" href="{% url 'home' %}">here</a> to return to the homepage.</p>
+        {% endif %}
         <form action="{% url 'contact_form' %}" method="POST" id="contact-form">
             {% csrf_token %}
             <div class="new-address-main">

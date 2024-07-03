@@ -17,6 +17,10 @@ button {
     outline: none;
     border:none;
 }
+/*nb .fa adjusted for chrome*/
+.fa {
+    display:inline !important;
+}
 a, a:visited, a:link, a:active, a:hover, a:focus  {
     text-decoration: none;
     color: inherit;
@@ -226,6 +230,8 @@ input[type='checkbox'], input[type='radio'] {
     display:flex;
 }
 .form-label-container {
+    display:flex;
+    align-items:center;
     width:150px;
 }
 .general-form select {
@@ -303,7 +309,7 @@ input[type='checkbox'], input[type='radio'] {
     padding:15px 10px 0 10px;
     color: rgb(255, 255, 140);
     background-color:rgb(0, 51, 0);
-    border: 2px inset rgb(0, 15, 0);
+    border: 2px solid rgb(0, 15, 0);
     margin: 10px 0 10px 20px;
 }
 #product-menu {
@@ -978,6 +984,8 @@ input[type=number] {
 #listing-view {
     display: flex;
     justify-content: space-evenly;
+    margin:10px 100px 0 100px;
+    margin-bottom: 50px;
 }
 .listing-item-view {
     display:flex;
@@ -1054,7 +1062,7 @@ input[type=number] {
 .decrement-listing, .increment-listing {
         font-size:80%;
         margin:0 3px;
-        padding:1px 2px;
+        padding:2px 2px 1px 2px;
         background-color:rgb(201, 198, 198);
         border:1px solid rgb(128, 128, 128);
 }
@@ -1241,6 +1249,7 @@ input[type=number] {
 .account-info-section {
     display:flex;
     justify-content:left;
+    align-items:center;
     font-size:140%;
     border: 1px solid grey;
     width:230px;
@@ -1477,6 +1486,21 @@ input[type=number] {
 .messages-specicifity .orders-order-info .orders-view-link {
     margin-left:5px;
 }
+#console-home-button-container {
+    margin-top:10px;
+    border-top: 2px dotted grey;
+}
+
+#console-home-button-container a{
+    text-decoration:none;
+    background-color: rgb(16, 95, 0);
+    color: white;
+}
+#console-home-button-container a:hover {
+    text-decoration:none;
+    background-color: rgb(129, 153, 124);
+    color: rgb(0, 15, 0);
+}
 
 /*-----------MEDIA QUERIES----------*/
 @media screen and (max-width:1650px) {
@@ -1532,6 +1556,10 @@ input[type=number] {
     }
     .address-selector-container {
         font-size:90%;
+    }
+    /* basket view */
+    #listing-view {
+        margin:10px 30px 0 30px;
     }
     /* orders view */
     .orders-order-info, .orders-shipped-address, .orders-products-shipped {
@@ -1897,6 +1925,7 @@ input[type=number] {
         display:block;
     }
     .form-label-container {
+        justify-content:center;
         margin-bottom:5px;
     }
     #id_container div {
@@ -1997,6 +2026,10 @@ input[type=number] {
     }
     .checkout-page .general-form .form-field-container {
         flex-direction:column;
+    }
+    /* basket view */
+    #listing-view {
+        margin:0;
     }
     /*confirmation page*/
     .confirmation-order-number {
