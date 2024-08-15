@@ -422,7 +422,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     initial_price = Number(initial_price);
                     let quantity = document.getElementById('quantity').value;
                     quantity = Number(quantity);
-                    quantity = Math.ceil(quantity);
+                    quantity = Math.round(quantity);
                     quantity -= 1;                    
                     document.getElementById('quantity').value = quantity;
                     document.getElementById('product-view-total').innerHTML = (Math.round((initial_price * quantity) * 100) / 100).toFixed(2); 
@@ -445,7 +445,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     initial_price = Number(initial_price);
                     let quantity = document.getElementById('quantity').value;
                     quantity = Number(quantity);
-                    quantity = Math.ceil(quantity);
+                    quantity = Math.round(quantity);
                     quantity += 1;
                     document.getElementById('quantity').value = quantity;
                     document.getElementById('product-view-total').innerHTML = (Math.round((initial_price * quantity) * 100) / 100).toFixed(2);
