@@ -422,7 +422,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     initial_price = Number(initial_price);
                     let quantity = document.getElementById('quantity').value;
                     quantity = Number(quantity);
-                    quantity -= 1;
+                    quantity = Math.ceil(quantity);
+                    quantity -= 1;                    
                     document.getElementById('quantity').value = quantity;
                     document.getElementById('product-view-total').innerHTML = (Math.round((initial_price * quantity) * 100) / 100).toFixed(2); 
                 }
@@ -444,6 +445,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     initial_price = Number(initial_price);
                     let quantity = document.getElementById('quantity').value;
                     quantity = Number(quantity);
+                    quantity = Math.ceil(quantity);
                     quantity += 1;
                     document.getElementById('quantity').value = quantity;
                     document.getElementById('product-view-total').innerHTML = (Math.round((initial_price * quantity) * 100) / 100).toFixed(2);
@@ -463,7 +465,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         enableSections[i].style.opacity = "1";
                     }
                     document.getElementById('quantity-alert').style.display="none";
-                if (initial_quantity > 200 || initial_quantity < 0) {
+                if (initial_quantity > 200 || initial_quantity < 1 || Number.isInteger(initial_quantity) === false) {
                     const disabledSections = Array.from(document.getElementsByClassName('product-action-button'));
                     for (let i = 0; i < disabledSections.length; i++) {
                         disabledSections[i].style.pointerEvents = "none";
@@ -478,12 +480,13 @@ document.addEventListener("DOMContentLoaded", function() {
     // set initial status of buttons if outside boundaries on page refresh
     if (document.getElementById('decrement-amount')) {
         let quantity = document.getElementById('quantity').value;
-        if (quantity > 200) {
+        if (quantity > 200 || quantity < 1 || Number.isInteger(quantity) === false) {
             const disabledSections = Array.from(document.getElementsByClassName('product-action-button'));
             for (let i = 0; i < disabledSections.length; i++) {
                 disabledSections[i].style.pointerEvents = "none";
                 disabledSections[i].style.opacity = "0.5";
             }
+            document.getElementById('quantity-alert').style.display="inline-block";
         }
     }
 
