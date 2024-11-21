@@ -714,7 +714,13 @@ Please find all testing documentation [HERE](TESTING.md).
 
 ### Initial Deployment
 
-Cheese and Beer has been deployed [HERE](https://cheese-and-beer-896aa5a35920.herokuapp.com/) via Heroku, taking the following steps:
+Please note the long term home for Cheese and Beer is now [HERE](https://cheesebeer.cookery-corner.co.uk/).  It was a very straightforward process and the entire site worked immediately with only changes to the DATABASE setup and related .env settings. I used the first part of [this guide](https://umar-yusuf.blogspot.com/2020/04/setting-up-django-project-and-app-on.html) to get it set up.
+
+Rather than create a new app, I emptied the folder and [imported](https://www.namecheap.com/support/knowledgebase/article.aspx/10113/2210/how-to-use-git-version-control-cpanel-plugin/) the files from GitHub, before installing everything in requirements.txt using the command on the cpanel terminal: (pip install -r requirements.txt).  It was then a simple matter of adding and updating the .env file.
+
+The main issue was with the export of the ElephantSQL database.  It was zipped using a file format only accesssible via Linux, and then I had to manually go through the export file removing all extensions and changing the name of the default user to that of the new database in every instance (about 250 of them).  This was easy, but only once I had worked it out!
+
+Cheese and Beer was initially deployed via Heroku, following the steps below:
 
 Preparing for Deployment:
 
