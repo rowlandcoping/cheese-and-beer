@@ -33,7 +33,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG") == "True"
 DEVELOPMENT = os.getenv("DEVELOPMENT") == "True"
-
+HOSTED = os.getenv("HOSTED") == "True"
 ALLOWED_HOSTS = [os.getenv("HOST")]
 
 # cloudinary
@@ -131,9 +131,21 @@ WSGI_APPLICATION = 'cheese_beer.wsgi.application'
 #   }
 # }
 
-DATABASES = {
+if HOSTED:
+    DATABASES = {
+        'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv("DATABASE_NAME"),
+        'USER': os.getenv("DATABASE_USER"),
+        'PASSWORD': os.getenv("DATABASE_PASSWORD"),
+        'HOST': 'localhost',
+        'PORT': '',
+        }
+    }
+else:
+    DATABASES = {
    'default': dj_database_url.parse(os.getenv("DATABASE_URL"))
-}
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
