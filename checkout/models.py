@@ -73,7 +73,7 @@ class OrderItems(models.Model):
     order_id = models.ForeignKey(
         Order, null=False, blank=False,
         on_delete=models.CASCADE, related_name='lineitems')
-    product_type = models.CharField()
+    product_type = models.CharField(max_length=250)
     product = models.ForeignKey(
         Product, null=True, blank=True, on_delete=models.CASCADE)
     price = models.DecimalField(

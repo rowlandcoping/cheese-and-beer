@@ -1,0 +1,17 @@
+services:
+  web:
+    build: .
+    container_name: cheese-beer-web
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/app
+    env_file:
+      - .env
+    networks:
+      - shared-network
+
+networks:
+  shared-network:
+    external: true

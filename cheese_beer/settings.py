@@ -34,7 +34,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG") == "True"
 DEVELOPMENT = os.getenv("DEVELOPMENT") == "True"
 HOSTED = os.getenv("HOSTED") == "True"
-ALLOWED_HOSTS = [os.getenv("HOST")]
+ALLOWED_HOSTS = os.getenv("HOST").split(',')
 
 # cloudinary
 
@@ -71,29 +71,18 @@ INSTALLED_APPS = [
     'cloudinary',
 ]
 
-if DEVELOPMENT:
-    MIDDLEWARE = [
-        'django.middleware.security.SecurityMiddleware',
-        'django.contrib.sessions.middleware.SessionMiddleware',
-        'django.middleware.common.CommonMiddleware',
-        'django.middleware.csrf.CsrfViewMiddleware',
-        'django.contrib.auth.middleware.AuthenticationMiddleware',
-        'django.contrib.messages.middleware.MessageMiddleware',
-        'django.middleware.clickjacking.XFrameOptionsMiddleware',
-        'allauth.account.middleware.AccountMiddleware',
-    ]
-else:
-    MIDDLEWARE = [
-        'django.middleware.security.SecurityMiddleware',
-        'whitenoise.middleware.WhiteNoiseMiddleware',
-        'django.contrib.sessions.middleware.SessionMiddleware',
-        'django.middleware.common.CommonMiddleware',
-        'django.middleware.csrf.CsrfViewMiddleware',
-        'django.contrib.auth.middleware.AuthenticationMiddleware',
-        'django.contrib.messages.middleware.MessageMiddleware',
-        'django.middleware.clickjacking.XFrameOptionsMiddleware',
-        'allauth.account.middleware.AccountMiddleware',
-    ]
+
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
+]
 
 ROOT_URLCONF = 'cheese_beer.urls'
 
@@ -144,7 +133,7 @@ if HOSTED:
     }
 else:
     DATABASES = {
-   'default': dj_database_url.parse(os.getenv("DATABASE_URL"))
+        'default': dj_database_url.parse(os.getenv("DATABASE_URL"))
     }
 
 # Password validation
@@ -203,10 +192,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-if DEVELOPMENT:
-    STATICFILES_DIRS = [BASE_DIR / 'static']
-else:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [BASE_DIR / 'static']  # Source static files
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = os.getenv("CLOUDINARY_BASE")
 

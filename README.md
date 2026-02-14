@@ -720,7 +720,7 @@ Rather than create a new app, I emptied the folder and [imported](https://www.na
 
 The main issue was with the export of the ElephantSQL database.  It was zipped using a file format only accesssible via Linux, and then I had to manually go through the export file removing all extensions and changing the name of the default user to that of the new database in every instance (about 250 of them).  This was easy, but only once I had worked it out!
 
-Cheese and Beer was initially deployed via Heroku, following the steps below:
+Cheese and Beer was initially deployed via Heroku [HERE] (https://cheese-and-beer-896aa5a35920.herokuapp.com/), following the steps below:
 
 Preparing for Deployment:
 
@@ -763,7 +763,7 @@ If you wish to deploy a version of this website for yourself, here is how to go 
 #### Create a Version of the repository:
 
  - Log in to or create your own Github account [HERE](https://github.com/).
- - Go to the Cheese and Beer repository [HERE](https://github.com/rowlandcoping/hopes-and-dreams) and select 'Fork' to create your own snapshot of the repository.
+ - Go to the Cheese and Beer repository [HERE](https://github.com/rowlandcoping/cheese-and-beer) and select 'Fork' to create your own snapshot of the repository.
 
 #### Creating your own Heroku Account:
 
@@ -774,7 +774,7 @@ If you wish to deploy a version of this website for yourself, here is how to go 
 
 This project uses PostgreSQL to store all data, therefore you will need to create a version of the database to deploy it for yourself.
 
- - You can sign up to ElephantSQL here [HERE](https://www.elephantsql.com/), this is what I am currently using.  A caveat to this is ElephantSQL is at end of life and will be decommissioned in January of next year, so if you want to work on the project longer term I recommend a more permanent solution.
+ - You can sign up to ElephantSQL here [HERE](https://www.elephantsql.com/), this is what I used initially.  A caveat to this is ElephantSQL is at end of life and will be decommissioned in January of 2025, so if you want to work on the project longer term I recommend a more permanent solution.
  - Click 'Create New Instance' to create a new database. Mine is called cheese_beer.  If you click your newly-created database in ElephantSQL it provides all the settings you need to connect it to your Django project.
  - Be sure to migrate the database models to your database from your development platform before you attempt to run the site. This will set all your models up on your database, ready to go!
     - python3 manage.py makemigrations
@@ -972,7 +972,7 @@ Python validation: CI Python Linter.\
 Framework: Django.\
 Image Hosting: Cloudinary.\
 DBMS: PostgreSQL via Django.\
-SMTP Mail Server: Zoho.\
+SMTP Mail Server: gmail.\
 Languages: HTML, CSS, JavaScript, Python.\
 Development Environment: VS Code on Linux.\
 Wireframes: Balsamiq.\
