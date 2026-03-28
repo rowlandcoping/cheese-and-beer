@@ -33,7 +33,6 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG") == "True"
 DEVELOPMENT = os.getenv("DEVELOPMENT") == "True"
-HOSTED = os.getenv("HOSTED") == "True"
 ALLOWED_HOSTS = os.getenv("HOST").split(',')
 
 # cloudinary
@@ -120,21 +119,9 @@ WSGI_APPLICATION = 'cheese_beer.wsgi.application'
 #   }
 # }
 
-if HOSTED:
-    DATABASES = {
-        'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv("DATABASE_NAME"),
-        'USER': os.getenv("DATABASE_USER"),
-        'PASSWORD': os.getenv("DATABASE_PASSWORD"),
-        'HOST': 'localhost',
-        'PORT': '',
-        }
-    }
-else:
-    DATABASES = {
-        'default': dj_database_url.parse(os.getenv("DATABASE_URL"))
-    }
+DATABASES = {
+    'default': dj_database_url.parse(os.getenv("DATABASE_URL"))
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -197,6 +184,14 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = os.getenv("CLOUDINARY_BASE")
 
+# settings so that CSRF works with nginx proxy
+if DEVELOPMENT is False:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    CSRF_TRUSTED_ORIGINS = [
+        'https://cheesebeer.cookery-corner.co.uk',
+        'https://www.cheesebeer.cookery-corner.co.uk'
+    ]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -205,15 +200,11 @@ SITE_ID = 1
 
 # email
 
-EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
-DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-if DEVELOPMENT is False:
-    EMAIL_USE_TLS = False
-    EMAIL_USE_SSL = True
-    EMAIL_PORT = 465
-    EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_BACKEND = os.getenv("EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend")
+EMAIL_HOST = os.getenv("EMAIL_HOST", "localhost")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", "25"))
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "False") == "True"
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "webmaster@localhost")
 
 # whitenoise
 
